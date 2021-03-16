@@ -1,0 +1,84 @@
+@import '~antd/dist/antd.css';
+
+::-webkit-scrollbar-track {
+   /* border-radius: 0px; */
+   box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	  -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+* {
+  scrollbar-width: thin;
+  /* scrollbar-color: darkgrey #F5F5F5; */
+}
+
+@media screen and (min-width: 966px) {
+  ::-webkit-scrollbar, .scroller {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+  }
+}
+ 
+::-webkit-scrollbar-thumb {
+    /* border-radius: 0px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  */
+   background-color: #a5a5a5;
+   border-radius: 10px;
+}
+
+.z-shadow, .z-card {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1);
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  color: unset;
+  font-size: unset;
+}
+
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-prev:focus,
+.ant-carousel .slick-next:focus {
+  color: unset;
+}
+
+.z-hover {
+    transition-duration: 0.3s;
+}
+
+.z-hover:hover,
+.z-hover:focus,
+.z-hover:active {
+    transition: transform .2s;
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+}
+
+.z-rotate {
+    -webkit-transition: all 1s ease !important;
+    -moz-transition: all 1s ease !important;
+    -o-transition: all 1s ease !important;
+    transition: all 1s ease !important;
+}
+
+.z-rotate:hover {
+    transform: rotate(
+        360deg
+    );
+}
+
+.mb-auto, .my-auto {
+    margin-bottom: auto!important;
+}
+.mt-auto, .my-auto {
+    margin-top: auto!important;
+}
+
+.text-center {
+    text-align: center!important;
+}

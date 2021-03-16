@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-import Data from '../Configs/Data';
 import Constants from './Constants';
 
 /**
@@ -130,7 +129,8 @@ const handleValidationError = (errorObject) => {
  */
 const Utils = {
     client: window.location.origin,
-    backend: window.location.origin,
+    // backend: window.location.origin,
+    backend: 'http://ezfolio.test',
     apiVersion: 'v1',
     showNotification,
     textEllipsis,

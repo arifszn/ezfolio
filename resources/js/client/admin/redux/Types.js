@@ -1,0 +1,6 @@
+const Types = {
+    INITIALIZE_GLOBAL_STATE: 'INITIALIZE_GLOBAL_STATE',
+    SET_GLOBAL_STATE: 'SET_GLOBAL_STATE',
+};
+
+export default Types;

@@ -2,7 +2,15 @@
 
 namespace App\Providers;
 
+use App\Services\AboutService;
+use App\Services\Contracts\AboutContract;
+use App\Services\Contracts\SettingContract;
+use App\Services\SettingService;
+use Config;
 use Illuminate\Support\ServiceProvider;
+use Schema;
+use Str;
+use URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(SettingContract::class, SettingService::class);
+        $this->app->bind(AboutContract::class, AboutService::class);
     }
 
     /**
@@ -23,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (Str::contains(Config::get('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
+        
+        Schema::defaultStringLength(191);
     }
 }

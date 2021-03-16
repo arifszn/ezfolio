@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.disableNotifications();
+mix.browserSync('http://ezfolio.test');
 
 mix.webpackConfig({
     module: {

@@ -12,6 +12,8 @@
     "devDependencies": {
         "@babel/preset-react": "^7.12.13",
         "axios": "^0.21",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.2.2",
         "eslint": "^7.22.0",
         "eslint-loader": "^4.0.2",
         "eslint-plugin-react": "^7.22.0",
@@ -38,6 +40,7 @@
         "filepond-plugin-image-preview": "^4.6.5",
         "less": "^4.1.1",
         "less-loader": "^8.0.0",
+        "mini-dynamic-antd-theme": "^0.5.2",
         "node-sass": "^5.0.0",
         "nprogress": "^0.2.0",
         "react-bootstrap": "^1.5.2",
