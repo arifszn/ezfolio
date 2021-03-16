@@ -11,7 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.disableNotifications();
+
+mix.js('resources/js/client/admin/roots/app.js', 'public/js/client/admin/roots').react();
+
+if (mix.inProduction()) {
+    mix.version();
+}

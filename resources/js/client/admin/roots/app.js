@@ -1,15 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import LazyLoading from '../../common/components/lazyLoading/LazyLoading';
-import ErrorBoundaryFallbackUI from '../../common/ErrorBoundaryFallbackUI';
-import SuspenseErrorBoundary from '../../common/SuspenseErrorBoundary';
-import { ConfigProvider } from 'antd';
-import enUSIntl from 'antd/lib/locale/en_US';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NotFound from '../../user/components/notFound/Notfound';
-import ReactRoutes from '../../common/helpers/ReactRoutes';
-import Routes from '../../common/helpers/Routes';
-import './../../common/assets/css/app.scss';
 
 /**
  * Remove an element by showing fade out effect
@@ -25,17 +15,6 @@ const fadeoutAndRemoveElement = (el, speed) => {
     setTimeout(function() {
         el.parentNode.removeChild(el);
     }, speed);
-}
-
-/**
- * public routes
- */
-const publicRoutes = () => {
-    return ReactRoutes.admin.filter(route => route.private === false).map((route, index) => (
-        <Route key={index} exact={route.exact} path={route.path}>
-            <route.component/>
-        </Route>
-    ));
 }
 
 /**
