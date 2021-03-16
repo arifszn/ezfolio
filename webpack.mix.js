@@ -13,6 +13,22 @@ const mix = require('laravel-mix');
 
 mix.disableNotifications();
 
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.(jsx|js|vue)$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                exclude: /(node_modules)/,
+            }
+        ]
+    },
+    plugins: [
+        
+    ],
+});
+
 mix.js('resources/js/client/admin/roots/app.js', 'public/js/client/admin/roots').react();
 
 if (mix.inProduction()) {
