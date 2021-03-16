@@ -1,0 +1,12 @@
+const Constants = {
+    TRUE: 1,
+    FALSE: 0,
+
+    STATUS_CODE_SUCCESS: 200,
+    STATUS_CODE_BAD_REQUEST: 400,
+    STATUS_CODE_UNAUTHORIZED: 401,
+    STATUS_CODE_NOT_FOUND: 404,
+    STATUS_CODE_ERROR: 500,
+}
+
+export default Constants;
