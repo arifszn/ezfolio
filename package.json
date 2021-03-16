@@ -1,0 +1,49 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.1"
+    },
+    "dependencies": {
+        "@ant-design/pro-table": "^2.30.7",
+        "@nivo/core": "^0.67.0",
+        "@nivo/pie": "^0.67.0",
+        "antd": "^4.14.0",
+        "filepond": "^4.25.3",
+        "filepond-plugin-file-encode": "^2.1.9",
+        "filepond-plugin-file-poster": "^2.4.1",
+        "filepond-plugin-file-validate-size": "^2.2.2",
+        "filepond-plugin-file-validate-type": "^1.2.5",
+        "filepond-plugin-image-exif-orientation": "^1.0.9",
+        "filepond-plugin-image-preview": "^4.6.5",
+        "less": "^4.1.1",
+        "less-loader": "^8.0.0",
+        "node-sass": "^5.0.0",
+        "nprogress": "^0.2.0",
+        "react-bootstrap": "^1.5.2",
+        "react-filepond": "^7.1.1",
+        "react-icons": "^4.2.0",
+        "react-if": "^4.0.1",
+        "react-image": "^4.0.3",
+        "react-redux": "^7.2.2",
+        "react-router-dom": "^5.2.0",
+        "react-typed": "^1.2.0",
+        "reactive-button": "^1.3.3",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
+        "simple-react-validator": "^1.6.0"
+    }
+}
