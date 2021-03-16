@@ -20,13 +20,6 @@ const showNotification = (message = 'Something went wrong', type = 'error', titl
 };
 
 /**
- * Return app name
- */
-const getAppName = () => {
-    return Data.appName;
-}
-
-/**
  * Ellipse long test
  * 
  * @param string str 
@@ -137,7 +130,7 @@ const handleValidationError = (errorObject) => {
  */
 const Utils = {
     client: window.location.origin,
-    backend: Data.backend,
+    backend: window.location.origin,
     apiVersion: 'v1',
     showNotification,
     textEllipsis,
@@ -145,7 +138,6 @@ const Utils = {
     handleException,
     handleValidationError,
     handleSuccessResponse,
-    getAppName,
 }
 
 export default Utils;
