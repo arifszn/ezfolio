@@ -13,3 +13,4 @@ yarn-error.log
 _ide_helper.php
 .phpstorm.meta.php
 storage/installed
+resources/js/client
