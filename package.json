@@ -18,6 +18,7 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
+        "prop-types": "^15.7.2",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "sass": "^1.32.8",
@@ -50,6 +51,7 @@
         "reactive-button": "^1.3.3",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
-        "simple-react-validator": "^1.6.0"
+        "simple-react-validator": "^1.6.0",
+        "styled-components": "^5.2.1"
     }
 }
