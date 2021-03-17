@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import { RootReducer, initialState } from './RootReducer';
-
-const thunkMiddleware = require('redux-thunk').default;
+import thunkMiddleware from 'redux-thunk';
 
 export const ConfigureStore = () => {
   const store = createStore(

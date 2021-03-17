@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "rachidlaasri/laravel-installer": "^4.1",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
-        "stevebauman/location": "^6.1"
+        "stevebauman/location": "^6.1",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

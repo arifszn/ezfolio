@@ -1,10 +1,36 @@
 <?php
 
+use App\Models\Setting;
+
 class Utils {
+    public static function isShortMenu()
+    {
+        try {
+            $settingService = resolve(SettingContract::class);
+            $response = $settingService->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
+
+            if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($response['payload']->setting_value === true || $response['payload']->setting_value === 'true' || $response['payload']->setting_value === 1 || $response['payload']->setting_value === '1') {
+                    return true;
+                };
+            }
+            return false;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
     public static function getFavicon()
     {
         try {
-            return asset('assets/common/img/favicon/default_favicon.png');
+            $settingService = resolve(SettingContract::class);
+            $response = $settingService->getSettingByKey(Setting::FAVICON, ['setting_value']);
+
+            if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+                return asset($response['payload']->setting_value);
+            } else {
+                return asset('assets/common/img/favicon/default_favicon.png');
+            }
         } catch (\Throwable $th) {
             return asset('assets/common/img/favicon/default_favicon.png');
         }

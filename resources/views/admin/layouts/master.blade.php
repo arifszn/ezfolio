@@ -3,7 +3,7 @@
     <head>
     @include('admin.layouts.partials._header')
     </head>
-    <body id="body">
+    <body id="body" class="{{ Utils::isShortMenu() ? 'z-sidebar-icon-only' : '' }}">
         @include('common.preloader2')
         @yield('body-content')
         @yield('scripts')

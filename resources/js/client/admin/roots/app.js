@@ -13,6 +13,8 @@ import { changeAntdTheme } from 'mini-dynamic-antd-theme';
 import { Provider, useDispatch } from 'react-redux';
 import { initializeGlobalState } from '../redux/ActionCreators';
 import ConfigureStore from '../redux/ConfigureStore';
+import PrivateRoute from '../components/PrivateRoute';
+import Layout from '../components/layout/Layout';
 const NotFound = React.lazy(() => import('../components/Notfound'));
 
 const store = ConfigureStore();
@@ -45,25 +47,40 @@ const publicRoutes = () => {
 }
 
 /**
+ * private routes
+ */
+const privateRoutes = () => {
+    return ReactRoutes.admin.filter(route => route.private === true).map((route, index) => (
+        <Route key={index} exact={route.exact} path={route.path}>
+            <route.component/>
+        </Route>
+    ));
+}
+
+/**
  * Root component
  */
 const App = () => {
     const dispatch = useDispatch();
+    // eslint-disable-next-line no-undef
+    let mySettings = settings;
+    
     dispatch(initializeGlobalState({
+        token: null,
         activeMenu: null,
         activeSubMenu: null,
-        accentColor: settings.accentColor,
-        navbarBG: settings.navbarBG,
-        navbarColor: settings.navbarColor,
-        sidebarBG: settings.sidebarBG,
-        sidebarColor: settings.sidebarColor,
-        shortMenu: settings.shortMenu,
-        siteName: settings.siteName,
-        logo: settings.logo,
-        favicon: settings.favicon,
-        avatar: settings.avatar,
-        demoMode: settings.demoMode,
-        cover: settings.cover,
+        accentColor: mySettings.accentColor,
+        navbarBG: mySettings.navbarBG,
+        navbarColor: mySettings.navbarColor,
+        sidebarBG: mySettings.sidebarBG,
+        sidebarColor: mySettings.sidebarColor,
+        shortMenu: mySettings.shortMenu,
+        siteName: mySettings.siteName,
+        logo: mySettings.logo,
+        favicon: mySettings.favicon,
+        avatar: mySettings.avatar,
+        demoMode: mySettings.demoMode,
+        cover: mySettings.cover,
     }));
 
     useEffect(()=> {
@@ -74,7 +91,7 @@ const App = () => {
              fadeoutAndRemoveElement(preloader, 1000);
         }
 
-        changeAntdTheme(settings.accentColor);
+        changeAntdTheme(mySettings.accentColor);
     }, []);
 
 	return (
@@ -87,6 +104,19 @@ const App = () => {
                                 
                                 {/* public routes */}
                                 {publicRoutes()}
+
+                                {/* private routes */}
+                                <PrivateRoute>
+                                    <Layout>
+                                        <Switch>
+                                            {privateRoutes()}
+
+                                            <Route>
+                                                <NotFound/>
+                                            </Route>
+                                        </Switch>
+                                    </Layout>
+                                </PrivateRoute>
 
                                 {/* 404 route */}
                                 <Route>
