@@ -14,8 +14,9 @@ import { Provider, useDispatch } from 'react-redux';
 import { initializeGlobalState } from '../redux/ActionCreators';
 import ConfigureStore from '../redux/ConfigureStore';
 import PrivateRoute from '../components/PrivateRoute';
+import loadable from '@loadable/component';
 import Layout from '../components/layout/Layout';
-const NotFound = React.lazy(() => import('../components/Notfound'));
+const NotFound = loadable(() => import('../components/Notfound'));
 
 const store = ConfigureStore();
 
