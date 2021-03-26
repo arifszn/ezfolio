@@ -1,6 +1,6 @@
 import { Button, Space, Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { MailOutlined } from '@ant-design/icons';
+import { AiOutlineMail } from 'react-icons/ai';
 import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
@@ -65,7 +65,7 @@ const ForgetPassword = () => {
                             }
                         ]}
                     >
-                        <Input prefix={<MailOutlined />} placeholder="Email" />
+                        <Input prefix={<AiOutlineMail />} placeholder="Email" />
                     </Form.Item>
                     <Form.Item>
                         <Space direction="vertical" style={{width: '100%'}}>

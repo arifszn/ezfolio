@@ -1,6 +1,5 @@
 import { Button, Divider, Form, Input, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
@@ -8,6 +7,8 @@ import Utils from '../../../common/helpers/Utils';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGlobalState } from '../../redux/ActionCreators';
+import {AiOutlineUser} from 'react-icons/ai';
+import {BsShieldLock} from 'react-icons/bs';
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
@@ -76,7 +77,7 @@ const Login = () => {
                             }
                         ]}
                     >
-                        <Input prefix={<UserOutlined/>} placeholder="Email" />
+                        <Input prefix={<AiOutlineUser/>} placeholder="Email" />
                     </Form.Item>
                     <Form.Item
                         name="password"
@@ -89,7 +90,7 @@ const Login = () => {
                         ]}
                     >
                         <Input.Password
-                            prefix={<LockOutlined/>}
+                            prefix={<BsShieldLock/>}
                             placeholder="Password"
                         />
                     </Form.Item>

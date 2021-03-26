@@ -1,6 +1,6 @@
 import React from 'react';
 import ProLayout from '@ant-design/pro-layout';
-import { HomeOutlined, ControlOutlined, ExperimentOutlined } from '@ant-design/icons';
+import { AiOutlineHome, AiOutlineControl, AiOutlineExperiment } from 'react-icons/ai';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Routes from '../../../common/helpers/Routes';
@@ -25,19 +25,18 @@ const Layout = ({ children }) => {
                 {
                     path: Routes.web.admin.dashboard,
                     name: 'Dashboard',
-                    icon: <HomeOutlined />,
+                    icon: <AiOutlineHome />,
                 },
                 {
                     path: Routes.web.admin.settings,
                     name: 'Settings',
-                    icon: <ControlOutlined />,
+                    icon: <AiOutlineControl />,
                 },
                 {
                     path: 'portfolio',
                     name: 'Portfolio',
-                    icon: <ExperimentOutlined />,
+                    icon: <AiOutlineExperiment />,
                     routes: [
-                    
                         {
                             path: Routes.web.admin.portfolioConfig,
                             name: 'Portfolio Config',

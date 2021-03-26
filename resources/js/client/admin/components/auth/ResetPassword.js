@@ -1,12 +1,13 @@
 import { Button, Space, Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AiOutlineMail } from 'react-icons/ai';
+import {BsShieldLock} from 'react-icons/bs';
 
 const ResetPassword = () => {
     const { token } = useParams();
@@ -69,7 +70,7 @@ const ResetPassword = () => {
                             }
                         ]}
                     >
-                        <Input prefix={<MailOutlined />} placeholder="Email" />
+                        <Input prefix={<AiOutlineMail />} placeholder="Email" />
                     </Form.Item>
 
                     <Form.Item
@@ -86,7 +87,7 @@ const ResetPassword = () => {
                         ]}
                         hasFeedback
                     >
-                        <Input.Password prefix={<LockOutlined />} placeholder="New Password"/>
+                        <Input.Password prefix={<BsShieldLock />} placeholder="New Password"/>
                     </Form.Item>
 
                     <Form.Item
@@ -108,7 +109,7 @@ const ResetPassword = () => {
                         ]}
                         hasFeedback
                     >
-                        <Input.Password prefix={<LockOutlined />} placeholder="Confirm Password"/>
+                        <Input.Password prefix={<BsShieldLock />} placeholder="Confirm Password"/>
                     </Form.Item>
 
                     <Form.Item>
