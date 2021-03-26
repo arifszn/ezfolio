@@ -5,8 +5,11 @@ const web = {
         login: '/admin/login',
         forgetPassword: '/admin/forget-password',
         resetPassword: '/admin/reset-password/:token',
-        dashboard: '/admin/dashboard',
         notFound: '/admin/not-found',
+        dashboard: '/admin/dashboard',
+        settings: '/admin/settings',
+        portfolioConfig: '/admin/portfolio/config',
+        portfolioAbout: '/admin/portfolio/about',
     },
     user: {
         home: '/',

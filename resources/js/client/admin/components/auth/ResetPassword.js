@@ -11,8 +11,21 @@ import { useSelector } from 'react-redux';
 const ResetPassword = () => {
     const { token } = useParams();
     const [loading, setLoading] = useState(false);
-    const siteName = useSelector(state => state.globalState.siteName);
+    const globalState = useSelector(state => state.globalState);
+    const siteName = globalState.siteName;
+    const apiToken = globalState.apiToken;
     let history = useHistory();
+
+    useEffect(() => {
+        document.title = `Reset Password - ${siteName}`;
+    }, [])
+
+    useEffect(() => {
+        if (apiToken) {
+            let { from } = location.state || { from: { pathname: Routes.web.admin.dashboard } };
+            history.push(from);
+        }
+    }, [apiToken]);
 
     const onSubmit = (values) => {
         setLoading(true);
@@ -35,10 +48,6 @@ const ResetPassword = () => {
             setLoading(false);
         });
     };
-
-    useEffect(() => {
-        document.title = `Reset Password - ${siteName}`;
-    }, [])
 
     return (
         <React.Fragment>

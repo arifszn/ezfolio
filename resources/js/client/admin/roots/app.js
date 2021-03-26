@@ -64,9 +64,11 @@ const App = () => {
     const dispatch = useDispatch();
     // eslint-disable-next-line no-undef
     let mySettings = settings;
+
+    const apiToken = (localStorage.getItem("apiToken") !== 'undefined' && localStorage.getItem("apiToken") !== null) ? localStorage.getItem("apiToken") : null;
     
     dispatch(initializeGlobalState({
-        token: null,
+        apiToken: apiToken,
         activeMenu: null,
         activeSubMenu: null,
         accentColor: mySettings.accentColor,
@@ -110,7 +112,6 @@ const App = () => {
                                     <Layout>
                                         <Switch>
                                             {privateRoutes()}
-
                                             <Route>
                                                 <NotFound/>
                                             </Route>

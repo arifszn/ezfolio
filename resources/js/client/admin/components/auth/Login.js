@@ -5,12 +5,28 @@ import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setGlobalState } from '../../redux/ActionCreators';
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
-    const siteName = useSelector(state => state.globalState.siteName);
+    const dispatch = useDispatch();
+    let history = useHistory();
+    const globalState = useSelector(state => state.globalState);
+    const siteName = globalState.siteName;
+    const apiToken = globalState.apiToken;
+
+    useEffect(() => {
+        document.title = `Login - ${siteName}`;
+    }, [])
+
+    useEffect(() => {
+        if (apiToken) {
+            let { from } = location.state || { from: { pathname: Routes.web.admin.dashboard } };
+            history.push(from);
+        }
+    }, [apiToken]);
 
     const onSubmit = (values) => {
         setLoading(true);
@@ -21,7 +37,15 @@ const Login = () => {
         })
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
-                
+                const apiToken = response.data.payload.token.access_token;
+
+                localStorage.setItem('apiToken', apiToken);
+
+                dispatch(setGlobalState({
+                    ...globalState,
+                    apiToken: apiToken,
+                    user: response.data.payload.user,
+                }));
             });
         })
         .catch((error) => {
@@ -30,10 +54,6 @@ const Login = () => {
             setLoading(false);
         });
     };
-
-    useEffect(() => {
-        document.title = `Login - ${siteName}`;
-    }, [])
 
     return (
         <React.Fragment>

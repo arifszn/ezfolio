@@ -22,6 +22,15 @@ mix.webpackConfig({
                 loader: 'eslint-loader',
                 enforce: 'pre',
                 exclude: /(node_modules)/,
+            },
+            {
+                test: /\.less$/,
+                loader: 'less-loader',
+                options: {
+                    lessOptions: {
+                        javascriptEnabled: true,
+                    }
+                }
             }
         ]
     },
