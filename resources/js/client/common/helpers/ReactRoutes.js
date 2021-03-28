@@ -3,6 +3,7 @@ import loadable from '@loadable/component';
 import Routes from './Routes';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import React from 'react';
 
 const Login = loadable(() => import('../../admin/components/auth/Login'));
 const ForgetPassword = loadable(() => import('../../admin/components/auth/ForgetPassword'));
@@ -16,9 +17,11 @@ const RedirectLogin = () => {
     const apiToken = useSelector(state => state.globalState.apiToken);
     
     return (
-        <Redirect
-            to={apiToken ? Routes.web.admin.dashboard : Routes.web.admin.login}
-        />
+        <React.Fragment>
+            <Redirect
+                to={apiToken ? Routes.web.admin.dashboard : Routes.web.admin.login}
+            />
+        </React.Fragment>
     )
 }
 

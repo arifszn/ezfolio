@@ -54,13 +54,19 @@ const handleException = (error, callback = null) => {
 
     let errorMessage = 'Something went wrong';
 
+    if (typeof error === 'string') {
+        try {
+            error = JSON.parse(error);
+        } catch (error) {
+            // do nothing
+        }
+    }
+
     if (typeof error.message !== 'undefined') {
         errorMessage = error.message;
     }
 
     if (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined') {
-        console.error(error.response.data);
-        
         if (typeof error.response.data.message !== 'undefined') {
             if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status === Constants.STATUS_CODE_BAD_REQUEST)) {
                 if (error.response.data.payload && typeof error.response.data.payload ==='object') {

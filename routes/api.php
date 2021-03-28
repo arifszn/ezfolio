@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1'], function () {
 
             Route::match(['get', 'post'], '/settings', ['App\Http\Controllers\Admin\Api\SettingController', 'index']);
 
+            Route::match(['post', 'delete'], '/logos', ['App\Http\Controllers\Admin\Api\SettingController', 'logo']);
         });
     });
 });

@@ -6,10 +6,10 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
 import PropTypes from 'prop-types';
 import Utils from '../../../common/helpers/Utils';
+import HTTP from '../../../common/helpers/HTTP';
+import axios from 'axios';
 
 /**
  * Register Filepond plugins
@@ -19,7 +19,6 @@ registerPlugin(
     FilePondPluginImagePreview, 
     FilePondPluginFileValidateSize, 
     FilePondPluginFileValidateType, 
-    FilePondPluginFilePoster
 );
 
 /**
@@ -37,7 +36,6 @@ registerPlugin(
  * labelIdle: string|null
  * name: string|null name of the filepond input which will be sent to server
  * serverUrl: string server url
- * bearerToken: string bearer token
  * afterUploadCallback: function Callback function after successful upload
  * afterRevertCallback: function|null Callback function after successful revert
  * 
@@ -54,10 +52,6 @@ const FileUploader = (props) => {
             // set type to limbo to indicate an already server uploaded file
             options: {
                 type: limbo ? 'limbo' : 'local',
-                // pass poster property
-                metadata: {
-                    poster: props.previewFile
-                }
             }
         }] :
         []
@@ -71,10 +65,6 @@ const FileUploader = (props) => {
                 // set type to local to indicate an already uploaded file
                 options: {
                     type: limbo ? 'limbo' : 'local',
-                    // pass poster property
-                    metadata: {
-                        poster: props.previewFile
-                    }
                 }
             }]);
         }
@@ -90,7 +80,6 @@ const FileUploader = (props) => {
                 allowRevert={typeof props.allowRevert !== 'undefined' ? props.allowRevert : false}
                 allowFileSizeValidation={true}
                 allowFileTypeValidation={props.acceptedFileTypes ? true : false}
-                filePosterMaxHeight={imagePreviewMaxHeight}
                 imagePreviewMaxHeight={imagePreviewMaxHeight}
                 acceptedFileTypes={props.acceptedFileTypes ? props.acceptedFileTypes : []}
                 maxTotalFileSize={props.maxFileSize ? props.maxFileSize : '5MB'}
@@ -103,14 +92,9 @@ const FileUploader = (props) => {
                 name={props.name ? props.name : 'filePond'}
                 credits={false}
                 server={
-                    {
-                        process: {
-                            url: props.serverUrl,
-                            headers: {
-                                Authorization: `Bearer ${props.bearerToken}`
-                            },
-                            load: (source, load) => {
-                                var myRequest = new Request(source);
+                    {   
+                        load: (source, load, error, progress, abort, headers) => {
+                            var myRequest = new Request(source);
                                 fetch(myRequest)
                                 .then(response => {
                                     response.blob()
@@ -119,47 +103,81 @@ const FileUploader = (props) => {
                                     })
                                     .catch(myErr => {
                                         console.log(myErr);
+                                        error('Something went wrong');
                                     });
                                 }).catch(err => {
                                     console.log(err);
+                                    error('Something went wrong');
                                 });
-                            },
-                            onload: (response) => {
-                                response = JSON.parse(response);
+
+                            // Should expose an abort method so the request can be cancelled
+                            return {
+                                abort: () => {
+                                    // User tapped cancel, abort our ongoing actions here
+
+                                    // Let FilePond know the request has been cancelled
+                                    abort();
+                                }
+                            };
+                        },
+                        process:(fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+                            // fieldName is the name of the input field
+                            // file is the actual file object to send
+                            const formData = new FormData();
+                            formData.append(fieldName, file, file.name);
+
+                            // related to aborting the request
+                            const CancelToken = axios.CancelToken;
+
+                            const source = CancelToken.source();
+
+                            const config = {
+                                onUploadProgress: e => progress(e.lengthComputable, e.loaded, e.total)
+                            }
+
+                            HTTP.post(props.serverUrl, formData, config)
+                            .then((response) => {
                                 Utils.handleSuccessResponse(response, () => {
                                     if (props.afterUploadCallback) {
-                                        props.afterUploadCallback(response);
+                                        props.afterUploadCallback(response.data.payload.file);
                                     }
-                                    return response.payload.file;
+                                    load(response.data.payload.file);
                                 });
-                            },
-                            onerror: (response) => {
-                                console.log(response);
-                                Utils.showNotification('Something went wrong in file upload', 'error', null);
-                            },
-                            ondata: (formData) => {
-                                //Called with the formdata object right before it is sent, return extended formdata object to make changes
-                                // formData.append('Hello', 'World');
-                                return formData;
-                            }
+                            }).catch((e) => {
+                                error('Something went wrong');
+                                Utils.handleException(e);
+                            });
+
+                            // Should expose an abort method so the request can be cancelled
+                            return {
+                                abort: () => {
+                                    // This function is entered if the user has tapped the cancel button
+                                    source.cancel('Operation canceled by the user.');
+
+                                    // Let FilePond know the request has been cancelled
+                                    abort();
+                                }
+                            };
                         },
-                        revert: {
-                            url: props.serverUrl,
-                            headers: {
-                                Authorization: `Bearer ${props.bearerToken}`
-                            },
-                            onload: (response) => {
-                                response = JSON.parse(response);
+                        revert: (file, load, error) => {
+                            HTTP.delete(props.serverUrl, {
+                                params: {
+                                    file: file
+                                }
+                            })
+                            .then((response) => {
                                 Utils.handleSuccessResponse(response, () => {
                                     if (props.afterRevertCallback) {
-                                        props.afterRevertCallback(response);
+                                        props.afterRevertCallback(response.data.payload.file);
                                     }
+                                    load();
                                 });
-                            },
-                            onerror: (response) => {
-                                console.log(response);
-                                Utils.showNotification('Something went wrong in file revert', 'error', null);
-                            }
+                            }).catch((e) => {
+                                error('Something went wrong');
+                                Utils.handleException(e);
+                            });
+
                         }
                     }
                 }
@@ -173,7 +191,6 @@ FileUploader.propTypes = {
     labelIdle: PropTypes.string,
     afterUploadCallback: PropTypes.func,
     afterRevertCallback: PropTypes.func,
-    bearerToken: PropTypes.string,
     serverUrl: PropTypes.string,
     previewFile: PropTypes.string,
     name: PropTypes.string,

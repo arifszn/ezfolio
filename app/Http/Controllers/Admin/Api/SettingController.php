@@ -7,6 +7,7 @@ use App\Services\Contracts\AdminContract;
 use App\Services\Contracts\SettingContract;
 use Constants;
 use Illuminate\Http\Request;
+use Log;
 
 class SettingController extends Controller
 {
@@ -48,6 +49,27 @@ class SettingController extends Controller
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('post')) {
             $result = $this->setting->setSettingData($request->all());
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        }
+    }
+
+    /**
+     * Logo resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
+    public function logo(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $result = $this->setting->processUpdateLogoRequest($request->all());
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        } elseif ($request->isMethod('delete')) {
+            Log::info($request->all());
+            Log::info(request()->getContent());
+            $result = $this->setting->processDeleteLogoRequest($request->file);
 
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }

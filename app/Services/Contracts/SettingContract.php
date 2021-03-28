@@ -48,10 +48,10 @@ interface SettingContract
     /**
      * Process the update logo request
      * 
-     * @param Request $request 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateLogoRequest(Request $request);
+    public function processUpdateLogoRequest(array $data);
 
     /**
      * Process the delete logo request

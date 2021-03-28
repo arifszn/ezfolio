@@ -31,7 +31,6 @@ const General = (props) => {
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
                 props.setGlobalState({
-                    ...props.globalState,
                     siteName: siteName
                 });
                 Utils.showNotification(response.data.message, 'success', null);
@@ -50,11 +49,33 @@ const General = (props) => {
             editable={{
                 tooltip: 'click to edit app name',
                 onChange: setSiteName,
-                maxLength: 20,
+                maxLength: 30,
             }}
         >
         {siteName}
       </Paragraph>
+    )
+
+    const logoUploadCallback = (file) => {
+        setTimeout(() => {
+            props.setGlobalState({
+                logo: file
+            });
+        }, 2000);
+    }
+
+    const changeLogo = (
+        <FileUploader
+            allowRevert={false}
+            previewFile={Utils.backend + '/' + props.globalState.logo}
+            acceptedFileTypes={['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml']}
+            allowMultiple={false}
+            name={'file'}
+            serverUrl={Routes.api.admin.logos}
+            labelIdle={'Drag & Drop your logo or <span class="filepond--label-action">Browse</span>'}
+            afterUploadCallback={logoUploadCallback}
+            afterRevertCallback={logoUploadCallback}
+        />
     )
 
     return (
@@ -98,20 +119,7 @@ const General = (props) => {
                         </List.Item>
                     </Spin>
                     <List.Item>
-                        <List.Item.Meta title={'App Logo'} description={
-                            <FileUploader
-                                allowRevert={true}
-                                previewFile={Utils.backend + '/' + props.globalState.logo}
-                                apiToken={'dasdasdasd'}
-                                acceptedFileTypes={['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml']}
-                                allowMultiple={false}
-                                name={'filePond'}
-                                serverUrl={'#'}
-                                labelIdle={'Drag & Drop your logo or <span class="filepond--label-action">Browse</span>'}
-                                afterUploadCallback={() => {}}
-                                afterRevertCallback={() => {}}
-                            />
-                        }>
+                        <List.Item.Meta title={'App Logo'} description={changeLogo}>
                         </List.Item.Meta>
                     </List.Item>
                 </List>

@@ -206,7 +206,7 @@ class SettingService implements SettingContract
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['logo'] = $result['payload']->setting_value;
             } else {
-                $data['logo'] = 'assets/common/img/logo/default_logo.png';
+                $data['logo'] = 'assets/common/img/logo/default.png';
             }
 
             //get favicon
@@ -347,14 +347,14 @@ class SettingService implements SettingContract
     /**
      * Process the update logo request
      * 
-     * @param Request $request 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateLogoRequest(Request $request)
+    public function processUpdateLogoRequest(array $data)
     {
         try {
-            $validate = Validator::make($request->all(), [
-                'filePond' => 'required'
+            $validate = Validator::make($data, [
+                'file' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -366,7 +366,7 @@ class SettingService implements SettingContract
             }
 
             $fileName = Str::random(10). '_'. time() .'.png';
-            $file = $request->file('filePond') ? $request->file('filePond') : $request->get('filePond');
+            $file = $data['file'];
             $pathName = 'assets/common/img/logo/';
             
             if (!file_exists($pathName)) {
@@ -377,7 +377,7 @@ class SettingService implements SettingContract
                 //delete previous logo
                 try {
                     $oldLogoResponse = $this->getSettingByKey(Setting::LOGO);
-                    if ($oldLogoResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldLogoResponse['payload']->setting_value !== 'assets/common/img/logo/default_logo.png' && file_exists($oldLogoResponse['payload']->setting_value)) {
+                    if ($oldLogoResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldLogoResponse['payload']->setting_value !== 'assets/common/img/logo/default.png' && file_exists($oldLogoResponse['payload']->setting_value)) {
                         unlink($oldLogoResponse['payload']->setting_value);
                     }
                 } catch (\Throwable $th) {
@@ -434,7 +434,7 @@ class SettingService implements SettingContract
                 ];
             }
             if (unlink($file)) {
-                $defaultLogo = 'assets/common/img/logo/default_logo.png';
+                $defaultLogo = 'assets/common/img/logo/default.png';
 
                 $result  = $this->setSettingData([
                     'name' => Setting::LOGO,
