@@ -19,7 +19,7 @@ if (env('APP_ENV') !== 'production') {
 }
 
 //log viewer
-Route::get('system-logs', ['\Rap2hpoutre\LaravelLogViewer\LogViewerController', 'index']);
+Route::get('/admin/system-logs', ['\Rap2hpoutre\LaravelLogViewer\LogViewerController', 'index']);
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/{path?}', ['App\Http\Controllers\Admin\AdminController', 'app'])->where('path', '.*')->name('admin.app');

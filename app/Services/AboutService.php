@@ -80,7 +80,7 @@ class AboutService implements AboutContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -168,7 +168,7 @@ class AboutService implements AboutContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -312,7 +312,7 @@ class AboutService implements AboutContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -456,7 +456,7 @@ class AboutService implements AboutContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];

@@ -1,3 +1,4 @@
+import { Result } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -19,10 +20,14 @@ const ErrorWrapper = styled.section`
     background: papayawhip;
 `;
 
+const Wrapper = styled.section`
+    margin-top: 30px;
+`;
+
 /**
- * Error boundary fallback UI to display when error occurs
+ * Simple Error boundary fallback UI to display when error occurs
  */
-const ErrorBoundaryFallbackUI = () => {
+export const SimpleErrorBoundaryFallbackUI = () => {
     return (
         <ErrorWrapper>
             <ErrorTitle>
@@ -40,4 +45,21 @@ const ErrorBoundaryFallbackUI = () => {
     )
 }
 
-export default ErrorBoundaryFallbackUI;
+/**
+ * Error boundary fallback UI to display when error occurs
+ */
+export const ErrorBoundaryFallbackUI = () => {
+    return (
+        <Wrapper>
+            <Result
+                status={500}
+                title="Something went wrong!"
+                // eslint-disable-next-line no-undef
+                subTitle={(!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 
+                    <code>Open <strong>console</strong> for more details.</code> :
+                    ''
+                }
+            />
+        </Wrapper>
+    )
+}

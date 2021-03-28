@@ -64,7 +64,7 @@ const handleException = (error, callback = null) => {
         if (typeof error.response.data.message !== 'undefined') {
             if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status === Constants.STATUS_CODE_BAD_REQUEST)) {
                 if (error.response.data.payload && typeof error.response.data.payload ==='object') {
-                    handleValidationError(error.response.data.payload);
+                    handleBadRequest(error.response.data.payload);
                 } else {
                     showNotification(error.response.data.message, 'error');
                 }
@@ -94,7 +94,7 @@ const handleSuccessResponse = (response, successCallback, errorCallback = null) 
     if (typeof response.data !== 'undefined') {
         if ((typeof response.data.status !== 'undefined') && (response.data.status === Constants.STATUS_CODE_BAD_REQUEST)) {
             if (response.data.payload && typeof response.data.payload ==='object') {
-                handleValidationError(response.data.payload);
+                handleBadRequest(response.data.payload);
             } else {
                 showNotification(response.data.message, 'error');
             }
@@ -111,11 +111,11 @@ const handleSuccessResponse = (response, successCallback, errorCallback = null) 
 }
 
 /**
- * Handle validation error
+ * Handle bad request
  * 
  * @param errorObject 
  */
-const handleValidationError = (errorObject) => {
+const handleBadRequest = (errorObject) => {
     for (var key of Object.keys(errorObject)) {
         let errors = errorObject[key];
         errors.forEach(error => {
@@ -136,7 +136,7 @@ const Utils = {
     textEllipsis,
     randomHexColor,
     handleException,
-    handleValidationError,
+    handleBadRequest,
     handleSuccessResponse,
 }
 

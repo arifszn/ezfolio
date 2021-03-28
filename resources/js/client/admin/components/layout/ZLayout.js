@@ -1,13 +1,19 @@
 import React from 'react';
 import ProLayout from '@ant-design/pro-layout';
-import { AiOutlineHome, AiOutlineControl, AiOutlineExperiment } from 'react-icons/ai';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Routes from '../../../common/helpers/Routes';
 import PropTypes from 'prop-types';
 import Utils from '../../../common/helpers/Utils';
+import {
+  HomeOutlined,
+  FileTextOutlined,
+  ExperimentOutlined,
+  ControlOutlined,
+} from '@ant-design/icons';
+import { BackTop } from 'antd';
 
-const Layout = ({ children }) => {
+const ZLayout = ({ children }) => {
     const location = useLocation();
     const globalState = useSelector(state => state.globalState);
     const favicon = globalState.favicon;
@@ -24,30 +30,41 @@ const Layout = ({ children }) => {
             routes: [
                 {
                     path: Routes.web.admin.dashboard,
+                    key: Routes.web.admin.dashboard,
                     name: 'Dashboard',
-                    icon: <AiOutlineHome />,
-                },
-                {
-                    path: Routes.web.admin.settings,
-                    name: 'Settings',
-                    icon: <AiOutlineControl />,
+                    icon: <HomeOutlined />,
                 },
                 {
                     path: 'portfolio',
                     name: 'Portfolio',
-                    icon: <AiOutlineExperiment />,
+                    icon: <ExperimentOutlined />,
                     routes: [
                         {
                             path: Routes.web.admin.portfolioConfig,
-                            name: 'Portfolio Config',
+                            key: Routes.web.admin.portfolioConfig,
+                            name: 'Config',
                         },
                         {
                             path: Routes.web.admin.portfolioAbout,
-                            name: 'Portfolio About',
+                            key: Routes.web.admin.portfolioAbout,
+                            name: 'About',
                         },
                     ],
                 },
-            ],
+                {
+                    path: Routes.web.admin.systemLogs,
+                    key: Routes.web.admin.systemLogs,
+                    name: 'System Logs',
+                    isExternalLink: true,
+                    icon: <FileTextOutlined/>,
+                },
+                {
+                    path: Routes.web.admin.settings,
+                    key: Routes.web.admin.settings,
+                    name: 'Settings',
+                    icon: <ControlOutlined />,
+                },
+            ]
         },
     };
 
@@ -71,7 +88,11 @@ const Layout = ({ children }) => {
                         <a
                             onClick={(e) => {
                                 e.preventDefault();
-                                navigateToPath(item.path);
+                                if (typeof item.isExternalLink !== 'undefined' && item.isExternalLink) {
+                                    window.open(item.path);
+                                } else {
+                                    navigateToPath(item.path);
+                                }
                             }}
                             href={item.path}
                         >
@@ -82,15 +103,15 @@ const Layout = ({ children }) => {
                     // rightContentRender={() => <RightContent/>}
                 >
                     {children}
-                    
+                    <BackTop />
                 </ProLayout>
             </div>
         </React.Fragment>
     )
 }
 
-Layout.propTypes = {
+ZLayout.propTypes = {
     children: PropTypes.node,
 }
 
-export default Layout;
+export default ZLayout;

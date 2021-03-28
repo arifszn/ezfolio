@@ -90,4 +90,17 @@ class AdminController extends Controller
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
+
+    public function loginCredentials(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $result = $this->admin->me();
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        } elseif ($request->isMethod('post')) {
+            $result = $this->admin->changeCredential($request->all());
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        }
+    }
 }

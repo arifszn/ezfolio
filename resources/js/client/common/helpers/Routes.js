@@ -10,6 +10,7 @@ const web = {
         settings: '/admin/settings',
         portfolioConfig: '/admin/portfolio/config',
         portfolioAbout: '/admin/portfolio/about',
+        systemLogs: '/admin/system-logs',
     },
     user: {
         home: '/',
@@ -22,6 +23,8 @@ const api = {
         login: Utils.backend+'/api/'+Utils.apiVersion+'/admin/login',
         forgetPassword: Utils.backend+'/api/'+Utils.apiVersion+'/admin/forget-password',
         resetPassword: Utils.backend+'/api/'+Utils.apiVersion+'/admin/reset-password',
+        refreshToken: Utils.backend+'/api/'+Utils.apiVersion+'/admin/refresh-token',
+        loginCredentials: Utils.backend+'/api/'+Utils.apiVersion+'/admin/login-credentials',
     },
 };
 

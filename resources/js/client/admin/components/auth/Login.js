@@ -6,7 +6,7 @@ import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setGlobalState } from '../../redux/ActionCreators';
+import { saveApiToken, setGlobalState } from '../../redux/ActionCreators';
 import {AiOutlineUser} from 'react-icons/ai';
 import {BsShieldLock} from 'react-icons/bs';
 
@@ -40,12 +40,8 @@ const Login = () => {
             Utils.handleSuccessResponse(response, () => {
                 const apiToken = response.data.payload.token.access_token;
 
-                localStorage.setItem('apiToken', apiToken);
-
-                dispatch(setGlobalState({
-                    ...globalState,
-                    apiToken: apiToken,
-                    user: response.data.payload.user,
+                dispatch(saveApiToken({
+                    apiToken: apiToken
                 }));
             });
         })

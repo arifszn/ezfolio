@@ -75,7 +75,7 @@ class AdminService implements AdminContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status'  => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -84,17 +84,17 @@ class AdminService implements AdminContract
             $credentials['email'] = $data['email'];
             $credentials['password'] = $data['password'];
 
-            if ($token = $this->guard('admins')->attempt($credentials)) {
+            if ($token = $this->guard()->attempt($credentials)) {
                 $tokenDetails = [
                     'access_token' => $token,
                     'token_type' => 'bearer',
-                    'expires_in' => $this->guard('admins')->factory()->getTTL() * 60
+                    'expires_in' => $this->guard()->factory()->getTTL() * 60
                 ];
 
                 return [
                     'message' => 'Successfully logged in',
                     'payload' => [
-                        'admin' => $this->guard('admins')->user(),
+                        'admin' => $this->guard()->user(),
                         'token' => $tokenDetails
                     ],
                     'status'  => Constants::STATUS_CODE_SUCCESS
@@ -133,7 +133,7 @@ class AdminService implements AdminContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status'  => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -150,18 +150,18 @@ class AdminService implements AdminContract
                 $admin = $result['payload'];
             }
 
-            $token = $this->guard('admins')->login($admin);
+            $token = $this->guard()->login($admin);
 
             $tokenDetails = [
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => $this->guard('admins')->factory()->getTTL() * 60
+                'expires_in' => $this->guard()->factory()->getTTL() * 60
             ];
             
             return [
                 'message' => 'Signup is successful',
                 'payload' => [
-                    'admin' => $this->guard('admins')->user(),
+                    'admin' => $this->guard()->user(),
                     'token' => $tokenDetails
                 ],
                 'status'  => Constants::STATUS_CODE_SUCCESS
@@ -217,7 +217,7 @@ class AdminService implements AdminContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status'  => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -375,7 +375,7 @@ class AdminService implements AdminContract
 
             if ($validate->fails()) {
                 return [
-                    'message' => 'Validation Error',
+                    'message' => 'Bad Request',
                     'payload' => $validate->errors(),
                     'status'  => Constants::STATUS_CODE_BAD_REQUEST
                 ];
@@ -467,7 +467,7 @@ class AdminService implements AdminContract
      */
     public function me()
     {
-        $me = $this->guard('admins')->user();
+        $me = $this->guard()->user();
 
         return [
             'message' => 'Admin found',
@@ -483,18 +483,122 @@ class AdminService implements AdminContract
      */
     public function refreshToken()
     {
-        $token = $this->guard()->refresh();
+        try {
+            $token = $this->guard()->refresh();
 
-        $tokenDetails = [
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
-        ];
+            $tokenDetails = [
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => $this->guard()->factory()->getTTL() * 60
+            ];
 
-        return [
-            'message' => 'Token refreshed',
-            'payload' => $tokenDetails,
-            'status'  => Constants::STATUS_CODE_SUCCESS
-        ];
+            return [
+                'message' => 'Token refreshed',
+                'payload' => $tokenDetails,
+                'status'  => Constants::STATUS_CODE_SUCCESS
+            ];
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            if ($th instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
+                return [
+                    'message' => 'Token is Blacklisted',
+                    'payload' => Constants::TOKEN_BLACKLISTED,
+                    'status'  => Constants::STATUS_CODE_ERROR
+                ];
+            }
+
+            return [
+                'message' => 'Something went wrong.',
+                'payload' => $th->getMessage(),
+                'status'  => Constants::STATUS_CODE_ERROR
+            ];
+        }
+    }
+
+    /**
+     * Change login credentials
+     * 
+     * @param array $data
+     * @return array 
+     */
+    public function changeCredential(array $data)
+    {
+        
+        try {
+            $validate = Validator::make($data, [
+                'id'       => 'required',
+                'email'    => 'required|email',
+                'password' => 'required'
+            ]);
+
+            if ($validate->fails()) {
+                return [
+                    'message' => 'Bad Request',
+                    'payload' => $validate->errors(),
+                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                ];
+            }
+
+            $newData['email'] = $data['email'];
+            $newData['password'] = Hash::make($data['password']);
+
+            $admin = $this->model
+                    ->where('id', $this->guard()->id())
+                    ->first();
+
+            $admin->update([
+                'email' => $newData['email'],
+                'password' => $newData['password'],
+            ]);
+
+            return [
+                'message' => 'Credential is successfully updated',
+                'payload' => $admin,
+                'status'  => Constants::STATUS_CODE_SUCCESS
+            ];
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return [
+                'message' => 'Something went wrong',
+                'payload' => $th->getMessage(),
+                'status'  => Constants::STATUS_CODE_ERROR
+            ];
+        }
+    }
+
+    /**
+     * Fetch admin information by admin id
+     * 
+     * @param int $adminId
+     * @param array $select
+     * @return array
+     */
+    public function getAdminById(int $adminId, array $select = ['*'])
+    {
+        try {
+            $admin = $this->model->select($select)->where('id', $adminId)->first();
+            
+            if ($admin) {
+                return [
+                    'message' => 'Data is fetched successfully',
+                    'payload' => $admin,
+                    'status'  => Constants::STATUS_CODE_SUCCESS
+                ];
+            } else {
+                return [
+                    'message' => 'No result is found',
+                    'payload' => null,
+                    'status'  => Constants::STATUS_CODE_NOT_FOUND
+                ];
+            }
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return [
+                'message' => 'Something went wrong',
+                'payload' => $th->getMessage(),
+                'status'  => Constants::STATUS_CODE_ERROR
+            ];
+        }
     }
 }

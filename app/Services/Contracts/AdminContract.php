@@ -71,4 +71,21 @@ interface AdminContract
      * @return JsonResponse
      */
     public function refreshToken();
+
+    /**
+     * Change login credentials
+     * 
+     * @param array $data
+     * @return array 
+     */
+    public function changeCredential(array $data);
+
+    /**
+     * Fetch admin information by admin id
+     * 
+     * @param int $adminId
+     * @param array $select
+     * @return array
+     */
+    public function getAdminById(int $adminId, array $select = ['*']);
 }

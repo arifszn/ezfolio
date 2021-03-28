@@ -1,12 +1,11 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import enUSIntl from 'antd/lib/locale/en_US';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Routes from '../../common/helpers/Routes';
 import SuspenseErrorBoundary from '../../common/components/SuspenseErrorBoundary';
-import ErrorBoundaryFallbackUI from '../../common/components/ErrorBoundaryFallbackUI';
-import LazyLoading from '../../common/components/lazyLoading/LazyLoading';
+import {ErrorBoundaryFallbackUI} from '../../common/components/ErrorBoundaryFallbackUI';
 import '../../common/assets/css/app.scss';
 import ReactRoutes from '../../common/helpers/ReactRoutes';
 import { changeAntdTheme } from 'mini-dynamic-antd-theme';
@@ -15,7 +14,9 @@ import { initializeGlobalState } from '../redux/ActionCreators';
 import ConfigureStore from '../redux/ConfigureStore';
 import PrivateRoute from '../components/PrivateRoute';
 import loadable from '@loadable/component';
-import Layout from '../components/layout/Layout';
+import ZLayout from '../components/layout/ZLayout';
+import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/lazyLoadingFallbackUi';
+import { setupInterceptors } from '../../common/helpers/HTTP';
 const NotFound = loadable(() => import('../components/Notfound'));
 
 const store = ConfigureStore();
@@ -42,7 +43,7 @@ const fadeoutAndRemoveElement = (el, speed) => {
 const publicRoutes = () => {
     return ReactRoutes.admin.filter(route => route.private === false).map((route, index) => (
         <Route key={index} exact={route.exact} path={route.path}>
-            <route.component/>
+            <route.component fallback={<LazyLoadingFallbackUi/>}/>
         </Route>
     ));
 }
@@ -53,7 +54,7 @@ const publicRoutes = () => {
 const privateRoutes = () => {
     return ReactRoutes.admin.filter(route => route.private === true).map((route, index) => (
         <Route key={index} exact={route.exact} path={route.path}>
-            <route.component/>
+            <route.component fallback={<LazyLoadingFallbackUi spinner={true}/>}/>
         </Route>
     ));
 }
@@ -70,13 +71,7 @@ const App = () => {
     
     dispatch(initializeGlobalState({
         apiToken: apiToken,
-        activeMenu: null,
-        activeSubMenu: null,
         accentColor: mySettings.accentColor,
-        navbarBG: mySettings.navbarBG,
-        navbarColor: mySettings.navbarColor,
-        sidebarBG: mySettings.sidebarBG,
-        sidebarColor: mySettings.sidebarColor,
         shortMenu: mySettings.shortMenu,
         siteName: mySettings.siteName,
         logo: mySettings.logo,
@@ -95,43 +90,43 @@ const App = () => {
         }
 
         changeAntdTheme(mySettings.accentColor);
+
+        setupInterceptors(store);
     }, []);
 
 	return (
 		<React.Fragment>
             <SuspenseErrorBoundary fallback={<ErrorBoundaryFallbackUI/>}>
-                <Suspense fallback={<LazyLoading/>}>
-                    <ConfigProvider locale={enUSIntl}>
-                        <BrowserRouter>
-                            <Switch>
-                                
-                                {/* public routes */}
-                                {publicRoutes()}
+                <ConfigProvider locale={enUSIntl}>
+                    <BrowserRouter>
+                        <Switch>
+                            
+                            {/* public routes */}
+                            {publicRoutes()}
 
-                                {/* private routes */}
-                                <PrivateRoute>
-                                    <Layout>
-                                        <Switch>
-                                            {privateRoutes()}
-                                            <Route>
-                                                <NotFound/>
-                                            </Route>
-                                        </Switch>
-                                    </Layout>
-                                </PrivateRoute>
+                            {/* private routes */}
+                            <PrivateRoute>
+                                <ZLayout>
+                                    <Switch>
+                                        {privateRoutes()}
+                                        <Route>
+                                            <NotFound/>
+                                        </Route>
+                                    </Switch>
+                                </ZLayout>
+                            </PrivateRoute>
 
-                                {/* 404 route */}
-                                <Route>
-                                    <NotFound/>
-                                </Route>
-                                <Route path={Routes.web.admin.notFound}>
-                                    <NotFound/>
-                                </Route>
-                                
-                            </Switch>
-                        </BrowserRouter>
-                    </ConfigProvider>
-                </Suspense>
+                            {/* 404 route */}
+                            <Route>
+                                <NotFound/>
+                            </Route>
+                            <Route path={Routes.web.admin.notFound}>
+                                <NotFound/>
+                            </Route>
+                            
+                        </Switch>
+                    </BrowserRouter>
+                </ConfigProvider>
             </SuspenseErrorBoundary>
         </React.Fragment>
 	);

@@ -1,5 +1,4 @@
 
-import React from 'react';
 import loadable from '@loadable/component';
 import Routes from './Routes';
 const Login = loadable(() => import('../../admin/components/auth/Login'));
