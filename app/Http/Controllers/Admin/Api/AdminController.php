@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AdminContract;
 use Constants;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
 class AdminController extends Controller
 {
@@ -91,6 +94,12 @@ class AdminController extends Controller
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 
+    /**
+     * Login credentials resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
     public function loginCredentials(Request $request)
     {
         if ($request->isMethod('get')) {

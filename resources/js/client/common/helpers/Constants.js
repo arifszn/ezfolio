@@ -14,6 +14,10 @@ const Constants = {
     TOKEN_EXPIRED: 'token_expired',
     TOKEN_BLACKLISTED: 'token_blacklisted',
     TOKEN_NOT_FOUND: 'token_not_found',
+
+    settings: {
+        SITE_NAME: 1,
+    }
 }
 
 export default Constants;

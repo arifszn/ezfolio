@@ -23,6 +23,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/me', ['App\Http\Controllers\Admin\Api\AdminController', 'me']);
 
             Route::match(['get', 'post'], '/login-credentials', ['App\Http\Controllers\Admin\Api\AdminController', 'loginCredentials']);
+
+            Route::match(['get', 'post'], '/settings', ['App\Http\Controllers\Admin\Api\SettingController', 'index']);
+
         });
     });
 });

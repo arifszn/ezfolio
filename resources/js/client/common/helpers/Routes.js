@@ -2,6 +2,7 @@ import Utils from "./Utils";
 
 const web = {
     admin: {
+        admin: '/admin',
         login: '/admin/login',
         forgetPassword: '/admin/forget-password',
         resetPassword: '/admin/reset-password/:token',
@@ -25,6 +26,7 @@ const api = {
         resetPassword: Utils.backend+'/api/'+Utils.apiVersion+'/admin/reset-password',
         refreshToken: Utils.backend+'/api/'+Utils.apiVersion+'/admin/refresh-token',
         loginCredentials: Utils.backend+'/api/'+Utils.apiVersion+'/admin/login-credentials',
+        settings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/settings',
     },
 };
 
