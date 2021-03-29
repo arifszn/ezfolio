@@ -1,16 +1,17 @@
 <?php
 
 use App\Models\Setting;
+use App\Services\Contracts\SettingContract;
 
 class Utils {
     public static function isShortMenu()
     {
         try {
             $settingService = resolve(SettingContract::class);
-            $response = $settingService->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
+            $result = $settingService->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
 
-            if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                if ($response['payload']->setting_value === true || $response['payload']->setting_value === 'true' || $response['payload']->setting_value === 1 || $response['payload']->setting_value === '1') {
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($result['payload']->setting_value === true || $result['payload']->setting_value === 'true' || $result['payload']->setting_value === 1 || $result['payload']->setting_value === '1') {
                     return true;
                 };
             }
@@ -24,15 +25,15 @@ class Utils {
     {
         try {
             $settingService = resolve(SettingContract::class);
-            $response = $settingService->getSettingByKey(Setting::FAVICON, ['setting_value']);
+            $result = $settingService->getSettingByKey(Setting::FAVICON, ['setting_value']);
 
-            if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                return asset($response['payload']->setting_value);
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                return asset($result['payload']->setting_value);
             } else {
-                return asset('assets/common/img/favicon/default_favicon.png');
+                return asset('assets/common/img/favicon/default.png');
             }
         } catch (\Throwable $th) {
-            return asset('assets/common/img/favicon/default_favicon.png');
+            return asset('assets/common/img/favicon/default.png');
         }
     }
     

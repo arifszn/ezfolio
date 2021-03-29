@@ -11,14 +11,11 @@ class Setting extends Model
 
     const SITE_NAME = 1;
     const ACCENT_COLOR = 2;
-    const NAV_BAR_BACKGROUND = 3;
-    const NAV_BAR_COLOR = 4;
-    const SIDE_BAR_BACKGROUND = 5;
-    const SIDE_BAR_COLOR = 6;
-    const SHORT_MENU = 7;
-    const LOGO = 8;
-    const FAVICON = 9;
-    const COVER = 10;
+    const SHORT_MENU = 3;
+    const LOGO = 4;
+    const FAVICON = 5;
+    const COVER = 6;
+    const MENU_LAYOUT = 7;
 
     /**
      * The attributes that are mass assignable.

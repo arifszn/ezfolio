@@ -27,7 +27,8 @@ const api = {
         refreshToken: Utils.backend+'/api/'+Utils.apiVersion+'/admin/refresh-token',
         loginCredentials: Utils.backend+'/api/'+Utils.apiVersion+'/admin/login-credentials',
         settings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/settings',
-        logos: Utils.backend+'/api/'+Utils.apiVersion+'/admin/logos',
+        logo: Utils.backend+'/api/'+Utils.apiVersion+'/admin/logo',
+        favicon: Utils.backend+'/api/'+Utils.apiVersion+'/admin/favicon',
     },
 };
 

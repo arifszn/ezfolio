@@ -6,7 +6,7 @@ import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveApiToken, setGlobalState } from '../../redux/ActionCreators';
+import { saveApiToken } from '../../redux/ActionCreators';
 import {AiOutlineUser} from 'react-icons/ai';
 import {BsShieldLock} from 'react-icons/bs';
 

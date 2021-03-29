@@ -64,10 +64,10 @@ interface SettingContract
     /**
      * Process the update favicon request
      * 
-     * @param Request $request 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateFaviconRequest(Request $request);
+    public function processUpdateFaviconRequest(array $data);
 
     /**
      * Process the delete favicon request

@@ -17,6 +17,12 @@ const Constants = {
 
     settings: {
         SITE_NAME: 1,
+        ACCENT_COLOR: 2,
+        SHORT_MENU: 3,
+        LOGO: 4,
+        FAVICON: 5,
+        COVER: 6,
+        MENU_LAYOUT: 7,
     }
 }
 

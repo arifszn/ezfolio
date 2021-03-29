@@ -152,42 +152,6 @@ class SettingService implements SettingContract
                 $data['accentColor'] = '#FF7F50';
             }
 
-            //get navbar background
-            $result = $this->getSettingByKey(Setting::NAV_BAR_BACKGROUND, ['setting_value']);
-
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                $data['navbarBG'] = $result['payload']->setting_value;
-            } else {
-                $data['navbarBG'] = '#ffffff';
-            }
-
-            //get navbar color
-            $result = $this->getSettingByKey(Setting::NAV_BAR_COLOR, ['setting_value']);
-
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                $data['navbarColor'] = $result['payload']->setting_value;
-            } else {
-                $data['navbarColor'] = '#494a4c';
-            }
-
-            //get sidebar background
-            $result = $this->getSettingByKey(Setting::SIDE_BAR_BACKGROUND, ['setting_value']);
-
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                $data['sidebarBG'] = $result['payload']->setting_value;
-            } else {
-                $data['sidebarBG'] = '#ffffff';
-            }
-
-            //get sidebar color
-            $result = $this->getSettingByKey(Setting::SIDE_BAR_COLOR, ['setting_value']);
-
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                $data['sidebarColor'] = $result['payload']->setting_value;
-            } else {
-                $data['sidebarColor'] = '#3e4b5b';
-            }
-
             //get short menu
             $result = $this->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
 
@@ -195,6 +159,15 @@ class SettingService implements SettingContract
                 $data['shortMenu'] = ($result['payload']->setting_value === true || $result['payload']->setting_value === 'true' || $result['payload']->setting_value === 1 || $result['payload']->setting_value === '1' ? true : false);
             } else {
                 $data['shortMenu'] = false;
+            }
+
+            //get short menu
+            $result = $this->getSettingByKey(Setting::MENU_LAYOUT, ['setting_value']);
+
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $data['menuLayout'] = $result['payload']->setting_value;
+            } else {
+                $data['menuLayout'] = 'side';
             }
 
             //get site name
@@ -215,7 +188,7 @@ class SettingService implements SettingContract
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['favicon'] = $result['payload']->setting_value;
             } else {
-                $data['favicon'] = 'assets/common/img/favicon/default_favicon.png';
+                $data['favicon'] = 'assets/common/img/favicon/default.png';
             }
 
             //get cover photo
@@ -288,7 +261,6 @@ class SettingService implements SettingContract
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
-
             
             if ($data['name'] === Setting::SITE_NAME) {
                 $result = $this->updateSiteName($data['setting_value']);
@@ -472,14 +444,14 @@ class SettingService implements SettingContract
     /**
      * Process the update favicon request
      * 
-     * @param Request $request 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateFaviconRequest(Request $request)
+    public function processUpdateFaviconRequest(array $data)
     {
         try {
-            $validate = Validator::make($request->all(), [
-                'filePond' => 'required'
+            $validate = Validator::make($data, [
+                'file' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -491,7 +463,7 @@ class SettingService implements SettingContract
             }
 
             $fileName = Str::random(10). '_'. time() .'.png';
-            $file = $request->file('filePond') ? $request->file('filePond') : $request->get('filePond');
+            $file = $data['file'];
             $pathName = 'assets/common/img/favicon/';
             
             if (!file_exists($pathName)) {
@@ -503,7 +475,7 @@ class SettingService implements SettingContract
                 //delete previous favicon
                 try {
                     $oldFaviconResponse = $this->getSettingByKey(Setting::FAVICON);
-                    if ($oldFaviconResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldFaviconResponse['payload']->setting_value !== 'assets/common/img/favicon/default_favicon.png' && file_exists($oldFaviconResponse['payload']->setting_value)) {
+                    if ($oldFaviconResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldFaviconResponse['payload']->setting_value !== 'assets/common/img/favicon/default.png' && file_exists($oldFaviconResponse['payload']->setting_value)) {
                         unlink($oldFaviconResponse['payload']->setting_value);
                     }
                 } catch (\Throwable $th) {
@@ -560,7 +532,7 @@ class SettingService implements SettingContract
                 ];
             }
             if (unlink($file)) {
-                $defaultFavicon = 'assets/common/img/favicon/default_favicon.png';
+                $defaultFavicon = 'assets/common/img/favicon/default.png';
                 $result  = $this->setSettingData([
                     'name' => Setting::FAVICON,
                     'setting_value' => $defaultFavicon,

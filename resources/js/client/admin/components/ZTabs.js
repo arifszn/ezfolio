@@ -34,7 +34,7 @@ const ZTabs = ({tabs, selectedTab = null}) => {
         if (selectedTab) {
             setSelectKey(selectedTab);
         }
-    }, selectedTab)
+    }, [selectedTab])
 
     const getMenu = () => {
         return tabs.map((tab) => <Menu.Item key={tab.key}>{tab.title}</Menu.Item>);

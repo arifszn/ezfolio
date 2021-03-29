@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import Constants from './Constants';
+import { changeAntdTheme } from 'mini-dynamic-antd-theme';
 
 /**
  * Display notification
@@ -131,6 +132,15 @@ const handleBadRequest = (errorObject) => {
 }
 
 /**
+ * Change accent color of the system
+ * 
+ *  * @param color 
+ */
+const changeAccentColor = (color) => {
+    changeAntdTheme(color);
+}
+
+/**
  * Utility helper
  */
 const Utils = {
@@ -144,6 +154,7 @@ const Utils = {
     handleException,
     handleBadRequest,
     handleSuccessResponse,
+    changeAccentColor,
 }
 
 export default Utils;

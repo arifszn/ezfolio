@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
@@ -15,8 +14,7 @@ import axios from 'axios';
  * Register Filepond plugins
  */
 registerPlugin(
-    FilePondPluginImageExifOrientation,
-    FilePondPluginImagePreview, 
+    FilePondPluginImagePreview,
     FilePondPluginFileValidateSize, 
     FilePondPluginFileValidateType, 
 );
@@ -93,7 +91,7 @@ const FileUploader = (props) => {
                 credits={false}
                 server={
                     {   
-                        load: (source, load, error, progress, abort, headers) => {
+                        load: (source, load, error, progress, abort) => {
                             var myRequest = new Request(source);
                                 fetch(myRequest)
                                 .then(response => {
@@ -120,7 +118,7 @@ const FileUploader = (props) => {
                                 }
                             };
                         },
-                        process:(fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+                        process:(fieldName, file, metadata, load, error, progress, abort) => {
 
                             // fieldName is the name of the input field
                             // file is the actual file object to send
@@ -199,7 +197,10 @@ FileUploader.propTypes = {
     allowMultiple: PropTypes.bool,
     allowRevert: PropTypes.bool,
     limbo: PropTypes.bool,
-    acceptedFileTypes: PropTypes.array,
+    acceptedFileTypes: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]),
     imagePreviewMaxHeight: PropTypes.number,
 }
 

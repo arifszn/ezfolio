@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
+import PropTypes from 'prop-types';
 
 const StyledDrawer = styled(Drawer)`
     .ant-drawer-content-wrapper {
@@ -174,6 +175,10 @@ const LoginCredentialPopup = (props) => {
             </Spin>
         </StyledDrawer>
     )
+}
+
+LoginCredentialPopup.propTypes = {
+    handleCancel: PropTypes.func,
 }
 
 export default LoginCredentialPopup;

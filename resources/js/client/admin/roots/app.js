@@ -8,7 +8,6 @@ import SuspenseErrorBoundary from '../../common/components/SuspenseErrorBoundary
 import {ErrorBoundaryFallbackUI} from '../../common/components/ErrorBoundaryFallbackUI';
 import '../../common/assets/css/app.scss';
 import ReactRoutes from '../../common/helpers/ReactRoutes';
-import { changeAntdTheme } from 'mini-dynamic-antd-theme';
 import { Provider, useDispatch } from 'react-redux';
 import { initializeGlobalState } from '../redux/ActionCreators';
 import ConfigureStore from '../redux/ConfigureStore';
@@ -17,6 +16,7 @@ import loadable from '@loadable/component';
 import ZLayout from '../components/layout/ZLayout';
 import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/lazyLoadingFallbackUi';
 import { setupInterceptors } from '../../common/helpers/HTTP';
+import Utils from '../../common/helpers/Utils';
 const NotFound = loadable(() => import('../components/Notfound'));
 
 const store = ConfigureStore();
@@ -73,6 +73,7 @@ const App = () => {
         apiToken: apiToken,
         accentColor: mySettings.accentColor,
         shortMenu: mySettings.shortMenu,
+        menuLayout: mySettings.menuLayout,
         siteName: mySettings.siteName,
         logo: mySettings.logo,
         favicon: mySettings.favicon,
@@ -89,7 +90,7 @@ const App = () => {
              fadeoutAndRemoveElement(preloader, 1000);
         }
 
-        changeAntdTheme(mySettings.accentColor);
+        Utils.changeAccentColor(mySettings.accentColor);
 
         setupInterceptors(store);
     }, []);

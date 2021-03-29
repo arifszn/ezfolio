@@ -16,16 +16,17 @@ import { BackTop } from 'antd';
 const ZLayout = ({ children }) => {
     const location = useLocation();
     const globalState = useSelector(state => state.globalState);
-    const favicon = globalState.favicon;
+    const logo = globalState.logo;
     const siteName = globalState.siteName;
+    const layout = globalState.menuLayout;
     let history = useHistory();
 
     const defaultProps = {
         title: siteName,
         navTheme: 'light',
-        // layout: 'top',
+        layout: layout,
         fixedHeader: true,
-        logo: `${Utils.backend}/${favicon}`,
+        logo: `${Utils.backend}/${logo}`,
         route: {
             routes: [
                 {

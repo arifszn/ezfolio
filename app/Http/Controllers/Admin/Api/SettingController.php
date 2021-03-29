@@ -74,4 +74,25 @@ class SettingController extends Controller
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
     }
+
+    /**
+     * Favicon resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
+    public function favicon(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $result = $this->setting->processUpdateFaviconRequest($request->all());
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        } elseif ($request->isMethod('delete')) {
+            Log::info($request->all());
+            Log::info(request()->getContent());
+            $result = $this->setting->processDeleteFaviconRequest($request->file);
+
+            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        }
+    }
 }

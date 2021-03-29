@@ -1,4 +1,4 @@
-import { List, PageHeader, Input, Typography, Spin } from 'antd';
+import { List, PageHeader, Typography, Spin } from 'antd';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Utils from '../../../common/helpers/Utils';
@@ -9,8 +9,14 @@ import LoginCredentialPopup from './LoginCredentialPopup';
 import Constants from '../../../common/helpers/Constants';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
+import styled from 'styled-components';
 
 const { Paragraph } = Typography;
+const { Item } = List;
+
+const StyledListItem = styled(Item)`
+padding: 16px 0px !important;
+`;
 
 const General = (props) => {
     const [loginCredentialVisible, setLoginCredentialVisible] = useState(false);
@@ -33,7 +39,7 @@ const General = (props) => {
                 props.setGlobalState({
                     siteName: siteName
                 });
-                Utils.showNotification(response.data.message, 'success', null);
+                // Utils.showNotification(response.data.message, 'success', null);
             });
         })
         .catch(error => {
@@ -64,17 +70,41 @@ const General = (props) => {
         }, 2000);
     }
 
+    const faviconUploadCallback = (file) => {
+        setTimeout(() => {
+            props.setGlobalState({
+                favicon: file
+            });
+        }, 2000);
+        document.getElementById("favicon").href = Utils.backend + '/' + file;
+    }
+
     const changeLogo = (
         <FileUploader
             allowRevert={false}
             previewFile={Utils.backend + '/' + props.globalState.logo}
-            acceptedFileTypes={['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml']}
+            acceptedFileTypes={"image/*"}
             allowMultiple={false}
             name={'file'}
-            serverUrl={Routes.api.admin.logos}
+            serverUrl={Routes.api.admin.logo}
             labelIdle={'Drag & Drop your logo or <span class="filepond--label-action">Browse</span>'}
             afterUploadCallback={logoUploadCallback}
             afterRevertCallback={logoUploadCallback}
+        />
+    )
+
+    const changeFavicon = (
+        <FileUploader
+            allowRevert={false}
+            previewFile={Utils.backend + '/' + props.globalState.favicon}
+            acceptedFileTypes={"image/*"}
+            allowMultiple={false}
+            name={'file'}
+            serverUrl={Routes.api.admin.favicon}
+            labelIdle={'Drag & Drop your favicon or <span class="filepond--label-action">Browse</span>'}
+            afterUploadCallback={faviconUploadCallback}
+            afterRevertCallback={faviconUploadCallback}
+            imagePreviewMaxHeight={75}
         />
     )
 
@@ -87,7 +117,7 @@ const General = (props) => {
                     itemLayout="horizontal"
                     size="large"
                 >
-                    <List.Item 
+                    <StyledListItem
                         actions={[
                             <a key="login-credentials-change" onClick={(e) => {
                                 e.preventDefault();
@@ -101,10 +131,10 @@ const General = (props) => {
                             </a>,
                         ]}
                     >
-                        <List.Item.Meta title={'Login Credentials'} description={'Change your login credentials'} />
-                    </List.Item>
+                        <Item.Meta title={'Login Credentials'} description={'Change your login credentials.'} />
+                    </StyledListItem>
                     <Spin size="small" spinning={loading && currentSettingToChange === Constants.settings.SITE_NAME}>
-                        <List.Item actions={(siteName && props.globalState.siteName !== siteName) && (
+                        <StyledListItem actions={(siteName && props.globalState.siteName !== siteName) && (
                             [
                                 <a 
                                     key="site-name-change" 
@@ -114,14 +144,15 @@ const General = (props) => {
                                 </a>,
                             ]
                         )}>
-                            <List.Item.Meta title={'App Name'} description={changeSiteName}>
-                            </List.Item.Meta>
-                        </List.Item>
+                            <Item.Meta title={'App Name'} description={changeSiteName}/>
+                        </StyledListItem>
                     </Spin>
-                    <List.Item>
-                        <List.Item.Meta title={'App Logo'} description={changeLogo}>
-                        </List.Item.Meta>
-                    </List.Item>
+                    <StyledListItem style={{padding: '16px 0px'}}>
+                        <Item.Meta title={'App Logo'} description={changeLogo}/>
+                    </StyledListItem>
+                    <StyledListItem style={{padding: '16px 0px'}}>
+                        <Item.Meta title={'Favicon'} description={changeFavicon}/>
+                    </StyledListItem>
                 </List>
             </PageHeader>
             {
@@ -157,7 +188,7 @@ const mapDispatchToProps = dispatch => ({
 
 General.propTypes = {
     globalState: PropTypes.object,
-    
+    setGlobalState: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(General);

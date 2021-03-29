@@ -6,11 +6,11 @@ import General from './General';
 import Icon from '@ant-design/icons';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { IoColorPaletteOutline } from 'react-icons/io5';
+import Themes from './Themes';
 
-const StyledCard = styled(Card)`
-.ant-card-body {
-    padding: 0;
-}
+const Wrapper = styled.div`
+padding: 0;
+background: #fff;
 `;
 
 const tabs = [
@@ -22,16 +22,16 @@ const tabs = [
     {
         key: 'themes',
         title: <React.Fragment><Icon component={IoColorPaletteOutline}/> Theme Settings</React.Fragment>,
-        content: 'This is themes tab'
+        content: <Themes/>
     }
 ]
 
 const Settings = () => {
     return (
         <React.Fragment>
-            <StyledCard className="z-shadow" hoverable={true} style={{padding: 0}} bordered={false}>
-                <ZTabs tabs={tabs}/>
-            </StyledCard>
+            <Wrapper className="z-shadow hoverable">
+                <ZTabs tabs={tabs} selectedTab={'themes'}/>
+            </Wrapper>
         </React.Fragment>
     )
 }
