@@ -4,7 +4,7 @@ import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AiOutlineMail } from 'react-icons/ai';
 import {BsShieldLock} from 'react-icons/bs';
@@ -16,6 +16,7 @@ const ResetPassword = () => {
     const siteName = globalState.siteName;
     const apiToken = globalState.apiToken;
     let history = useHistory();
+    let location = useLocation();
 
     useEffect(() => {
         document.title = `Reset Password - ${siteName}`;

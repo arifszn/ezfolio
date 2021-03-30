@@ -167,7 +167,7 @@ class SettingService implements SettingContract
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['menuLayout'] = $result['payload']->setting_value;
             } else {
-                $data['menuLayout'] = 'side';
+                $data['menuLayout'] = 'mix';
             }
 
             //get site name

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import React from 'react';
 
 const Login = loadable(() => import('../../admin/components/auth/Login'));
+const Logout = loadable(() => import('../../admin/components/auth/Logout'));
 const ForgetPassword = loadable(() => import('../../admin/components/auth/ForgetPassword'));
 const ResetPassword = loadable(() => import('../../admin/components/auth/ResetPassword'));
 const Dashboard = loadable(() => import('../../admin/components/dashboard/Dashboard'));
@@ -32,6 +33,13 @@ const admin = [
         exact: true,
         component: Login,
         private: false
+    },
+    {
+        title: 'Logout',
+        path: Routes.web.admin.logout,
+        exact: true,
+        component: Logout,
+        private: true
     },
     {
         title: 'Forget Password',

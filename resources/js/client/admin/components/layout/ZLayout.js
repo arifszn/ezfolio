@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProLayout from '@ant-design/pro-layout';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,20 +12,33 @@ import {
   ControlOutlined,
 } from '@ant-design/icons';
 import { BackTop } from 'antd';
+import NavContent from './NavContent';
+import { useIsMobile } from '../../../common/hooks/IsMobile';
 
 const ZLayout = ({ children }) => {
+    const isMobile = useIsMobile();
     const location = useLocation();
     const globalState = useSelector(state => state.globalState);
     const logo = globalState.logo;
     const siteName = globalState.siteName;
     const layout = globalState.menuLayout;
+    const [collapsed, setCollapsed] = useState(false);
     let history = useHistory();
+
+    useEffect(() => {
+        !isMobile && setCollapsed(globalState.shortMenu);
+    }, [globalState.shortMenu])
 
     const defaultProps = {
         title: siteName,
-        navTheme: 'light',
-        layout: layout,
+        navTheme: 'dark',
+        headerTheme: 'dark',
+        layout: !isMobile ? layout : 'mix',
         fixedHeader: true,
+        collapsed: collapsed,
+        onCollapse: (_collapsed) => {
+            setCollapsed(_collapsed)
+        },
         logo: `${Utils.backend}/${logo}`,
         route: {
             routes: [
@@ -100,8 +113,8 @@ const ZLayout = ({ children }) => {
                             {dom}
                         </a>
                     )}
+                    // rightContentRender={() => <NavContent/>}
                     breadcrumbRender={() => ('')}
-                    // rightContentRender={() => <RightContent/>}
                 >
                     {children}
                     <BackTop />
@@ -115,4 +128,4 @@ ZLayout.propTypes = {
     children: PropTypes.node,
 }
 
-export default ZLayout;
+export default React.memo(ZLayout);

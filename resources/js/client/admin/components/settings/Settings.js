@@ -1,4 +1,3 @@
-import { Card } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import ZTabs from '../ZTabs';

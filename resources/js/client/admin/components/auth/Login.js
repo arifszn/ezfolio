@@ -4,7 +4,7 @@ import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveApiToken } from '../../redux/ActionCreators';
 import {AiOutlineUser} from 'react-icons/ai';
@@ -14,6 +14,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     let history = useHistory();
+    let location = useLocation();
     const globalState = useSelector(state => state.globalState);
     const siteName = globalState.siteName;
     const apiToken = globalState.apiToken;
@@ -24,7 +25,7 @@ const Login = () => {
 
     useEffect(() => {
         if (apiToken) {
-            let { from } = location.state || { from: { pathname: Routes.web.admin.dashboard } };
+            let { from } = location.intended || { from: { pathname: Routes.web.admin.dashboard } };
             history.push(from);
         }
     }, [apiToken]);

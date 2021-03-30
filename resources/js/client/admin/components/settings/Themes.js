@@ -1,14 +1,14 @@
-import { PageHeader, Radio, Col, List, Card, Spin } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { PageHeader, Radio, List, Spin } from 'antd';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setGlobalState } from '../../redux/ActionCreators';
-import { BlockPicker } from 'react-color';
 import styled from 'styled-components';
 import ColorPickerPopup from '../ColorPickerPopup';
 import Utils from '../../../common/helpers/Utils';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Constants from '../../../common/helpers/Constants';
+import PropTypes from 'prop-types';
 
 const { Item } = List;
 
@@ -35,7 +35,7 @@ const Themes = (props) => {
         Utils.changeAccentColor(color);
     }
 
-    const submitData = (name, value) => {
+    const submitData = (name, value, callback = null) => {
         if (!loading) {
             setLoading(true);
         }
@@ -48,36 +48,9 @@ const Themes = (props) => {
         })
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
-                /* if (name === Constants.NAV_BAR_BACKGROUND) {
-                    props.setGlobalState({
-                        navbarBG: value
-                    });
-                    document.documentElement.style.setProperty('--z-navbar-bg', value);
-                } else if (name === Constants.NAV_BAR_COLOR) {
-                    props.setGlobalState({
-                        navbarColor: value
-                    });
-                    document.documentElement.style.setProperty('--z-navbar-color', value);
-                } else if (name === Constants.SIDE_BAR_BACKGROUND) {
-                    props.setGlobalState({
-                        sidebarBG: value
-                    });
-                    document.documentElement.style.setProperty('--z-sidebar-bg', value);
-                } else if (name === Constants.SIDE_BAR_COLOR) {
-                    props.setGlobalState({
-                        sidebarColor: value
-                    });
-                    document.documentElement.style.setProperty('--z-sidebar-menu-color', value);
-                } else if (name === Constants.SHORT_MENU) {
-                    props.setGlobalState({
-                        shortMenu: value
-                    });
-                    if (value) {
-                        document.getElementById("body").classList.add("z-sidebar-icon-only");
-                    } else {
-                        document.getElementById("body").classList.remove("z-sidebar-icon-only");
-                    }
-                } */
+                if (callback) {
+                    callback();
+                }
             })
         })
         .catch(error => {
@@ -91,11 +64,24 @@ const Themes = (props) => {
     const menuLayoutChangeHandle = (e) => {
         const value = e.target.value;
 
-        props.setGlobalState({
-            menuLayout: value
-        });
-        submitData(Constants.settings.MENU_LAYOUT, value);
-    } 
+        const callback = () => {
+            props.setGlobalState({
+                menuLayout: value
+            });
+        }
+        submitData(Constants.settings.MENU_LAYOUT, value, callback);
+    }
+
+    const shortMenuChangeHandle = (e) => {
+        const value = e.target.value;
+
+        const callback = () => {
+            props.setGlobalState({
+                shortMenu: value
+            });
+        }
+        submitData(Constants.settings.SHORT_MENU, value, callback);
+    }
 
     return (
         <React.Fragment>
@@ -126,10 +112,11 @@ const Themes = (props) => {
                         <StyledListItem actions={
                             [
                                 <Radio.Group
+                                    key="change-menu-layout"
                                     size="small"
                                     options={
                                         [
-                                            { label: 'Side', value: 'side' },
+                                            { label: 'Side', value: 'mix' },
                                             { label: 'Top', value: 'top' },
                                         ]
                                     }
@@ -143,6 +130,32 @@ const Themes = (props) => {
                             <Item.Meta title={'Menu Layout'} description={'Change menu style.'} />
                         </StyledListItem>
                     </Spin>
+                    {
+                        props.globalState.menuLayout === 'mix' && (
+                            <Spin size="small" spinning={loading && currentSettingToChange === Constants.settings.SHORT_MENU}>
+                                <StyledListItem actions={
+                                    [
+                                        <Radio.Group
+                                            key="change-short-menu"
+                                            size="small"
+                                            options={
+                                                [
+                                                    { label: 'Yes', value: true },
+                                                    { label: 'No', value: false },
+                                                ]
+                                            }
+                                            onChange={shortMenuChangeHandle}
+                                            value={props.globalState.shortMenu}
+                                            optionType="button"
+                                            buttonStyle="solid"
+                                        />
+                                    ]
+                                }>
+                                    <Item.Meta title={'Short Menu'} description={'Choose left side menu should be expanded or short when layout is sided.'} />
+                                </StyledListItem>
+                            </Spin>
+                        )
+                    }
                 </List>
             </PageHeader>
             {
@@ -173,5 +186,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     setGlobalState: (state) => dispatch(setGlobalState(state)),
 });
+
+Themes.propTypes = {
+    globalState: PropTypes.object,
+    setGlobalState: PropTypes.func,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Themes);

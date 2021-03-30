@@ -5,7 +5,7 @@ import AuthLayout from './AuthLayout';
 import axios from 'axios';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ForgetPassword = () => {
@@ -14,6 +14,7 @@ const ForgetPassword = () => {
     const siteName = globalState.siteName;
     const apiToken = globalState.apiToken;
     let history = useHistory();
+    let location = useLocation();
 
     useEffect(() => {
         document.title = `Forget Password - ${siteName}`;

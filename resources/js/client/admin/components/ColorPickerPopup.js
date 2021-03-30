@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Form, Input, message, Switch, Spin } from 'antd';
+import { Modal } from 'antd';
 import { BlockPicker } from 'react-color';
+import PropTypes from 'prop-types';
 
 const ColorPickerPopup = (props) => {
     const [visible, setVisible] = useState(props.visible);
@@ -42,7 +43,7 @@ const ColorPickerPopup = (props) => {
                 <BlockPicker
                     color={color}
                     triangle="hide"
-                    onChange={(color, event) => {
+                    onChange={(color) => {
                         props.colorPickerOnChange(color);
                     }}
                     colors={[
@@ -71,6 +72,14 @@ const ColorPickerPopup = (props) => {
             </Modal>
         </React.Fragment>
     )
+}
+
+ColorPickerPopup.propTypes = {
+    colorPickerOnChange: PropTypes.func.isRequired,
+    handleCancel: PropTypes.func.isRequired,
+    submitCallback: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired,
+    selectedColor: PropTypes.string.isRequired,
 }
 
 export default ColorPickerPopup;

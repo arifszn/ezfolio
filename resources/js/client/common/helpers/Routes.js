@@ -4,6 +4,7 @@ const web = {
     admin: {
         admin: '/admin',
         login: '/admin/login',
+        logout: '/admin/logout',
         forgetPassword: '/admin/forget-password',
         resetPassword: '/admin/reset-password/:token',
         notFound: '/admin/not-found',
