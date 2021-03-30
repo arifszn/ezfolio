@@ -164,8 +164,8 @@ const Themes = (props) => {
                                             size="small"
                                             options={
                                                 [
-                                                    { label: 'Yes', value: true },
-                                                    { label: 'No', value: false },
+                                                    { label: 'Short', value: true },
+                                                    { label: 'Full', value: false },
                                                 ]
                                             }
                                             onChange={shortMenuChangeHandle}
@@ -175,7 +175,7 @@ const Themes = (props) => {
                                         />
                                     ]
                                 }>
-                                    <Item.Meta title={'Short Menu'} description={'Choose left side menu should be expanded or short when layout is sided.'} />
+                                    <Item.Meta title={'Menu Size'} description={'Change default menu size.'} />
                                 </StyledListItem>
                             </Spin>
                         )
@@ -223,7 +223,7 @@ const Themes = (props) => {
                                         />
                                     ]
                                 }>
-                                    <Item.Meta title={'Nav Layout'} description={'Change nav color when layout is sided.'} />
+                                    <Item.Meta title={'Nav Bar Color'} description={'Change nav color.'} />
                                 </StyledListItem>
                             </Spin>
                         )

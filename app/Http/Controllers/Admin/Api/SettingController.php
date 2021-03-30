@@ -67,8 +67,6 @@ class SettingController extends Controller
 
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('delete')) {
-            Log::info($request->all());
-            Log::info(request()->getContent());
             $result = $this->setting->processDeleteLogoRequest($request->file);
 
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
@@ -88,11 +86,16 @@ class SettingController extends Controller
 
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('delete')) {
-            Log::info($request->all());
-            Log::info(request()->getContent());
             $result = $this->setting->processDeleteFaviconRequest($request->file);
 
             return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
+    }
+
+    public function storeMailSetting(Request $request)
+    {
+        $result = $this->setting->storeMailSetting($request->all());
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 }

@@ -29,6 +29,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::match(['post', 'delete'], '/logo', ['App\Http\Controllers\Admin\Api\SettingController', 'logo']);
 
             Route::match(['post', 'delete'], '/favicon', ['App\Http\Controllers\Admin\Api\SettingController', 'favicon']);
+
+            Route::post('/mail-setting', ['App\Http\Controllers\Admin\Api\SettingController', 'storeMailSetting']);
         });
     });
 });

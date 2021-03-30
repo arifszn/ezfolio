@@ -230,7 +230,7 @@ class SettingService implements SettingContract
             }
 
             //get mail setting
-            $data['mailSetting']['MAIL_DRIVER'] = env('MAIL_DRIVER');
+            $data['mailSetting']['MAIL_MAILER'] = env('MAIL_MAILER');
             $data['mailSetting']['MAIL_HOST'] = env('MAIL_HOST');
             $data['mailSetting']['MAIL_PORT'] = env('MAIL_PORT');
             $data['mailSetting']['MAIL_USERNAME'] = env('MAIL_USERNAME');
@@ -594,7 +594,7 @@ class SettingService implements SettingContract
     {
         try {
             $validate = Validator::make($data, [
-                'MAIL_DRIVER' => 'required',
+                'MAIL_MAILER' => 'required',
                 'MAIL_HOST' => 'required',
                 'MAIL_PORT' => 'required',
                 'MAIL_USERNAME' => 'required',
@@ -610,7 +610,7 @@ class SettingService implements SettingContract
                 ];
             }
             
-            $file = DotenvEditor::setKey('MAIL_DRIVER', $data['MAIL_DRIVER']);
+            $file = DotenvEditor::setKey('MAIL_MAILER', $data['MAIL_MAILER']);
             $file = DotenvEditor::setKey('MAIL_HOST', $data['MAIL_HOST']);
             $file = DotenvEditor::setKey('MAIL_PORT', $data['MAIL_PORT']);
             $file = DotenvEditor::setKey('MAIL_USERNAME', $data['MAIL_USERNAME']);

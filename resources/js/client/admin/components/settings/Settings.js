@@ -6,6 +6,8 @@ import Icon from '@ant-design/icons';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { IoColorPaletteOutline } from 'react-icons/io5';
 import Themes from './Themes';
+import Mail from './Mail';
+import { RiMailSettingsLine } from 'react-icons/ri';
 
 const Wrapper = styled.div`
 padding: 0;
@@ -22,6 +24,11 @@ const tabs = [
         key: 'themes',
         title: <React.Fragment><Icon component={IoColorPaletteOutline}/> Theme Settings</React.Fragment>,
         content: <Themes/>
+    },
+    {
+        key: 'mail',
+        title: <React.Fragment><Icon component={RiMailSettingsLine}/> Mail Settings</React.Fragment>,
+        content: <Mail/>
     }
 ]
 
@@ -29,7 +36,7 @@ const Settings = () => {
     return (
         <React.Fragment>
             <Wrapper className="z-shadow hoverable">
-                <ZTabs tabs={tabs} selectedTab={'themes'}/>
+                <ZTabs tabs={tabs} selectedTab={'mail'}/>
             </Wrapper>
         </React.Fragment>
     )
