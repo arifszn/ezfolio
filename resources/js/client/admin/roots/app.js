@@ -74,6 +74,8 @@ const App = () => {
         accentColor: mySettings.accentColor,
         shortMenu: mySettings.shortMenu,
         menuLayout: mySettings.menuLayout,
+        menuColor: mySettings.menuColor,
+        navColor: mySettings.navColor,
         siteName: mySettings.siteName,
         logo: mySettings.logo,
         favicon: mySettings.favicon,

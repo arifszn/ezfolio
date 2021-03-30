@@ -161,13 +161,31 @@ class SettingService implements SettingContract
                 $data['shortMenu'] = false;
             }
 
-            //get short menu
+            //get menu layout
             $result = $this->getSettingByKey(Setting::MENU_LAYOUT, ['setting_value']);
 
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['menuLayout'] = $result['payload']->setting_value;
             } else {
                 $data['menuLayout'] = 'mix';
+            }
+
+            //get menu color
+            $result = $this->getSettingByKey(Setting::MENU_COLOR, ['setting_value']);
+
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $data['menuColor'] = $result['payload']->setting_value;
+            } else {
+                $data['menuColor'] = 'light';
+            }
+
+            //get nav color
+            $result = $this->getSettingByKey(Setting::NAV_COLOR, ['setting_value']);
+
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $data['navColor'] = $result['payload']->setting_value;
+            } else {
+                $data['navColor'] = 'light';
             }
 
             //get site name

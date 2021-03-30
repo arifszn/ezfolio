@@ -9,6 +9,7 @@ import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Constants from '../../../common/helpers/Constants';
 import PropTypes from 'prop-types';
+import { useIsMobile } from '../../../common/hooks/IsMobile';
 
 const { Item } = List;
 
@@ -17,6 +18,7 @@ padding: 16px 0px !important;
 `;
 
 const Themes = (props) => {
+    const isMobile = useIsMobile();
     const [loading, setLoading] = useState(false);
     const [colorPickerVisible, setColorPickerVisible] = useState(false);
     const [currentSettingToChange, setCurrentSettingToChange] = useState(null);
@@ -81,6 +83,28 @@ const Themes = (props) => {
             });
         }
         submitData(Constants.settings.SHORT_MENU, value, callback);
+    }
+
+    const menuColorChangeHandle = (e) => {
+        const value = e.target.value;
+
+        const callback = () => {
+            props.setGlobalState({
+                menuColor: value
+            });
+        }
+        submitData(Constants.settings.MENU_COLOR, value, callback);
+    }
+
+    const navColorChangeHandle = (e) => {
+        const value = e.target.value;
+
+        const callback = () => {
+            props.setGlobalState({
+                navColor: value
+            });
+        }
+        submitData(Constants.settings.NAV_COLOR, value, callback);
     }
 
     return (
@@ -152,6 +176,54 @@ const Themes = (props) => {
                                     ]
                                 }>
                                     <Item.Meta title={'Short Menu'} description={'Choose left side menu should be expanded or short when layout is sided.'} />
+                                </StyledListItem>
+                            </Spin>
+                        )
+                    }
+                    <Spin size="small" spinning={loading && currentSettingToChange === Constants.settings.MENU_COLOR}>
+                        <StyledListItem actions={
+                            [
+                                <Radio.Group
+                                    key="change-menu-color"
+                                    size="small"
+                                    options={
+                                        [
+                                            { label: 'Dark', value: 'dark' },
+                                            { label: 'Light', value: 'light' },
+                                        ]
+                                    }
+                                    onChange={menuColorChangeHandle}
+                                    value={props.globalState.menuColor}
+                                    optionType="button"
+                                    buttonStyle="solid"
+                                />
+                            ]
+                        }>
+                            <Item.Meta title={'Menu Layout'} description={'Change menu color.'} />
+                        </StyledListItem>
+                    </Spin>
+                    {
+                       ( isMobile || (props.globalState.menuLayout === 'mix')) && (
+                            <Spin size="small" spinning={loading && currentSettingToChange === Constants.settings.NAV_COLOR}>
+                                <StyledListItem actions={
+                                    [
+                                        <Radio.Group
+                                            key="change-nav-color"
+                                            size="small"
+                                            options={
+                                                [
+                                                    { label: 'Dark', value: 'dark' },
+                                                    { label: 'Light', value: 'light' },
+                                                ]
+                                            }
+                                            onChange={navColorChangeHandle}
+                                            value={props.globalState.navColor}
+                                            optionType="button"
+                                            buttonStyle="solid"
+                                        />
+                                    ]
+                                }>
+                                    <Item.Meta title={'Nav Layout'} description={'Change nav color when layout is sided.'} />
                                 </StyledListItem>
                             </Spin>
                         )

@@ -21,6 +21,8 @@ const ZLayout = ({ children }) => {
     const globalState = useSelector(state => state.globalState);
     const logo = globalState.logo;
     const siteName = globalState.siteName;
+    const menuColor = globalState.menuColor;
+    const navColor = globalState.navColor;
     const layout = globalState.menuLayout;
     const [collapsed, setCollapsed] = useState(false);
     let history = useHistory();
@@ -31,8 +33,8 @@ const ZLayout = ({ children }) => {
 
     const defaultProps = {
         title: siteName,
-        navTheme: 'dark',
-        headerTheme: 'dark',
+        navTheme: menuColor,
+        headerTheme: navColor,
         layout: !isMobile ? layout : 'mix',
         fixedHeader: true,
         collapsed: collapsed,
@@ -113,7 +115,7 @@ const ZLayout = ({ children }) => {
                             {dom}
                         </a>
                     )}
-                    // rightContentRender={() => <NavContent/>}
+                    rightContentRender={() => <NavContent/>}
                     breadcrumbRender={() => ('')}
                 >
                     {children}

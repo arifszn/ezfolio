@@ -16,6 +16,8 @@ class Setting extends Model
     const FAVICON = 5;
     const COVER = 6;
     const MENU_LAYOUT = 7;
+    const MENU_COLOR = 8;
+    const NAV_COLOR = 9;
 
     /**
      * The attributes that are mass assignable.
