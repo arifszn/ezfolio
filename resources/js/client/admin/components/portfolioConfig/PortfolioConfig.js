@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ZTabs from '../ZTabs';
 import Icon from '@ant-design/icons';
-import { AiOutlineSetting } from 'react-icons/ai';
-import { IoColorPaletteOutline } from 'react-icons/io5';
-import { RiMailSettingsLine } from 'react-icons/ri';
-import { GrConfigure, GrTemplate } from 'react-icons/gr';
+import { GrTemplate } from 'react-icons/gr';
 import Template from './Template';
 import PageWrapper from '../layout/PageWrapper';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Spin } from 'antd';
 
 const PortfolioConfig = () => {
     const [templateConfig, setTemplateConfig] = useState(null);

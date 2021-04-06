@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Row, Radio, Spin, Image, PageHeader, Typography } from 'antd';
+import { Card, Col, Row, Radio, Spin, Image, PageHeader } from 'antd';
 import Utils from '../../../common/helpers/Utils';
-import {BiLoader} from 'react-icons/bi';
 import styled from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Constants from '../../../common/helpers/Constants';
+import PropTypes from 'prop-types';
 
 const { Meta } = Card;
-const { Text, Link } = Typography;
 
 const selectedTemplateStyle = {
     padding: '.25rem',
@@ -108,5 +107,9 @@ const Template = (props) => {
         </React.Fragment>
     );
 };
+
+Template.propTypes = {
+    config: PropTypes.object.isRequired,
+}
 
 export default Template;
