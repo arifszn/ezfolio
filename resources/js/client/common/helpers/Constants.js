@@ -27,8 +27,9 @@ const Constants = {
         NAV_COLOR: 9,
     },
 
-    config: {
-        TEMPLATE: 1
+    portfolioConfig: {
+        TEMPLATE: 1,
+        ACCENT_COLOR: 2,
     }
 }
 

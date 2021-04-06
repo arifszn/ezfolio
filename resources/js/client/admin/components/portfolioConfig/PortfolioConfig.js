@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import ZTabs from '../ZTabs';
 import Icon from '@ant-design/icons';
 import { GrTemplate } from 'react-icons/gr';
-import Template from './Template';
+import Basic from './Basic';
 import PageWrapper from '../layout/PageWrapper';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 
 const PortfolioConfig = () => {
-    const [templateConfig, setTemplateConfig] = useState(null);
+    const [basicConfig, setBasicConfig] = useState(null);
     const [componentLoading, setComponentLoading] = useState(true);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const PortfolioConfig = () => {
         HTTP.get(Routes.api.admin.portfolioConfigs)
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
-                setTemplateConfig(response.data.payload.template);
+                setBasicConfig(response.data.payload);
             })
         })
         .catch(error => {
@@ -34,9 +34,9 @@ const PortfolioConfig = () => {
 
     const tabs = [
         {
-            key: 'template-settings',
-            title: <React.Fragment><Icon component={GrTemplate}/> Template Settings</React.Fragment>,
-            content: <Template config={templateConfig}/>
+            key: 'basic',
+            title: <React.Fragment><Icon component={GrTemplate}/> Basic</React.Fragment>,
+            content: <Basic config={basicConfig}/>
         },
     ]
 

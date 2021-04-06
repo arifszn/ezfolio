@@ -31,7 +31,7 @@ const General = (props) => {
         setCurrentSettingToChange(Constants.settings.SITE_NAME);
 
         HTTP.post(Routes.api.admin.settings, {
-            name: Constants.settings.SITE_NAME,
+            setting_key: Constants.settings.SITE_NAME,
             setting_value: siteName
         })
         .then(response => {

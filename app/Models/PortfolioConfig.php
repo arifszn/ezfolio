@@ -10,6 +10,7 @@ class PortfolioConfig extends Model
     use HasFactory;
 
     const TEMPLATE = 1;
+    const ACCENT_COLOR = 2;
 
     /**
      * The attributes that are mass assignable.

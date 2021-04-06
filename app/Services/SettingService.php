@@ -268,7 +268,7 @@ class SettingService implements SettingContract
         try {
 
             $validate = Validator::make($data, [
-                'name' => 'required',
+                'setting_key' => 'required',
                 'setting_value' => 'required'
             ]);
 
@@ -280,10 +280,10 @@ class SettingService implements SettingContract
                 ];
             }
             
-            if ($data['name'] === Setting::SITE_NAME) {
+            if ($data['setting_key'] === Setting::SITE_NAME) {
                 $result = $this->updateSiteName($data['setting_value']);
             } else {
-                $newData['setting_key'] = $data['name'];
+                $newData['setting_key'] = $data['setting_key'];
                 $newData['setting_value'] = $data['setting_value'];
 
                 $result = $this->insertOrUpdate($newData);
@@ -375,7 +375,7 @@ class SettingService implements SettingContract
                 }
 
                 $result  = $this->setSettingData([
-                    'name'  => Setting::LOGO,
+                    'setting_key'  => Setting::LOGO,
                     'setting_value' => $pathName.$fileName,
                 ]);
 
@@ -427,7 +427,7 @@ class SettingService implements SettingContract
                 $defaultLogo = 'assets/common/img/logo/default.png';
 
                 $result  = $this->setSettingData([
-                    'name' => Setting::LOGO,
+                    'setting_key' => Setting::LOGO,
                     'setting_value' => $defaultLogo,
                 ]);
 
@@ -501,7 +501,7 @@ class SettingService implements SettingContract
                 }
 
                 $result  = $this->setSettingData([
-                    'name' => Setting::FAVICON,
+                    'setting_key' => Setting::FAVICON,
                     'setting_value' => $pathName.$fileName,
                 ]);
 
@@ -552,7 +552,7 @@ class SettingService implements SettingContract
             if (unlink($file)) {
                 $defaultFavicon = 'assets/common/img/favicon/default.png';
                 $result  = $this->setSettingData([
-                    'name' => Setting::FAVICON,
+                    'setting_key' => Setting::FAVICON,
                     'setting_value' => $defaultFavicon,
                 ]);
 
