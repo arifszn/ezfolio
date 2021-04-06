@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
     display: flex;
+    position: absolute;
     justify-content: center;
     align-items: center;
     width: 100%;
