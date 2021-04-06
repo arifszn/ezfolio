@@ -27,6 +27,17 @@ const Themes = (props) => {
         submitData(Constants.settings.ACCENT_COLOR, color);
     }
 
+    const colorPickerCancelCallback = (color = null) => {
+        if (color) {
+            props.setGlobalState({
+                accentColor: color
+            });
+            document.documentElement.style.setProperty('--z-accent-color', color);
+            Utils.changeAccentColor(color);
+        }
+        setColorPickerVisible(false);
+    }
+
     const colorPickerOnChange = (colorObject) => {
         const color = colorObject.hex;
 
@@ -235,11 +246,7 @@ const Themes = (props) => {
                     <ColorPickerPopup
                         selectedColor={props.globalState.accentColor}
                         visible={colorPickerVisible}
-                        handleCancel={
-                            () => {
-                                setColorPickerVisible(false);
-                            }
-                        }
+                        handleCancel={colorPickerCancelCallback}
                         submitCallback={colorPickerSubmitCallback}
                         colorPickerOnChange={colorPickerOnChange}
                     />

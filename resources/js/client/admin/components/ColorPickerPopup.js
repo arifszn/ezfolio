@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 const ColorPickerPopup = (props) => {
     const [visible, setVisible] = useState(props.visible);
     const [color, setColor] = useState(props.selectedColor);
+    const [previousColor, setPreviousColor] = useState(null);
+
+    useEffect(() => {
+        setPreviousColor(props.selectedColor);
+    }, [])
 
     useEffect(() => {
         setVisible(props.visible);
@@ -20,10 +25,10 @@ const ColorPickerPopup = (props) => {
         handleCancel();
     }
 
-    const handleCancel = () => {
+    const handleCancel = (_previousColor = null) => {
         setVisible(false);
         setTimeout(() => {
-            props.handleCancel();
+            props.handleCancel(_previousColor);
         }, 800);
     }
 
@@ -33,7 +38,7 @@ const ColorPickerPopup = (props) => {
                 visible={visible}
                 closable={false}
                 onOk={handleOk}
-                onCancel={handleCancel}
+                onCancel={() => {handleCancel(previousColor)}}
                 destroyOnClose={true}
                 maskClosable={false}
                 okText="Save"

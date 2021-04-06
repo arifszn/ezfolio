@@ -25,6 +25,10 @@ const Constants = {
         MENU_LAYOUT: 7,
         MENU_COLOR: 8,
         NAV_COLOR: 9,
+    },
+
+    config: {
+        TEMPLATE: 1
     }
 }
 

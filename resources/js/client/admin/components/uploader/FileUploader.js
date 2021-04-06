@@ -189,7 +189,7 @@ FileUploader.propTypes = {
     labelIdle: PropTypes.string,
     afterUploadCallback: PropTypes.func,
     afterRevertCallback: PropTypes.func,
-    serverUrl: PropTypes.string,
+    serverUrl: PropTypes.string.isRequired,
     previewFile: PropTypes.string,
     name: PropTypes.string,
     maxFiles: PropTypes.number,

@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
             $this->call(AdminSeeder::class);
+            $this->call(PortfolioSeeder::class);
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
         }

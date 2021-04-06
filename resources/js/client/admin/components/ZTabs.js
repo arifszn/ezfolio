@@ -69,7 +69,7 @@ const ZTabs = ({tabs, selectedTab = null}) => {
 }
 
 ZTabs.propTypes = {
-    tabs: PropTypes.arrayOf(PropTypes.shape({ key: PropTypes.string, title: PropTypes.node, content: PropTypes.node })),
+    tabs: PropTypes.arrayOf(PropTypes.shape({ key: PropTypes.string, title: PropTypes.node, content: PropTypes.node })).isRequired,
     selectedTab: PropTypes.string
 }
 

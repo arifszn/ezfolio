@@ -178,7 +178,7 @@ const LoginCredentialPopup = (props) => {
 }
 
 LoginCredentialPopup.propTypes = {
-    handleCancel: PropTypes.func,
+    handleCancel: PropTypes.func.isRequired,
 }
 
 export default LoginCredentialPopup;

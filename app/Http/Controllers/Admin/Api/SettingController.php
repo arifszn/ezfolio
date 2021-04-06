@@ -23,7 +23,7 @@ class SettingController extends Controller
     private $setting;
 
     /**
-     * Create a new instance.
+     * Create a new instance
      * 
      * @param AdminContract $admin 
      * @param SettingContract $setting 
@@ -45,13 +45,11 @@ class SettingController extends Controller
     {
         if ($request->isMethod('get')) {
             $result = $this->setting->getSettingsData();
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('post')) {
             $result = $this->setting->setSettingData($request->all());
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -64,13 +62,11 @@ class SettingController extends Controller
     {
         if ($request->isMethod('post')) {
             $result = $this->setting->processUpdateLogoRequest($request->all());
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('delete')) {
             $result = $this->setting->processDeleteLogoRequest($request->file);
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -83,18 +79,16 @@ class SettingController extends Controller
     {
         if ($request->isMethod('post')) {
             $result = $this->setting->processUpdateFaviconRequest($request->all());
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('delete')) {
             $result = $this->setting->processDeleteFaviconRequest($request->file);
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 
-    public function storeMailSetting(Request $request)
+    public function storeMailSettings(Request $request)
     {
-        $result = $this->setting->storeMailSetting($request->all());
+        $result = $this->setting->storeMailSettings($request->all());
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }

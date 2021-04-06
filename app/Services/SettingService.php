@@ -230,14 +230,14 @@ class SettingService implements SettingContract
             }
 
             //get mail setting
-            $data['mailSetting']['MAIL_MAILER'] = env('MAIL_MAILER');
-            $data['mailSetting']['MAIL_HOST'] = env('MAIL_HOST');
-            $data['mailSetting']['MAIL_PORT'] = env('MAIL_PORT');
-            $data['mailSetting']['MAIL_USERNAME'] = env('MAIL_USERNAME');
-            $data['mailSetting']['MAIL_PASSWORD'] = env('MAIL_PASSWORD');
-            $data['mailSetting']['MAIL_ENCRYPTION'] = env('MAIL_ENCRYPTION');
-            $data['mailSetting']['MAIL_FROM_ADDRESS'] = env('MAIL_FROM_ADDRESS');
-            $data['mailSetting']['MAIL_FROM_NAME'] = env('MAIL_FROM_NAME');
+            $data['mailSettings']['MAIL_MAILER'] = env('MAIL_MAILER');
+            $data['mailSettings']['MAIL_HOST'] = env('MAIL_HOST');
+            $data['mailSettings']['MAIL_PORT'] = env('MAIL_PORT');
+            $data['mailSettings']['MAIL_USERNAME'] = env('MAIL_USERNAME');
+            $data['mailSettings']['MAIL_PASSWORD'] = env('MAIL_PASSWORD');
+            $data['mailSettings']['MAIL_ENCRYPTION'] = env('MAIL_ENCRYPTION');
+            $data['mailSettings']['MAIL_FROM_ADDRESS'] = env('MAIL_FROM_ADDRESS');
+            $data['mailSettings']['MAIL_FROM_NAME'] = env('MAIL_FROM_NAME');
 
             //get demo mode
             $data['demoMode'] = Config::get('custom.demo_mode');
@@ -585,12 +585,12 @@ class SettingService implements SettingContract
     }
 
     /**
-     * store mail setting
+     * store mail settings
      * 
      * @param array $data 
      * @return array
      */
-    public function storeMailSetting(array $data)
+    public function storeMailSettings(array $data)
     {
         try {
             $validate = Validator::make($data, [

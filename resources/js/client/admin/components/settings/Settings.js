@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import ZTabs from '../ZTabs';
 import General from './General';
 import Icon from '@ant-design/icons';
@@ -8,11 +7,7 @@ import { IoColorPaletteOutline } from 'react-icons/io5';
 import Themes from './Themes';
 import Mail from './Mail';
 import { RiMailSettingsLine } from 'react-icons/ri';
-
-const Wrapper = styled.div`
-padding: 0;
-background: #fff;
-`;
+import PageWrapper from '../layout/PageWrapper';
 
 const tabs = [
     {
@@ -35,9 +30,9 @@ const tabs = [
 const Settings = () => {
     return (
         <React.Fragment>
-            <Wrapper className="z-shadow hoverable">
-                <ZTabs tabs={tabs} selectedTab={'mail'}/>
-            </Wrapper>
+            <PageWrapper>
+                <ZTabs tabs={tabs}/>
+            </PageWrapper>
         </React.Fragment>
     )
 }

@@ -23,14 +23,14 @@ const Mail = () => {
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
                 form.setFieldsValue({
-                    MAIL_MAILER: response.data.payload.mailSetting.MAIL_MAILER,
-                    MAIL_HOST: response.data.payload.mailSetting.MAIL_HOST,
-                    MAIL_PORT: response.data.payload.mailSetting.MAIL_PORT,
-                    MAIL_USERNAME: response.data.payload.mailSetting.MAIL_USERNAME,
-                    MAIL_PASSWORD: response.data.payload.mailSetting.MAIL_PASSWORD,
-                    MAIL_ENCRYPTION: response.data.payload.mailSetting.MAIL_ENCRYPTION,
-                    MAIL_FROM_ADDRESS: response.data.payload.mailSetting.MAIL_FROM_ADDRESS,
-                    MAIL_FROM_NAME: response.data.payload.mailSetting.MAIL_FROM_NAME,
+                    MAIL_MAILER: response.data.payload.mailSettings.MAIL_MAILER,
+                    MAIL_HOST: response.data.payload.mailSettings.MAIL_HOST,
+                    MAIL_PORT: response.data.payload.mailSettings.MAIL_PORT,
+                    MAIL_USERNAME: response.data.payload.mailSettings.MAIL_USERNAME,
+                    MAIL_PASSWORD: response.data.payload.mailSettings.MAIL_PASSWORD,
+                    MAIL_ENCRYPTION: response.data.payload.mailSettings.MAIL_ENCRYPTION,
+                    MAIL_FROM_ADDRESS: response.data.payload.mailSettings.MAIL_FROM_ADDRESS,
+                    MAIL_FROM_NAME: response.data.payload.mailSettings.MAIL_FROM_NAME,
                 });
             })
         })
@@ -46,7 +46,7 @@ const Mail = () => {
             setLoading(true);
         }
 
-        HTTP.post(Routes.api.admin.mailSetting, {
+        HTTP.post(Routes.api.admin.mailSettings, {
             MAIL_MAILER: values.MAIL_MAILER,
             MAIL_HOST: values.MAIL_HOST,
             MAIL_PORT: values.MAIL_PORT,

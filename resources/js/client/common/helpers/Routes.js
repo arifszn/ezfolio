@@ -30,7 +30,8 @@ const api = {
         settings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/settings',
         logo: Utils.backend+'/api/'+Utils.apiVersion+'/admin/logo',
         favicon: Utils.backend+'/api/'+Utils.apiVersion+'/admin/favicon',
-        mailSetting: Utils.backend+'/api/'+Utils.apiVersion+'/admin/mail-setting',
+        mailSettings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/mail-settings',
+        portfolioConfigs: Utils.backend+'/api/'+Utils.apiVersion+'/admin/portfolio-configs',
     },
 };
 

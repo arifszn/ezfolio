@@ -78,10 +78,10 @@ interface SettingContract
     public function processDeleteFaviconRequest(string $file);
 
     /**
-     * store mail setting
+     * store mail settings
      * 
      * @param array $data 
      * @return array
      */
-    public function storeMailSetting(array $data);
+    public function storeMailSettings(array $data);
 }

@@ -141,6 +141,27 @@ const changeAccentColor = (color) => {
 }
 
 /**
+ * Portfolio templates
+ */
+const templates = [
+    {
+        id: 'procyon',
+        title: 'Procyon',
+        image: window.location.origin + '/' +'assets/common/img/templates/procyon.png',
+    },
+    {
+        id: 'rigel',
+        title: 'Rigel',
+        image: window.location.origin + '/' +'assets/common/img/templates/rigel.png',
+    },
+    {
+        id: 'vega',
+        title: 'Vega',
+        image: window.location.origin + '/' +'assets/common/img/templates/vega.png',
+    },
+];
+
+/**
  * Utility helper
  */
 const Utils = {
@@ -155,6 +176,7 @@ const Utils = {
     handleBadRequest,
     handleSuccessResponse,
     changeAccentColor,
+    templates,
 }
 
 export default Utils;

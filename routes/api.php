@@ -30,7 +30,10 @@ Route::group(['prefix' => 'v1'], function () {
 
             Route::match(['post', 'delete'], '/favicon', ['App\Http\Controllers\Admin\Api\SettingController', 'favicon']);
 
-            Route::post('/mail-setting', ['App\Http\Controllers\Admin\Api\SettingController', 'storeMailSetting']);
+            Route::post('/mail-settings', ['App\Http\Controllers\Admin\Api\SettingController', 'storeMailSettings']);
+
+            Route::match(['get', 'post'], '/portfolio-configs', ['App\Http\Controllers\Admin\Api\PortfolioController', 'index']);
+
         });
     });
 });

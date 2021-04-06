@@ -18,7 +18,7 @@ class AdminController extends Controller
     private $admin;
 
     /**
-     * Create a new instance.
+     * Create a new instance
      * 
      * @param AdminContract $admin 
      * @return void 
@@ -104,12 +104,10 @@ class AdminController extends Controller
     {
         if ($request->isMethod('get')) {
             $result = $this->admin->me();
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         } elseif ($request->isMethod('post')) {
             $result = $this->admin->changeCredential($request->all());
-
-            return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
         }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
 }
