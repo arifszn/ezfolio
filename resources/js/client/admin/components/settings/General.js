@@ -133,7 +133,7 @@ const General = (props) => {
                     >
                         <Item.Meta title={'Login Credentials'} description={'Change your login credentials.'} />
                     </StyledListItem>
-                    <Spin size="small" spinning={loading && currentSettingToChange === Constants.settings.SITE_NAME}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.SITE_NAME}>
                         <StyledListItem actions={(siteName && props.globalState.siteName !== siteName) && (
                             [
                                 <a 

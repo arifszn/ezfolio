@@ -123,34 +123,32 @@ const Basic = (props) => {
             <PageHeader
                 title="Basic Config"
             >
-                <Spin spinning={loading} delay={500} size="large">
-                    <List
-                        itemLayout="horizontal"
-                        size="large"
-                    >
-                        <Spin size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.TEMPLATE}>
-                            <StyledListItem style={{padding: '16px 0px'}}>
-                                <Item.Meta title={'Portfolio Template'} description={changeTemplate}/>
-                            </StyledListItem>
-                        </Spin>
-                        <Spin size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.ACCENT_COLOR}>
-                            <StyledListItem actions={
-                                [
-                                    <a 
-                                        key="site-name-change" 
-                                        onClick={() => {
-                                            
-                                        }}
-                                    >
-                                        Change
-                                    </a>,
-                                ]
-                            }>
-                                <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of portfolio.'} />
-                            </StyledListItem>
-                        </Spin>
-                    </List>
-                </Spin>
+                <List
+                    itemLayout="horizontal"
+                    size="large"
+                >
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.TEMPLATE}>
+                        <StyledListItem style={{padding: '16px 0px'}}>
+                            <Item.Meta title={'Portfolio Template'} description={changeTemplate}/>
+                        </StyledListItem>
+                    </Spin>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.ACCENT_COLOR}>
+                        <StyledListItem actions={
+                            [
+                                <a 
+                                    key="site-name-change" 
+                                    onClick={() => {
+                                        
+                                    }}
+                                >
+                                    Change
+                                </a>,
+                            ]
+                        }>
+                            <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of portfolio.'} />
+                        </StyledListItem>
+                    </Spin>
+                </List>
             </PageHeader>
         </React.Fragment>
     );
