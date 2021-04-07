@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Row, Radio, Spin, Image, PageHeader, List } from 'antd';
+import { Card, Col, Row, Radio, Spin, Image, PageHeader, List, Typography, Switch } from 'antd';
 import Utils from '../../../common/helpers/Utils';
 import styled from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Constants from '../../../common/helpers/Constants';
 import PropTypes from 'prop-types';
+import ColorPickerPopup from '../ColorPickerPopup';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 const { Item } = List;
+const { Paragraph, Text } = Typography;
 
 const selectedTemplateStyle = {
     padding: '.25rem',
@@ -32,8 +35,38 @@ padding: 16px 0px !important;
 
 const Basic = (props) => {
     const [template, setTemplate] = useState(null);
+    const [accentColor, setAccentColor] = useState(null);
+    const [googleAnalyticsId, setGoogleAnalyticsId] = useState('');
+    const [maintenanceMode, setMaintenanceMode] = useState(false);
     const [loading, setLoading] = useState(false);
     const [currentSettingToChange, setCurrentSettingToChange] = useState(null);
+    const [colorPickerVisible, setColorPickerVisible] = useState(false);
+
+    useEffect(() => {
+        if (props.config) {
+            setTemplate(props.config.template);
+            setAccentColor(props.config.accentColor);     
+            setGoogleAnalyticsId(props.config.googleAnalyticsId);     
+            setMaintenanceMode((parseInt(props.config.maintenanceMode) == 1) ? true : false);     
+        }
+    }, [props.config])
+
+    const colorPickerSubmitCallback = (color) => {
+        submitData(Constants.portfolioConfig.ACCENT_COLOR, color);
+    }
+
+    const colorPickerOnChange = (colorObject) => {
+        const color = colorObject.hex;
+        setAccentColor(color);
+    }
+
+    const colorPickerCancelCallback = (color = null) => {
+        if (color) {
+            setAccentColor(color);
+        }
+
+        setColorPickerVisible(false);
+    }
 
     const templateOnClickHandler = (selected) => {
         if (selected !== template) {
@@ -72,11 +105,48 @@ const Basic = (props) => {
         });
     }
 
-    useEffect(() => {
-        if (props.config) {
-            setTemplate(props.config.template);            
+    const changeGoogleAnalyticsId = (
+        <React.Fragment>
+            {
+                googleAnalyticsId ? (
+                    <Paragraph
+                            editable={{
+                                tooltip: 'click to edit google analytic id',
+                                onChange: setGoogleAnalyticsId,
+                            }}
+                        >
+                        {googleAnalyticsId}
+                    </Paragraph>
+                ) : (
+                    <React.Fragment>
+                        <Paragraph
+                            editable={{
+                                tooltip: 'click to edit google analytic id',
+                                onChange: setGoogleAnalyticsId,
+                            }}
+                        >
+                            <Text type='secondary'>Click here to set google analytic id</Text>
+                        </Paragraph>
+                    </React.Fragment>
+                )
+            }
+        </React.Fragment>
+    )
+
+    const changeGoogleAnalyticsIdHandleSubmit = (e) => {
+        e.preventDefault();
+
+        submitData(Constants.portfolioConfig.GOOGLE_ANALYTICS_ID, googleAnalyticsId);
+    }
+
+    const maintenanceModeOnChange = (checked) => {
+
+        const callback = () => {
+            setMaintenanceMode(checked);
         }
-    }, [props.config])
+
+        submitData(Constants.portfolioConfig.MAINTENANCE_MODE, checked, callback);
+    }
 
     const changeTemplate = (
         <Radio.Group onChange={(e) => templateOnClickHandler(e.target.value)} value={template}>
@@ -136,9 +206,9 @@ const Basic = (props) => {
                         <StyledListItem actions={
                             [
                                 <a 
-                                    key="site-name-change" 
+                                    key="accent-color-change" 
                                     onClick={() => {
-                                        
+                                        setColorPickerVisible(true);
                                     }}
                                 >
                                     Change
@@ -148,8 +218,44 @@ const Basic = (props) => {
                             <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of portfolio.'} />
                         </StyledListItem>
                     </Spin>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.GOOGLE_ANALYTICS_ID}>
+                        <StyledListItem actions={[
+                            <a 
+                                key="google-analytics-change" 
+                                onClick={changeGoogleAnalyticsIdHandleSubmit}
+                            >
+                                Change
+                            </a>,
+                        ]}>
+                            <Item.Meta title={<React.Fragment>Google Analytics ID <small><Text type="secondary">(Optional)</Text></small></React.Fragment>} description={changeGoogleAnalyticsId}/>
+                        </StyledListItem>
+                    </Spin>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}>
+                        <StyledListItem actions={[
+                            <Switch
+                                loading={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}
+                                checkedChildren={<CheckOutlined />}
+                                unCheckedChildren={<CloseOutlined />}
+                                checked={maintenanceMode}
+                                onChange={maintenanceModeOnChange}
+                            />
+                        ]}>
+                            <Item.Meta title={'Maintenance Mode'} description={'Set maintenance mode of portfolio.'}/>
+                        </StyledListItem>
+                    </Spin>
                 </List>
             </PageHeader>
+            {
+                colorPickerVisible && (
+                    <ColorPickerPopup
+                        selectedColor={accentColor}
+                        visible={colorPickerVisible}
+                        handleCancel={colorPickerCancelCallback}
+                        submitCallback={colorPickerSubmitCallback}
+                        colorPickerOnChange={colorPickerOnChange}
+                    />
+                )
+            }
         </React.Fragment>
     );
 };

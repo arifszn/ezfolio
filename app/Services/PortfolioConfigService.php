@@ -155,12 +155,38 @@ class PortfolioConfigService implements PortfolioConfigContract
             $data = [];
 
             if ($template) {
-                //get template
                 $response = $this->getConfigByKey(PortfolioConfig::TEMPLATE, ['setting_value']);
                 if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
                     $data['template'] = $response['payload']->setting_value;
                 } else {
                     $data['template'] = 'procyon';
+                }
+            }
+
+            if ($accentColor) {
+                $response = $this->getConfigByKey(PortfolioConfig::ACCENT_COLOR, ['setting_value']);
+                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['accentColor'] = $response['payload']->setting_value;
+                } else {
+                    $data['accentColor'] = '#0168fa';
+                }
+            }
+
+            if ($googleAnalyticsId) {
+                $response = $this->getConfigByKey(PortfolioConfig::GOOGLE_ANALYTICS_ID, ['setting_value']);
+                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['googleAnalyticsId'] = $response['payload']->setting_value;
+                } else {
+                    $data['googleAnalyticsId'] = '';
+                }
+            }
+
+            if ($maintenanceMode) {
+                $response = $this->getConfigByKey(PortfolioConfig::MAINTENANCE_MODE, ['setting_value']);
+                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['maintenanceMode'] = $response['payload']->setting_value;
+                } else {
+                    $data['maintenanceMode'] = Constants::FALSE;
                 }
             }
 

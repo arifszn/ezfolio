@@ -131,7 +131,7 @@ const Themes = (props) => {
                         <StyledListItem actions={
                             [
                                 <a 
-                                    key="site-name-change" 
+                                    key="accent-color-change" 
                                     onClick={() => {
                                         setColorPickerVisible(true);
                                     }}

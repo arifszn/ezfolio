@@ -30,6 +30,8 @@ const Constants = {
     portfolioConfig: {
         TEMPLATE: 1,
         ACCENT_COLOR: 2,
+        GOOGLE_ANALYTICS_ID: 3,
+        MAINTENANCE_MODE: 4,
     }
 }
 

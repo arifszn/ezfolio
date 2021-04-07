@@ -11,6 +11,8 @@ class PortfolioConfig extends Model
 
     const TEMPLATE = 1;
     const ACCENT_COLOR = 2;
+    const GOOGLE_ANALYTICS_ID = 3;
+    const MAINTENANCE_MODE = 4;
 
     /**
      * The attributes that are mass assignable.
