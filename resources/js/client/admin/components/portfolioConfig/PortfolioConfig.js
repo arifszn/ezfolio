@@ -6,13 +6,13 @@ import PageWrapper from '../layout/PageWrapper';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { BiMenu } from 'react-icons/bi';
+import { BiMenu, BiCodeAlt } from 'react-icons/bi';
 import { AiOutlineControl } from 'react-icons/ai';
 import Menu from './Menu';
+import CustomScript from './CustomScript';
 
 const PortfolioConfig = () => {
-    const [basicConfig, setBasicConfig] = useState(null);
-    const [menuConfig, setMenuConfig] = useState(null);
+    const [config, setConfig] = useState(null);
     const [componentLoading, setComponentLoading] = useState(true);
 
     useEffect(() => {
@@ -25,8 +25,7 @@ const PortfolioConfig = () => {
         HTTP.get(Routes.api.admin.portfolioConfigs)
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
-                setBasicConfig(response.data.payload);
-                setMenuConfig(response.data.payload.menu);
+                setConfig(response.data.payload);
             })
         })
         .catch(error => {
@@ -40,12 +39,17 @@ const PortfolioConfig = () => {
         {
             key: 'basic',
             title: <React.Fragment><Icon component={AiOutlineControl}/> Basic</React.Fragment>,
-            content: <Basic config={basicConfig}/>
+            content: <Basic config={config}/>
         },
         {
             key: 'menu',
             title: <React.Fragment><Icon component={BiMenu}/> Menu</React.Fragment>,
-            content: <Menu config={menuConfig}/>
+            content: <Menu config={config}/>
+        },
+        {
+            key: 'custom-script',
+            title: <React.Fragment><Icon component={BiCodeAlt}/> Custom Script</React.Fragment>,
+            content: <CustomScript config={config}/>
         },
     ]
 

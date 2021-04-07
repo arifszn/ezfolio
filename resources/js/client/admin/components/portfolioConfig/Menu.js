@@ -28,14 +28,14 @@ const Menu = (props) => {
 
     useEffect(() => {
         if (props.config) {
-            setAbout(parseInt(props.config.about));
-            setSkills(parseInt(props.config.skills));
-            setEducation(parseInt(props.config.education));
-            setExperiences(parseInt(props.config.experiences));
-            setProjects(parseInt(props.config.projects));
-            setServices(parseInt(props.config.services));
-            setContact(parseInt(props.config.contact));
-            setFooter(parseInt(props.config.footer));
+            setAbout(parseInt(props.config.menu.about));
+            setSkills(parseInt(props.config.menu.skills));
+            setEducation(parseInt(props.config.menu.education));
+            setExperiences(parseInt(props.config.menu.experiences));
+            setProjects(parseInt(props.config.menu.projects));
+            setServices(parseInt(props.config.menu.services));
+            setContact(parseInt(props.config.menu.contact));
+            setFooter(parseInt(props.config.menu.footer));
         }
     }, [props.config])
 

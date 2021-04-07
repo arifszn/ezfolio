@@ -40,6 +40,8 @@ const Constants = {
         MENU_SERVICE: 10,
         MENU_CONTACT: 11,
         MENU_FOOTER: 12,
+        SCRIPT_HEADER: 13,
+        SCRIPT_FOOTER: 14,
     }
 }
 

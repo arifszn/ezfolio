@@ -24,6 +24,10 @@ class PortfolioConfig extends Model
     const MENU_CONTACT = 11;
     const MENU_FOOTER = 12;
 
+    const SCRIPT_HEADER = 13;
+    const SCRIPT_FOOTER = 14;
+    
+
     /**
      * The attributes that are mass assignable.
      *

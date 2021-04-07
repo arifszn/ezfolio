@@ -248,6 +248,22 @@ class PortfolioConfigService implements PortfolioConfigContract
                 }
             }
 
+            if ($script) {
+                $result = $this->getConfigByKey(PortfolioConfig::SCRIPT_HEADER, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['script']['header'] = $result['payload']->setting_value;
+                } else {
+                    $data['script']['header'] = '';
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::SCRIPT_FOOTER, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['script']['footer'] = $result['payload']->setting_value;
+                } else {
+                    $data['script']['footer'] = '';
+                }
+            }
+
             return [
                 'message' => 'Configs are fetched successfully',
                 'payload' => $data,

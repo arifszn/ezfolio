@@ -109,6 +109,22 @@ class PortfolioSeeder extends Seeder
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
+
+            //header script
+            $data = [
+                'setting_key' => PortfolioConfig::SCRIPT_HEADER,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            //footer script
+            $data = [
+                'setting_key' => PortfolioConfig::SCRIPT_FOOTER,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
         } catch (\Throwable $th) {
             //throw $th;
         }
