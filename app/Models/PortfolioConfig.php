@@ -14,6 +14,16 @@ class PortfolioConfig extends Model
     const GOOGLE_ANALYTICS_ID = 3;
     const MAINTENANCE_MODE = 4;
 
+    //menu
+    const MENU_ABOUT = 5;
+    const MENU_SKILL = 6;
+    const MENU_EDUCATION = 7;
+    const MENU_EXPERIENCE = 8;
+    const MENU_PROJECT = 9;
+    const MENU_SERVICE = 10;
+    const MENU_CONTACT = 11;
+    const MENU_FOOTER = 12;
+
     /**
      * The attributes that are mass assignable.
      *

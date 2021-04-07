@@ -32,6 +32,14 @@ const Constants = {
         ACCENT_COLOR: 2,
         GOOGLE_ANALYTICS_ID: 3,
         MAINTENANCE_MODE: 4,
+        MENU_ABOUT: 5,
+        MENU_SKILL: 6,
+        MENU_EDUCATION: 7,
+        MENU_EXPERIENCE: 8,
+        MENU_PROJECT: 9,
+        MENU_SERVICE: 10,
+        MENU_CONTACT: 11,
+        MENU_FOOTER: 12,
     }
 }
 

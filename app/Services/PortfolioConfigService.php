@@ -53,24 +53,24 @@ class PortfolioConfigService implements PortfolioConfigContract
             }
 
             if (isset($data['default_value'])) {
-                $response = $this->model->updateOrCreate([
+                $result = $this->model->updateOrCreate([
                     'setting_key' => $data['setting_key'],
                 ], [
                     'setting_value' => isset($data['setting_value']) ? $data['setting_value'] : '',
                     'default_value' => isset($data['default_value']) ? $data['default_value'] : ''
                 ]);
             } else {
-                $response = $this->model->updateOrCreate([
+                $result = $this->model->updateOrCreate([
                     'setting_key' => $data['setting_key'],
                 ], [
                     'setting_value' => $data['setting_value']
                 ]);
             }
 
-            if ($response) {
+            if ($result) {
                 return [
                     'message' => 'Data is successfully updated',
-                    'payload' => $response,
+                    'payload' => $result,
                     'status'  => Constants::STATUS_CODE_SUCCESS
                 ]; 
             } else {
@@ -155,38 +155,96 @@ class PortfolioConfigService implements PortfolioConfigContract
             $data = [];
 
             if ($template) {
-                $response = $this->getConfigByKey(PortfolioConfig::TEMPLATE, ['setting_value']);
-                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['template'] = $response['payload']->setting_value;
+                $result = $this->getConfigByKey(PortfolioConfig::TEMPLATE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['template'] = $result['payload']->setting_value;
                 } else {
                     $data['template'] = 'procyon';
                 }
             }
 
             if ($accentColor) {
-                $response = $this->getConfigByKey(PortfolioConfig::ACCENT_COLOR, ['setting_value']);
-                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['accentColor'] = $response['payload']->setting_value;
+                $result = $this->getConfigByKey(PortfolioConfig::ACCENT_COLOR, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['accentColor'] = $result['payload']->setting_value;
                 } else {
                     $data['accentColor'] = '#0168fa';
                 }
             }
 
             if ($googleAnalyticsId) {
-                $response = $this->getConfigByKey(PortfolioConfig::GOOGLE_ANALYTICS_ID, ['setting_value']);
-                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['googleAnalyticsId'] = $response['payload']->setting_value;
+                $result = $this->getConfigByKey(PortfolioConfig::GOOGLE_ANALYTICS_ID, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['googleAnalyticsId'] = $result['payload']->setting_value;
                 } else {
                     $data['googleAnalyticsId'] = '';
                 }
             }
 
             if ($maintenanceMode) {
-                $response = $this->getConfigByKey(PortfolioConfig::MAINTENANCE_MODE, ['setting_value']);
-                if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['maintenanceMode'] = $response['payload']->setting_value;
+                $result = $this->getConfigByKey(PortfolioConfig::MAINTENANCE_MODE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['maintenanceMode'] = $result['payload']->setting_value;
                 } else {
                     $data['maintenanceMode'] = Constants::FALSE;
+                }
+            }
+
+            if ($menu) {
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_ABOUT, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['about'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['about'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_SKILL, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['skills'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['skills'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_EDUCATION, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['education'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['education'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_EXPERIENCE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['experiences'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['experiences'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_PROJECT, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['projects'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['projects'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_SERVICE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['services'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['services'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_CONTACT, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['contact'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['contact'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::MENU_FOOTER, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['menu']['footer'] = $result['payload']->setting_value;
+                } else {
+                    $data['menu']['footer'] = Constants::TRUE;
                 }
             }
 
@@ -230,16 +288,16 @@ class PortfolioConfigService implements PortfolioConfigContract
             $newData['setting_key']   = $data['setting_key'];
             $newData['setting_value'] = isset($data['setting_value']) ? $data['setting_value'] : '';
 
-            $response = $this->insertOrUpdate($newData);
+            $result = $this->insertOrUpdate($newData);
             
-            if ($response['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 return [
                     'message' => 'Config is successfully updated',
-                    'payload' => $response['payload'],
+                    'payload' => $result['payload'],
                     'status' => Constants::STATUS_CODE_SUCCESS
                 ]; 
             } else {
-                return $response;
+                return $result;
             }
 
         } catch (\Throwable $th) {

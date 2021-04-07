@@ -233,6 +233,7 @@ const Basic = (props) => {
                     <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}>
                         <StyledListItem actions={[
                             <Switch
+                                key="maintenance-mode-change" 
                                 loading={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
@@ -240,7 +241,7 @@ const Basic = (props) => {
                                 onChange={maintenanceModeOnChange}
                             />
                         ]}>
-                            <Item.Meta title={'Maintenance Mode'} description={'Set maintenance mode of portfolio.'}/>
+                            <Item.Meta title={'Maintenance Mode'} description={'Set maintenance mode of frontend.'}/>
                         </StyledListItem>
                     </Spin>
                 </List>

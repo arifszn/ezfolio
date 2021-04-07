@@ -52,6 +52,63 @@ class PortfolioSeeder extends Seeder
                 'default_value' => Constants::FALSE,
             ];
             $portfolioConfig->insertOrUpdate($data);
+
+            //menus
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_ABOUT,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_SKILL,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_EDUCATION,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_EXPERIENCE,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_PROJECT,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_SERVICE,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_CONTACT,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::MENU_FOOTER,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
         } catch (\Throwable $th) {
             //throw $th;
         }
