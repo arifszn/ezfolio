@@ -17,3 +17,8 @@ public/js/client
 public/assets/common/img/logo/*
 !public/assets/common/img/logo/.gitkeep
 !public/assets/common/img/logo/default.png
+public/assets/common/img/favicon/*
+!public/assets/common/img/favicon/.gitkeep
+!public/assets/common/img/favicon/default.png
+public/assets/common/img/meta-image/*
+!public/assets/common/img/meta-image/.gitkeep

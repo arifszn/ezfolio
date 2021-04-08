@@ -24,23 +24,23 @@ const General = (props) => {
     const [currentSettingToChange, setCurrentSettingToChange] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const changeSiteNameHandleSubmit = (e) => {
-        e.preventDefault();
+    const submitData = (name, value, callback = null) => {
+        if (!loading) {
+            setLoading(true);
+        }
 
-        setLoading(true);
-        setCurrentSettingToChange(Constants.settings.SITE_NAME);
+        setCurrentSettingToChange(name);
 
         HTTP.post(Routes.api.admin.settings, {
-            setting_key: Constants.settings.SITE_NAME,
-            setting_value: siteName
+            setting_key: name,
+            setting_value: value
         })
         .then(response => {
             Utils.handleSuccessResponse(response, () => {
-                props.setGlobalState({
-                    siteName: siteName
-                });
-                // Utils.showNotification(response.data.message, 'success', null);
-            });
+                if (callback) {
+                    callback();
+                }
+            })
         })
         .catch(error => {
             Utils.handleException(error);
@@ -48,6 +48,18 @@ const General = (props) => {
         .finally(() => {
             setLoading(false);
         });
+    }
+
+    const changeSiteNameHandleSubmit = (e) => {
+        e.preventDefault();
+
+        const callback = () => {
+            props.setGlobalState({
+                siteName: siteName
+            });
+        }
+
+        submitData(Constants.settings.SITE_NAME, siteName, callback);
     }
 
     const changeSiteName = (

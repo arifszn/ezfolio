@@ -26,6 +26,11 @@ class PortfolioConfig extends Model
 
     const SCRIPT_HEADER = 13;
     const SCRIPT_FOOTER = 14;
+
+    const META_TITLE = 15;
+    const META_AUTHOR = 16;
+    const META_DESCRIPTION = 17;
+    const META_IMAGE = 18;
     
 
     /**

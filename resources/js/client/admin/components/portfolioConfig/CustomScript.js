@@ -73,7 +73,7 @@ const CustomScript = (props) => {
                                         setHeaderCodeEditorVisible(true);
                                     }}
                                 >
-                                    Set
+                                    Change
                                 </a>,
                             ]
                         }>
@@ -89,7 +89,7 @@ const CustomScript = (props) => {
                                         setFooterCodeEditorVisible(true);
                                     }}
                                 >
-                                    Set
+                                    Change
                                 </a>,
                             ]
                         }>

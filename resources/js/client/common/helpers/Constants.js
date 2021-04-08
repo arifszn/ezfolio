@@ -42,6 +42,10 @@ const Constants = {
         MENU_FOOTER: 12,
         SCRIPT_HEADER: 13,
         SCRIPT_FOOTER: 14,
+        META_TITLE: 15,
+        META_AUTHOR: 16,
+        META_DESCRIPTION: 17,
+        META_IMAGE: 18,
     }
 }
 

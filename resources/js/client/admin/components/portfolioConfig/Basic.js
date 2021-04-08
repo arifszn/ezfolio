@@ -8,6 +8,7 @@ import Constants from '../../../common/helpers/Constants';
 import PropTypes from 'prop-types';
 import ColorPickerPopup from '../ColorPickerPopup';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import SeoPopup from '../SeoPopup';
 
 const { Meta } = Card;
 const { Item } = List;
@@ -41,13 +42,16 @@ const Basic = (props) => {
     const [loading, setLoading] = useState(false);
     const [currentSettingToChange, setCurrentSettingToChange] = useState(null);
     const [colorPickerVisible, setColorPickerVisible] = useState(false);
+    const [seoPopupVisible, setSeoPopupVisible] = useState(false);
+    const [seo, setSeo] = useState(null);
 
     useEffect(() => {
         if (props.config) {
             setTemplate(props.config.template);
             setAccentColor(props.config.accentColor);     
-            setGoogleAnalyticsId(props.config.googleAnalyticsId);     
-            setMaintenanceMode((parseInt(props.config.maintenanceMode) == 1) ? true : false);     
+            setGoogleAnalyticsId(props.config.googleAnalyticsId);
+            setSeo(props.config.seo);
+            setMaintenanceMode((parseInt(props.config.maintenanceMode) == 1) ? true : false);  
         }
     }, [props.config])
 
@@ -230,6 +234,20 @@ const Basic = (props) => {
                             <Item.Meta title={<React.Fragment>Google Analytics ID <small><Text type="secondary">(Optional)</Text></small></React.Fragment>} description={changeGoogleAnalyticsId}/>
                         </StyledListItem>
                     </Spin>
+                    <StyledListItem actions={
+                        [
+                            <a 
+                                key="seo-change" 
+                                onClick={() => {
+                                    setSeoPopupVisible(true);
+                                }}
+                            >
+                                Change
+                            </a>,
+                        ]
+                    }>
+                        <Item.Meta title={'SEO'} description={'Search engine optimization of frontend.'} />
+                    </StyledListItem>
                     <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}>
                         <StyledListItem actions={[
                             <Switch
@@ -254,6 +272,24 @@ const Basic = (props) => {
                         handleCancel={colorPickerCancelCallback}
                         submitCallback={colorPickerSubmitCallback}
                         colorPickerOnChange={colorPickerOnChange}
+                    />
+                )
+            }
+            {
+                seoPopupVisible && (
+                    <SeoPopup
+                        data={seo}
+                        handleCancel={
+                            () => {
+                                setSeoPopupVisible(false);
+                            }
+                        }
+                        submitCallback={
+                            (newValue) => {
+                                setSeo(newValue);
+                                setSeoPopupVisible(false);
+                            }
+                        }
                     />
                 )
             }

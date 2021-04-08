@@ -54,4 +54,12 @@ interface PortfolioConfigContract
      * @return array 
      */
     public function setConfigData(array $data);
+
+    /**
+     * Store meta data
+     * 
+     * @param array $data 
+     * @return array 
+     */
+    public function setMetaData(array $data);
 }

@@ -33,6 +33,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/mail-settings', ['App\Http\Controllers\Admin\Api\SettingController', 'storeMailSettings']);
 
             Route::match(['get', 'post'], '/portfolio-configs', ['App\Http\Controllers\Admin\Api\PortfolioController', 'index']);
+
+            Route::post('/seo', ['App\Http\Controllers\Admin\Api\PortfolioController', 'seo']);
         });
     });
 });

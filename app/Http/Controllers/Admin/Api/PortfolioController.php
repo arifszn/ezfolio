@@ -41,4 +41,17 @@ class PortfolioController extends Controller
         
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
+
+    /**
+     * Handle seo request
+     * 
+     * @param Request $request 
+     * @return JsonResponse 
+     */
+    public function seo(Request $request)
+    {
+        $result = $this->portfolioConfig->setMetaData($request->all());
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+    }
 }

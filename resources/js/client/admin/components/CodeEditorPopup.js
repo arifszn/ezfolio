@@ -76,9 +76,10 @@ const CodeEditorPopup = (props) => {
         >
             <Spin spinning={componentLoading} size="large" delay={500}>
                 <Input.TextArea
+                    style={{background: 'ghostwhite'}}
                     value={value}
                     onChange={onChange}
-                    placeholder="console.log()"
+                    placeholder="Type some code..."
                     autoSize={{ minRows: 15}}
                 />
             </Spin>

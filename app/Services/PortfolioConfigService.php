@@ -10,6 +10,7 @@ use Constants;
 use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Str;
 use Validator;
 
 class PortfolioConfigService implements PortfolioConfigContract
@@ -264,6 +265,36 @@ class PortfolioConfigService implements PortfolioConfigContract
                 }
             }
 
+            if ($seo) {
+                $result = $this->getConfigByKey(PortfolioConfig::META_TITLE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['seo']['title'] = $result['payload']->setting_value;
+                } else {
+                    $data['seo']['title'] = '';
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::META_AUTHOR, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['seo']['author'] = $result['payload']->setting_value;
+                } else {
+                    $data['seo']['author'] = '';
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::META_DESCRIPTION, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['seo']['description'] = $result['payload']->setting_value;
+                } else {
+                    $data['seo']['description'] = '';
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::META_IMAGE, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['seo']['image'] = $result['payload']->setting_value;
+                } else {
+                    $data['seo']['image'] = '';
+                }
+            }
+
             return [
                 'message' => 'Configs are fetched successfully',
                 'payload' => $data,
@@ -316,6 +347,137 @@ class PortfolioConfigService implements PortfolioConfigContract
                 return $result;
             }
 
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return [
+                'message' => 'Something went wrong',
+                'payload' => $th->getMessage(),
+                'status'  => Constants::STATUS_CODE_ERROR
+            ];
+        }
+    }
+
+    /**
+     * Store meta data
+     * 
+     * @param array $data 
+     * @return array 
+     */
+    public function setMetaData(array $data)
+    {
+        try {
+            $count = 0;
+            $inserted = [];
+
+            foreach ($data as $key => $value) {
+                if ($key === 'title') {
+                    $newData = [
+                        'setting_key' => PortfolioConfig::META_TITLE,
+                        'setting_value' => isset($value) ? $value : '',
+                    ];
+                    $result = $this->insertOrUpdate($newData);
+
+                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                        $count++;
+                        $inserted['title'] = $result['payload']->setting_value;
+                    } else {
+                        Log::error($result['payload']);
+                    }
+                } elseif ($key === 'author') {
+                    $newData = [
+                        'setting_key' => PortfolioConfig::META_AUTHOR,
+                        'setting_value' => isset($value) ? $value : '',
+                    ];
+                    $result = $this->insertOrUpdate($newData);
+
+                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                        $count++;
+                        $inserted['author'] = $result['payload']->setting_value;
+                    } else {
+                        Log::error($result['payload']);
+                    }
+                } elseif ($key === 'description') {
+                    $newData = [
+                        'setting_key' => PortfolioConfig::META_DESCRIPTION,
+                        'setting_value' => isset($value) ? $value : '',
+                    ];
+                    $result = $this->insertOrUpdate($newData);
+
+                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                        $count++;
+                        $inserted['description'] = $result['payload']->setting_value;
+                    } else {
+                        Log::error($result['payload']);
+                    }
+                } elseif ($key === 'image') {
+                    $file = $data['image'];
+                    if ($file) {
+                        $fileName = Str::random(10). '_'. time() .'.png';
+                        $pathName = 'assets/common/img/meta-image/';
+                        
+                        if (!file_exists($pathName)) {
+                            mkdir( $pathName, 0777, true);
+                        }
+
+                        if ($file->move($pathName, $fileName)) {
+                            //delete previous image
+                            try {
+                                $oldImageResponse = $this->getConfigByKey(PortfolioConfig::META_IMAGE);
+                                if ($oldImageResponse['status'] === Constants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
+                                    unlink($oldImageResponse['payload']->setting_value);
+                                }
+                            } catch (\Throwable $th) {
+                                Log::error($th->getMessage());
+                            }
+
+                            $newData = [
+                                'setting_key' => PortfolioConfig::META_IMAGE,
+                                'setting_value' => $pathName.$fileName,
+                            ];
+                            $result = $this->insertOrUpdate($newData);
+
+                            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                                $count++;
+                                $inserted['image'] = $result['payload']->setting_value;
+                            } else {
+                                Log::error($result['payload']);
+                            }
+                        }
+                    } else {
+                        //delete previous image
+                        try {
+                            $oldImageResponse = $this->getConfigByKey(PortfolioConfig::META_IMAGE);
+                            if ($oldImageResponse['status'] === Constants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
+                                unlink($oldImageResponse['payload']->setting_value);
+                            }
+                        } catch (\Throwable $th) {
+                            Log::error($th->getMessage());
+                        }
+
+                        $newData = [
+                            'setting_key' => PortfolioConfig::META_IMAGE,
+                            'setting_value' => '',
+                        ];
+                        $result = $this->insertOrUpdate($newData);
+                    }
+                }
+            }
+            if ($count) {
+                return [
+                    'message' => 'SEO info is successfully saved',
+                    'payload' => [
+                        'count' => $count,
+                        'inserted' => $inserted
+                    ],
+                    'status' => Constants::STATUS_CODE_SUCCESS
+                ];
+            } else {
+                return [
+                    'message' => 'Nothing is updated',
+                    'payload' => null,
+                    'status' => Constants::STATUS_CODE_ERROR
+                ];
+            }
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [

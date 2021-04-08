@@ -6,6 +6,7 @@ use App\Models\PortfolioConfig;
 use App\Services\Contracts\PortfolioConfigContract;
 use Constants;
 use Illuminate\Database\Seeder;
+use Log;
 
 class PortfolioSeeder extends Seeder
 {
@@ -121,6 +122,55 @@ class PortfolioSeeder extends Seeder
             //footer script
             $data = [
                 'setting_key' => PortfolioConfig::SCRIPT_FOOTER,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+
+            //meta title
+            $data = [
+                'setting_key' => PortfolioConfig::META_TITLE,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            //meta author
+            $data = [
+                'setting_key' => PortfolioConfig::META_AUTHOR,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            //meta description
+            $data = [
+                'setting_key' => PortfolioConfig::META_DESCRIPTION,
+                'setting_value' => '',
+                'default_value' => '',
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            //meta image
+            try {
+                if (is_dir('public/assets/common/img/meta-image')) {
+                    $dir = 'public/assets/common/img/meta-image';
+                } else {
+                    $dir = 'assets/common/img/meta-image';
+                }
+                $leave_files = array('.gitkeep');
+                
+                foreach( glob("$dir/*") as $file ) {
+                    if( !in_array(basename($file), $leave_files) ){
+                        unlink($file);
+                    }
+                }
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+            $data = [
+                'setting_key' => PortfolioConfig::META_IMAGE,
                 'setting_value' => '',
                 'default_value' => '',
             ];

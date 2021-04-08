@@ -32,6 +32,7 @@ const api = {
         favicon: Utils.backend+'/api/'+Utils.apiVersion+'/admin/favicon',
         mailSettings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/mail-settings',
         portfolioConfigs: Utils.backend+'/api/'+Utils.apiVersion+'/admin/portfolio-configs',
+        seo: Utils.backend+'/api/'+Utils.apiVersion+'/admin/seo',
     },
 };
 

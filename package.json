@@ -32,7 +32,7 @@
         "@loadable/component": "^5.14.1",
         "@nivo/core": "^0.67.0",
         "@nivo/pie": "^0.67.0",
-        "antd": "^4.14.1",
+        "antd": "^4.15.0",
         "filepond": "^4.26.0",
         "filepond-plugin-file-encode": "^2.1.10",
         "filepond-plugin-file-validate-size": "^2.2.4",
