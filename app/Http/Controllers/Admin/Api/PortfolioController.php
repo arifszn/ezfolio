@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Contracts\AboutContract;
 use App\Services\Contracts\PortfolioConfigContract;
 use Constants;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
 class PortfolioController extends Controller
 {
@@ -15,14 +19,21 @@ class PortfolioController extends Controller
     private $portfolioConfig;
 
     /**
+     * @var AboutContract
+     */
+    private $about;
+
+    /**
      * Create a new instance
      * 
-     * @param PortfolioConfigContract $portfolioConfig 
+     * @param PortfolioConfigContract $portfolioConfig
+     * @param AboutContract $about
      * @return void 
      */
-    public function __construct(PortfolioConfigContract $portfolioConfig)
+    public function __construct(PortfolioConfigContract $portfolioConfig, AboutContract $about)
     {
         $this->portfolioConfig = $portfolioConfig;
+        $this->about = $about;
     }
 
     /**
@@ -51,6 +62,40 @@ class PortfolioController extends Controller
     public function seo(Request $request)
     {
         $result = $this->portfolioConfig->setMetaData($request->all());
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+    }
+
+    /**
+     * Handle about request
+     * 
+     * @param Request $request 
+     * @return JsonResponse 
+     */
+    public function about(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $result = $this->about->getAllFields();
+        } elseif ($request->isMethod('post')) {
+            $result = $this->about->store($request->all());
+        }
+        
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+    }
+
+    /**
+     * Avatar resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
+    public function avatar(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $result = $this->about->processUpdateAvatarRequest($request->all());
+        } elseif ($request->isMethod('delete')) {
+            $result = $this->about->processDeleteAvatarRequest($request->file);
+        }
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }

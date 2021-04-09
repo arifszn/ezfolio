@@ -25,53 +25,47 @@ interface AboutContract
     /**
      * Process the update avatar request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateAvatarRequest(Request $request, int $adminId);
+    public function processUpdateAvatarRequest(array $data);
 
     /**
      * Process the delete avatar request
      * 
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteAvatarRequest(string $file, int $adminId);
+    public function processDeleteAvatarRequest(string $file);
 
     /**
      * Process the update cover request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateCoverRequest(Request $request, int $adminId);
+    public function processUpdateCoverRequest(array $data);
 
     /**
      * Process the delete cover request
      * 
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteCoverRequest(string $file, int $adminId);
+    public function processDeleteCoverRequest(string $file);
 
     /**
      * Process the update CV request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array 
      */
-    public function processUpdateCVRequest(Request $request, int $adminId);
+    public function processUpdateCVRequest(array $data);
 
     /**
      * Process the delete CV request
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteCVRequest(string $file, int $adminId);
+    public function processDeleteCVRequest(string $file);
 }

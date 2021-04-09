@@ -108,7 +108,7 @@ const FileUploaderFormInput = (props) => {
                 }}
                 allowMultiple={props.allowMultiple ? props.allowMultiple : false}
                 maxFiles={props.maxFiles ? props.maxFiles : 3}
-                name={props.name ? props.name : 'filePond'}
+                name={props.name ? props.name : 'file'}
                 labelIdle={props.labelIdle ? props.labelIdle : 'Drag & Drop your file or <span class="filepond--label-action">Browse</span>'}
             />
         </React.Fragment>

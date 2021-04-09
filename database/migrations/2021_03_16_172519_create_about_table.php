@@ -25,7 +25,6 @@ class CreateAboutTable extends Migration
             $table->longText('taglines')->nullable();
             $table->longText('social_links')->nullable();
             $table->string('cv')->nullable();
-            $table->boolean('display_cv')->default(Constants::TRUE);
             $table->timestamps();
         });
     }

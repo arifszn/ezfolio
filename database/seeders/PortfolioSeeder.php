@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\PortfolioConfig;
+use App\Services\Contracts\AboutContract;
 use App\Services\Contracts\PortfolioConfigContract;
 use Constants;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class PortfolioSeeder extends Seeder
     {
         try {
             $portfolioConfig = resolve(PortfolioConfigContract::class);
+            $about = resolve(AboutContract::class);
 
             //portfolio config table seed
 
@@ -189,8 +191,122 @@ class PortfolioSeeder extends Seeder
                 'default_value' => '',
             ];
             $portfolioConfig->insertOrUpdate($data);
+
+
+            //about table seed
+            try {
+                try {
+                    //avatar
+                    if (is_dir('public/assets/common/img/avatar')) {
+                        $dir = 'public/assets/common/img/avatar';
+                    } else {
+                        $dir = 'assets/common/img/avatar';
+                    }
+                    $leave_files = array('.gitkeep');
+                    
+                    foreach( glob("$dir/*") as $file ) {
+                        if( !in_array(basename($file), $leave_files) ){
+                            unlink($file);
+                        }
+                    }
+
+                    if (is_dir('public/assets/common/img/avatar')) {
+                        copy('public/assets/common/default/avatar/default.png', $dir.'/default.png');
+                    } else {
+                        copy('assets/common/default/avatar/default.png', $dir.'/default.png');
+                    }
+                } catch (\Throwable $th) {
+                    Log::error($th->getMessage());
+                }
+
+                try {
+                    //cover
+                    if (is_dir('public/assets/common/img/cover')) {
+                        $dir = 'public/assets/common/img/cover';
+                    } else {
+                        $dir = 'assets/common/img/cover';
+                    }
+                    $leave_files = array('.gitkeep');
+                    
+                    foreach( glob("$dir/*") as $file ) {
+                        if( !in_array(basename($file), $leave_files) ){
+                            unlink($file);
+                        }
+                    }
+
+                    if (is_dir('public/assets/common/img/cover')) {
+                        copy('public/assets/common/default/cover/default.png', $dir.'/default.png');
+                    } else {
+                        copy('assets/common/default/cover/default.png', $dir.'/default.png');
+                    }
+                } catch (\Throwable $th) {
+                    Log::error($th->getMessage());
+                }
+
+                try {
+                    //cv
+                    if (is_dir('public/assets/common/cv')) {
+                        $dir = 'public/assets/common/cv';
+                    } else {
+                        $dir = 'assets/common/cv';
+                    }
+
+                    $leave_files = array('.gitkeep');
+                    
+                    foreach( glob("$dir/*") as $file ) {
+                        if( !in_array(basename($file), $leave_files) ){
+                            unlink($file);
+                        }
+                    }
+                    if (is_dir('public/assets/common/default/cv/')) {
+                        copy('public/assets/common/default/cv/default.pdf', $dir.'/default.pdf');
+                    } else {
+                        copy('assets/common/default/cv/default.pdf', $dir.'/default.pdf');
+                    }
+                    
+                } catch (\Throwable $th) {
+                    Log::error($th->getMessage());
+                }
+                
+                $data = [
+                    'name' => 'John Doe',
+                    'email' => 'johndoe@example.com',
+                    'avatar' => 'assets/common/img/avatar/default.png',
+                    'cover' => 'assets/common/img/cover/default.png',
+                    'phone' => '12025550191',
+                    'address' => '1609 Nuzum Court, Cheektowaga, NY 14225',
+                    'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'taglines' => ["I am Software Engineer", "I am Web Developer", "I am Full Stack Engineer"],
+                    'socialLinks' => [
+                        [
+                            'title' => 'LinkedIn',
+                            'iconClass' => 'fab fa-linkedin-in',
+                            'link' => 'https://www.linkedin.com'
+                        ],
+                        [
+                            'title' => 'Github',
+                            'iconClass' => 'fab fa-github',
+                            'link' => 'https://github.com'
+                        ],
+                        [
+                            'title' => 'Twitter',
+                            'iconClass' => 'fab fa-twitter',
+                            'link' => 'https://twitter.com'
+                        ],
+                        [
+                            'title' => 'Mail',
+                            'iconClass' => 'far fa-envelope',
+                            'link' => 'mailto:johndoe@example.com'
+                        ],
+                    ],
+                    'seederCV' => 'assets/common/cv/default.pdf',
+                ];
+                $about->store($data);
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
         } catch (\Throwable $th) {
-            //throw $th;
+            Log::error($th->getMessage());
         }
     }
 }

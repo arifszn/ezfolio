@@ -9,7 +9,6 @@ use App\Services\Contracts\AboutContract;
 use App\Services\Contracts\SettingContract;
 use Config;
 use Constants;
-use Illuminate\Http\Request;
 use Log;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 use Str;
@@ -217,7 +216,7 @@ class SettingService implements SettingContract
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['cover'] = $result['payload']->cover;
             } else {
-                $data['cover'] = 'assets/common/img/cover/default_cover.png';
+                $data['cover'] = 'assets/common/img/cover/default.png';
             }
 
             //get avatar
@@ -226,7 +225,7 @@ class SettingService implements SettingContract
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $data['avatar'] = $result['payload']->avatar;
             } else {
-                $data['avatar'] = 'assets/common/img/avatar/default_avatar.png';
+                $data['avatar'] = 'assets/common/img/avatar/default.png';
             }
 
             //get mail setting

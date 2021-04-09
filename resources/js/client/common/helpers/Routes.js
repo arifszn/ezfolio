@@ -33,6 +33,8 @@ const api = {
         mailSettings: Utils.backend+'/api/'+Utils.apiVersion+'/admin/mail-settings',
         portfolioConfigs: Utils.backend+'/api/'+Utils.apiVersion+'/admin/portfolio-configs',
         seo: Utils.backend+'/api/'+Utils.apiVersion+'/admin/seo',
+        about: Utils.backend+'/api/'+Utils.apiVersion+'/admin/about',
+        avatar: Utils.backend+'/api/'+Utils.apiVersion+'/admin/avatar',
     },
 };
 

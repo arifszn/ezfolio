@@ -32,6 +32,5 @@ class About extends Model
         'taglines',
         'social_links',
         'cv',
-        'display_cv'
     ];
 }

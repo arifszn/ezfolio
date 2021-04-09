@@ -22,3 +22,12 @@ public/assets/common/img/favicon/*
 !public/assets/common/img/favicon/default.png
 public/assets/common/img/meta-image/*
 !public/assets/common/img/meta-image/.gitkeep
+public/assets/common/img/avatar/*
+!public/assets/common/img/avatar/.gitkeep
+!public/assets/common/img/avatar/default.png
+public/assets/common/img/cover/*
+!public/assets/common/img/cover/.gitkeep
+!public/assets/common/img/cover/default.png
+public/assets/common/cv/*
+!public/assets/common/cv/.gitkeep
+!public/assets/common/cv/default.png

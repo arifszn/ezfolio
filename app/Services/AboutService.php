@@ -10,6 +10,7 @@ use Constants;
 use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Str;
 use Validator;
 
 class AboutService implements AboutContract
@@ -91,7 +92,6 @@ class AboutService implements AboutContract
             $newData['phone'] = !empty($data['phone']) ? $data['phone'] : null;
             $newData['address'] = !empty($data['address']) ? $data['address'] : null;
             $newData['description'] = !empty($data['description']) ? $data['description'] : null;
-            $newData['display_cv'] = isset($data['display_cv']) ? $data['display_cv'] : Constants::TRUE;
 
             if (!empty($data['seederCV'])) {
                 $newData['cv'] = $data['seederCV'];
@@ -124,9 +124,9 @@ class AboutService implements AboutContract
                 $existedRecord = $existedRecord['payload'];
                 $result      = $existedRecord->update($newData);
             } else {
-                $newData['avatar'] = 'assets/common/img/avatar/default_avatar.png';
-                $newData['cover'] = 'assets/common/img/cover/default_cover.png';
-                $result          = $this->model->create($newData);
+                $newData['avatar'] = 'assets/common/img/avatar/default.png';
+                $newData['cover'] = 'assets/common/img/cover/default.png';
+                $result = $this->model->create($newData);
             }
 
             if ($result) {
@@ -155,15 +155,14 @@ class AboutService implements AboutContract
     /**
      * Process the update avatar request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateAvatarRequest(Request $request, int $adminId)
+    public function processUpdateAvatarRequest(array $data)
     {
         try {
-            $validate = Validator::make($request->all(), [
-                'filePond' => 'required'
+            $validate = Validator::make($data, [
+                'file' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -174,8 +173,8 @@ class AboutService implements AboutContract
                 ];
             }
 
-            $file     = $request->file('filePond') ? $request->file('filePond') : $request->get('filePond');
-            $fileName = $file->getClientOriginalName();
+            $file = $data['file'];
+            $fileName = Str::random(10). '_'. time() .'.png';
             $pathName = 'assets/common/img/avatar/';
             
             if (!file_exists($pathName)) {
@@ -187,7 +186,7 @@ class AboutService implements AboutContract
                 //delete previous avatar
                 $oldAvatarResponse = $this->getAllFields(['avatar', 'id']);
                 try {
-                    if ($oldAvatarResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldAvatarResponse['payload']->avatar !== 'assets/common/img/avatar/default_avatar.png' && file_exists($oldAvatarResponse['payload']->avatar)) {
+                    if ($oldAvatarResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldAvatarResponse['payload']->avatar !== 'assets/common/img/avatar/default.png' && file_exists($oldAvatarResponse['payload']->avatar)) {
                         unlink($oldAvatarResponse['payload']->avatar);
                     }
                 } catch (\Throwable $th) {
@@ -236,10 +235,9 @@ class AboutService implements AboutContract
      * Process the delete avatar request
      * 
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteAvatarRequest(string $file, int $adminId)
+    public function processDeleteAvatarRequest(string $file)
     {
         try {
             if (!file_exists($file)) {
@@ -251,7 +249,7 @@ class AboutService implements AboutContract
             }
 
             if (unlink($file)) {
-                $defaultAvatar = 'assets/common/img/avatar/default_avatar.png';
+                $defaultAvatar = 'assets/common/img/avatar/default.png';
                 $result      = $this->getAllFields();
 
                 if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
@@ -299,15 +297,14 @@ class AboutService implements AboutContract
     /**
      * Process the update cover request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array
      */
-    public function processUpdateCoverRequest(Request $request, int $adminId)
+    public function processUpdateCoverRequest(array $data)
     {
         try {
-            $validate = Validator::make($request->all(), [
-                'filePond' => 'required'
+            $validate = Validator::make($data, [
+                'file' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -318,8 +315,8 @@ class AboutService implements AboutContract
                 ];
             }
 
-            $file = $request->file('filePond') ? $request->file('filePond') : $request->get('filePond');
-            $fileName = $file->getClientOriginalName();
+            $file = $data['file'];
+            $fileName = Str::random(10). '_'. time() .'.png';
             $pathName = 'assets/common/img/cover/';
             
             if (!file_exists($pathName)) {
@@ -331,7 +328,7 @@ class AboutService implements AboutContract
                 //delete previous cover
                 $oldCoverResponse = $this->getAllFields(['cover', 'id']);
                 try {
-                    if ($oldCoverResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCoverResponse['payload']->cover !== 'assets/common/img/cover/default_cover.png' && file_exists($oldCoverResponse['payload']->cover)) {
+                    if ($oldCoverResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCoverResponse['payload']->cover !== 'assets/common/img/cover/default.png' && file_exists($oldCoverResponse['payload']->cover)) {
                         unlink($oldCoverResponse['payload']->cover);
                     }
                 } catch (\Throwable $th) {
@@ -380,10 +377,9 @@ class AboutService implements AboutContract
      * Process the delete cover request
      * 
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteCoverRequest(string $file, int $adminId)
+    public function processDeleteCoverRequest(string $file)
     {
         try {
             if (!file_exists($file)) {
@@ -395,7 +391,7 @@ class AboutService implements AboutContract
             }
 
             if (unlink($file)) {
-                $defaultCover = 'assets/common/img/cover/default_cover.png';
+                $defaultCover = 'assets/common/img/cover/default.png';
                 $result = $this->getAllFields();
 
                 if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
@@ -443,15 +439,14 @@ class AboutService implements AboutContract
     /**
      * Process the update CV request
      * 
-     * @param Request $request 
-     * @param int $adminId 
+     * @param array $data 
      * @return array 
      */
-    public function processUpdateCVRequest(Request $request, int $adminId)
+    public function processUpdateCVRequest(array $data)
     {
         try {
-            $validate = Validator::make($request->all(), [
-                'filePond' => 'required'
+            $validate = Validator::make($data, [
+                'file' => 'required'
             ]);
 
             if ($validate->fails()) {
@@ -462,8 +457,8 @@ class AboutService implements AboutContract
                 ];
             }
           
-            $file = $request->file('filePond') ? $request->file('filePond') : $request->get('filePond');
-            $fileName = $file->getClientOriginalName();
+            $file = $data['file'];
+            $fileName = Str::random(10). '_'. time() .'.png';
             $pathName = 'assets/common/cv/';
             
             if (!file_exists($pathName)) {
@@ -474,7 +469,7 @@ class AboutService implements AboutContract
                 //delete previous cv
                 $oldCVResponse = $this->getAllFields(['cv', 'id']);
                 try {
-                    if ($oldCVResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCVResponse['payload']->cv !== 'assets/common/cv/default_cv.pdf' && file_exists($oldCVResponse['payload']->cv)) {
+                    if ($oldCVResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCVResponse['payload']->cv !== 'assets/common/cv/default.pdf' && file_exists($oldCVResponse['payload']->cv)) {
                         unlink($oldCVResponse['payload']->cv);
                     }
                 } catch (\Throwable $th) {
@@ -522,10 +517,9 @@ class AboutService implements AboutContract
     /**
      * Process the delete CV request
      * @param string $file 
-     * @param int $adminId 
      * @return array 
      */
-    public function processDeleteCVRequest(string $file, int $adminId)
+    public function processDeleteCVRequest(string $file)
     {
         try {
             if (!file_exists($file)) {
