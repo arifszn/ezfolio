@@ -54,58 +54,72 @@ class PortfolioSeeder extends Seeder
             ];
             $portfolioConfig->insertOrUpdate($data);
 
-            //menus
+            //visibility
             $data = [
-                'setting_key' => PortfolioConfig::MENU_ABOUT,
+                'setting_key' => PortfolioConfig::VISIBILITY_ABOUT,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_SKILL,
+                'setting_key' => PortfolioConfig::VISIBILITY_SKILL,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_EDUCATION,
+                'setting_key' => PortfolioConfig::VISIBILITY_EDUCATION,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_EXPERIENCE,
+                'setting_key' => PortfolioConfig::VISIBILITY_EXPERIENCE,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_PROJECT,
+                'setting_key' => PortfolioConfig::VISIBILITY_PROJECT,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_SERVICE,
+                'setting_key' => PortfolioConfig::VISIBILITY_SERVICE,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_CONTACT,
+                'setting_key' => PortfolioConfig::VISIBILITY_CONTACT,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::MENU_FOOTER,
+                'setting_key' => PortfolioConfig::VISIBILITY_FOOTER,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::VISIBILITY_CV,
+                'setting_value' => Constants::TRUE,
+                'default_value' => Constants::TRUE,
+            ];
+            $portfolioConfig->insertOrUpdate($data);
+
+            $data = [
+                'setting_key' => PortfolioConfig::VISIBILITY_SKILL_PERCENT,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];

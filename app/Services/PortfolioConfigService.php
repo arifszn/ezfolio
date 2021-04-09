@@ -137,7 +137,7 @@ class PortfolioConfigService implements PortfolioConfigContract
      * @param boolean $template
      * @param boolean $skillPercent
      * @param boolean $seo
-     * @param boolean $menu
+     * @param boolean $visibility
      * @param boolean $script
      * @return array
      */
@@ -148,7 +148,7 @@ class PortfolioConfigService implements PortfolioConfigContract
         bool $template = true,
         bool $skillPercent = true,
         bool $seo = true,
-        bool $menu = true,
+        bool $visibility = true,
         bool $script = true
     )
     {
@@ -191,61 +191,75 @@ class PortfolioConfigService implements PortfolioConfigContract
                 }
             }
 
-            if ($menu) {
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_ABOUT, ['setting_value']);
+            if ($visibility) {
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_ABOUT, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['about'] = $result['payload']->setting_value;
+                    $data['visibility']['about'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['about'] = Constants::TRUE;
+                    $data['visibility']['about'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_SKILL, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['skills'] = $result['payload']->setting_value;
+                    $data['visibility']['skills'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['skills'] = Constants::TRUE;
+                    $data['visibility']['skills'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_EDUCATION, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_EDUCATION, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['education'] = $result['payload']->setting_value;
+                    $data['visibility']['education'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['education'] = Constants::TRUE;
+                    $data['visibility']['education'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_EXPERIENCE, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_EXPERIENCE, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['experiences'] = $result['payload']->setting_value;
+                    $data['visibility']['experiences'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['experiences'] = Constants::TRUE;
+                    $data['visibility']['experiences'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_PROJECT, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_PROJECT, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['projects'] = $result['payload']->setting_value;
+                    $data['visibility']['projects'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['projects'] = Constants::TRUE;
+                    $data['visibility']['projects'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_SERVICE, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SERVICE, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['services'] = $result['payload']->setting_value;
+                    $data['visibility']['services'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['services'] = Constants::TRUE;
+                    $data['visibility']['services'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_CONTACT, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_CONTACT, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['contact'] = $result['payload']->setting_value;
+                    $data['visibility']['contact'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['contact'] = Constants::TRUE;
+                    $data['visibility']['contact'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::MENU_FOOTER, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_FOOTER, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['menu']['footer'] = $result['payload']->setting_value;
+                    $data['visibility']['footer'] = $result['payload']->setting_value;
                 } else {
-                    $data['menu']['footer'] = Constants::TRUE;
+                    $data['visibility']['footer'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_CV, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['visibility']['cv'] = $result['payload']->setting_value;
+                } else {
+                    $data['visibility']['cv'] = Constants::TRUE;
+                }
+
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL_PERCENT, ['setting_value']);
+                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    $data['visibility']['skillPercent'] = $result['payload']->setting_value;
+                } else {
+                    $data['visibility']['skillPercent'] = Constants::TRUE;
                 }
             }
 

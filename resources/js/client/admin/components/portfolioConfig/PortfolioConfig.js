@@ -8,7 +8,7 @@ import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import { BiMenu, BiCodeAlt } from 'react-icons/bi';
 import { AiOutlineControl } from 'react-icons/ai';
-import Menu from './Menu';
+import Visibility from './Visibility';
 import CustomScript from './CustomScript';
 
 const PortfolioConfig = () => {
@@ -42,9 +42,9 @@ const PortfolioConfig = () => {
             content: <Basic config={config}/>
         },
         {
-            key: 'menu',
-            title: <React.Fragment><Icon component={BiMenu}/> Menu</React.Fragment>,
-            content: <Menu config={config}/>
+            key: 'visibility',
+            title: <React.Fragment><Icon component={BiMenu}/> Visibility</React.Fragment>,
+            content: <Visibility config={config}/>
         },
         {
             key: 'custom-script',

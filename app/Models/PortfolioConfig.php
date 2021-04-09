@@ -14,15 +14,15 @@ class PortfolioConfig extends Model
     const GOOGLE_ANALYTICS_ID = 3;
     const MAINTENANCE_MODE = 4;
 
-    //menu
-    const MENU_ABOUT = 5;
-    const MENU_SKILL = 6;
-    const MENU_EDUCATION = 7;
-    const MENU_EXPERIENCE = 8;
-    const MENU_PROJECT = 9;
-    const MENU_SERVICE = 10;
-    const MENU_CONTACT = 11;
-    const MENU_FOOTER = 12;
+    //visibility
+    const VISIBILITY_ABOUT = 5;
+    const VISIBILITY_SKILL = 6;
+    const VISIBILITY_EDUCATION = 7;
+    const VISIBILITY_EXPERIENCE = 8;
+    const VISIBILITY_PROJECT = 9;
+    const VISIBILITY_SERVICE = 10;
+    const VISIBILITY_CONTACT = 11;
+    const VISIBILITY_FOOTER = 12;
 
     const SCRIPT_HEADER = 13;
     const SCRIPT_FOOTER = 14;
@@ -31,6 +31,9 @@ class PortfolioConfig extends Model
     const META_AUTHOR = 16;
     const META_DESCRIPTION = 17;
     const META_IMAGE = 18;
+
+    const VISIBILITY_CV = 19;
+    const VISIBILITY_SKILL_PERCENT = 20;
     
 
     /**

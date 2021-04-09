@@ -4,23 +4,6 @@ use App\Models\Setting;
 use App\Services\Contracts\SettingContract;
 
 class Utils {
-    public static function isShortMenu()
-    {
-        try {
-            $settingService = resolve(SettingContract::class);
-            $result = $settingService->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
-
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                if ($result['payload']->setting_value === true || $result['payload']->setting_value === 'true' || $result['payload']->setting_value === 1 || $result['payload']->setting_value === '1') {
-                    return true;
-                };
-            }
-            return false;
-        } catch (\Throwable $th) {
-            return false;
-        }
-    }
-
     public static function getFavicon()
     {
         try {

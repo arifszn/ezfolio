@@ -32,7 +32,7 @@ interface PortfolioConfigContract
      * @param boolean $template
      * @param boolean $skillPercent
      * @param boolean $seo
-     * @param boolean $menu
+     * @param boolean $visibility
      * @param boolean $script
      * @return array
      */
@@ -43,7 +43,7 @@ interface PortfolioConfigContract
         bool $template = true,
         bool $skillPercent = true,
         bool $seo = true,
-        bool $menu = true,
+        bool $visibility = true,
         bool $script = true
     );
 
