@@ -43,6 +43,7 @@
         "mini-dynamic-antd-theme": "^0.5.3",
         "node-sass": "^5.0.0",
         "nprogress": "^0.2.0",
+        "rc-queue-anim": "^1.8.5",
         "react-bootstrap": "^1.5.2",
         "react-color": "^2.19.3",
         "react-filepond": "^7.1.1",

@@ -123,127 +123,131 @@ const FileUploader = (props) => {
 
     const imagePreviewMaxHeight = props.imagePreviewMaxHeight ? props.imagePreviewMaxHeight : 150;
 
-    const renderFilePond = (
-        <FilePond
-            stylePanelLayout={props.isAvatar ? 'compact circle' :'compact'}
-            instantUpload={false}
-            allowRevert={typeof props.allowRevert !== 'undefined' ? props.allowRevert : false}
-            allowFileSizeValidation={true}
-            allowFileTypeValidation={props.acceptedFileTypes ? true : false}
-            imagePreviewMaxHeight={imagePreviewMaxHeight}
-            acceptedFileTypes={props.acceptedFileTypes ? props.acceptedFileTypes : []}
-            maxTotalFileSize={props.maxFileSize ? props.maxFileSize : '5MB'}
-            labelMaxFileSizeExceeded={'File is too large'}
-            labelMaxFileSize={'Maximum file size is {filesize}'}
-            files={files}
-            onupdatefiles={setFiles}
-            allowMultiple={props.allowMultiple ? props.allowMultiple : false}
-            maxFiles={props.maxFiles ? props.maxFiles : 3}
-            name={props.name ? props.name : 'file'}
-            credits={false}
-            server={
-                {   
-                    load: (source, load, error, progress, abort) => {
-                        let myRequest = new Request(source);
-                            fetch(myRequest)
-                            .then(response => {
-                                response.blob()
-                                .then(myBlob => {
-                                    load(myBlob);
-                                })
-                                .catch(myErr => {
-                                    console.log(myErr);
+    const renderFilePond = () => {
+        return (
+            <FilePond
+                stylePanelLayout={props.isAvatar ? 'compact circle' :'compact'}
+                instantUpload={false}
+                allowRevert={typeof props.allowRevert !== 'undefined' ? props.allowRevert : false}
+                allowFileSizeValidation={true}
+                allowFileTypeValidation={props.acceptedFileTypes ? true : false}
+                imagePreviewMaxHeight={imagePreviewMaxHeight}
+                acceptedFileTypes={props.acceptedFileTypes ? props.acceptedFileTypes : []}
+                maxTotalFileSize={props.maxFileSize ? props.maxFileSize : '5MB'}
+                labelMaxFileSizeExceeded={'File is too large'}
+                labelMaxFileSize={'Maximum file size is {filesize}'}
+                files={files}
+                onupdatefiles={setFiles}
+                allowMultiple={props.allowMultiple ? props.allowMultiple : false}
+                maxFiles={props.maxFiles ? props.maxFiles : 3}
+                name={props.name ? props.name : 'file'}
+                credits={false}
+                server={
+                    {   
+                        load: (source, load, error, progress, abort) => {
+                            let myRequest = new Request(source);
+                                fetch(myRequest)
+                                .then(response => {
+                                    response.blob()
+                                    .then(myBlob => {
+                                        load(myBlob);
+                                    })
+                                    .catch(myErr => {
+                                        console.log(myErr);
+                                        error('Something went wrong');
+                                    });
+                                }).catch(err => {
+                                    console.log(err);
                                     error('Something went wrong');
                                 });
-                            }).catch(err => {
-                                console.log(err);
+
+                            // Should expose an abort method so the request can be cancelled
+                            return {
+                                abort: () => {
+                                    // User tapped cancel, abort our ongoing actions here
+
+                                    // Let FilePond know the request has been cancelled
+                                    abort();
+                                }
+                            };
+                        },
+                        process:(fieldName, file, metadata, load, error, progress, abort) => {
+
+                            // fieldName is the name of the input field
+                            // file is the actual file object to send
+                            const formData = new FormData();
+                            formData.append(fieldName, file, file.name);
+
+                            // related to aborting the request
+                            const CancelToken = axios.CancelToken;
+
+                            const source = CancelToken.source();
+
+                            const config = {
+                                onUploadProgress: e => progress(e.lengthComputable, e.loaded, e.total)
+                            }
+
+                            HTTP.post(props.serverUrl, formData, config)
+                            .then((response) => {
+                                Utils.handleSuccessResponse(response, () => {
+                                    if (props.afterUploadCallback) {
+                                        props.afterUploadCallback(response.data.payload.file);
+                                    }
+                                    load(response.data.payload.file);
+                                });
+                            }).catch((e) => {
                                 error('Something went wrong');
+                                Utils.handleException(e);
                             });
 
-                        // Should expose an abort method so the request can be cancelled
-                        return {
-                            abort: () => {
-                                // User tapped cancel, abort our ongoing actions here
+                            // Should expose an abort method so the request can be cancelled
+                            return {
+                                abort: () => {
+                                    // This function is entered if the user has tapped the cancel button
+                                    source.cancel('Operation canceled by the user.');
 
-                                // Let FilePond know the request has been cancelled
-                                abort();
-                            }
-                        };
-                    },
-                    process:(fieldName, file, metadata, load, error, progress, abort) => {
+                                    // Let FilePond know the request has been cancelled
+                                    abort();
+                                }
+                            };
+                        },
+                        revert: (file, load, error) => {
+                            HTTP.delete(props.serverUrl, {
+                                params: {
+                                    file: file
+                                }
+                            })
+                            .then((response) => {
+                                Utils.handleSuccessResponse(response, () => {
+                                    if (props.afterRevertCallback) {
+                                        props.afterRevertCallback(response.data.payload.file);
+                                    }
+                                    load();
+                                });
+                            }).catch((e) => {
+                                error('Something went wrong');
+                                Utils.handleException(e);
+                            });
 
-                        // fieldName is the name of the input field
-                        // file is the actual file object to send
-                        const formData = new FormData();
-                        formData.append(fieldName, file, file.name);
-
-                        // related to aborting the request
-                        const CancelToken = axios.CancelToken;
-
-                        const source = CancelToken.source();
-
-                        const config = {
-                            onUploadProgress: e => progress(e.lengthComputable, e.loaded, e.total)
                         }
-
-                        HTTP.post(props.serverUrl, formData, config)
-                        .then((response) => {
-                            Utils.handleSuccessResponse(response, () => {
-                                if (props.afterUploadCallback) {
-                                    props.afterUploadCallback(response.data.payload.file);
-                                }
-                                load(response.data.payload.file);
-                            });
-                        }).catch((e) => {
-                            error('Something went wrong');
-                            Utils.handleException(e);
-                        });
-
-                        // Should expose an abort method so the request can be cancelled
-                        return {
-                            abort: () => {
-                                // This function is entered if the user has tapped the cancel button
-                                source.cancel('Operation canceled by the user.');
-
-                                // Let FilePond know the request has been cancelled
-                                abort();
-                            }
-                        };
-                    },
-                    revert: (file, load, error) => {
-                        HTTP.delete(props.serverUrl, {
-                            params: {
-                                file: file
-                            }
-                        })
-                        .then((response) => {
-                            Utils.handleSuccessResponse(response, () => {
-                                if (props.afterRevertCallback) {
-                                    props.afterRevertCallback(response.data.payload.file);
-                                }
-                                load();
-                            });
-                        }).catch((e) => {
-                            error('Something went wrong');
-                            Utils.handleException(e);
-                        });
-
                     }
                 }
-            }
-            labelIdle={props.labelIdle ? props.labelIdle : (props.isAvatar ? '<span class="filepond--label-action">Change</span>' :'Drag & Drop your file or <span class="filepond--label-action">Browse</span>')}
-            {...(props.isAvatar && avatarProps)}
-        />
-    )
+                labelIdle={props.labelIdle ? props.labelIdle : (props.isAvatar ? '<span class="filepond--label-action">Change</span>' :'Drag & Drop your file or <span class="filepond--label-action">Browse</span>')}
+                {...(props.isAvatar && avatarProps)}
+            />
+        )
+    }
 
     return (
         <React.Fragment>
             {
                 props.isAvatar ? (
                     <AvatarWrapper preview={typeof props.previewAvatar !== 'undefined' && props.previewAvatar}>
-                        {renderFilePond}
+                        {renderFilePond()}
                     </AvatarWrapper>
-                ) : {renderFilePond}
+                ) : (
+                    renderFilePond()
+                )
             }
         </React.Fragment>
     );

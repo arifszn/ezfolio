@@ -104,7 +104,7 @@ const SeoPopup = (props) => {
                 preserve={false}
                 form={form}
                 layout="vertical"
-                name="response"
+                name="seo"
             >
                 <Form.Item
                     label={<React.Fragment>Meta Title</React.Fragment>}

@@ -111,7 +111,7 @@ const LoginCredentialPopup = (props) => {
                     preserve={false}
                     form={form}
                     layout="vertical"
-                    name="response"
+                    name="login-credentials"
                 >
                     <Form.Item name="id" hidden>
                         <Input/>
