@@ -426,7 +426,8 @@ class PortfolioConfigService implements PortfolioConfigContract
                 } elseif ($key === 'image') {
                     $file = $data['image'];
                     if ($file) {
-                        $fileName = Str::random(10). '_'. time() .'.png';
+                        $extension = $file->extension() ? $file->extension() : 'png';
+                        $fileName = Str::random(10). '_'. time() .'.'. $extension;
                         $pathName = 'assets/common/img/meta-image/';
                         
                         if (!file_exists($pathName)) {

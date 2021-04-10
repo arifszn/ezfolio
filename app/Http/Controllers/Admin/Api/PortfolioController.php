@@ -99,4 +99,38 @@ class PortfolioController extends Controller
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
     }
+
+    /**
+     * CV resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
+    public function cv(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $result = $this->about->processUpdateCVRequest($request->all());
+        } elseif ($request->isMethod('delete')) {
+            $result = $this->about->processDeleteCVRequest($request->file);
+        }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+    }
+
+    /**
+     * Cover resource
+     * 
+     * @param Request $request 
+     * @return JsonResponse
+     */
+    public function cover(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $result = $this->about->processUpdateCoverRequest($request->all());
+        } elseif ($request->isMethod('delete')) {
+            $result = $this->about->processDeleteCoverRequest($request->file);
+        }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+    }
 }

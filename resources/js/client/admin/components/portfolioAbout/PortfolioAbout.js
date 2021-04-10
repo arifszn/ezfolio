@@ -1,4 +1,4 @@
-import { Card, Col, Form, Input, List, Row, Space, Typography } from 'antd';
+import { Button, Card, Col, Form, Input, List, Row, Space, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
@@ -8,6 +8,7 @@ import FileUploader from '../uploader/FileUploader';
 import Typed from 'react-typed';
 import QueueAnim from 'rc-queue-anim';
 import SocialLinkPopup from './SocialLinkPopup';
+import { DownloadOutlined } from '@ant-design/icons';
 
 const pulseAnimation = keyframes`
 0%,
@@ -79,6 +80,7 @@ const PortfolioAbout = () => {
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [cv, setCv] = useState(null);
+    const [cover, setCover] = useState(null);
     const [taglines, setTagLines] = useState([]);
     const [socialLinks, setSocialLinks] = useState([]);
     
@@ -135,6 +137,7 @@ const PortfolioAbout = () => {
                 setAddress(response.data.payload.address);
                 setDescription(response.data.payload.description);
                 setCv(response.data.payload.cv);
+                setCover(response.data.payload.cover);
                 setTagLines(response.data.payload.taglines ? JSON.parse(response.data.payload.taglines) : []);
                 setSocialLinks(response.data.payload.social_links ? JSON.parse(response.data.payload.social_links) : []);
 
@@ -181,7 +184,26 @@ const PortfolioAbout = () => {
         .then((values) => {
             //save form
             setLoading(true);
-            
+
+            HTTP.post(Routes.api.admin.about, {
+                name: values.name,
+                email: values.email,
+                phone: values.phone,
+                address: values.address,
+                description: values.description,
+                taglines: taglines,
+                socialLinks: socialLinks,
+            })
+            .then(response => {
+                Utils.handleSuccessResponse(response, () => {
+                    Utils.showNotification(response.data.message, 'success');
+                });
+            })
+            .catch((error) => {
+                Utils.handleException(error);
+            }).finally(() => {
+                setLoading(false);
+            });
             
         })
         .catch((info) => {
@@ -236,6 +258,18 @@ const PortfolioAbout = () => {
         }
     }
 
+    const cvUploadCallback = (file) => {
+        setTimeout(() => {
+            setCv(file);
+        }, 2000);
+    }
+    
+    const coverUploadCallback = (file) => {
+        setTimeout(() => {
+            setCover(file);
+        }, 2000);
+    }
+
     const socialLinkEditHandler = (index) => {
         setSocialLinkToEdit({
             index: index,
@@ -247,336 +281,398 @@ const PortfolioAbout = () => {
     return (
         <React.Fragment>
             <Row gutter={24}>
-                    <Col 
-                        xl={10}
-                        lg={10}
-                        md={24}
-                        sm={24}
-                        xs={24}
-                        style={{
-                            marginBottom: 24,
-                        }}
-                    >
-                        <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
-                            <List
-                                itemLayout="horizontal"
-                                size="large"
-                            >
-                                <Item>
-                                    <Space direction="vertical" align="center" style={{width: '100%'}}>
-                                        <FileUploader
-                                            allowRevert={true}
-                                            isAvatar={true}
-                                            previewAvatar={avatar && Utils.backend + '/' + avatar}
-                                            acceptedFileTypes={"image/*"}
-                                            allowMultiple={false}
-                                            name={'file'}
-                                            serverUrl={Routes.api.admin.avatar}
-                                            afterUploadCallback={avatarUploadCallback}
-                                            afterRevertCallback={avatarUploadCallback}
+                <Col 
+                    xl={10}
+                    lg={10}
+                    md={24}
+                    sm={24}
+                    xs={24}
+                    style={{
+                        marginBottom: 24,
+                    }}
+                >
+                    <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
+                        <List
+                            itemLayout="horizontal"
+                            size="large"
+                        >
+                            <Item>
+                                <Space direction="vertical" align="center" style={{width: '100%'}}>
+                                    <FileUploader
+                                        allowRevert={true}
+                                        isAvatar={true}
+                                        previewAvatar={avatar && Utils.backend + '/' + avatar}
+                                        acceptedFileTypes={"image/*"}
+                                        allowMultiple={false}
+                                        name={'file'}
+                                        serverUrl={Routes.api.admin.avatar}
+                                        afterUploadCallback={avatarUploadCallback}
+                                        afterRevertCallback={avatarUploadCallback}
+                                    />
+                                    <Title level={4}>
+                                        {name}
+                                        <EditSpan onClick={() => {focusInput('name')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </Title>
+                                </Space>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Email
+                                        <EditSpan onClick={() => {focusInput('email')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <Text type="secondary">{email}</Text>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Phone
+                                        <EditSpan onClick={() => {focusInput('phone')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <Text type="secondary">{phone}</Text>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Address
+                                        <EditSpan onClick={() => {focusInput('address')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <Text type="secondary">{address}</Text>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Description
+                                        <EditSpan onClick={() => {focusInput('description')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <Paragraph type="secondary" style={{textAlign: 'justify'}}>{description}</Paragraph>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Taglines
+                                        <EditSpan onClick={() => {focusInput('taglines')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <div>
+                                        <Typed
+                                            strings={taglines && taglines.length ? taglines : ['']}
+                                            typeSpeed={40}
+                                            backSpeed={40}
+                                            smartBackspace={true}
+                                            loop={true}
                                         />
-                                        <Title level={4}>
-                                            {name}
-                                            <EditSpan onClick={() => {focusInput('name')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </Title>
+                                    </div>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Social Links
+                                        <EditSpan onClick={() => {focusInput('socialLinks')}}>
+                                            <i className="fa fa-pencil-alt" title="Edit"></i>
+                                        </EditSpan>
+                                    </React.Fragment>
+                                } description={
+                                    <Space wrap>
+                                        {
+                                            socialLinks.map((socialLink, index) => (
+                                                <a key={index} href={socialLink.link} target="_blank" rel="noreferrer"><i className={socialLink.iconClass}></i></a>
+                                            ))
+                                        }
                                     </Space>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
-                                            Email
-                                            <EditSpan onClick={() => {focusInput('email')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <Text type="secondary">{email}</Text>
-                                    }/>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
-                                            Phone
-                                            <EditSpan onClick={() => {focusInput('phone')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <Text type="secondary">{phone}</Text>
-                                    }/>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
-                                            Address
-                                            <EditSpan onClick={() => {focusInput('address')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <Text type="secondary">{address}</Text>
-                                    }/>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
-                                            Description
-                                            <EditSpan onClick={() => {focusInput('description')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <Paragraph type="secondary" style={{textAlign: 'justify'}}>{description}</Paragraph>
-                                    }/>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        CV
+                                    </React.Fragment>
+                                } description={
+                                    cv ? (
+                                        <a href={Utils.backend + '/' + cv} download target="_blank" rel="noreferrer">
+                                            <Button type="primary" icon={<DownloadOutlined />}>
+                                                Download
+                                            </Button>
+                                        </a>
+                                    ) : ''
+                                }/>
+                            </Item>
+                            <Item>
+                                <Item.Meta title={
+                                    <React.Fragment>
+                                        Cover Photo
+                                    </React.Fragment>
+                                } description={
+                                    <FileUploader
+                                        allowRevert={false}
+                                        previewFile={cover !== null ? Utils.backend + '/' + cover : null}
+                                        acceptedFileTypes={"image/*"}
+                                        allowMultiple={false}
+                                        name={'file'}
+                                        serverUrl={Routes.api.admin.cover}
+                                        labelIdle={'Drag & Drop your cover or <span class="filepond--label-action">Browse</span>'}
+                                        afterUploadCallback={coverUploadCallback}
+                                        afterRevertCallback={coverUploadCallback}
+                                        imagePreviewMaxHeight={195}
+                                    />
+                                }/>
+                            </Item>
+                        </List>
+                    </Card>
+                </Col>
+                <Col
+                    xl={14}
+                    lg={14}
+                    md={24}
+                    sm={24}
+                    xs={24}
+                    style={{
+                        marginBottom: 24,
+                    }}
+                >
+                    <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
+                        <Form
+                            preserve={false}
+                            form={form}
+                            onValuesChange={onFormValuesChange}
+                            onFinish={handleSubmit}
+                            layout="vertical"
+                            name="about"
+                            requiredMark={false}
+                        >
+                            <Form.Item
+                                name="name"
+                                label={<Text strong>Full Name</Text>}
+                                tooltip="This is a required field"
+                                messageVariables={{ label: 'Name' }}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please enter your name'
+                                    },
+                                ]}
+                            >
+                                <Input ref={nameInput} placeholder="Full Name"/>
+                            </Form.Item>
+                            <Form.Item
+                                name="email"
+                                label={<Text strong>Email</Text>}
+                                tooltip="This is a required field"
+                                messageVariables={{ label: 'Email' }}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please enter your email'
+                                    },
+                                    {
+                                        type: 'email',
+                                        message: 'Invalid email address'
+                                    }
+                                ]}
+                            >
+                                <Input ref={emailInput} placeholder="Email"/>
+                            </Form.Item>
+                            <Form.Item
+                                name="phone"
+                                label={<Text strong>Phone</Text>}
+                                messageVariables={{ label: 'Phone' }}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please enter your phone'
+                                    }
+                                ]}
+                            >
+                                <Input ref={phoneInput} placeholder="Phone"/>
+                            </Form.Item>
+                            <Form.Item
+                                name="address"
+                                label={<Text strong>Address</Text>}
+                                messageVariables={{ label: 'Address' }}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please enter your address'
+                                    }
+                                ]}
+                            >
+                                <Input ref={addressInput} placeholder="Address"/>
+                            </Form.Item>
+                            <Form.Item
+                                name="description"
+                                label={<Text strong>Description</Text>}
+                                tooltip="This is a required field"
+                                messageVariables={{ label: 'Description' }}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please enter your description'
+                                    }
+                                ]}
+                            >
+                                <Input.TextArea rows="4" ref={descriptionInput} placeholder="Description"/>
+                            </Form.Item>
+                            <AnimatedDiv animate={focusTaglines} ref={taglinesInput} tabIndex="-1">
+                                <Form.Item
+                                    label={<Text strong>
                                             Taglines
-                                            <EditSpan onClick={() => {focusInput('taglines')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
+                                            <EditSpan onClick={taglineNewHandler}>
+                                                <i className="fa fa-plus" title="Edit"></i>
                                             </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <div>
-                                            <Typed
-                                                strings={taglines && taglines.length ? taglines : ['']}
-                                                typeSpeed={40}
-                                                backSpeed={40}
-                                                smartBackspace={true}
-                                                loop={true}
-                                            />
-                                        </div>
-                                    }/>
-                                </Item>
-                                <Item>
-                                    <Item.Meta title={
-                                        <React.Fragment>
-                                            Social Links
-                                            <EditSpan onClick={() => {focusInput('socialLinks')}}>
-                                                <i className="fa fa-pencil-alt" title="Edit"></i>
-                                            </EditSpan>
-                                        </React.Fragment>
-                                    } description={
-                                        <Space wrap>
+                                        </Text>
+                                    }
+                                >
+                                    <List
+                                        size="small"
+                                        bordered
+                                    >
+                                        <QueueAnim type={['right', 'left']} leaveReverse>
                                             {
-                                                socialLinks.map((socialLink, index) => (
-                                                    <a key={index} href={socialLink.link} target="_blank"><i className={socialLink.iconClass}></i></a>
+                                                taglines.map((item, index) => (
+                                                    <div key={index}>
+                                                        <List.Item actions={
+                                                            [
+                                                                <EditSpan key={'delete'}>
+                                                                    <i className="fas fa-times" style={{color: 'red'}} onClick={()=> taglineDeleteHandler(index)}></i>
+                                                                </EditSpan>
+                                                            ]
+                                                        }>
+                                                            <Item.Meta description={
+                                                                <Input placeholder="Enter tag line" value={item} bordered={false} onChange={(e) => taglineEditHandler(e, index)}/>
+                                                            }/>
+                                                        </List.Item>
+                                                    </div>
                                                 ))
                                             }
-                                        </Space>
-                                    }/>
-                                </Item>
-                            </List>
-                        </Card>
-                    </Col>
-                    <Col
-                        xl={14}
-                        lg={14}
-                        md={24}
-                        sm={24}
-                        xs={24}
-                        style={{
-                            marginBottom: 24,
-                        }}
-                    >
-                        <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
-                           <Form
-                                preserve={false}
-                                form={form}
-                                onValuesChange={onFormValuesChange}
-                                layout="vertical"
-                                name="about"
-                                requiredMark={false}
-                                size={'middle'}
+                                        </QueueAnim>
+                                    </List>
+                                </Form.Item>
+                            </AnimatedDiv>
+                            <AnimatedDiv animate={focusSocialLinks} ref={socialLinksInput} tabIndex="-1">
+                                <Form.Item
+                                    label={<Text strong>
+                                            Social Links
+                                            <EditSpan onClick={socialLinksNewHandler}>
+                                                <i className="fa fa-plus" title="Edit"></i>
+                                            </EditSpan>
+                                        </Text>
+                                    }
+                                >
+                                    <List
+                                        size="small"
+                                        bordered
+                                    >
+                                        <QueueAnim type={['right', 'left']} leaveReverse>
+                                            {
+                                                socialLinks.map((item, index) => (
+                                                    <div key={index}>
+                                                        <List.Item actions={
+                                                            [
+                                                                <EditSpan key={'edit'}>
+                                                                    <i className="fas fa-pen-square" onClick={()=> socialLinkEditHandler(index)}></i>
+                                                                </EditSpan>,
+                                                                <EditSpan key={'delete'}>
+                                                                    <i className="fas fa-times" style={{color: 'red'}} onClick={()=> socialLinkDeleteHandler(index)}></i>
+                                                                </EditSpan>,
+                                                            ]
+                                                        }>
+                                                            <Item.Meta description={
+                                                                <a href={item.link} target="_blank" rel="noreferrer">
+                                                                    <Space><i className={item.iconClass}></i> {item.title}</Space>
+                                                                </a>
+                                                            }/>
+                                                        </List.Item>
+                                                    </div>
+                                                ))
+                                            }
+                                        </QueueAnim>
+                                    </List>
+                                </Form.Item>
+                            </AnimatedDiv>
+                            <Form.Item
+                                label={<Text strong>
+                                        CV
+                                    </Text>
+                                }
                             >
-                                <Form.Item
-                                    name="name"
-                                    label={<Text strong>Full Name</Text>}
-                                    tooltip="This is a required field"
-                                    messageVariables={{ label: 'Name' }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your name'
-                                        },
-                                    ]}
-                                >
-                                    <Input ref={nameInput} placeholder="Full Name"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="email"
-                                    label={<Text strong>Email</Text>}
-                                    tooltip="This is a required field"
-                                    messageVariables={{ label: 'Email' }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your email'
-                                        },
-                                        {
-                                            type: 'email',
-                                            message: 'Invalid email address'
-                                        }
-                                    ]}
-                                >
-                                    <Input ref={emailInput} placeholder="Email"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="phone"
-                                    label={<Text strong>Phone</Text>}
-                                    messageVariables={{ label: 'Phone' }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your phone'
-                                        }
-                                    ]}
-                                >
-                                    <Input ref={phoneInput} placeholder="Phone"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="address"
-                                    label={<Text strong>Address</Text>}
-                                    messageVariables={{ label: 'Address' }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your address'
-                                        }
-                                    ]}
-                                >
-                                    <Input ref={addressInput} placeholder="Address"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="description"
-                                    label={<Text strong>Description</Text>}
-                                    tooltip="This is a required field"
-                                    messageVariables={{ label: 'Description' }}
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your description'
-                                        }
-                                    ]}
-                                >
-                                    <Input.TextArea rows="3" ref={descriptionInput} placeholder="Description"/>
-                                </Form.Item>
-                                <AnimatedDiv animate={focusTaglines} ref={taglinesInput} tabIndex="-1">
-                                    <Form.Item
-                                        label={<Text strong>
-                                                Taglines
-                                                <EditSpan onClick={taglineNewHandler}>
-                                                    <i className="fa fa-plus" title="Edit"></i>
-                                                </EditSpan>
-                                            </Text>
-                                        }
-                                    >
-                                        <List
-                                            size="small"
-                                            bordered
-                                        >
-                                            <QueueAnim type={['right', 'left']} leaveReverse>
-                                                {
-                                                    taglines.map((item, index) => (
-                                                        <div key={index}>
-                                                            <List.Item actions={
-                                                                [
-                                                                    <EditSpan>
-                                                                        <i className="fas fa-times" style={{color: 'red'}} onClick={()=> taglineDeleteHandler(index)}></i>
-                                                                    </EditSpan>
-                                                                ]
-                                                            }>
-                                                                <Item.Meta description={
-                                                                    <Input placeholder="Enter tag line" value={item} bordered={false} onChange={(e) => taglineEditHandler(e, index)}/>
-                                                                }/>
-                                                            </List.Item>
-                                                        </div>
-                                                    ))
-                                                }
-                                            </QueueAnim>
-                                        </List>
-                                    </Form.Item>
-                                </AnimatedDiv>
-                                <AnimatedDiv animate={focusSocialLinks} ref={socialLinksInput} tabIndex="-1">
-                                    <Form.Item
-                                        label={<Text strong>
-                                                Social Links
-                                                <EditSpan onClick={socialLinksNewHandler}>
-                                                    <i className="fa fa-plus" title="Edit"></i>
-                                                </EditSpan>
-                                            </Text>
-                                        }
-                                    >
-                                        <List
-                                            size="small"
-                                            bordered
-                                        >
-                                            <QueueAnim type={['right', 'left']} leaveReverse>
-                                                {
-                                                    socialLinks.map((item, index) => (
-                                                        <div key={index}>
-                                                            <List.Item actions={
-                                                                [
-                                                                    <EditSpan>
-                                                                        <i className="fas fa-pen-square" onClick={()=> socialLinkEditHandler(index)}></i>
-                                                                    </EditSpan>,
-                                                                    <EditSpan>
-                                                                        <i className="fas fa-times" style={{color: 'red'}} onClick={()=> socialLinkDeleteHandler(index)}></i>
-                                                                    </EditSpan>,
-                                                                ]
-                                                            }>
-                                                                <Item.Meta description={
-                                                                    <a href={item.link} target="_blank">
-                                                                        <Space><i className={item.iconClass}></i> {item.title}</Space>
-                                                                    </a>
-                                                                }/>
-                                                            </List.Item>
-                                                        </div>
-                                                    ))
-                                                }
-                                            </QueueAnim>
-                                        </List>
-                                    </Form.Item>
-                                </AnimatedDiv>
-                            </Form>
-                        </Card>
-                    </Col>
-                </Row>
-                {
-                    socialLinkPopupVisible && (
-                        <SocialLinkPopup
-                            title={'Social Link'}
-                            socialLink={socialLinkToEdit}
-                            visible={socialLinkPopupVisible}
-                            handleCancel={
-                                () => {
-                                    setSocialLinkPopupVisible(false);
-                                }
+                                <FileUploader
+                                    allowRevert={false}
+                                    previewFile={cv !== null ? Utils.backend + '/' + cv : null}
+                                    acceptedFileTypes={['text/plain', 'application/pdf', 'application/doc', 'application/rtf']}
+                                    allowMultiple={false}
+                                    name={'file'}
+                                    serverUrl={Routes.api.admin.cv}
+                                    labelIdle={'Drag & Drop your CV or <span class="filepond--label-action">Browse</span>'}
+                                    afterUploadCallback={cvUploadCallback}
+                                    afterRevertCallback={cvUploadCallback}
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                style={{
+                                    textAlign: 'right',
+                                }}
+                            >
+                                <Button type="primary" htmlType="submit" block loading={loading}>
+                                    Save
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </Card>
+                </Col>
+            </Row>
+            {
+                socialLinkPopupVisible && (
+                    <SocialLinkPopup
+                        title={'Social Link'}
+                        socialLink={socialLinkToEdit}
+                        visible={socialLinkPopupVisible}
+                        handleCancel={
+                            () => {
+                                setSocialLinkPopupVisible(false);
                             }
-                            submitCallback={
-                                (newSocialLink) => {
-                                    let newObject = {
-                                        title: newSocialLink.title,
-                                        link: newSocialLink.link,
-                                        iconClass: newSocialLink.iconClass
-                                    }
+                        }
+                        submitCallback={
+                            (newSocialLink) => {
+                                let newObject = {
+                                    title: newSocialLink.title,
+                                    link: newSocialLink.link,
+                                    iconClass: newSocialLink.iconClass
+                                }
 
-                                    if (typeof newSocialLink.index !== 'undefined' && newSocialLink.index !== null) {
-                                        socialLinks[newSocialLink.index] = newObject;
-                                    } else {
-                                        let array = [...socialLinks];
-                                        array.push(newObject);
-                                        setSocialLinks(array);
-                                    }
-                                    setSocialLinkPopupVisible(false);
+                                if (typeof newSocialLink.index !== 'undefined' && newSocialLink.index !== null) {
+                                    socialLinks[newSocialLink.index] = newObject;
+                                } else {
+                                    let array = [...socialLinks];
+                                    array.push(newObject);
+                                    setSocialLinks(array);
                                 }
+                                setSocialLinkPopupVisible(false);
                             }
-                        />
-                    )
-                }
+                        }
+                    />
+                )
+            }
         </React.Fragment>
     )
 }

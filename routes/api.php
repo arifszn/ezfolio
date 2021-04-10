@@ -39,6 +39,10 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/seo', ['App\Http\Controllers\Admin\Api\PortfolioController', 'seo']);
 
             Route::match(['post', 'delete'], '/avatar', ['App\Http\Controllers\Admin\Api\PortfolioController', 'avatar']);
+
+            Route::match(['post', 'delete'], '/cv', ['App\Http\Controllers\Admin\Api\PortfolioController', 'cv']);
+
+            Route::match(['post', 'delete'], '/cover', ['App\Http\Controllers\Admin\Api\PortfolioController', 'cover']);
         });
     });
 });

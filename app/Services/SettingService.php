@@ -353,9 +353,9 @@ class SettingService implements SettingContract
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
-
-            $fileName = Str::random(10). '_'. time() .'.png';
             $file = $data['file'];
+            $extension = $file->extension() ? $file->extension() : 'png';
+            $fileName = Str::random(10). '_'. time() .'.'. $extension;
             $pathName = 'assets/common/img/logo/';
             
             if (!file_exists($pathName)) {
@@ -479,8 +479,9 @@ class SettingService implements SettingContract
                 ];
             }
 
-            $fileName = Str::random(10). '_'. time() .'.png';
             $file = $data['file'];
+            $extension = $file->extension() ? $file->extension() : 'png';
+            $fileName = Str::random(10). '_'. time() .'.'. $extension;
             $pathName = 'assets/common/img/favicon/';
             
             if (!file_exists($pathName)) {

@@ -174,7 +174,8 @@ class AboutService implements AboutContract
             }
 
             $file = $data['file'];
-            $fileName = Str::random(10). '_'. time() .'.png';
+            $extension = $file->extension() ? $file->extension() : 'png';
+            $fileName = Str::random(10). '_'. time() .'.'. $extension;
             $pathName = 'assets/common/img/avatar/';
             
             if (!file_exists($pathName)) {
@@ -316,7 +317,8 @@ class AboutService implements AboutContract
             }
 
             $file = $data['file'];
-            $fileName = Str::random(10). '_'. time() .'.png';
+            $extension = $file->extension() ? $file->extension() : 'png';
+            $fileName = Str::random(10). '_'. time() .'.'. $extension;
             $pathName = 'assets/common/img/cover/';
             
             if (!file_exists($pathName)) {
@@ -458,7 +460,8 @@ class AboutService implements AboutContract
             }
           
             $file = $data['file'];
-            $fileName = Str::random(10). '_'. time() .'.png';
+            $extension = $file->extension() ? $file->extension() : 'pdf';
+            $fileName = Str::random(10). '_'. time() .'.'. $extension;
             $pathName = 'assets/common/cv/';
             
             if (!file_exists($pathName)) {

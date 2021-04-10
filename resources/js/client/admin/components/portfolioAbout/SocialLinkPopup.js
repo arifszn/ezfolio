@@ -13,15 +13,13 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const SocialLinkPopup = (props) => {
-    const [visible, setVisible] = useState(true);
-    const [socialLink, setSocialLink] = useState((typeof props.socialLink !== 'undefined') ? props.socialLink : null);
+    const [visible, setVisible] = useState(false);
     const [form] = Form.useForm();
     const [loading, setLoading] = useState((typeof props.loading !== 'undefined') ? props.loading : false);
     const [componentLoading, setComponentLoading] = useState((typeof props.componentLoading !== 'undefined') ? props.componentLoading : false);
 
     useEffect(() => {
         if (typeof props.socialLink !== 'undefined' && props.socialLink) {
-            setSocialLink(props.socialLink)
             form.setFieldsValue({
                 index: props.socialLink.index,
                 title: props.socialLink.data.title,
@@ -30,6 +28,12 @@ const SocialLinkPopup = (props) => {
             });
         }
     }, [props.socialLink])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(props.visible);
+        }, 400);
+    }, [props.visible])
 
     useEffect(() => {
         if (typeof props.loading !== 'undefined') {
@@ -50,7 +54,7 @@ const SocialLinkPopup = (props) => {
         }, 800);
     };
 
-    const handleOk = (values) => {
+    const handleOk = () => {
         form
         .validateFields()
         .then((values) => {
@@ -114,7 +118,7 @@ const SocialLinkPopup = (props) => {
                     <Form.Item
                         name="iconClass"
                         label="Icon Class"
-                        extra={<React.Fragment>Find your suitable icon: <a href="https://fontawesome.com/icons" target="_blank">Font Awesome</a>|<a href="http://code.meta-platform.com/assets/mdi/preview.html" target="_blank">Material Design</a></React.Fragment>}
+                        extra={<React.Fragment>Find your suitable icon: <a href="https://fontawesome.com/icons" target="_blank" rel="noreferrer">Font Awesome</a>|<a href="http://code.meta-platform.com/assets/mdi/preview.html" target="_blank" rel="noreferrer">Material Design</a></React.Fragment>}
                         rules={[
                             {
                                 required: true,
@@ -149,7 +153,8 @@ const SocialLinkPopup = (props) => {
 SocialLinkPopup.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     submitCallback: PropTypes.func.isRequired,
-    value: PropTypes.string,
+    visible: PropTypes.bool.isRequired,
+    socialLink: PropTypes.object,
     loading: PropTypes.bool,
     componentLoading: PropTypes.bool,
     title: PropTypes.node,

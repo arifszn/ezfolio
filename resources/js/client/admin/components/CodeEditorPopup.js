@@ -13,7 +13,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const CodeEditorPopup = (props) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [value, setValue] = useState((typeof props.value !== 'undefined') ? props.value : '');
     const [loading, setLoading] = useState((typeof props.loading !== 'undefined') ? props.loading : false);
     const [componentLoading, setComponentLoading] = useState((typeof props.componentLoading !== 'undefined') ? props.componentLoading : false);
@@ -23,6 +23,12 @@ const CodeEditorPopup = (props) => {
             setValue(props.value)
         }
     }, [props.value])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(props.visible);
+        }, 400);
+    }, [props.visible])
 
     useEffect(() => {
         if (typeof props.loading !== 'undefined') {
@@ -90,6 +96,7 @@ const CodeEditorPopup = (props) => {
 CodeEditorPopup.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     submitCallback: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired,
     value: PropTypes.string,
     loading: PropTypes.bool,
     componentLoading: PropTypes.bool,

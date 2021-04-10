@@ -35,6 +35,8 @@ const api = {
         seo: Utils.backend+'/api/'+Utils.apiVersion+'/admin/seo',
         about: Utils.backend+'/api/'+Utils.apiVersion+'/admin/about',
         avatar: Utils.backend+'/api/'+Utils.apiVersion+'/admin/avatar',
+        cv: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cv',
+        cover: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cover',
     },
 };
 

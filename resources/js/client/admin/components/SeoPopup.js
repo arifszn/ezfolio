@@ -17,7 +17,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const SeoPopup = (props) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
 
@@ -31,6 +31,12 @@ const SeoPopup = (props) => {
             });
         }
     }, [props.data])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(props.visible);
+        }, 400);
+    }, [props.visible])
 
     const imageOnChange = (files) => {
         form.setFieldsValue({
@@ -146,6 +152,7 @@ SeoPopup.propTypes = {
 
 SeoPopup.propTypes = {
     data: PropTypes.object,
+    visible: PropTypes.bool.isRequired,
     submitCallback: PropTypes.func
 }
 

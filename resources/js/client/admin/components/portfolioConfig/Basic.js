@@ -278,6 +278,7 @@ const Basic = (props) => {
             {
                 seoPopupVisible && (
                     <SeoPopup
+                        visible={seoPopupVisible}
                         data={seo}
                         handleCancel={
                             () => {

@@ -16,7 +16,7 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const LoginCredentialPopup = (props) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [componentLoading, setComponentLoading] = useState(true);
     const [form] = Form.useForm();
@@ -24,6 +24,12 @@ const LoginCredentialPopup = (props) => {
     useEffect(() => {
         loadData();
     }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(props.visible);
+        }, 400);
+    }, [props.visible])
 
     const loadData = () => {
         if (!componentLoading) {
@@ -178,6 +184,7 @@ const LoginCredentialPopup = (props) => {
 }
 
 LoginCredentialPopup.propTypes = {
+    visible: PropTypes.bool.isRequired,
     handleCancel: PropTypes.func.isRequired,
 }
 
