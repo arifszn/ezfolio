@@ -6,6 +6,7 @@ use App\Models\Setting;
 use App\Services\Contracts\AdminContract;
 use App\Services\Contracts\SettingContract;
 use Constants;
+use DotenvEditor;
 use Exception;
 use Illuminate\Database\Seeder;
 use Log;
@@ -38,6 +39,9 @@ class AdminSeeder extends Seeder
                     //setting table seed
                     try {
                         $settingContract = resolve(SettingContract::class);
+                        //site name
+                        $file = DotenvEditor::setKey('APP_NAME', 'Ezfolio');
+                        $file = DotenvEditor::save();
 
                         //accent color
                         $data = [
