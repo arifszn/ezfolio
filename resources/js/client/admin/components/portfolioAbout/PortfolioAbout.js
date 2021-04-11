@@ -1,4 +1,4 @@
-import { Button, Card, Col, Form, Input, List, Row, Space, Typography } from 'antd';
+import { Button, Card, Col, Empty, Form, Input, List, Row, Space, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
@@ -411,7 +411,7 @@ const PortfolioAbout = () => {
                                 } description={
                                     cv ? (
                                         <a href={Utils.backend + '/' + cv} download target="_blank" rel="noreferrer">
-                                            <Button type="primary" icon={<DownloadOutlined />}>
+                                            <Button type="default" icon={<DownloadOutlined />}>
                                                 Download
                                             </Button>
                                         </a>
@@ -459,12 +459,11 @@ const PortfolioAbout = () => {
                             onFinish={handleSubmit}
                             layout="vertical"
                             name="about"
-                            requiredMark={false}
+                            requiredMark
                         >
                             <Form.Item
                                 name="name"
                                 label={<Text strong>Full Name</Text>}
-                                tooltip="This is a required field"
                                 messageVariables={{ label: 'Name' }}
                                 rules={[
                                     {
@@ -478,7 +477,6 @@ const PortfolioAbout = () => {
                             <Form.Item
                                 name="email"
                                 label={<Text strong>Email</Text>}
-                                tooltip="This is a required field"
                                 messageVariables={{ label: 'Email' }}
                                 rules={[
                                     {
@@ -497,12 +495,6 @@ const PortfolioAbout = () => {
                                 name="phone"
                                 label={<Text strong>Phone</Text>}
                                 messageVariables={{ label: 'Phone' }}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please enter your phone'
-                                    }
-                                ]}
                             >
                                 <Input ref={phoneInput} placeholder="Phone"/>
                             </Form.Item>
@@ -510,19 +502,12 @@ const PortfolioAbout = () => {
                                 name="address"
                                 label={<Text strong>Address</Text>}
                                 messageVariables={{ label: 'Address' }}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please enter your address'
-                                    }
-                                ]}
                             >
                                 <Input ref={addressInput} placeholder="Address"/>
                             </Form.Item>
                             <Form.Item
                                 name="description"
                                 label={<Text strong>Description</Text>}
-                                tooltip="This is a required field"
                                 messageVariables={{ label: 'Description' }}
                                 rules={[
                                     {
@@ -547,25 +532,31 @@ const PortfolioAbout = () => {
                                         size="small"
                                         bordered
                                     >
-                                        <QueueAnim type={['right', 'left']} leaveReverse>
-                                            {
-                                                taglines.map((item, index) => (
-                                                    <div key={index}>
-                                                        <List.Item actions={
-                                                            [
-                                                                <EditSpan key={'delete'}>
-                                                                    <i className="fas fa-times" style={{color: 'red'}} onClick={()=> taglineDeleteHandler(index)}></i>
-                                                                </EditSpan>
-                                                            ]
-                                                        }>
-                                                            <Item.Meta description={
-                                                                <Input placeholder="Enter tag line" value={item} bordered={false} onChange={(e) => taglineEditHandler(e, index)}/>
-                                                            }/>
-                                                        </List.Item>
-                                                    </div>
-                                                ))
-                                            }
-                                        </QueueAnim>
+                                        {
+                                            taglines.length ? (
+                                                <QueueAnim type={['right', 'left']} leaveReverse>
+                                                    {
+                                                        taglines.map((item, index) => (
+                                                            <div key={index}>
+                                                                <List.Item actions={
+                                                                    [
+                                                                        <EditSpan key={'delete'}>
+                                                                            <i className="fas fa-times" style={{color: 'red'}} onClick={()=> taglineDeleteHandler(index)}></i>
+                                                                        </EditSpan>
+                                                                    ]
+                                                                }>
+                                                                    <Item.Meta description={
+                                                                        <Input placeholder="Enter tag line" value={item} bordered={false} onChange={(e) => taglineEditHandler(e, index)}/>
+                                                                    }/>
+                                                                </List.Item>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </QueueAnim>
+                                            ) : (
+                                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                                            )
+                                        }
                                     </List>
                                 </Form.Item>
                             </AnimatedDiv>
@@ -583,30 +574,36 @@ const PortfolioAbout = () => {
                                         size="small"
                                         bordered
                                     >
-                                        <QueueAnim type={['right', 'left']} leaveReverse>
-                                            {
-                                                socialLinks.map((item, index) => (
-                                                    <div key={index}>
-                                                        <List.Item actions={
-                                                            [
-                                                                <EditSpan key={'edit'}>
-                                                                    <i className="fas fa-pen-square" onClick={()=> socialLinkEditHandler(index)}></i>
-                                                                </EditSpan>,
-                                                                <EditSpan key={'delete'}>
-                                                                    <i className="fas fa-times" style={{color: 'red'}} onClick={()=> socialLinkDeleteHandler(index)}></i>
-                                                                </EditSpan>,
-                                                            ]
-                                                        }>
-                                                            <Item.Meta description={
-                                                                <a href={item.link} target="_blank" rel="noreferrer">
-                                                                    <Space><i className={item.iconClass}></i> {item.title}</Space>
-                                                                </a>
-                                                            }/>
-                                                        </List.Item>
-                                                    </div>
-                                                ))
-                                            }
-                                        </QueueAnim>
+                                        {
+                                            socialLinks.length ? (
+                                                <QueueAnim type={['right', 'left']} leaveReverse>
+                                                    {
+                                                        socialLinks.map((item, index) => (
+                                                            <div key={index}>
+                                                                <List.Item actions={
+                                                                    [
+                                                                        <EditSpan key={'edit'}>
+                                                                            <i className="fas fa-pen-square" onClick={()=> socialLinkEditHandler(index)}></i>
+                                                                        </EditSpan>,
+                                                                        <EditSpan key={'delete'}>
+                                                                            <i className="fas fa-times" style={{color: 'red'}} onClick={()=> socialLinkDeleteHandler(index)}></i>
+                                                                        </EditSpan>,
+                                                                    ]
+                                                                }>
+                                                                    <Item.Meta description={
+                                                                        <a href={item.link} target="_blank" rel="noreferrer">
+                                                                            <Space><i className={item.iconClass}></i> {item.title}</Space>
+                                                                        </a>
+                                                                    }/>
+                                                                </List.Item>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </QueueAnim>
+                                            ) : (
+                                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                                            )
+                                        }
                                     </List>
                                 </Form.Item>
                             </AnimatedDiv>
@@ -630,11 +627,11 @@ const PortfolioAbout = () => {
                             </Form.Item>
                             <Form.Item
                                 style={{
-                                    textAlign: 'right',
+                                    textAlign: 'center',
                                 }}
                             >
-                                <Button type="primary" htmlType="submit" block loading={loading}>
-                                    Save
+                                <Button type="primary" htmlType="submit"  loading={loading}>
+                                    Save Changes
                                 </Button>
                             </Form.Item>
                         </Form>
