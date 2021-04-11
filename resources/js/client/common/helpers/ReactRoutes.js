@@ -12,7 +12,7 @@ const ResetPassword = loadable(() => import('../../admin/components/auth/ResetPa
 const Dashboard = loadable(() => import('../../admin/components/dashboard/Dashboard'));
 const Settings = loadable(() => import('../../admin/components/settings/Settings'));
 const PortfolioConfig = loadable(() => import('../../admin/components/portfolioConfig/PortfolioConfig'));
-const PortfolioAbout = loadable(() => import('../../admin/components/portfolioAbout/PortfolioAbout'));
+const About = loadable(() => import('../../admin/components/about/About'));
 
 const RedirectLogin = () => {
     const apiToken = useSelector(state => state.globalState.apiToken);
@@ -87,7 +87,7 @@ const admin = [
         title: 'PortfolioAbout',
         path: Routes.web.admin.portfolioAbout,
         exact: true,
-        component: PortfolioAbout,
+        component: About,
         private: true
     },
 ]

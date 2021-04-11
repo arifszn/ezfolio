@@ -72,7 +72,7 @@ i, svg {
 }
 `;
 
-const PortfolioAbout = () => {
+const About = () => {
     const [avatar, setAvatar] = useState(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -674,4 +674,4 @@ const PortfolioAbout = () => {
     )
 }
 
-export default PortfolioAbout;
+export default About;
