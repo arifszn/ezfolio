@@ -30,7 +30,7 @@ const tabs = [
 const Settings = () => {
     return (
         <React.Fragment>
-            <PageWrapper>
+            <PageWrapper noPadding>
                 <ZTabs tabs={tabs}/>
             </PageWrapper>
         </React.Fragment>

@@ -43,6 +43,10 @@ Route::group(['prefix' => 'v1'], function () {
             Route::match(['post', 'delete'], '/cv', ['App\Http\Controllers\Admin\Api\PortfolioController', 'cv']);
 
             Route::match(['post', 'delete'], '/cover', ['App\Http\Controllers\Admin\Api\PortfolioController', 'cover']);
+
+            Route::get('/education-list', ['App\Http\Controllers\Admin\Api\PortfolioController', 'educationList']);
+            Route::post('/education', ['App\Http\Controllers\Admin\Api\PortfolioController', 'education']);
+            Route::delete('/education', ['App\Http\Controllers\Admin\Api\PortfolioController', 'education']);
         });
     });
 });

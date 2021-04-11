@@ -1,4 +1,4 @@
-import { notification } from 'antd';
+import { notification, message as tinyMessage } from 'antd';
 import Constants from './Constants';
 import { changeAntdTheme } from 'mini-dynamic-antd-theme';
 
@@ -17,6 +17,16 @@ const showNotification = (message = 'Something went wrong', type = 'error', titl
         placement: 'bottomRight',
         duration: sticky ? 0 : 4.5
     });
+};
+
+/**
+ * Display tiny notification
+ * 
+ * @param string message 
+ * @param string type 
+ */
+const showTinyNotification = (message = 'Something went wrong', type = 'error') => {
+    tinyMessage[type](message);
 };
 
 /**
@@ -170,6 +180,7 @@ const Utils = {
     backend: 'http://ezfolio.test',
     apiVersion: 'v1',
     showNotification,
+    showTinyNotification,
     textEllipsis,
     randomHexColor,
     handleException,

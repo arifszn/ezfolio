@@ -55,7 +55,7 @@ const PortfolioConfig = () => {
 
     return (
         <React.Fragment>
-            <PageWrapper loading={componentLoading}>
+            <PageWrapper loading={componentLoading} noPadding>
                 <ZTabs tabs={tabs}/>
             </PageWrapper>
         </React.Fragment>

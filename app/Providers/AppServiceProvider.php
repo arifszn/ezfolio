@@ -6,8 +6,10 @@ use App\Services\AboutService;
 use App\Services\AdminService;
 use App\Services\Contracts\AboutContract;
 use App\Services\Contracts\AdminContract;
+use App\Services\Contracts\EducationContract;
 use App\Services\Contracts\PortfolioConfigContract;
 use App\Services\Contracts\SettingContract;
+use App\Services\EducationService;
 use App\Services\PortfolioConfigService;
 use App\Services\SettingService;
 use Config;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AboutContract::class, AboutService::class);
         $this->app->bind(AdminContract::class, AdminService::class);
         $this->app->bind(PortfolioConfigContract::class, PortfolioConfigService::class);
+        $this->app->bind(EducationContract::class, EducationService::class);
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Button, Card, Col, Empty, Form, Input, List, Row, Space, Typography } from 'antd';
+import { Button, Col, Empty, Form, Input, List, Row, Space, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
@@ -9,6 +9,7 @@ import Typed from 'react-typed';
 import QueueAnim from 'rc-queue-anim';
 import SocialLinkPopup from './SocialLinkPopup';
 import { DownloadOutlined } from '@ant-design/icons';
+import PageWrapper from '../layout/PageWrapper';
 
 const pulseAnimation = keyframes`
 0%,
@@ -291,7 +292,7 @@ const About = () => {
                         marginBottom: 24,
                     }}
                 >
-                    <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
+                    <PageWrapper loading={componentLoading}>
                         <List
                             itemLayout="horizontal"
                             size="large"
@@ -439,7 +440,7 @@ const About = () => {
                                 }/>
                             </Item>
                         </List>
-                    </Card>
+                    </PageWrapper>
                 </Col>
                 <Col
                     xl={14}
@@ -451,7 +452,7 @@ const About = () => {
                         marginBottom: 24,
                     }}
                 >
-                    <Card bordered={false} hoverable className={'z-shadow'} loading={componentLoading} style={{cursor: 'default'}}>
+                    <PageWrapper loading={componentLoading}>
                         <Form
                             preserve={false}
                             form={form}
@@ -635,7 +636,7 @@ const About = () => {
                                 </Button>
                             </Form.Item>
                         </Form>
-                    </Card>
+                    </PageWrapper>
                 </Col>
             </Row>
             {

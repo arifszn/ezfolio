@@ -13,6 +13,7 @@ const Dashboard = loadable(() => import('../../admin/components/dashboard/Dashbo
 const Settings = loadable(() => import('../../admin/components/settings/Settings'));
 const PortfolioConfig = loadable(() => import('../../admin/components/portfolioConfig/PortfolioConfig'));
 const About = loadable(() => import('../../admin/components/about/About'));
+const EducationList = loadable(() => import('../../admin/components/education/EducationList'));
 
 const RedirectLogin = () => {
     const apiToken = useSelector(state => state.globalState.apiToken);
@@ -88,6 +89,13 @@ const admin = [
         path: Routes.web.admin.portfolioAbout,
         exact: true,
         component: About,
+        private: true
+    },
+    {
+        title: 'portfolioEducation',
+        path: Routes.web.admin.portfolioEducation,
+        exact: true,
+        component: EducationList,
         private: true
     },
 ]

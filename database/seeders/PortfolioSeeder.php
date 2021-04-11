@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\AboutContract;
+use App\Services\Contracts\EducationContract;
 use App\Services\Contracts\PortfolioConfigContract;
 use Constants;
 use Illuminate\Database\Seeder;
@@ -21,6 +22,7 @@ class PortfolioSeeder extends Seeder
         try {
             $portfolioConfig = resolve(PortfolioConfigContract::class);
             $about = resolve(AboutContract::class);
+            $education = resolve(EducationContract::class);
 
             //portfolio config table seed
 
@@ -302,6 +304,31 @@ class PortfolioSeeder extends Seeder
                     'seederCV' => 'assets/common/cv/default.pdf',
                 ];
                 $about->store($data);
+
+                //education table seed
+                try {
+                    $data = [
+                        'institution' => 'University of Colorado Boulder',
+                        'period' => '2006-2010',
+                        'degree' => 'Bachelor of Science',
+                        'cgpa'  => '4.00 out of 4.00',
+                        'department' => 'Computer Science & Engineering',
+                        'thesis' => 'Web Development Track'
+                    ];
+                    $education->store($data);
+
+                    $data = [
+                        'institution' => 'James Buchanan High School',
+                        'period' => '2002-2006',
+                        'degree' => 'Technology Magnet Program',
+                        'cgpa' => '3.75 out of 4.00',
+                        'department' => null,
+                        'thesis' => null
+                    ];
+                    $education->store($data);
+                } catch (\Throwable $th) {
+                    Log::error($th->getMessage());
+                }
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }
