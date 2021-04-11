@@ -183,7 +183,7 @@ const EducationList = () => {
                         )}
                         actionRef={actionRef}
                         request={async (params, sorter) => {
-                            return HTTP.get(Routes.api.admin.educationList+'?page='+params.current, {
+                            return HTTP.get(Routes.api.admin.education+'?page='+params.current, {
                                 params: {
                                     params,
                                     sorter,

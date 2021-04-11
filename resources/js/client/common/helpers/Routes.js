@@ -38,7 +38,6 @@ const api = {
         avatar: Utils.backend+'/api/'+Utils.apiVersion+'/admin/avatar',
         cv: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cv',
         cover: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cover',
-        educationList: Utils.backend+'/api/'+Utils.apiVersion+'/admin/education-list',
         education: Utils.backend+'/api/'+Utils.apiVersion+'/admin/education',
     },
 };

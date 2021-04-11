@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AboutContract;
-use App\Services\Contracts\EducationContract;
 use App\Services\Contracts\PortfolioConfigContract;
 use Constants;
 use Illuminate\Http\JsonResponse;
@@ -25,27 +24,16 @@ class PortfolioController extends Controller
     private $about;
 
     /**
-     * @var EducationContract
-     */
-    private $education;
-
-    /**
      * Create a new instance
      * 
      * @param PortfolioConfigContract $portfolioConfig
      * @param AboutContract $about
-     * @param EducationContract $education
      * @return void 
      */
-    public function __construct(
-        PortfolioConfigContract $portfolioConfig,
-        AboutContract $about,
-        EducationContract $education
-    )
+    public function __construct(PortfolioConfigContract $portfolioConfig, AboutContract $about)
     {
         $this->portfolioConfig = $portfolioConfig;
         $this->about = $about;
-        $this->education = $education;
     }
 
     /**
@@ -141,38 +129,6 @@ class PortfolioController extends Controller
             $result = $this->about->processUpdateCoverRequest($request->all());
         } elseif ($request->isMethod('delete')) {
             $result = $this->about->processDeleteCoverRequest($request->file);
-        }
-
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
-    }
-
-    /**
-     * Get education list
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
-     */
-    public function educationList(Request $request)
-    {
-        $result = $this->education->getAllFieldsWithPaginate($request->all());
-
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
-    }
-
-    /**
-     * Education resource
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
-     */
-    public function education(Request $request)
-    {
-        if ($request->isMethod('get')) {
-            $result = $this->education->getById($request->id);
-        } elseif ($request->isMethod('post')) {
-            return response()->json($this->education->store($request->all()));
-        } elseif ($request->isMethod('delete')) {
-            return response()->json($this->education->deleteByIds($request->ids));
         }
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);

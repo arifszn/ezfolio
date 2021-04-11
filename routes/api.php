@@ -20,6 +20,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::group(['middleware' => ['jwt.verify']], function () {
             Route::post('/refresh-token', ['App\Http\Controllers\Admin\Api\AdminController', 'refreshToken'])->name('refresh-token');
+
             Route::get('/me', ['App\Http\Controllers\Admin\Api\AdminController', 'me']);
 
             Route::match(['get', 'post'], '/login-credentials', ['App\Http\Controllers\Admin\Api\AdminController', 'loginCredentials']);
@@ -44,9 +45,11 @@ Route::group(['prefix' => 'v1'], function () {
 
             Route::match(['post', 'delete'], '/cover', ['App\Http\Controllers\Admin\Api\PortfolioController', 'cover']);
 
-            Route::get('/education-list', ['App\Http\Controllers\Admin\Api\PortfolioController', 'educationList']);
-            Route::post('/education', ['App\Http\Controllers\Admin\Api\PortfolioController', 'education']);
-            Route::delete('/education', ['App\Http\Controllers\Admin\Api\PortfolioController', 'education']);
+            Route::get('/education', ['App\Http\Controllers\Admin\Api\EducationController', 'index']);
+            Route::post('/education', ['App\Http\Controllers\Admin\Api\EducationController', 'store']);
+            Route::get('/education/{id}', ['App\Http\Controllers\Admin\Api\EducationController', 'show']);
+            Route::put('/education/{id}', ['App\Http\Controllers\Admin\Api\EducationController', 'update']);
+            Route::delete('/education', ['App\Http\Controllers\Admin\Api\EducationController', 'destroy']);
         });
     });
 });

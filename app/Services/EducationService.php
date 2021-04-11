@@ -92,8 +92,8 @@ class EducationService implements EducationContract
             $newData['department'] = !empty($data['department']) ? $data['department'] : null;
             $newData['thesis'] = !empty($data['thesis']) ? $data['thesis'] : null;
             
-            if (!empty($data['educationId'])) {
-                $response = $this->getById($data['educationId'], ['id']);
+            if (!empty($data['id'])) {
+                $response = $this->getById($data['id'], ['id']);
                 if ($response['status'] !== Constants::STATUS_CODE_SUCCESS) {
                     return $response;
                 } else {
@@ -106,7 +106,7 @@ class EducationService implements EducationContract
 
             if ($response) {
                 return [
-                    'message' => !empty($data['educationId']) ? 'Data is successfully updated' : 'Data is successfully saved',
+                    'message' => !empty($data['id']) ? 'Data is successfully updated' : 'Data is successfully saved',
                     'payload' => $response,
                     'status' => Constants::STATUS_CODE_SUCCESS
                 ];

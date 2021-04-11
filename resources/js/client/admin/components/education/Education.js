@@ -23,7 +23,7 @@ const Education = (props) => {
 
     useEffect(() => {
         form.setFieldsValue({
-            educationId: props.itemToEdit ? props.itemToEdit.id : '', 
+            id: props.itemToEdit ? props.itemToEdit.id : '', 
             institution: props.itemToEdit ? props.itemToEdit.institution : '', 
             period: props.itemToEdit ? props.itemToEdit.period : '',
             degree: props.itemToEdit ? props.itemToEdit.degree : '',
@@ -66,8 +66,8 @@ const Education = (props) => {
             //save form
             setLoading(true);
 
-            HTTP.post(Routes.api.admin.education, {
-                educationId: values.educationId,
+            HTTP[values.id ? 'put' : 'post'](Routes.api.admin.education+(values.id ? `/${values.id}` : '' ), {
+                id: values.id,
                 institution: values.institution,
                 cgpa: values.cgpa,
                 degree: values.degree,
@@ -123,7 +123,7 @@ const Education = (props) => {
                     layout="vertical"
                     name="education"
                 >
-                    <Form.Item name="educationId" hidden>
+                    <Form.Item name="id" hidden>
                         <Input/>
                     </Form.Item>
                     <Form.Item
