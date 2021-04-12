@@ -13,6 +13,7 @@ const web = {
         portfolioConfig: '/admin/portfolio/config',
         portfolioAbout: '/admin/portfolio/about',
         portfolioEducation: '/admin/portfolio/education',
+        portfolioSkills: '/admin/portfolio/skills',
         systemLogs: '/admin/system-logs',
     },
     user: {
@@ -39,6 +40,7 @@ const api = {
         cv: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cv',
         cover: Utils.backend+'/api/'+Utils.apiVersion+'/admin/cover',
         education: Utils.backend+'/api/'+Utils.apiVersion+'/admin/education',
+        skills: Utils.backend+'/api/'+Utils.apiVersion+'/admin/skills',
     },
 };
 

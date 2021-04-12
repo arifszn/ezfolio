@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\Constants;
 use Closure;
-use Constants;
 use Exception;
 use Illuminate\Http\Request;
 use Route;
@@ -27,7 +27,7 @@ class VerifyJwt
                 return response()->json([
                     'message' => 'Token is Invalid',
                     'payload' => Constants::TOKEN_INVALID,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status' => Constants::STATUS_CODE_ERROR
                 ], Constants::STATUS_CODE_ERROR);
             } elseif ($th instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
                 if (Route::getRoutes()->match($request)->getName() === 'refresh-token') {
@@ -37,25 +37,25 @@ class VerifyJwt
                 return response()->json([
                     'message' => 'Token is Expired',
                     'payload' => Constants::TOKEN_EXPIRED,
-                    'status'  => Constants::STATUS_CODE_UNAUTHORIZED
+                    'status' => Constants::STATUS_CODE_UNAUTHORIZED
                 ], Constants::STATUS_CODE_UNAUTHORIZED);
             } elseif ($th instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
                 return response()->json([
                     'message' => 'Token is Blacklisted',
                     'payload' => Constants::TOKEN_BLACKLISTED,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status' => Constants::STATUS_CODE_ERROR
                 ], Constants::STATUS_CODE_UNAUTHORIZED);
             } elseif ($th instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
                 return response()->json([
                     'message' => 'Authorization token not found',
                     'payload' => Constants::TOKEN_NOT_FOUND,
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ], Constants::STATUS_CODE_BAD_REQUEST);
             } else {
                 return response()->json([
                     'message' => 'Something went wrong',
                     'payload' => Constants::TOKEN_INVALID,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status' => Constants::STATUS_CODE_ERROR
                 ], Constants::STATUS_CODE_ERROR);
             }
         }

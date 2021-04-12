@@ -2,32 +2,30 @@
 
 namespace App\Services;
 
-use App;
-use App\Constant;
+use App\Helpers\Constants;
 use App\Models\Setting;
-use App\Services\Contracts\AboutContract;
-use App\Services\Contracts\SettingContract;
+use App\Services\Contracts\AboutInterface;
+use App\Services\Contracts\SettingInterface;
 use Config;
-use Constants;
 use Log;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 use Str;
 use Validator;
 
-class SettingService implements SettingContract
+class SettingService implements SettingInterface
 {
     /**
      * Eloquent instance
-     * 
+     *
      * @var Setting
      */
     private $model;
 
     /**
      * Create a new service instance.
-     * 
-     * @param Setting $setting 
-     * @return void 
+     *
+     * @param Setting $setting
+     * @return void
      */
     public function __construct(Setting $setting)
     {
@@ -36,9 +34,9 @@ class SettingService implements SettingContract
 
     /**
      * If setting exist, update it. Otherwise insert new
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function insertOrUpdate(array $data)
     {
@@ -56,7 +54,6 @@ class SettingService implements SettingContract
                     'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
-
 
             if (isset($data['default_value'])) {
                 $result = $this->model->updateOrCreate([
@@ -78,7 +75,7 @@ class SettingService implements SettingContract
                     'message' => 'Data is saved successfully',
                     'payload' => $result,
                     'status' => Constants::STATUS_CODE_SUCCESS
-                ]; 
+                ];
             } else {
                 return [
                     'message' => 'Something went wrong',
@@ -98,10 +95,10 @@ class SettingService implements SettingContract
 
     /**
      * Get single setting by key
-     * 
-     * @param int $key 
-     * @param array $select 
-     * @return array 
+     *
+     * @param int $key
+     * @param array $select
+     * @return array
      */
     public function getSettingByKey(int $key, array $select = ['*'])
     {
@@ -116,7 +113,7 @@ class SettingService implements SettingContract
                     'message' => 'Setting is fetched successfully',
                     'payload' => $result,
                     'status' => Constants::STATUS_CODE_SUCCESS
-                ];  
+                ];
             } else {
                 return [
                     'message' => 'Setting is not found',
@@ -136,7 +133,7 @@ class SettingService implements SettingContract
 
     /**
      * Get all related settings
-     * 
+     *
      * @return array
      */
     public function getSettingsData()
@@ -209,7 +206,7 @@ class SettingService implements SettingContract
             }
 
             //get cover photo
-            $about = resolve(AboutContract::class);
+            $about = resolve(AboutInterface::class);
 
             $result     = $about->getAllFields(['cover', 'id']);
 
@@ -258,14 +255,13 @@ class SettingService implements SettingContract
 
     /**
      * Set single setting
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function setSettingData(array $data)
     {
         try {
-
             $validate = Validator::make($data, [
                 'setting_key' => 'required',
                 'setting_value' => 'required'
@@ -301,8 +297,8 @@ class SettingService implements SettingContract
 
     /**
      * Update Site name related env variables
-     * 
-     * @param string $newName 
+     *
+     * @param string $newName
      * @return array
      */
     public function updateSiteName(string $newName)
@@ -335,8 +331,8 @@ class SettingService implements SettingContract
 
     /**
      * Process the update logo request
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function processUpdateLogoRequest(array $data)
@@ -359,7 +355,7 @@ class SettingService implements SettingContract
             $pathName = 'assets/common/img/logo/';
             
             if (!file_exists($pathName)) {
-                mkdir( $pathName, 0777, true);
+                mkdir($pathName, 0777, true);
             }
 
             if ($file->move($pathName, $fileName)) {
@@ -408,9 +404,9 @@ class SettingService implements SettingContract
 
     /**
      * Process the delete logo request
-     * 
-     * @param string $file 
-     * @return array 
+     *
+     * @param string $file
+     * @return array
      */
     public function processDeleteLogoRequest(string $file)
     {
@@ -460,8 +456,8 @@ class SettingService implements SettingContract
 
     /**
      * Process the update favicon request
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function processUpdateFaviconRequest(array $data)
@@ -485,11 +481,10 @@ class SettingService implements SettingContract
             $pathName = 'assets/common/img/favicon/';
             
             if (!file_exists($pathName)) {
-                mkdir( $pathName, 0777, true);
+                mkdir($pathName, 0777, true);
             }
 
             if ($file->move($pathName, $fileName)) {
-
                 //delete previous favicon
                 try {
                     $oldFaviconResponse = $this->getSettingByKey(Setting::FAVICON);
@@ -535,9 +530,9 @@ class SettingService implements SettingContract
 
     /**
      * Process the delete favicon request
-     * 
-     * @param string $file 
-     * @return array 
+     *
+     * @param string $file
+     * @return array
      */
     public function processDeleteFaviconRequest(string $file)
     {
@@ -586,8 +581,8 @@ class SettingService implements SettingContract
 
     /**
      * store mail settings
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function storeMailSettings(array $data)

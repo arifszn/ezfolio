@@ -50,6 +50,12 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/education/{id}', ['App\Http\Controllers\Admin\Api\EducationController', 'show']);
             Route::put('/education/{id}', ['App\Http\Controllers\Admin\Api\EducationController', 'update']);
             Route::delete('/education', ['App\Http\Controllers\Admin\Api\EducationController', 'destroy']);
+
+            Route::get('/skills', ['App\Http\Controllers\Admin\Api\SkillController', 'index']);
+            Route::post('/skills', ['App\Http\Controllers\Admin\Api\SkillController', 'store']);
+            Route::get('/skills/{id}', ['App\Http\Controllers\Admin\Api\SkillController', 'show']);
+            Route::put('/skills/{id}', ['App\Http\Controllers\Admin\Api\SkillController', 'update']);
+            Route::delete('/skills', ['App\Http\Controllers\Admin\Api\SkillController', 'destroy']);
         });
     });
 });

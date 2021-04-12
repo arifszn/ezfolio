@@ -2,28 +2,25 @@
 
 namespace App\Services;
 
-use App;
-use App\Constant;
-use App\Models\About;
+use App\Helpers\Constants;
 use App\Models\Education;
-use App\Services\Contracts\EducationContract;
-use Constants;
+use App\Services\Contracts\EducationInterface;
 use Log;
 use Validator;
 
-class EducationService implements EducationContract
+class EducationService implements EducationInterface
 {
     /**
      * Eloquent instance
-     * 
+     *
      * @var Education
      */
     private $model;
 
     /**
      * Create a new service instance
-     * 
-     * @param Education $education 
+     *
+     * @param Education $education
      * @return void
      */
     public function __construct(Education $education)
@@ -33,9 +30,9 @@ class EducationService implements EducationContract
 
     /**
      * Get all fields
-     * 
+     *
      * @param array $select
-     * @return array 
+     * @return array
      */
     public function getAllFields(array $select = ['*'])
     {
@@ -66,9 +63,9 @@ class EducationService implements EducationContract
 
     /**
      * Store/update data
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function store(array $data)
     {
@@ -129,7 +126,7 @@ class EducationService implements EducationContract
 
     /**
      * Fetch data by id
-     * 
+     *
      * @param int $educationId
      * @param array $select
      * @return array
@@ -164,10 +161,10 @@ class EducationService implements EducationContract
 
     /**
      * Get all fields with paginate
-     * 
+     *
      * @param array $data
      * @param array $select
-     * @return array 
+     * @return array
      */
     public function getAllFieldsWithPaginate(array $data, array $select = ['*'])
     {
@@ -192,7 +189,7 @@ class EducationService implements EducationContract
                 $columns = !empty($data['columns']) ? $data['columns'] : null;
                 
                 if ($columns) {
-                    $result->where(function($query) use ($columns, $searchQuery) {
+                    $result->where(function ($query) use ($columns, $searchQuery) {
                         foreach ($columns as $key => $column) {
                             if (!empty(json_decode($column)->search) && json_decode($column)->search === true) {
                                 $fieldName = json_decode($column)->dataIndex;
@@ -203,7 +200,7 @@ class EducationService implements EducationContract
                 }
             }
 
-            $result = $result->paginate($perPage); 
+            $result = $result->paginate($perPage);
             
             if ($result) {
                 return [
@@ -230,7 +227,7 @@ class EducationService implements EducationContract
 
     /**
      * Delete data by id array
-     * 
+     *
      * @param array $ids
      * @return array
      */

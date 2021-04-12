@@ -2,22 +2,18 @@
 
 namespace App\Services;
 
-use App;
-use App\Constant;
+use App\Helpers\Constants;
 use App\Models\PortfolioConfig;
-use App\Services\Contracts\PortfolioConfigContract;
-use Constants;
+use App\Services\Contracts\PortfolioConfigInterface;
 use Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Str;
 use Validator;
 
-class PortfolioConfigService implements PortfolioConfigContract
+class PortfolioConfigService implements PortfolioConfigInterface
 {
     /**
      * Eloquent instance
-     * 
+     *
      * @var PortfolioConfig
      */
     private $model;
@@ -34,9 +30,9 @@ class PortfolioConfigService implements PortfolioConfigContract
 
     /**
      * If config exist, update it. Otherwise insert new
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function insertOrUpdate(array $data)
     {
@@ -73,7 +69,7 @@ class PortfolioConfigService implements PortfolioConfigContract
                     'message' => 'Data is successfully updated',
                     'payload' => $result,
                     'status'  => Constants::STATUS_CODE_SUCCESS
-                ]; 
+                ];
             } else {
                 return [
                     'message' => 'Something went wrong',
@@ -93,10 +89,10 @@ class PortfolioConfigService implements PortfolioConfigContract
 
     /**
      * Get single config by key
-     * 
+     *
      * @param int $key
-     * @param array $select 
-     * @return array 
+     * @param array $select
+     * @return array
      */
     public function getConfigByKey(int $key, array $select = ['*'])
     {
@@ -110,13 +106,13 @@ class PortfolioConfigService implements PortfolioConfigContract
                     'message' => 'Config is fetched successfully',
                     'payload' => $result,
                     'status' => Constants::STATUS_CODE_SUCCESS
-                ];  
+                ];
             } else {
                 return [
                     'message' => 'Config is not found',
                     'payload' => null,
                     'status'  => Constants::STATUS_CODE_NOT_FOUND
-                ]; 
+                ];
             }
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
@@ -150,8 +146,7 @@ class PortfolioConfigService implements PortfolioConfigContract
         bool $seo = true,
         bool $visibility = true,
         bool $script = true
-    )
-    {
+    ) {
         try {
             $data = [];
 
@@ -326,14 +321,13 @@ class PortfolioConfigService implements PortfolioConfigContract
 
     /**
      * Set single Config
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function setConfigData(array $data)
     {
         try {
-
             $validate = Validator::make($data, [
                 'setting_key' => 'required',
             ]);
@@ -356,11 +350,10 @@ class PortfolioConfigService implements PortfolioConfigContract
                     'message' => 'Config is successfully updated',
                     'payload' => $result['payload'],
                     'status' => Constants::STATUS_CODE_SUCCESS
-                ]; 
+                ];
             } else {
                 return $result;
             }
-
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
@@ -373,9 +366,9 @@ class PortfolioConfigService implements PortfolioConfigContract
 
     /**
      * Store meta data
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function setMetaData(array $data)
     {
@@ -431,7 +424,7 @@ class PortfolioConfigService implements PortfolioConfigContract
                         $pathName = 'assets/common/img/meta-image/';
                         
                         if (!file_exists($pathName)) {
-                            mkdir( $pathName, 0777, true);
+                            mkdir($pathName, 0777, true);
                         }
 
                         if ($file->move($pathName, $fileName)) {

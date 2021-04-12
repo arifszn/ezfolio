@@ -2,24 +2,22 @@
 
 namespace App\Services\Contracts;
 
-use Illuminate\Http\Request;
-
-interface PortfolioConfigContract
+interface PortfolioConfigInterface
 {
     /**
      * If config exist, update it. Otherwise insert new
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function insertOrUpdate(array $data);
 
     /**
      * Get single config by key
-     * 
+     *
      * @param int $key
-     * @param array $select 
-     * @return array 
+     * @param array $select
+     * @return array
      */
     public function getConfigByKey(int $key, array $select = ['*']);
 
@@ -49,17 +47,17 @@ interface PortfolioConfigContract
 
     /**
      * Set single config
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function setConfigData(array $data);
 
     /**
      * Store meta data
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function setMetaData(array $data);
 }

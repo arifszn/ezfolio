@@ -2,36 +2,35 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\EducationContract;
-use Constants;
+use App\Services\Contracts\EducationInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
     /**
-     * @var EducationContract
+     * @var EducationInterface
      */
     private $education;
 
     /**
      * Create a new instance
-     * 
-     * @param EducationContract $education
-     * @return void 
+     *
+     * @param EducationInterface $education
+     * @return void
      */
-    public function __construct(EducationContract $education)
+    public function __construct(EducationInterface $education)
     {
         $this->education = $education;
     }
 
     /**
      * Get all items
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
@@ -42,9 +41,9 @@ class EducationController extends Controller
 
     /**
      * Store a new item
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -55,9 +54,9 @@ class EducationController extends Controller
 
     /**
      * Show the given new item
-     * 
-     * @param int $id 
-     * @return JsonResponse 
+     *
+     * @param int $id
+     * @return JsonResponse
      */
     public function show(int $id)
     {
@@ -68,10 +67,10 @@ class EducationController extends Controller
 
     /**
      * Update the given item
-     * 
-     * @param Request $request 
-     * @param int $id 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
     public function update(Request $request, int $id)
     {
@@ -82,9 +81,9 @@ class EducationController extends Controller
 
     /**
      * Destroy the given items
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function destroy(Request $request)
     {

@@ -2,29 +2,26 @@
 
 namespace App\Services;
 
-use App;
-use App\Constant;
+use App\Helpers\Constants;
 use App\Models\About;
-use App\Services\Contracts\AboutContract;
-use Constants;
+use App\Services\Contracts\AboutInterface;
 use Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Str;
 use Validator;
 
-class AboutService implements AboutContract
+class AboutService implements AboutInterface
 {
     /**
      * Eloquent instance
-     * 
+     *
      * @var About
      */
     private $model;
 
     /**
-     * Create a new service instance.
+     * Create a new service instance
      *
+     * @param About $about
      * @return void
      */
     public function __construct(About $about)
@@ -34,14 +31,15 @@ class AboutService implements AboutContract
 
     /**
      * Get all about fields
-     * 
+     *
      * @param array $select
-     * @return array 
+     * @return array
      */
     public function getAllFields(array $select = ['*'])
     {
         try {
             $result = $this->model->select($select)->first();
+
             if ($result) {
                 return [
                     'message' => 'Data is fetched successfully',
@@ -67,9 +65,9 @@ class AboutService implements AboutContract
 
     /**
      * Store/update data
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function store(array $data)
     {
@@ -107,7 +105,6 @@ class AboutService implements AboutContract
             }
             $newData['taglines'] = count($newTagLinesArray) ? json_encode($newTagLinesArray) : null;
             
-
             $newSocialLinksArray = [];
             if (!empty($data['socialLinks'])) {
                 foreach ($data['socialLinks'] as $key => $socialLink) {
@@ -122,7 +119,7 @@ class AboutService implements AboutContract
 
             if ($existedRecord['status'] === Constants::STATUS_CODE_SUCCESS) {
                 $existedRecord = $existedRecord['payload'];
-                $result      = $existedRecord->update($newData);
+                $result = $existedRecord->update($newData);
             } else {
                 $newData['avatar'] = 'assets/common/img/avatar/default.png';
                 $newData['cover'] = 'assets/common/img/cover/default.png';
@@ -154,8 +151,8 @@ class AboutService implements AboutContract
 
     /**
      * Process the update avatar request
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function processUpdateAvatarRequest(array $data)
@@ -179,11 +176,10 @@ class AboutService implements AboutContract
             $pathName = 'assets/common/img/avatar/';
             
             if (!file_exists($pathName)) {
-                mkdir( $pathName, 0777, true);
+                mkdir($pathName, 0777, true);
             }
 
             if ($file->move($pathName, $fileName)) {
-
                 //delete previous avatar
                 $oldAvatarResponse = $this->getAllFields(['avatar', 'id']);
                 try {
@@ -234,9 +230,9 @@ class AboutService implements AboutContract
 
     /**
      * Process the delete avatar request
-     * 
-     * @param string $file 
-     * @return array 
+     *
+     * @param string $file
+     * @return array
      */
     public function processDeleteAvatarRequest(string $file)
     {
@@ -251,7 +247,7 @@ class AboutService implements AboutContract
 
             if (unlink($file)) {
                 $defaultAvatar = 'assets/common/img/avatar/default.png';
-                $result      = $this->getAllFields();
+                $result = $this->getAllFields();
 
                 if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
                     return $result;
@@ -297,8 +293,8 @@ class AboutService implements AboutContract
 
     /**
      * Process the update cover request
-     * 
-     * @param array $data 
+     *
+     * @param array $data
      * @return array
      */
     public function processUpdateCoverRequest(array $data)
@@ -322,11 +318,10 @@ class AboutService implements AboutContract
             $pathName = 'assets/common/img/cover/';
             
             if (!file_exists($pathName)) {
-                mkdir( $pathName, 0777, true);
+                mkdir($pathName, 0777, true);
             }
 
             if ($file->move($pathName, $fileName)) {
-
                 //delete previous cover
                 $oldCoverResponse = $this->getAllFields(['cover', 'id']);
                 try {
@@ -377,9 +372,9 @@ class AboutService implements AboutContract
 
     /**
      * Process the delete cover request
-     * 
-     * @param string $file 
-     * @return array 
+     *
+     * @param string $file
+     * @return array
      */
     public function processDeleteCoverRequest(string $file)
     {
@@ -433,16 +428,16 @@ class AboutService implements AboutContract
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Process the update CV request
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     public function processUpdateCVRequest(array $data)
     {
@@ -465,7 +460,7 @@ class AboutService implements AboutContract
             $pathName = 'assets/common/cv/';
             
             if (!file_exists($pathName)) {
-                mkdir( $pathName, 0777, true);
+                mkdir($pathName, 0777, true);
             }
 
             if ($file->move($pathName, $fileName)) {
@@ -519,8 +514,9 @@ class AboutService implements AboutContract
 
     /**
      * Process the delete CV request
-     * @param string $file 
-     * @return array 
+     *
+     * @param string $file
+     * @return array
      */
     public function processDeleteCVRequest(string $file)
     {

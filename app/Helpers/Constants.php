@@ -1,6 +1,9 @@
 <?php
 
-class Constants {
+namespace App\Helpers;
+
+class Constants
+{
     const TRUE = 1;
     const FALSE = 0;
 

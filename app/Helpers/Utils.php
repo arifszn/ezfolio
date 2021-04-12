@@ -1,13 +1,22 @@
 <?php
 
-use App\Models\Setting;
-use App\Services\Contracts\SettingContract;
+namespace App\Helpers;
 
-class Utils {
+use App\Helpers\Constants;
+use App\Models\Setting;
+use App\Services\Contracts\SettingInterface;
+
+class Utils
+{
+    /**
+     * Get the favicon path
+     *
+     * @return string
+     */
     public static function getFavicon()
     {
         try {
-            $settingService = resolve(SettingContract::class);
+            $settingService = resolve(SettingInterface::class);
             $result = $settingService->getSettingByKey(Setting::FAVICON, ['setting_value']);
 
             if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
@@ -22,8 +31,8 @@ class Utils {
     
     /**
      * Return rgb value of a hex color value
-     * 
-     * @param string $hex 
+     *
+     * @param string $hex
      * @return string //r, g, b
      */
     public static function getRgbValue(string $hex)

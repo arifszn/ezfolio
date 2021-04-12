@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\SettingContract;
-use Constants;
+use App\Services\Contracts\SettingInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     /**
-     * @var SettingContract
+     * @var SettingInterface
      */
     private $setting;
 
     /**
      * Create a new controller instance.
      *
+     * @param SettingInterface $setting
      * @return void
      */
-    public function __construct(SettingContract $setting)
+    public function __construct(SettingInterface $setting)
     {
         $this->setting = $setting;
     }
 
     /**
      * Display admin frontend
-     * 
-     * @return View|Factory 
+     *
+     * @return View|Factory
      */
     public function app()
     {
@@ -41,7 +40,7 @@ class AdminController extends Controller
         } else {
             return view('errors.custom')->with([
                 'message' => $result['message'],
-                'status'   => $result['status'],
+                'status' => $result['status'],
             ]);
         }
 

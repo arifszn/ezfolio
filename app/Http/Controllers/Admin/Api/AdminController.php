@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\AdminContract;
-use Constants;
+use App\Services\Contracts\AdminInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
 class AdminController extends Controller
 {
@@ -19,21 +17,21 @@ class AdminController extends Controller
 
     /**
      * Create a new instance
-     * 
-     * @param AdminContract $admin 
-     * @return void 
+     *
+     * @param AdminInterface $admin
+     * @return void
      */
-    public function __construct(AdminContract $admin)
+    public function __construct(AdminInterface $admin)
     {
         $this->admin = $admin;
     }
 
     /**
      * Handle login
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
-     * @throws BindingResolutionException 
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws BindingResolutionException
      */
     public function login(Request $request)
     {
@@ -44,10 +42,10 @@ class AdminController extends Controller
 
     /**
      * Handle forget password
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
-     * @throws BindingResolutionException 
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws BindingResolutionException
      */
     public function forgetPassword(Request $request)
     {
@@ -58,10 +56,10 @@ class AdminController extends Controller
 
     /**
      * Handle reset password
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
-     * @throws BindingResolutionException 
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws BindingResolutionException
      */
     public function resetPassword(Request $request)
     {
@@ -96,8 +94,8 @@ class AdminController extends Controller
 
     /**
      * Login credentials resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function loginCredentials(Request $request)

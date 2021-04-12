@@ -231,7 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Utils' => App\Helpers\Utils::class,
+        'Constants' => App\Helpers\Constants::class,
     ],
 
 ];

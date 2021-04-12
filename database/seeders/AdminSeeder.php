@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Constants;
 use App\Models\Setting;
-use App\Services\Contracts\AdminContract;
-use App\Services\Contracts\SettingContract;
-use Constants;
+use App\Services\Contracts\AdminInterface;
+use App\Services\Contracts\SettingInterface;
 use DotenvEditor;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -21,9 +21,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         try {
-            $adminContract = resolve(AdminContract::class);
+            $adminService= resolve(AdminInterface::class);
 
-            $result = $adminContract->handleSignup([
+            $result = $adminService->handleSignup([
                 'email' => 'swazan.arif@gmail.com',
                 'password' => '12345',
                 'password_confirmation' => '12345',
@@ -35,10 +35,9 @@ class AdminSeeder extends Seeder
                 $admin = $result['payload']['admin'];
 
                 if (!empty($admin)) {
-
                     //setting table seed
                     try {
-                        $settingContract = resolve(SettingContract::class);
+                        $settingService = resolve(SettingInterface::class);
                         //site name
                         $file = DotenvEditor::setKey('APP_NAME', 'Ezfolio');
                         $file = DotenvEditor::save();
@@ -49,7 +48,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => '#00bfa5',
                             'default_value' => '#00bfa5',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //short menu
                         $data = [
@@ -57,7 +56,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => Constants::FALSE,
                             'default_value' => Constants::FALSE,
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //menu layout
                         $data = [
@@ -65,7 +64,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => 'mix',
                             'default_value' => 'mix',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //menu color
                         $data = [
@@ -73,7 +72,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => 'light',
                             'default_value' => 'light',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //menu color
                         $data = [
@@ -81,7 +80,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => 'light',
                             'default_value' => 'light',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //logo
                         try {
@@ -92,8 +91,8 @@ class AdminSeeder extends Seeder
                             }
                             $leave_files = array('.gitkeep');
                             
-                            foreach( glob("$dir/*") as $file ) {
-                                if( !in_array(basename($file), $leave_files) ){
+                            foreach (glob("$dir/*") as $file) {
+                                if (!in_array(basename($file), $leave_files)) {
                                     unlink($file);
                                 }
                             }
@@ -112,7 +111,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => 'assets/common/img/logo/default.png',
                             'default_value' => 'assets/common/img/logo/default.png',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
 
                         //favicon
                         try {
@@ -123,8 +122,8 @@ class AdminSeeder extends Seeder
                             }
                             $leave_files = array('.gitkeep');
                             
-                            foreach( glob("$dir/*") as $file ) {
-                                if( !in_array(basename($file), $leave_files) ){
+                            foreach (glob("$dir/*") as $file) {
+                                if (!in_array(basename($file), $leave_files)) {
                                     unlink($file);
                                 }
                             }
@@ -143,7 +142,7 @@ class AdminSeeder extends Seeder
                             'setting_value' => 'assets/common/img/favicon/default.png',
                             'default_value' => 'assets/common/img/favicon/default.png',
                         ];
-                        $settingContract->insertOrUpdate($data);
+                        $settingService->insertOrUpdate($data);
                     } catch (\Throwable $th) {
                         Log::error($th->getMessage());
                     }

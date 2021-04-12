@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\AboutContract;
-use App\Services\Contracts\PortfolioConfigContract;
-use Constants;
+use App\Services\Contracts\AboutInterface;
+use App\Services\Contracts\PortfolioConfigInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
 class PortfolioController extends Controller
 {
     /**
-     * @var PortfolioConfigContract
+     * @var PortfolioConfigInterface
      */
     private $portfolioConfig;
 
     /**
-     * @var AboutContract
+     * @var AboutInterface
      */
     private $about;
 
     /**
      * Create a new instance
-     * 
-     * @param PortfolioConfigContract $portfolioConfig
-     * @param AboutContract $about
-     * @return void 
+     *
+     * @param PortfolioConfigInterface $portfolioConfig
+     * @param AboutInterface $about
+     * @return void
      */
-    public function __construct(PortfolioConfigContract $portfolioConfig, AboutContract $about)
+    public function __construct(PortfolioConfigInterface $portfolioConfig, AboutInterface $about)
     {
         $this->portfolioConfig = $portfolioConfig;
         $this->about = $about;
@@ -38,8 +36,8 @@ class PortfolioController extends Controller
 
     /**
      * Get configs
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request)
@@ -55,9 +53,9 @@ class PortfolioController extends Controller
 
     /**
      * Handle seo request
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function seo(Request $request)
     {
@@ -68,9 +66,9 @@ class PortfolioController extends Controller
 
     /**
      * Handle about request
-     * 
-     * @param Request $request 
-     * @return JsonResponse 
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function about(Request $request)
     {
@@ -85,8 +83,8 @@ class PortfolioController extends Controller
 
     /**
      * Avatar resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function avatar(Request $request)
@@ -102,8 +100,8 @@ class PortfolioController extends Controller
 
     /**
      * CV resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function cv(Request $request)
@@ -119,8 +117,8 @@ class PortfolioController extends Controller
 
     /**
      * Cover resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function cover(Request $request)

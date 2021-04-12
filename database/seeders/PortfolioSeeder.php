@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Constants;
 use App\Models\PortfolioConfig;
-use App\Services\Contracts\AboutContract;
-use App\Services\Contracts\EducationContract;
-use App\Services\Contracts\PortfolioConfigContract;
-use Constants;
+use App\Services\Contracts\AboutInterface;
+use App\Services\Contracts\EducationInterface;
+use App\Services\Contracts\PortfolioConfigInterface;
 use Illuminate\Database\Seeder;
 use Log;
 
@@ -20,9 +20,9 @@ class PortfolioSeeder extends Seeder
     public function run()
     {
         try {
-            $portfolioConfig = resolve(PortfolioConfigContract::class);
-            $about = resolve(AboutContract::class);
-            $education = resolve(EducationContract::class);
+            $portfolioConfig = resolve(PortfolioConfigInterface::class);
+            $about = resolve(AboutInterface::class);
+            $education = resolve(EducationInterface::class);
 
             //portfolio config table seed
 
@@ -179,8 +179,8 @@ class PortfolioSeeder extends Seeder
                 }
                 $leave_files = array('.gitkeep');
                 
-                foreach( glob("$dir/*") as $file ) {
-                    if( !in_array(basename($file), $leave_files) ){
+                foreach (glob("$dir/*") as $file) {
+                    if (!in_array(basename($file), $leave_files)) {
                         unlink($file);
                     }
                 }
@@ -206,8 +206,8 @@ class PortfolioSeeder extends Seeder
                     }
                     $leave_files = array('.gitkeep');
                     
-                    foreach( glob("$dir/*") as $file ) {
-                        if( !in_array(basename($file), $leave_files) ){
+                    foreach (glob("$dir/*") as $file) {
+                        if (!in_array(basename($file), $leave_files)) {
                             unlink($file);
                         }
                     }
@@ -230,8 +230,8 @@ class PortfolioSeeder extends Seeder
                     }
                     $leave_files = array('.gitkeep');
                     
-                    foreach( glob("$dir/*") as $file ) {
-                        if( !in_array(basename($file), $leave_files) ){
+                    foreach (glob("$dir/*") as $file) {
+                        if (!in_array(basename($file), $leave_files)) {
                             unlink($file);
                         }
                     }
@@ -255,8 +255,8 @@ class PortfolioSeeder extends Seeder
 
                     $leave_files = array('.gitkeep');
                     
-                    foreach( glob("$dir/*") as $file ) {
-                        if( !in_array(basename($file), $leave_files) ){
+                    foreach (glob("$dir/*") as $file) {
+                        if (!in_array(basename($file), $leave_files)) {
                             unlink($file);
                         }
                     }
@@ -265,7 +265,6 @@ class PortfolioSeeder extends Seeder
                     } else {
                         copy('assets/common/default/cv/default.pdf', $dir.'/default.pdf');
                     }
-                    
                 } catch (\Throwable $th) {
                     Log::error($th->getMessage());
                 }

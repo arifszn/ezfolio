@@ -2,34 +2,32 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\AdminContract;
-use App\Services\Contracts\SettingContract;
-use Constants;
+use App\Services\Contracts\AdminInterface;
+use App\Services\Contracts\SettingInterface;
 use Illuminate\Http\Request;
-use Log;
 
 class SettingController extends Controller
 {
     /**
-     * @var AdminContract
+     * @var AdminInterface
      */
     private $admin;
 
     /**
-     * 
-     * @var SettingContract
+     * @var SettingInterface
      */
     private $setting;
 
     /**
      * Create a new instance
-     * 
-     * @param AdminContract $admin 
-     * @param SettingContract $setting 
-     * @return void 
+     *
+     * @param AdminInterface $admin
+     * @param SettingInterface $setting
+     * @return void
      */
-    public function __construct(AdminContract $admin, SettingContract $setting)
+    public function __construct(AdminInterface $admin, SettingInterface $setting)
     {
         $this->admin = $admin;
         $this->setting = $setting;
@@ -37,8 +35,8 @@ class SettingController extends Controller
     
     /**
      * Settings resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request)
@@ -54,8 +52,8 @@ class SettingController extends Controller
 
     /**
      * Logo resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function logo(Request $request)
@@ -71,8 +69,8 @@ class SettingController extends Controller
 
     /**
      * Favicon resource
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      * @return JsonResponse
      */
     public function favicon(Request $request)

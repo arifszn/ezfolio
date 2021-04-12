@@ -2,59 +2,58 @@
 
 namespace App\Services\Contracts;
 
-use Illuminate\Http\Request;
-
-interface AdminContract
+interface AdminInterface
 {
     /**
      * Get the corresponding model
-     * 
-     * @return User 
+     *
+     * @return User
      */
     public function getModel();
 
     /**
      * Handle login
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleLogin(array $data);
 
     /**
      * Handle signup
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleSignup(array $data);
 
     /**
      * Fetch data by email
-     * 
-     * @param string $email 
-     * @param array $select 
-     * @return array 
+     *
+     * @param string $email
+     * @param array $select
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function getByEmail(string $email, array $select = ['*']);
 
     /**
      * Handle forget password
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleForgetPassword(array $data);
 
     /**
      * Handle reset password
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleResetPassword(array $data);
 
@@ -74,18 +73,20 @@ interface AdminContract
 
     /**
      * Change login credentials
-     * 
+     *
      * @param array $data
-     * @return array 
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function changeCredential(array $data);
 
     /**
      * Fetch admin information by admin id
-     * 
+     *
      * @param int $adminId
      * @param array $select
      * @return array
+     * @throws InvalidArgumentException
      */
     public function getAdminById(int $adminId, array $select = ['*']);
 }

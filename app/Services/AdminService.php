@@ -3,35 +3,32 @@
 namespace App\Services;
 
 use App;
-use App\Constant;
+use App\Helpers\Constants;
 use App\Models\Admin;
 use App\Models\AdminPasswordResets;
 use App\Notifications\AdminResetPasswordNotification;
-use App\Services\Contracts\AdminContract;
+use App\Services\Contracts\AdminInterface;
 use Auth;
 use Carbon\Carbon;
-use Constants;
 use Hash;
 use Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Str;
 use Validator;
 
-class AdminService implements AdminContract
+class AdminService implements AdminInterface
 {
     /**
      * Eloquent instance
-     * 
+     *
      * @var Admin
      */
     private $model;
     
     /**
      * Instantiate a new instance.
-     * 
-     * @param Admin $admin 
-     * @return void 
+     *
+     * @param Admin $admin
+     * @return void
      */
     public function __construct(Admin $admin)
     {
@@ -50,8 +47,8 @@ class AdminService implements AdminContract
 
     /**
      * Get the corresponding model
-     * 
-     * @return Admin 
+     *
+     * @return Admin
      */
     public function getModel()
     {
@@ -60,10 +57,10 @@ class AdminService implements AdminContract
 
     /**
      * Handle login
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleLogin(array $data)
     {
@@ -77,7 +74,7 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -97,13 +94,13 @@ class AdminService implements AdminContract
                         'admin' => $this->guard()->user(),
                         'token' => $tokenDetails
                     ],
-                    'status'  => Constants::STATUS_CODE_SUCCESS
+                    'status' => Constants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Incorrect credentials',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_UNAUTHORIZED
+                    'status' => Constants::STATUS_CODE_UNAUTHORIZED
                 ];
             }
         } catch (\Throwable $th) {
@@ -111,17 +108,17 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Handle signup
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleSignup(array $data)
     {
@@ -135,7 +132,7 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -164,23 +161,23 @@ class AdminService implements AdminContract
                     'admin' => $this->guard()->user(),
                     'token' => $tokenDetails
                 ],
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status' => Constants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Store a new admin to database
-     * 
-     * @param array $data 
-     * @return array 
+     *
+     * @param array $data
+     * @return array
      */
     private function createAdmin(array $data)
     {
@@ -189,24 +186,24 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Successfully created.',
                 'payload' => $admin,
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status' => Constants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Handle forget password
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleForgetPassword(array $data)
     {
@@ -219,7 +216,7 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -237,17 +234,17 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Fetch data by email
-     * 
-     * @param string $email 
-     * @param array $select 
-     * @return array 
+     *
+     * @param string $email
+     * @param array $select
+     * @return array
      */
     public function getByEmail(string $email, array $select = ['*'])
     {
@@ -258,13 +255,13 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Admin found.',
                     'payload' => $data,
-                    'status'  => Constants::STATUS_CODE_SUCCESS
+                    'status' => Constants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Found no admin with that email address.',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => Constants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -272,15 +269,15 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Send password reset mail by creating reset token
-     * 
-     * @param Admin $admin 
+     *
+     * @param Admin $admin
      * @return array
      */
     private function sendPasswordResetEmail(Admin $admin)
@@ -298,30 +295,30 @@ class AdminService implements AdminContract
         return [
             'message' => 'We have emailed your password reset link!',
             'payload' => null,
-            'status'  => Constants::STATUS_CODE_SUCCESS
+            'status' => Constants::STATUS_CODE_SUCCESS
         ];
     }
 
     /**
      * Return password reset token
-     * 
-     * @param string $email 
-     * @return array 
+     *
+     * @param string $email
+     * @return array
      */
     private function createPasswordResetToken(string $email)
     {
         //delete existing tokens
         $this->deletePasswordResetToken($email);
 
-        $token = Str::random(80);;
+        $token = Str::random(80);
         return $this->savePasswordResetToken($token, $email);
     }
 
     /**
      * delete password reset token
-     * 
-     * @param string $token 
-     * @param string $email 
+     *
+     * @param string $token
+     * @param string $email
      * @return array
      */
     private function deletePasswordResetToken(string $email)
@@ -331,15 +328,15 @@ class AdminService implements AdminContract
         return [
             'message' => 'Token is deleted successfully.',
             'payload' => null,
-            'status'  => Constants::STATUS_CODE_SUCCESS
+            'status' => Constants::STATUS_CODE_SUCCESS
         ];
     }
 
     /**
      * Store password reset token
-     * 
-     * @param string $token 
-     * @param string $email 
+     *
+     * @param string $token
+     * @param string $email
      * @return array
      */
     private function savePasswordResetToken(string $token, string $email)
@@ -347,22 +344,22 @@ class AdminService implements AdminContract
         $entry = AdminPasswordResets::insert([
             'email' => $email,
             'token' => $token,
-            'created_at' => Carbon::now()            
+            'created_at' => Carbon::now()
         ]);
 
         return [
             'message' => 'Successfully created.',
             'payload' => $token,
-            'status'  => Constants::STATUS_CODE_SUCCESS
+            'status' => Constants::STATUS_CODE_SUCCESS
         ];
     }
 
     /**
      * Handle reset password
-     * 
-     * @param array $data 
-     * @return array 
-     * @throws InvalidArgumentException 
+     *
+     * @param array $data
+     * @return array
+     * @throws InvalidArgumentException
      */
     public function handleResetPassword(array $data)
     {
@@ -377,7 +374,7 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -393,8 +390,6 @@ class AdminService implements AdminContract
 
             if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
                 return $result;
-            } else {
-                $token = $result['payload'];
             }
             
             //delete token
@@ -407,16 +402,16 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Reset password for the admin
-     * 
-     * @param Admin $admin 
-     * @param string $password 
+     *
+     * @param Admin $admin
+     * @param string $password
      * @return array
      */
     private function resetPassword(Admin $admin, string $password)
@@ -424,18 +419,18 @@ class AdminService implements AdminContract
         $admin->password = Hash::make($password);
         $admin->save();
 
-         return [
+        return [
             'message' => 'Your password has been reset!',
             'payload' => $admin,
-            'status'  => Constants::STATUS_CODE_SUCCESS
+            'status' => Constants::STATUS_CODE_SUCCESS
         ];
     }
     
     /**
      * Validate password reset token
-     * 
-     * @param string $token 
-     * @param string $email 
+     *
+     * @param string $token
+     * @param string $email
      * @return array
      */
     private function validatePasswordResetToken(string $token, string $email)
@@ -449,13 +444,13 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Token found.',
                 'payload' => $data,
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status' => Constants::STATUS_CODE_SUCCESS
             ];
         } else {
             return [
                 'message' => 'Invalid password reset token. Please try again',
                 'payload' => null,
-                'status'  => Constants::STATUS_CODE_NOT_FOUND
+                'status' => Constants::STATUS_CODE_NOT_FOUND
             ];
         }
     }
@@ -472,7 +467,7 @@ class AdminService implements AdminContract
         return [
             'message' => 'Admin found',
             'payload' => $me,
-            'status'  => Constants::STATUS_CODE_SUCCESS
+            'status' => Constants::STATUS_CODE_SUCCESS
         ];
     }
 
@@ -495,7 +490,7 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Token refreshed',
                 'payload' => $tokenDetails,
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status' => Constants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
@@ -504,31 +499,31 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Token is Blacklisted',
                     'payload' => Constants::TOKEN_BLACKLISTED,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status' => Constants::STATUS_CODE_ERROR
                 ];
             }
 
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Change login credentials
-     * 
+     *
      * @param array $data
-     * @return array 
+     * @return array
      */
     public function changeCredential(array $data)
     {
         
         try {
             $validate = Validator::make($data, [
-                'id'       => 'required',
-                'email'    => 'required|email',
+                'id' => 'required',
+                'email' => 'required|email',
                 'password' => 'required'
             ]);
 
@@ -536,7 +531,7 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => Constants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -555,21 +550,21 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Credential is successfully updated',
                 'payload' => $admin,
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status' => Constants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
 
     /**
      * Fetch admin information by admin id
-     * 
+     *
      * @param int $adminId
      * @param array $select
      * @return array
@@ -583,13 +578,13 @@ class AdminService implements AdminContract
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $admin,
-                    'status'  => Constants::STATUS_CODE_SUCCESS
+                    'status' => Constants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result is found',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => Constants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -597,7 +592,7 @@ class AdminService implements AdminContract
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status' => Constants::STATUS_CODE_ERROR
             ];
         }
     }
