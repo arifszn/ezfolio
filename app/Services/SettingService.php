@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\Setting;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\SettingInterface;

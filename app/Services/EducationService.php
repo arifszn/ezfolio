@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\Education;
 use App\Services\Contracts\EducationInterface;
 use Log;
@@ -127,14 +127,14 @@ class EducationService implements EducationInterface
     /**
      * Fetch data by id
      *
-     * @param int $educationId
+     * @param int $id
      * @param array $select
      * @return array
      */
-    public function getById(int $educationId, array $select = ['*'])
+    public function getById(int $id, array $select = ['*'])
     {
         try {
-            $data = $this->model->select($select)->where('id', $educationId)->first();
+            $data = $this->model->select($select)->where('id', $id)->first();
             
             if ($data) {
                 return [

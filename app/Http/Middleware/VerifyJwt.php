@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\Constants;
+use Constants;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;

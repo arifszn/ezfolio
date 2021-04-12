@@ -47,7 +47,7 @@ const Constants = {
         META_DESCRIPTION: 17,
         META_IMAGE: 18,
         VISIBILITY_CV: 19,
-        VISIBILITY_SKILL_PERCENT: 20,
+        VISIBILITY_SKILL_PROFICIENCY: 20,
     }
 }
 

@@ -23,11 +23,11 @@ interface EducationInterface
     /**
      * Fetch skill by id
      *
-     * @param int $educationId
+     * @param int $id
      * @param array $select
      * @return array
      */
-    public function getById(int $educationId, array $select = ['*']);
+    public function getById(int $id, array $select = ['*']);
 
     /**
      * Get all fields with paginate

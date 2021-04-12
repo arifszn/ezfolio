@@ -33,7 +33,7 @@ class PortfolioConfig extends Model
     const META_IMAGE = 18;
 
     const VISIBILITY_CV = 19;
-    const VISIBILITY_SKILL_PERCENT = 20;
+    const VISIBILITY_SKILL_PROFICIENCY = 20;
     
 
     /**

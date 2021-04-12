@@ -26,7 +26,7 @@ const Visibility = (props) => {
     const [contact, setContact] = useState(false);
     const [footer, setFooter] = useState(false);
     const [cv, setCv] = useState(false);
-    const [skillPercent, setSkillPercent] = useState(false);
+    const [skillProficiency, setSkillProficiency] = useState(false);
 
     useEffect(() => {
         if (props.config) {
@@ -39,7 +39,7 @@ const Visibility = (props) => {
             setContact(parseInt(props.config.visibility.contact));
             setFooter(parseInt(props.config.visibility.footer));
             setCv(parseInt(props.config.visibility.cv));
-            setSkillPercent(parseInt(props.config.visibility.skillPercent));
+            setSkillProficiency(parseInt(props.config.visibility.skillProficiency));
         }
     }, [props.config])
 
@@ -249,23 +249,23 @@ const Visibility = (props) => {
                             <Item.Meta title={'CV'} description={'Display CV download button.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PERCENT}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}>
                         <StyledListItem actions={[
                             <Switch
-                                key={'skill-percent'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PERCENT}
+                                key={'skill-proficiency'}
+                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
-                                checked={skillPercent}
+                                checked={skillProficiency}
                                 onChange={(checked) => {
                                     const callback = () => {
-                                        setSkillPercent(checked);
+                                        setSkillProficiency(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_SKILL_PERCENT, checked, callback);
+                                    submitData(Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY, checked, callback);
                                 }}
                             />
                         ]}>
-                            <Item.Meta title={'Skill Percent'} description={'Display percent bar of skills.'}/>
+                            <Item.Meta title={'Skill Proficiency'} description={'Display proficiency bar of skills.'}/>
                         </StyledListItem>
                     </Spin>
                 </List>

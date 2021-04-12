@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\SettingInterface;
 use Illuminate\Contracts\View\View;

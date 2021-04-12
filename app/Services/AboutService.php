@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\About;
 use App\Services\Contracts\AboutInterface;
 use Log;

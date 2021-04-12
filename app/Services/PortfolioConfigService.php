@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\PortfolioConfigInterface;
 use Log;
@@ -131,7 +131,6 @@ class PortfolioConfigService implements PortfolioConfigInterface
      * @param boolean $googleAnalyticsId
      * @param boolean $maintenanceMode
      * @param boolean $template
-     * @param boolean $skillPercent
      * @param boolean $seo
      * @param boolean $visibility
      * @param boolean $script
@@ -142,7 +141,6 @@ class PortfolioConfigService implements PortfolioConfigInterface
         bool $googleAnalyticsId = true,
         bool $maintenanceMode = true,
         bool $template = true,
-        bool $skillPercent = true,
         bool $seo = true,
         bool $visibility = true,
         bool $script = true
@@ -250,11 +248,11 @@ class PortfolioConfigService implements PortfolioConfigInterface
                     $data['visibility']['cv'] = Constants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL_PERCENT, ['setting_value']);
+                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL_PROFICIENCY, ['setting_value']);
                 if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
-                    $data['visibility']['skillPercent'] = $result['payload']->setting_value;
+                    $data['visibility']['skillProficiency'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['skillPercent'] = Constants::TRUE;
+                    $data['visibility']['skillProficiency'] = Constants::TRUE;
                 }
             }
 

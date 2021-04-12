@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\Setting;
 use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\SettingInterface;

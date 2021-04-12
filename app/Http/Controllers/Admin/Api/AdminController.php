@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AdminInterface;
 use Illuminate\Http\JsonResponse;

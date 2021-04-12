@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App;
-use App\Helpers\Constants;
+use Constants;
 use App\Models\Admin;
 use App\Models\AdminPasswordResets;
 use App\Notifications\AdminResetPasswordNotification;

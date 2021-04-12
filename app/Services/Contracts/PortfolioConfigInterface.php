@@ -28,7 +28,6 @@ interface PortfolioConfigInterface
      * @param boolean $googleAnalyticsId
      * @param boolean $maintenanceMode
      * @param boolean $template
-     * @param boolean $skillPercent
      * @param boolean $seo
      * @param boolean $visibility
      * @param boolean $script
@@ -39,7 +38,6 @@ interface PortfolioConfigInterface
         bool $googleAnalyticsId = true,
         bool $maintenanceMode = true,
         bool $template = true,
-        bool $skillPercent = true,
         bool $seo = true,
         bool $visibility = true,
         bool $script = true
