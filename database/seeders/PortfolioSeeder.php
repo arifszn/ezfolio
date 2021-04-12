@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\Constants;
+use Constants;
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
+use App\Services\Contracts\SkillInterface;
 use Illuminate\Database\Seeder;
 use Log;
 
@@ -23,6 +24,7 @@ class PortfolioSeeder extends Seeder
             $portfolioConfig = resolve(PortfolioConfigInterface::class);
             $about = resolve(AboutInterface::class);
             $education = resolve(EducationInterface::class);
+            $skill = resolve(SkillInterface::class);
 
             //portfolio config table seed
 
@@ -123,7 +125,7 @@ class PortfolioSeeder extends Seeder
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_SKILL_PERCENT,
+                'setting_key' => PortfolioConfig::VISIBILITY_SKILL_PROFICIENCY,
                 'setting_value' => Constants::TRUE,
                 'default_value' => Constants::TRUE,
             ];
@@ -328,6 +330,65 @@ class PortfolioSeeder extends Seeder
                 } catch (\Throwable $th) {
                     Log::error($th->getMessage());
                 }
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            //skill table seed
+            try {
+                $data = [
+                    'name'    => 'Laravel',
+                    'proficiency' => '100'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'PHP',
+                    'proficiency' => '100'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'JavaScript',
+                    'proficiency' => '95'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'React.js',
+                    'proficiency' => '95'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'Vue.js',
+                    'proficiency' => '90'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'jQuery',
+                    'proficiency' => '90'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'MySQL',
+                    'proficiency' => '90'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'CSS',
+                    'proficiency' => '90'
+                ];
+                $skill->store($data);
+
+                $data = [
+                    'name'    => 'Node.js',
+                    'proficiency' => '80'
+                ];
+                $skill->store($data);
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }

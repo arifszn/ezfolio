@@ -9,9 +9,11 @@ use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\SettingInterface;
+use App\Services\Contracts\SkillInterface;
 use App\Services\EducationService;
 use App\Services\PortfolioConfigService;
 use App\Services\SettingService;
+use App\Services\SkillService;
 use Config;
 use Illuminate\Support\ServiceProvider;
 use Schema;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AdminInterface::class, AdminService::class);
         $this->app->bind(PortfolioConfigInterface::class, PortfolioConfigService::class);
         $this->app->bind(EducationInterface::class, EducationService::class);
+        $this->app->bind(SkillInterface::class, SkillService::class);
     }
 
     /**

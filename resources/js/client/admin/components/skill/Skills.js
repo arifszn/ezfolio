@@ -1,4 +1,4 @@
-import { Button, Menu, PageHeader, Space, Dropdown, Modal } from 'antd';
+import { Button, Menu, PageHeader, Space, Dropdown, Modal, Progress } from 'antd';
 import React, { useRef, useState } from 'react';
 import PageWrapper from '../layout/PageWrapper';
 import ProTable from '@ant-design/pro-table';
@@ -18,52 +18,30 @@ const Skills = () => {
 
     const columns = [
         {
-            title: 'Institution',
-            dataIndex: 'institution',
+            title: 'Name',
+            dataIndex: 'name',
             search: true,
             sorter: true,
             width: 170,
             ellipsis:true
         },
         {
-            title: 'Period',
-            dataIndex: 'period',
-            sorter: true,
-            search: true,
-            width: 130,
-            ellipsis:true
-        },
-        {
-            title: 'Degree',
-            dataIndex: 'degree',
+            title: 'Proficiency',
+            dataIndex: 'proficiency',
             sorter: true,
             search: true,
             width: 170,
-            ellipsis:true
-        },
-        {
-            title: 'CGPA',
-            dataIndex: 'cgpa',
-            sorter: true,
-            search: true,
-            width: 130,
-            ellipsis:true
-        },
-        {
-            title: 'Department',
-            dataIndex: 'department',
-            sorter: true,
-            search: true,
-            width: 170,
-            ellipsis:true
-        },
-        {
-            title: 'Thesis',
-            dataIndex: 'thesis',
-            sorter: true,
-            search: true,
-            width: 170,
-            ellipsis:true
+            render: (text, row) => [
+                <Progress
+                    key={'progress'}
+                    strokeColor={{
+                        from: '#108ee9',
+                        to: '#87d068',
+                    }}
+                    percent={row.proficiency}
+                    status="active"
+                />,
+            ],
         },
         {
             title: 'Option',

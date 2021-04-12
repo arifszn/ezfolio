@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Button, Spin, Input, Form } from 'antd';
+import { Drawer, Button, Spin, Input, Form, Slider } from 'antd';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import HTTP from '../../../common/helpers/HTTP';
@@ -15,6 +15,10 @@ const StyledDrawer = styled(Drawer)`
     }
 `;
 
+const formatter = (value) => {
+    return `${value}%`;
+}
+
 const Skill = (props) => {
     const [visible, setVisible] = useState(false);
     const [form] = Form.useForm();
@@ -23,13 +27,9 @@ const Skill = (props) => {
 
     useEffect(() => {
         form.setFieldsValue({
-            skillId: props.itemToEdit ? props.itemToEdit.id : '', 
-            institution: props.itemToEdit ? props.itemToEdit.institution : '', 
-            period: props.itemToEdit ? props.itemToEdit.period : '',
-            degree: props.itemToEdit ? props.itemToEdit.degree : '',
-            cgpa: props.itemToEdit ? props.itemToEdit.cgpa : '',
-            department: props.itemToEdit ? props.itemToEdit.department : '',
-            thesis: props.itemToEdit ? props.itemToEdit.thesis : '',
+            id: props.itemToEdit ? props.itemToEdit.id : '', 
+            name: props.itemToEdit ? props.itemToEdit.name : '', 
+            proficiency: props.itemToEdit ? props.itemToEdit.proficiency : null
         });
     }, [props.itemToEdit])
 
@@ -66,14 +66,10 @@ const Skill = (props) => {
             //save form
             setLoading(true);
 
-            HTTP.post(Routes.api.admin.skill, {
-                skillId: values.skillId,
-                institution: values.institution,
-                cgpa: values.cgpa,
-                degree: values.degree,
-                department: values.department,
-                period: values.period,
-                thesis: values.thesis,
+            HTTP[values.id ? 'put' : 'post'](Routes.api.admin.skills+(values.id ? `/${values.id}` : '' ), {
+                id: values.id,
+                name: values.name,
+                proficiency: values.proficiency
             })
             .then(response => {
                 Utils.handleSuccessResponse(response, () => {
@@ -123,35 +119,32 @@ const Skill = (props) => {
                     layout="vertical"
                     name="skill"
                 >
-                    <Form.Item name="skillId" hidden>
+                    <Form.Item name="id" hidden>
                         <Input/>
                     </Form.Item>
                     <Form.Item
-                        name="institution"
-                        label="Institution"
+                        name="name"
+                        label="Skill Name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the name of institution',
+                                message: 'Please enter skill name',
                             },
                         ]}
                     >
-                        <Input placeholder="Enter Institution"/>
+                        <Input placeholder="Enter Skill Name"/>
                     </Form.Item>
-                    <Form.Item name="period" label="Period">
-                        <Input placeholder="Enter Period"/>
-                    </Form.Item>
-                    <Form.Item name="degree" label="Degree">
-                        <Input placeholder="Enter Degree"/>
-                    </Form.Item>
-                    <Form.Item name="cgpa" label="CGPA">
-                        <Input placeholder="Enter CGPA"/>
-                    </Form.Item>
-                    <Form.Item name="department" label="Department">
-                        <Input placeholder="Enter Department"/>
-                    </Form.Item>
-                    <Form.Item name="thesis" label="Thesis">
-                        <Input placeholder="Enter Thesis"/>
+                    <Form.Item
+                        name="proficiency"
+                        label="Skill Proficiency"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please enter skill proficiency',
+                            },
+                        ]}
+                    >
+                        <Slider tooltipVisible tipFormatter={formatter}/>
                     </Form.Item>
                 </Form>
             </Spin>
