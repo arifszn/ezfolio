@@ -6,6 +6,7 @@ use CoreConstants;
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\EducationInterface;
+use App\Services\Contracts\ExperienceInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\SkillInterface;
 use Illuminate\Database\Seeder;
@@ -25,6 +26,7 @@ class PortfolioSeeder extends Seeder
             $about = resolve(AboutInterface::class);
             $education = resolve(EducationInterface::class);
             $skill = resolve(SkillInterface::class);
+            $experience = resolve(ExperienceInterface::class);
 
             //portfolio config table seed
 
@@ -389,6 +391,35 @@ class PortfolioSeeder extends Seeder
                     'proficiency' => '80'
                 ];
                 $skill->store($data);
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            //experience table seed
+            try {
+                $data = [
+                    'company' => 'ABC LIMITED',
+                    'period' => '2019-Present',
+                    'position' => 'Senior Web Developer',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $experience->store($data);
+
+                $data = [
+                    'company' => 'ABC LIMITED',
+                    'period' => '2017-2019',
+                    'position' => 'Web Developer',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $experience->store($data);
+
+                $data = [
+                    'company' => 'XYZ LIMITED',
+                    'period' => '2015-2017',
+                    'position' => 'Junior Web Developer',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $experience->store($data);
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }

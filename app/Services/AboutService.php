@@ -87,16 +87,16 @@ class AboutService implements AboutInterface
 
             $newData['name'] = $data['name'];
             $newData['email'] = $data['email'];
-            $newData['phone'] = !empty($data['phone']) ? $data['phone'] : null;
-            $newData['address'] = !empty($data['address']) ? $data['address'] : null;
-            $newData['description'] = !empty($data['description']) ? $data['description'] : null;
+            $newData['phone'] = isset($data['phone']) ? $data['phone'] : null;
+            $newData['address'] = isset($data['address']) ? $data['address'] : null;
+            $newData['description'] = isset($data['description']) ? $data['description'] : null;
 
-            if (!empty($data['seederCV'])) {
+            if (isset($data['seederCV'])) {
                 $newData['cv'] = $data['seederCV'];
             }
             
             $newTagLinesArray = [];
-            if (!empty($data['taglines'])) {
+            if (isset($data['taglines'])) {
                 foreach ($data['taglines'] as $key => $tagline) {
                     if ($tagline !== null && $tagline !== '') {
                         array_push($newTagLinesArray, $tagline);
@@ -106,7 +106,7 @@ class AboutService implements AboutInterface
             $newData['taglines'] = count($newTagLinesArray) ? json_encode($newTagLinesArray) : null;
             
             $newSocialLinksArray = [];
-            if (!empty($data['socialLinks'])) {
+            if (isset($data['socialLinks'])) {
                 foreach ($data['socialLinks'] as $key => $socialLink) {
                     if ($socialLink !== '' && !empty($socialLink['title']) && !empty($socialLink['link']) && !empty($socialLink['iconClass'])) {
                         array_push($newSocialLinksArray, $socialLink);

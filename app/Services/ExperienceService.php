@@ -3,29 +3,29 @@
 namespace App\Services;
 
 use CoreConstants;
-use App\Models\Education;
-use App\Services\Contracts\EducationInterface;
+use App\Models\Experience;
+use App\Services\Contracts\ExperienceInterface;
 use Log;
 use Validator;
 
-class EducationService implements EducationInterface
+class ExperienceService implements ExperienceInterface
 {
     /**
      * Eloquent instance
      *
-     * @var Education
+     * @var Experience
      */
     private $model;
 
     /**
      * Create a new service instance
      *
-     * @param Education $education
+     * @param Experience $experience
      * @return void
      */
-    public function __construct(Education $education)
+    public function __construct(Experience $experience)
     {
-        $this->model = $education;
+        $this->model = $experience;
     }
 
     /**
@@ -71,7 +71,7 @@ class EducationService implements EducationInterface
     {
         try {
             $validate = Validator::make($data, [
-                'institution' => 'required|string',
+                'company' => 'required|string'
             ]);
 
             if ($validate->fails()) {
@@ -82,12 +82,10 @@ class EducationService implements EducationInterface
                 ];
             }
 
-            $newData['institution'] = $data['institution'];
+            $newData['company'] = $data['company'];
             $newData['period'] = isset($data['period']) ? $data['period'] : null;
-            $newData['degree'] = isset($data['degree']) ? $data['degree'] : null;
-            $newData['cgpa'] = isset($data['cgpa']) ? $data['cgpa'] : null;
-            $newData['department'] = isset($data['department']) ? $data['department'] : null;
-            $newData['thesis'] = isset($data['thesis']) ? $data['thesis'] : null;
+            $newData['position'] = isset($data['position']) ? $data['position'] : null;
+            $newData['details'] = isset($data['details']) ? $data['details'] : null;
             
             if (isset($data['id'])) {
                 $response = $this->getById($data['id'], ['id']);
@@ -226,7 +224,7 @@ class EducationService implements EducationInterface
     }
 
     /**
-     * Delete data by id array
+     * Delete items by id array
      *
      * @param array $ids
      * @return array

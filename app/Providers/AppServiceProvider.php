@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\Experience;
 use App\Services\AboutService;
 use App\Services\AdminService;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\EducationInterface;
+use App\Services\Contracts\ExperienceInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\SettingInterface;
 use App\Services\Contracts\SkillInterface;
 use App\Services\EducationService;
+use App\Services\ExperienceService;
 use App\Services\PortfolioConfigService;
 use App\Services\SettingService;
 use App\Services\SkillService;
@@ -34,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AdminInterface::class, AdminService::class);
         $this->app->bind(PortfolioConfigInterface::class, PortfolioConfigService::class);
         $this->app->bind(EducationInterface::class, EducationService::class);
+        $this->app->bind(ExperienceInterface::class, ExperienceService::class);
         $this->app->bind(SkillInterface::class, SkillService::class);
     }
 

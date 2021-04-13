@@ -86,7 +86,7 @@ class SkillService implements SkillInterface
             $newData['name'] = $data['name'];
             $newData['proficiency'] = $data['proficiency'];
             
-            if (!empty($data['id'])) {
+            if (isset($data['id'])) {
                 $response = $this->getById($data['id'], ['id']);
                 if ($response['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $response;
@@ -100,7 +100,7 @@ class SkillService implements SkillInterface
 
             if ($response) {
                 return [
-                    'message' => !empty($data['id']) ? 'Data is successfully updated' : 'Data is successfully saved',
+                    'message' => isset($data['id']) ? 'Data is successfully updated' : 'Data is successfully saved',
                     'payload' => $response,
                     'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
@@ -223,7 +223,7 @@ class SkillService implements SkillInterface
     }
 
     /**
-     * Delete data by id array
+     * Delete items by id array
      *
      * @param array $ids
      * @return array

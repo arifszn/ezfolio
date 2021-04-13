@@ -75,6 +75,11 @@ const ZLayout = ({ children }) => {
                             key: Routes.web.admin.portfolioEducation,
                             name: 'Education',
                         },
+                        {
+                            path: Routes.web.admin.portfolioExperiences,
+                            key: Routes.web.admin.portfolioExperiences,
+                            name: 'Experience',
+                        },
                     ],
                 },
                 {
