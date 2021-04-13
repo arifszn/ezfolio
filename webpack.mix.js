@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,12 +19,6 @@ mix.webpackConfig({
     module: {
         rules: [
             {
-                test: /\.(jsx|js|vue)$/,
-                loader: 'eslint-loader',
-                enforce: 'pre',
-                exclude: /(node_modules)/,
-            },
-            {
                 test: /\.less$/,
                 loader: 'less-loader',
                 options: {
@@ -35,7 +30,12 @@ mix.webpackConfig({
         ]
     },
     plugins: [
-        
+        new ESLintPlugin({
+            extensions: [`js`, `jsx`],
+            exclude: [
+                'node_modules'
+            ],
+        })
     ],
 });
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\CoreConstants;
 use Illuminate\Support\Facades\Route;
 
 if (env('APP_ENV') !== 'production') {
@@ -10,7 +11,7 @@ if (env('APP_ENV') !== 'production') {
             return response()->json([
                 'message' => 'Command successfully executed',
                 'payload' => null,
-                'status'  => Constants::STATUS_CODE_SUCCESS
+                'status'  => CoreConstants::STATUS_CODE_SUCCESS
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -21,6 +22,6 @@ if (env('APP_ENV') !== 'production') {
 //log viewer
 Route::get('/admin/system-logs', ['\Rap2hpoutre\LaravelLogViewer\LogViewerController', 'index']);
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function () {
     Route::get('/{path?}', ['App\Http\Controllers\Admin\AdminController', 'app'])->where('path', '.*')->name('admin.app');
 });

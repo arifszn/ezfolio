@@ -1,7 +1,7 @@
 import axios from "axios";
 import { removeApiToken, saveApiToken } from "../../admin/redux/ActionCreators";
 import Utils from "../helpers/Utils";
-import Constants from "./Constants";
+import CoreConstants from "./CoreConstants";
 import Routes from "./Routes";
 
 /**
@@ -65,14 +65,14 @@ export const setupInterceptors = (store) => {
     //Request failed
     const errorHandler = async (error) => {
         if (isPrivate(error.config)) {
-            let responseStatus = (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined' && typeof error.response.data.status !== 'undefined') ? error.response.data.status : (typeof error.response !== 'undefined' && typeof error.response.status !== 'undefined' ? error.response.status : Constants.STATUS_CODE_SUCCESS);
+            let responseStatus = (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined' && typeof error.response.data.status !== 'undefined') ? error.response.data.status : (typeof error.response !== 'undefined' && typeof error.response.status !== 'undefined' ? error.response.status : CoreConstants.STATUS_CODE_SUCCESS);
             
-            if (responseStatus === Constants.STATUS_CODE_ERROR) {
-                if (typeof error.response.data.payload !== 'undefined' && (error.response.data.payload === Constants.TOKEN_INVALID || error.response.data.payload === Constants.TOKEN_BLACKLISTED)) {
+            if (responseStatus === CoreConstants.STATUS_CODE_ERROR) {
+                if (typeof error.response.data.payload !== 'undefined' && (error.response.data.payload === CoreConstants.TOKEN_INVALID || error.response.data.payload === CoreConstants.TOKEN_BLACKLISTED)) {
                     store.dispatch(removeApiToken());
                 }
-            } else if (responseStatus === Constants.STATUS_CODE_UNAUTHORIZED) {
-                if (typeof error.response.data.payload !== 'undefined' && error.response.data.payload === Constants.TOKEN_EXPIRED) {
+            } else if (responseStatus === CoreConstants.STATUS_CODE_UNAUTHORIZED) {
+                if (typeof error.response.data.payload !== 'undefined' && error.response.data.payload === CoreConstants.TOKEN_EXPIRED) {
                     //refresh apiToken
                     const originalRequest = error.config;
                     try {

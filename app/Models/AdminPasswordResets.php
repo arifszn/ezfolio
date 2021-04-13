@@ -15,7 +15,7 @@ class AdminPasswordResets extends Model
      * @var array
      */
     protected $fillable = [
-        'email', 
-        'token', 
+        'email',
+        'token',
     ];
 }

@@ -5,7 +5,7 @@ import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import styled from 'styled-components';
-import Constants from '../../../common/helpers/Constants';
+import CoreConstants from '../../../common/helpers/CoreConstants';
 import CodeEditorPopup from '../CodeEditorPopup';
 
 const { Item } = List;
@@ -64,7 +64,7 @@ const CustomScript = (props) => {
                     itemLayout="horizontal"
                     size="large"
                 >
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.SCRIPT_HEADER}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.SCRIPT_HEADER}>
                         <StyledListItem actions={
                             [
                                 <a 
@@ -80,7 +80,7 @@ const CustomScript = (props) => {
                             <Item.Meta title={<React.Fragment>Portfolio Header Script <small><Typography.Text type="secondary">(Optional)</Typography.Text></small></React.Fragment>} description={'Set script which will be placed in header.'} />
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.SCRIPT_FOOTER}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.SCRIPT_FOOTER}>
                         <StyledListItem actions={
                             [
                                 <a 
@@ -103,7 +103,7 @@ const CustomScript = (props) => {
                     <CodeEditorPopup
                         title={'Header Script'}
                         value={headerScript}
-                        loading={loading && currentSettingToChange === Constants.portfolioConfig.SCRIPT_HEADER}
+                        loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.SCRIPT_HEADER}
                         visible={headerCodeEditorVisible}
                         handleCancel={
                             () => {
@@ -116,7 +116,7 @@ const CustomScript = (props) => {
                                     setHeaderScript(value);
                                     setHeaderCodeEditorVisible(false);
                                 }
-                                submitData(Constants.portfolioConfig.SCRIPT_HEADER, value, callback);
+                                submitData(CoreConstants.portfolioConfig.SCRIPT_HEADER, value, callback);
                             }
                         }
                     />
@@ -127,7 +127,7 @@ const CustomScript = (props) => {
                     <CodeEditorPopup
                         title={'Footer Script'}
                         value={footerScript}
-                        loading={loading && currentSettingToChange === Constants.portfolioConfig.SCRIPT_FOOTER}
+                        loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.SCRIPT_FOOTER}
                         visible={footerCodeEditorVisible}
                         handleCancel={
                             () => {
@@ -140,7 +140,7 @@ const CustomScript = (props) => {
                                     setFooterScript(value);
                                     setFooterCodeEditorVisible(false);
                                 }
-                                submitData(Constants.portfolioConfig.SCRIPT_FOOTER, value, callback);
+                                submitData(CoreConstants.portfolioConfig.SCRIPT_FOOTER, value, callback);
                             }
                         }
                     />

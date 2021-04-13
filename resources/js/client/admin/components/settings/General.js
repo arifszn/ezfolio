@@ -6,7 +6,7 @@ import { setGlobalState } from '../../redux/ActionCreators';
 import FileUploader from '../uploader/FileUploader';
 import PropTypes from 'prop-types';
 import LoginCredentialPopup from './LoginCredentialPopup';
-import Constants from '../../../common/helpers/Constants';
+import CoreConstants from '../../../common/helpers/CoreConstants';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import styled from 'styled-components';
@@ -59,7 +59,7 @@ const General = (props) => {
             });
         }
 
-        submitData(Constants.settings.SITE_NAME, siteName, callback);
+        submitData(CoreConstants.settings.SITE_NAME, siteName, callback);
     }
 
     const changeSiteName = (
@@ -145,7 +145,7 @@ const General = (props) => {
                     >
                         <Item.Meta title={'Login Credentials'} description={'Change your login credentials.'} />
                     </StyledListItem>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.SITE_NAME}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.SITE_NAME}>
                         <StyledListItem actions={(siteName && props.globalState.siteName !== siteName) && (
                             [
                                 <a 

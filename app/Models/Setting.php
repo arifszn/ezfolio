@@ -9,16 +9,6 @@ class Setting extends Model
 {
     use HasFactory;
 
-    const SITE_NAME = 1;
-    const ACCENT_COLOR = 2;
-    const SHORT_MENU = 3;
-    const LOGO = 4;
-    const FAVICON = 5;
-    const COVER = 6;
-    const MENU_LAYOUT = 7;
-    const MENU_COLOR = 8;
-    const NAV_COLOR = 9;
-
     /**
      * The attributes that are mass assignable.
      *

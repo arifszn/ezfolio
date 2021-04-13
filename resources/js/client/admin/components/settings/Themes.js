@@ -7,7 +7,7 @@ import ColorPickerPopup from '../ColorPickerPopup';
 import Utils from '../../../common/helpers/Utils';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
-import Constants from '../../../common/helpers/Constants';
+import CoreConstants from '../../../common/helpers/CoreConstants';
 import PropTypes from 'prop-types';
 import { useIsMobile } from '../../../common/hooks/IsMobile';
 
@@ -24,7 +24,7 @@ const Themes = (props) => {
     const [currentSettingToChange, setCurrentSettingToChange] = useState(null);
 
     const colorPickerSubmitCallback = (color) => {
-        submitData(Constants.settings.ACCENT_COLOR, color);
+        submitData(CoreConstants.settings.ACCENT_COLOR, color);
     }
 
     const colorPickerCancelCallback = (color = null) => {
@@ -82,7 +82,7 @@ const Themes = (props) => {
                 menuLayout: value
             });
         }
-        submitData(Constants.settings.MENU_LAYOUT, value, callback);
+        submitData(CoreConstants.settings.MENU_LAYOUT, value, callback);
     }
 
     const shortMenuChangeHandle = (e) => {
@@ -93,7 +93,7 @@ const Themes = (props) => {
                 shortMenu: value
             });
         }
-        submitData(Constants.settings.SHORT_MENU, value, callback);
+        submitData(CoreConstants.settings.SHORT_MENU, value, callback);
     }
 
     const menuColorChangeHandle = (e) => {
@@ -104,7 +104,7 @@ const Themes = (props) => {
                 menuColor: value
             });
         }
-        submitData(Constants.settings.MENU_COLOR, value, callback);
+        submitData(CoreConstants.settings.MENU_COLOR, value, callback);
     }
 
     const navColorChangeHandle = (e) => {
@@ -115,7 +115,7 @@ const Themes = (props) => {
                 navColor: value
             });
         }
-        submitData(Constants.settings.NAV_COLOR, value, callback);
+        submitData(CoreConstants.settings.NAV_COLOR, value, callback);
     }
 
     return (
@@ -127,7 +127,7 @@ const Themes = (props) => {
                     itemLayout="horizontal"
                     size="large"
                 >
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.ACCENT_COLOR}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.ACCENT_COLOR}>
                         <StyledListItem actions={
                             [
                                 <a 
@@ -143,7 +143,7 @@ const Themes = (props) => {
                             <Item.Meta title={'Accent Color'} description={'Change accent color of app.'} />
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.MENU_LAYOUT}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.MENU_LAYOUT}>
                         <StyledListItem actions={
                             [
                                 <Radio.Group
@@ -167,7 +167,7 @@ const Themes = (props) => {
                     </Spin>
                     {
                         props.globalState.menuLayout === 'mix' && (
-                            <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.SHORT_MENU}>
+                            <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.SHORT_MENU}>
                                 <StyledListItem actions={
                                     [
                                         <Radio.Group
@@ -191,7 +191,7 @@ const Themes = (props) => {
                             </Spin>
                         )
                     }
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.MENU_COLOR}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.MENU_COLOR}>
                         <StyledListItem actions={
                             [
                                 <Radio.Group
@@ -215,7 +215,7 @@ const Themes = (props) => {
                     </Spin>
                     {
                        ( isMobile || (props.globalState.menuLayout === 'mix')) && (
-                            <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.settings.NAV_COLOR}>
+                            <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.NAV_COLOR}>
                                 <StyledListItem actions={
                                     [
                                         <Radio.Group

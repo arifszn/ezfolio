@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Constants;
+use CoreConstants;
 use App\Models\Setting;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\SettingInterface;
@@ -51,7 +51,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -74,13 +74,13 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Data is saved successfully',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -88,7 +88,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -112,13 +112,13 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Setting is fetched successfully',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Setting is not found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -126,7 +126,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -140,45 +140,45 @@ class SettingService implements SettingInterface
     {
         try {
             //get accent color
-            $result = $this->getSettingByKey(Setting::ACCENT_COLOR, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__ACCENT_COLOR, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['accentColor'] = $result['payload']->setting_value;
             } else {
                 $data['accentColor'] = '#FF7F50';
             }
 
             //get short menu
-            $result = $this->getSettingByKey(Setting::SHORT_MENU, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__SHORT_MENU, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['shortMenu'] = ($result['payload']->setting_value === true || $result['payload']->setting_value === 'true' || $result['payload']->setting_value === 1 || $result['payload']->setting_value === '1' ? true : false);
             } else {
                 $data['shortMenu'] = false;
             }
 
             //get menu layout
-            $result = $this->getSettingByKey(Setting::MENU_LAYOUT, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__MENU_LAYOUT, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['menuLayout'] = $result['payload']->setting_value;
             } else {
                 $data['menuLayout'] = 'mix';
             }
 
             //get menu color
-            $result = $this->getSettingByKey(Setting::MENU_COLOR, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__MENU_COLOR, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['menuColor'] = $result['payload']->setting_value;
             } else {
                 $data['menuColor'] = 'light';
             }
 
             //get nav color
-            $result = $this->getSettingByKey(Setting::NAV_COLOR, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__NAV_COLOR, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['navColor'] = $result['payload']->setting_value;
             } else {
                 $data['navColor'] = 'light';
@@ -188,18 +188,18 @@ class SettingService implements SettingInterface
             $data['siteName'] = DotenvEditor::getValue('APP_NAME');
 
             //get logo
-            $result = $this->getSettingByKey(Setting::LOGO, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__LOGO, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['logo'] = $result['payload']->setting_value;
             } else {
                 $data['logo'] = 'assets/common/img/logo/default.png';
             }
 
             //get favicon
-            $result = $this->getSettingByKey(Setting::FAVICON, ['setting_value']);
+            $result = $this->getSettingByKey(CoreConstants::SETTING__FAVICON, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['favicon'] = $result['payload']->setting_value;
             } else {
                 $data['favicon'] = 'assets/common/img/favicon/default.png';
@@ -210,7 +210,7 @@ class SettingService implements SettingInterface
 
             $result     = $about->getAllFields(['cover', 'id']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['cover'] = $result['payload']->cover;
             } else {
                 $data['cover'] = 'assets/common/img/cover/default.png';
@@ -219,7 +219,7 @@ class SettingService implements SettingInterface
             //get avatar
             $result     = $about->getAllFields(['avatar', 'id']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['avatar'] = $result['payload']->avatar;
             } else {
                 $data['avatar'] = 'assets/common/img/avatar/default.png';
@@ -241,14 +241,14 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Settings are fetched successfully',
                 'payload' => $data,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -271,11 +271,11 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
             
-            if ($data['setting_key'] === Setting::SITE_NAME) {
+            if ($data['setting_key'] === CoreConstants::SETTING__SITE_NAME) {
                 $result = $this->updateSiteName($data['setting_value']);
             } else {
                 $newData['setting_key'] = $data['setting_key'];
@@ -290,7 +290,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -310,13 +310,13 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Site name is successfully updated',
                     'payload' => $newName,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -324,7 +324,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -346,7 +346,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
             $file = $data['file'];
@@ -361,8 +361,8 @@ class SettingService implements SettingInterface
             if ($file->move($pathName, $fileName)) {
                 //delete previous logo
                 try {
-                    $oldLogoResponse = $this->getSettingByKey(Setting::LOGO);
-                    if ($oldLogoResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldLogoResponse['payload']->setting_value !== 'assets/common/img/logo/default.png' && file_exists($oldLogoResponse['payload']->setting_value)) {
+                    $oldLogoResponse = $this->getSettingByKey(CoreConstants::SETTING__LOGO);
+                    if ($oldLogoResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldLogoResponse['payload']->setting_value !== 'assets/common/img/logo/default.png' && file_exists($oldLogoResponse['payload']->setting_value)) {
                         unlink($oldLogoResponse['payload']->setting_value);
                     }
                 } catch (\Throwable $th) {
@@ -370,17 +370,17 @@ class SettingService implements SettingInterface
                 }
 
                 $result  = $this->setSettingData([
-                    'setting_key'  => Setting::LOGO,
+                    'setting_key'  => CoreConstants::SETTING__LOGO,
                     'setting_value' => $pathName.$fileName,
                 ]);
 
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     return [
                         'message' => 'File is successfully saved',
                         'payload' => [
                             'file' => $pathName.$fileName
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return $result;
@@ -389,7 +389,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'File could not be saved',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -397,7 +397,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -415,24 +415,24 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'The file can\'t be found',
                     'payload' => $file,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
             if (unlink($file)) {
                 $defaultLogo = 'assets/common/img/logo/default.png';
 
                 $result  = $this->setSettingData([
-                    'setting_key' => Setting::LOGO,
+                    'setting_key' => CoreConstants::SETTING__LOGO,
                     'setting_value' => $defaultLogo,
                 ]);
 
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     return [
                         'message' => 'Logo is deleted successfully',
                         'payload' => [
                             'file' => $defaultLogo
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return $result;
@@ -441,7 +441,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Logo could not be deleted',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -449,7 +449,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -471,7 +471,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -487,8 +487,8 @@ class SettingService implements SettingInterface
             if ($file->move($pathName, $fileName)) {
                 //delete previous favicon
                 try {
-                    $oldFaviconResponse = $this->getSettingByKey(Setting::FAVICON);
-                    if ($oldFaviconResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldFaviconResponse['payload']->setting_value !== 'assets/common/img/favicon/default.png' && file_exists($oldFaviconResponse['payload']->setting_value)) {
+                    $oldFaviconResponse = $this->getSettingByKey(CoreConstants::SETTING__FAVICON);
+                    if ($oldFaviconResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldFaviconResponse['payload']->setting_value !== 'assets/common/img/favicon/default.png' && file_exists($oldFaviconResponse['payload']->setting_value)) {
                         unlink($oldFaviconResponse['payload']->setting_value);
                     }
                 } catch (\Throwable $th) {
@@ -496,17 +496,17 @@ class SettingService implements SettingInterface
                 }
 
                 $result  = $this->setSettingData([
-                    'setting_key' => Setting::FAVICON,
+                    'setting_key' => CoreConstants::SETTING__FAVICON,
                     'setting_value' => $pathName.$fileName,
                 ]);
 
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     return [
                         'message' => 'Favicon is successfully saved',
                         'payload' => [
                             'file' => $pathName.$fileName
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return $result;
@@ -515,7 +515,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Favicon could not be saved',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -523,7 +523,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -541,23 +541,23 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'The file can\'t be found',
                     'payload' => $file,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
             if (unlink($file)) {
                 $defaultFavicon = 'assets/common/img/favicon/default.png';
                 $result  = $this->setSettingData([
-                    'setting_key' => Setting::FAVICON,
+                    'setting_key' => CoreConstants::SETTING__FAVICON,
                     'setting_value' => $defaultFavicon,
                 ]);
 
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     return [
                         'message' => 'File is deleted successfully',
                         'payload' => [
                             'file' => $defaultFavicon
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return $result;
@@ -566,7 +566,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'File could not be deleted',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -574,7 +574,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -601,7 +601,7 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
             
@@ -619,13 +619,13 @@ class SettingService implements SettingInterface
                 return [
                     'message' => 'Mail setting is successfully updated',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -633,7 +633,7 @@ class SettingService implements SettingInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }

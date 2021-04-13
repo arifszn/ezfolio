@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App;
-use Constants;
+use CoreConstants;
 use App\Models\Admin;
 use App\Models\AdminPasswordResets;
 use App\Notifications\AdminResetPasswordNotification;
@@ -74,7 +74,7 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -94,13 +94,13 @@ class AdminService implements AdminInterface
                         'admin' => $this->guard()->user(),
                         'token' => $tokenDetails
                     ],
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Incorrect credentials',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_UNAUTHORIZED
+                    'status' => CoreConstants::STATUS_CODE_UNAUTHORIZED
                 ];
             }
         } catch (\Throwable $th) {
@@ -108,7 +108,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -132,7 +132,7 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -141,7 +141,7 @@ class AdminService implements AdminInterface
 
             $result = $this->createAdmin($newData);
 
-            if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                 return $result;
             } else {
                 $admin = $result['payload'];
@@ -161,14 +161,14 @@ class AdminService implements AdminInterface
                     'admin' => $this->guard()->user(),
                     'token' => $tokenDetails
                 ],
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -186,14 +186,14 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Successfully created.',
                 'payload' => $admin,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -216,13 +216,13 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
             $result = $this->getByEmail($data['email']);
 
-            if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                 return $result;
             } else {
                 $admin = $result['payload'];
@@ -234,7 +234,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -255,13 +255,13 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Admin found.',
                     'payload' => $data,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Found no admin with that email address.',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -269,7 +269,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -284,7 +284,7 @@ class AdminService implements AdminInterface
     {
         $result = $this->createPasswordResetToken($admin->email);
 
-        if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+        if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
             return $result;
         } else {
             $token = $result['payload'];
@@ -295,7 +295,7 @@ class AdminService implements AdminInterface
         return [
             'message' => 'We have emailed your password reset link!',
             'payload' => null,
-            'status' => Constants::STATUS_CODE_SUCCESS
+            'status' => CoreConstants::STATUS_CODE_SUCCESS
         ];
     }
 
@@ -328,7 +328,7 @@ class AdminService implements AdminInterface
         return [
             'message' => 'Token is deleted successfully.',
             'payload' => null,
-            'status' => Constants::STATUS_CODE_SUCCESS
+            'status' => CoreConstants::STATUS_CODE_SUCCESS
         ];
     }
 
@@ -350,7 +350,7 @@ class AdminService implements AdminInterface
         return [
             'message' => 'Successfully created.',
             'payload' => $token,
-            'status' => Constants::STATUS_CODE_SUCCESS
+            'status' => CoreConstants::STATUS_CODE_SUCCESS
         ];
     }
 
@@ -374,13 +374,13 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
             $result = $this->getByEmail($data['email']);
 
-            if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                 return $result;
             } else {
                 $admin = $result['payload'];
@@ -388,7 +388,7 @@ class AdminService implements AdminInterface
 
             $result = $this->validatePasswordResetToken($data['token'], $data['email']);
 
-            if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                 return $result;
             }
             
@@ -402,7 +402,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -422,7 +422,7 @@ class AdminService implements AdminInterface
         return [
             'message' => 'Your password has been reset!',
             'payload' => $admin,
-            'status' => Constants::STATUS_CODE_SUCCESS
+            'status' => CoreConstants::STATUS_CODE_SUCCESS
         ];
     }
     
@@ -444,13 +444,13 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Token found.',
                 'payload' => $data,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } else {
             return [
                 'message' => 'Invalid password reset token. Please try again',
                 'payload' => null,
-                'status' => Constants::STATUS_CODE_NOT_FOUND
+                'status' => CoreConstants::STATUS_CODE_NOT_FOUND
             ];
         }
     }
@@ -467,7 +467,7 @@ class AdminService implements AdminInterface
         return [
             'message' => 'Admin found',
             'payload' => $me,
-            'status' => Constants::STATUS_CODE_SUCCESS
+            'status' => CoreConstants::STATUS_CODE_SUCCESS
         ];
     }
 
@@ -490,7 +490,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Token refreshed',
                 'payload' => $tokenDetails,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
@@ -498,15 +498,15 @@ class AdminService implements AdminInterface
             if ($th instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
                 return [
                     'message' => 'Token is Blacklisted',
-                    'payload' => Constants::TOKEN_BLACKLISTED,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'payload' => CoreConstants::TOKEN_BLACKLISTED,
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
 
             return [
                 'message' => 'Something went wrong.',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -531,7 +531,7 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -550,14 +550,14 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Credential is successfully updated',
                 'payload' => $admin,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -578,13 +578,13 @@ class AdminService implements AdminInterface
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $admin,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result is found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -592,7 +592,7 @@ class AdminService implements AdminInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }

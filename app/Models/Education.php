@@ -15,7 +15,7 @@ class Education extends Model
      * @var array
      */
     protected $fillable = [
-        'institution', 
+        'institution',
         'period',
         'degree',
         'cgpa',

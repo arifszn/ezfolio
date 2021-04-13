@@ -28,6 +28,7 @@ const Skills = () => {
         {
             title: 'Proficiency',
             dataIndex: 'proficiency',
+            align: 'center',
             sorter: true,
             search: true,
             width: 170,

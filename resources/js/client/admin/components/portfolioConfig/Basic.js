@@ -4,7 +4,7 @@ import Utils from '../../../common/helpers/Utils';
 import styled from 'styled-components';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
-import Constants from '../../../common/helpers/Constants';
+import CoreConstants from '../../../common/helpers/CoreConstants';
 import PropTypes from 'prop-types';
 import ColorPickerPopup from '../ColorPickerPopup';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -56,7 +56,7 @@ const Basic = (props) => {
     }, [props.config])
 
     const colorPickerSubmitCallback = (color) => {
-        submitData(Constants.portfolioConfig.ACCENT_COLOR, color);
+        submitData(CoreConstants.portfolioConfig.ACCENT_COLOR, color);
     }
 
     const colorPickerOnChange = (colorObject) => {
@@ -79,7 +79,7 @@ const Basic = (props) => {
             const callback = () => {
                 setTemplate(selected);
             }
-            submitData(Constants.portfolioConfig.TEMPLATE, value, callback);
+            submitData(CoreConstants.portfolioConfig.TEMPLATE, value, callback);
         }
     }
     
@@ -140,7 +140,7 @@ const Basic = (props) => {
     const changeGoogleAnalyticsIdHandleSubmit = (e) => {
         e.preventDefault();
 
-        submitData(Constants.portfolioConfig.GOOGLE_ANALYTICS_ID, googleAnalyticsId);
+        submitData(CoreConstants.portfolioConfig.GOOGLE_ANALYTICS_ID, googleAnalyticsId);
     }
 
     const maintenanceModeOnChange = (checked) => {
@@ -149,7 +149,7 @@ const Basic = (props) => {
             setMaintenanceMode(checked);
         }
 
-        submitData(Constants.portfolioConfig.MAINTENANCE_MODE, checked, callback);
+        submitData(CoreConstants.portfolioConfig.MAINTENANCE_MODE, checked, callback);
     }
 
     const changeTemplate = (
@@ -201,12 +201,12 @@ const Basic = (props) => {
                     itemLayout="horizontal"
                     size="large"
                 >
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.TEMPLATE}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.TEMPLATE}>
                         <StyledListItem style={{padding: '16px 0px'}}>
                             <Item.Meta title={'Portfolio Template'} description={changeTemplate}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.ACCENT_COLOR}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.ACCENT_COLOR}>
                         <StyledListItem actions={
                             [
                                 <a 
@@ -222,7 +222,7 @@ const Basic = (props) => {
                             <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of portfolio.'} />
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.GOOGLE_ANALYTICS_ID}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.GOOGLE_ANALYTICS_ID}>
                         <StyledListItem actions={[
                             <a 
                                 key="google-analytics-change" 
@@ -248,11 +248,11 @@ const Basic = (props) => {
                     }>
                         <Item.Meta title={'SEO'} description={'Search engine optimization of frontend.'} />
                     </StyledListItem>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.MAINTENANCE_MODE}>
                         <StyledListItem actions={[
                             <Switch
                                 key="maintenance-mode-change" 
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.MAINTENANCE_MODE}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.MAINTENANCE_MODE}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={maintenanceMode}

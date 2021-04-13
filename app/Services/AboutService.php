@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Constants;
+use CoreConstants;
 use App\Models\About;
 use App\Services\Contracts\AboutInterface;
 use Log;
@@ -44,13 +44,13 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -58,7 +58,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -81,7 +81,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -117,7 +117,7 @@ class AboutService implements AboutInterface
             
             $existedRecord = $this->getAllFields();
 
-            if ($existedRecord['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($existedRecord['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $existedRecord = $existedRecord['payload'];
                 $result = $existedRecord->update($newData);
             } else {
@@ -130,13 +130,13 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Data is successfully updated',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status'  => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -144,7 +144,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -166,7 +166,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -183,7 +183,7 @@ class AboutService implements AboutInterface
                 //delete previous avatar
                 $oldAvatarResponse = $this->getAllFields(['avatar', 'id']);
                 try {
-                    if ($oldAvatarResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldAvatarResponse['payload']->avatar !== 'assets/common/img/avatar/default.png' && file_exists($oldAvatarResponse['payload']->avatar)) {
+                    if ($oldAvatarResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldAvatarResponse['payload']->avatar !== 'assets/common/img/avatar/default.png' && file_exists($oldAvatarResponse['payload']->avatar)) {
                         unlink($oldAvatarResponse['payload']->avatar);
                     }
                 } catch (\Throwable $th) {
@@ -202,20 +202,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => $pathName.$fileName
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message' => 'Something went wrong',
                         'payload' => null,
-                        'status' => Constants::STATUS_CODE_ERROR
+                        'status' => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message' => 'File could not be saved',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -223,7 +223,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -241,7 +241,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'The file can\'t be found',
                     'payload' => $file,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
 
@@ -249,7 +249,7 @@ class AboutService implements AboutInterface
                 $defaultAvatar = 'assets/common/img/avatar/default.png';
                 $result = $this->getAllFields();
 
-                if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
                 } else {
                     $result = $result['payload'];
@@ -265,20 +265,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => $defaultAvatar
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message' => 'Something went wrong',
                         'payload' => null,
-                        'status' => Constants::STATUS_CODE_ERROR
+                        'status' => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message' => 'File could not be deleted',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -286,7 +286,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -308,7 +308,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -325,7 +325,7 @@ class AboutService implements AboutInterface
                 //delete previous cover
                 $oldCoverResponse = $this->getAllFields(['cover', 'id']);
                 try {
-                    if ($oldCoverResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCoverResponse['payload']->cover !== 'assets/common/img/cover/default.png' && file_exists($oldCoverResponse['payload']->cover)) {
+                    if ($oldCoverResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldCoverResponse['payload']->cover !== 'assets/common/img/cover/default.png' && file_exists($oldCoverResponse['payload']->cover)) {
                         unlink($oldCoverResponse['payload']->cover);
                     }
                 } catch (\Throwable $th) {
@@ -344,20 +344,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => $pathName.$fileName
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message' => 'Something went wrong',
                         'payload' => null,
-                        'status' => Constants::STATUS_CODE_ERROR
+                        'status' => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message' => 'File could not be saved',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -365,7 +365,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -383,7 +383,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'The file can\'t be found',
                     'payload' => $file,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
 
@@ -391,7 +391,7 @@ class AboutService implements AboutInterface
                 $defaultCover = 'assets/common/img/cover/default.png';
                 $result = $this->getAllFields();
 
-                if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
                 } else {
                     $result = $result['payload'];
@@ -407,20 +407,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => $defaultCover
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message' => 'Something went wrong',
                         'payload' => null,
-                        'status' => Constants::STATUS_CODE_ERROR
+                        'status' => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message' => 'File could not be deleted',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -428,7 +428,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -450,7 +450,7 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'Bad Request',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
           
@@ -467,7 +467,7 @@ class AboutService implements AboutInterface
                 //delete previous cv
                 $oldCVResponse = $this->getAllFields(['cv', 'id']);
                 try {
-                    if ($oldCVResponse['status'] === Constants::STATUS_CODE_SUCCESS && $oldCVResponse['payload']->cv !== 'assets/common/cv/default.pdf' && file_exists($oldCVResponse['payload']->cv)) {
+                    if ($oldCVResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldCVResponse['payload']->cv !== 'assets/common/cv/default.pdf' && file_exists($oldCVResponse['payload']->cv)) {
                         unlink($oldCVResponse['payload']->cv);
                     }
                 } catch (\Throwable $th) {
@@ -486,20 +486,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => $pathName.$fileName
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message' => 'Something went wrong',
                         'payload' => null,
-                        'status' => Constants::STATUS_CODE_ERROR
+                        'status' => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message' => 'File could not be saved',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -507,7 +507,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -525,13 +525,13 @@ class AboutService implements AboutInterface
                 return [
                     'message' => 'The file can\'t be found',
                     'payload' => $file,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
 
             if (unlink($file)) {
                 $result = $this->getAllFields();
-                if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+                if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
                 } else {
                     $result = $result['payload'];
@@ -547,20 +547,20 @@ class AboutService implements AboutInterface
                         'payload' => [
                             'file' => null
                         ],
-                        'status' => Constants::STATUS_CODE_SUCCESS
+                        'status' => CoreConstants::STATUS_CODE_SUCCESS
                     ];
                 } else {
                     return [
                         'message'  => 'Something went wrong',
                         'payload' => null,
-                        'status'  => Constants::STATUS_CODE_ERROR
+                        'status'  => CoreConstants::STATUS_CODE_ERROR
                     ];
                 }
             } else {
                 return [
                     'message'  => 'File could not be deleted',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -568,7 +568,7 @@ class AboutService implements AboutInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }

@@ -1,4 +1,4 @@
-const Constants = {
+const CoreConstants = {
     TRUE: 1,
     FALSE: 0,
 
@@ -51,4 +51,4 @@ const Constants = {
     }
 }
 
-export default Constants;
+export default CoreConstants;

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Constants;
+use CoreConstants;
 use App\Models\Education;
 use App\Services\Contracts\EducationInterface;
 use Log;
@@ -42,13 +42,13 @@ class EducationService implements EducationInterface
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $response,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -56,7 +56,7 @@ class EducationService implements EducationInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -78,7 +78,7 @@ class EducationService implements EducationInterface
                 return [
                     'message' => 'Validation Error',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -91,7 +91,7 @@ class EducationService implements EducationInterface
             
             if (!empty($data['id'])) {
                 $response = $this->getById($data['id'], ['id']);
-                if ($response['status'] !== Constants::STATUS_CODE_SUCCESS) {
+                if ($response['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $response;
                 } else {
                     $existingData = $response['payload'];
@@ -105,13 +105,13 @@ class EducationService implements EducationInterface
                 return [
                     'message' => !empty($data['id']) ? 'Data is successfully updated' : 'Data is successfully saved',
                     'payload' => $response,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -119,7 +119,7 @@ class EducationService implements EducationInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -140,13 +140,13 @@ class EducationService implements EducationInterface
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $data,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result is found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -154,7 +154,7 @@ class EducationService implements EducationInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -206,13 +206,13 @@ class EducationService implements EducationInterface
                 return [
                     'message' => 'Data is fetched successfully',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'No result found',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_NOT_FOUND
+                    'status' => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -220,7 +220,7 @@ class EducationService implements EducationInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -240,13 +240,13 @@ class EducationService implements EducationInterface
                 return [
                     'message' => 'Data is deleted successfully',
                     'payload' => $data,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Nothing to Delete',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -254,7 +254,7 @@ class EducationService implements EducationInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => Constants::STATUS_CODE_ERROR
+                'status' => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }

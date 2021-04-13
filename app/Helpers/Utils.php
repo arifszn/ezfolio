@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use Constants;
+use CoreConstants;
 use App\Models\Setting;
 use App\Services\Contracts\SettingInterface;
 
@@ -17,9 +17,9 @@ class Utils
     {
         try {
             $settingService = resolve(SettingInterface::class);
-            $result = $settingService->getSettingByKey(Setting::FAVICON, ['setting_value']);
+            $result = $settingService->getSettingByKey(CoreConstants::SETTING__FAVICON, ['setting_value']);
 
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 return asset($result['payload']->setting_value);
             } else {
                 return asset('assets/common/img/favicon/default.png');

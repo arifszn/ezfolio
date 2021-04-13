@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Constants;
+use CoreConstants;
 use App\Models\Setting;
 use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\SettingInterface;
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
                 'password_confirmation' => '12345',
             ]);
 
-            if ($result['status'] !== Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                 throw new Exception($result['message']);
             } else {
                 $admin = $result['payload']['admin'];
@@ -44,7 +44,7 @@ class AdminSeeder extends Seeder
 
                         //accent color
                         $data = [
-                            'setting_key' => Setting::ACCENT_COLOR,
+                            'setting_key' => CoreConstants::SETTING__ACCENT_COLOR,
                             'setting_value' => '#00bfa5',
                             'default_value' => '#00bfa5',
                         ];
@@ -52,15 +52,15 @@ class AdminSeeder extends Seeder
 
                         //short menu
                         $data = [
-                            'setting_key' => Setting::SHORT_MENU,
-                            'setting_value' => Constants::FALSE,
-                            'default_value' => Constants::FALSE,
+                            'setting_key' => CoreConstants::SETTING__SHORT_MENU,
+                            'setting_value' => CoreConstants::FALSE,
+                            'default_value' => CoreConstants::FALSE,
                         ];
                         $settingService->insertOrUpdate($data);
 
                         //menu layout
                         $data = [
-                            'setting_key' => Setting::MENU_LAYOUT,
+                            'setting_key' => CoreConstants::SETTING__MENU_LAYOUT,
                             'setting_value' => 'mix',
                             'default_value' => 'mix',
                         ];
@@ -68,7 +68,7 @@ class AdminSeeder extends Seeder
 
                         //menu color
                         $data = [
-                            'setting_key' => Setting::MENU_COLOR,
+                            'setting_key' => CoreConstants::SETTING__MENU_COLOR,
                             'setting_value' => 'light',
                             'default_value' => 'light',
                         ];
@@ -76,7 +76,7 @@ class AdminSeeder extends Seeder
 
                         //menu color
                         $data = [
-                            'setting_key' => Setting::NAV_COLOR,
+                            'setting_key' => CoreConstants::SETTING__NAV_COLOR,
                             'setting_value' => 'light',
                             'default_value' => 'light',
                         ];
@@ -107,7 +107,7 @@ class AdminSeeder extends Seeder
                         }
 
                         $data = [
-                            'setting_key' => Setting::LOGO,
+                            'setting_key' => CoreConstants::SETTING__LOGO,
                             'setting_value' => 'assets/common/img/logo/default.png',
                             'default_value' => 'assets/common/img/logo/default.png',
                         ];
@@ -138,7 +138,7 @@ class AdminSeeder extends Seeder
                         }
                         
                         $data = [
-                            'setting_key' => Setting::FAVICON,
+                            'setting_key' => CoreConstants::SETTING__FAVICON,
                             'setting_value' => 'assets/common/img/favicon/default.png',
                             'default_value' => 'assets/common/img/favicon/default.png',
                         ];

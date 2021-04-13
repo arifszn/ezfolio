@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use Constants;
+use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
@@ -48,7 +48,7 @@ class PortfolioController extends Controller
             $result = $this->portfolioConfig->setConfigData($request->all());
         }
         
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -61,7 +61,7 @@ class PortfolioController extends Controller
     {
         $result = $this->portfolioConfig->setMetaData($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -78,7 +78,7 @@ class PortfolioController extends Controller
             $result = $this->about->store($request->all());
         }
         
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -95,7 +95,7 @@ class PortfolioController extends Controller
             $result = $this->about->processDeleteAvatarRequest($request->file);
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -112,7 +112,7 @@ class PortfolioController extends Controller
             $result = $this->about->processDeleteCVRequest($request->file);
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -129,6 +129,6 @@ class PortfolioController extends Controller
             $result = $this->about->processDeleteCoverRequest($request->file);
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 }

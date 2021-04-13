@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Constants;
+use CoreConstants;
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\EducationInterface;
@@ -30,7 +30,7 @@ class PortfolioSeeder extends Seeder
 
             //template
             $data = [
-                'setting_key' => PortfolioConfig::TEMPLATE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__TEMPLATE,
                 'setting_value' => 'procyon',
                 'default_value' => 'procyon',
             ];
@@ -38,7 +38,7 @@ class PortfolioSeeder extends Seeder
 
             //accent color
             $data = [
-                'setting_key' => PortfolioConfig::ACCENT_COLOR,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__ACCENT_COLOR,
                 'setting_value' => '#0168fa',
                 'default_value' => '#0168fa',
             ];
@@ -46,7 +46,7 @@ class PortfolioSeeder extends Seeder
 
             //google analytics ID
             $data = [
-                'setting_key' => PortfolioConfig::GOOGLE_ANALYTICS_ID,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__GOOGLE_ANALYTICS_ID,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -54,86 +54,86 @@ class PortfolioSeeder extends Seeder
 
             //maintenance mode
             $data = [
-                'setting_key' => PortfolioConfig::MAINTENANCE_MODE,
-                'setting_value' => Constants::FALSE,
-                'default_value' => Constants::FALSE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__MAINTENANCE_MODE,
+                'setting_value' => CoreConstants::FALSE,
+                'default_value' => CoreConstants::FALSE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             //visibility
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_ABOUT,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_ABOUT,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_SKILL,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SKILL,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_EDUCATION,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_EDUCATION,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_EXPERIENCE,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_EXPERIENCE,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_PROJECT,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_PROJECT,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_SERVICE,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SERVICE,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_CONTACT,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_CONTACT,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_FOOTER,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_FOOTER,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_CV,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_CV,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             $data = [
-                'setting_key' => PortfolioConfig::VISIBILITY_SKILL_PROFICIENCY,
-                'setting_value' => Constants::TRUE,
-                'default_value' => Constants::TRUE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SKILL_PROFICIENCY,
+                'setting_value' => CoreConstants::TRUE,
+                'default_value' => CoreConstants::TRUE,
             ];
             $portfolioConfig->insertOrUpdate($data);
 
             //header script
             $data = [
-                'setting_key' => PortfolioConfig::SCRIPT_HEADER,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__SCRIPT_HEADER,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -141,7 +141,7 @@ class PortfolioSeeder extends Seeder
 
             //footer script
             $data = [
-                'setting_key' => PortfolioConfig::SCRIPT_FOOTER,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__SCRIPT_FOOTER,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -150,7 +150,7 @@ class PortfolioSeeder extends Seeder
 
             //meta title
             $data = [
-                'setting_key' => PortfolioConfig::META_TITLE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_TITLE,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -158,7 +158,7 @@ class PortfolioSeeder extends Seeder
 
             //meta author
             $data = [
-                'setting_key' => PortfolioConfig::META_AUTHOR,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_AUTHOR,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -166,7 +166,7 @@ class PortfolioSeeder extends Seeder
 
             //meta description
             $data = [
-                'setting_key' => PortfolioConfig::META_DESCRIPTION,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_DESCRIPTION,
                 'setting_value' => '',
                 'default_value' => '',
             ];
@@ -190,7 +190,7 @@ class PortfolioSeeder extends Seeder
                 Log::error($th->getMessage());
             }
             $data = [
-                'setting_key' => PortfolioConfig::META_IMAGE,
+                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_IMAGE,
                 'setting_value' => '',
                 'default_value' => '',
             ];

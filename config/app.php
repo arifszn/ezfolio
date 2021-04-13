@@ -232,7 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Utils' => App\Helpers\Utils::class,
-        'Constants' => App\Helpers\Constants::class,
+        'CoreConstants' => App\Helpers\CoreConstants::class,
     ],
 
 ];

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use Constants;
+use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\SettingInterface;
@@ -47,7 +47,7 @@ class SettingController extends Controller
             $result = $this->setting->setSettingData($request->all());
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -64,7 +64,7 @@ class SettingController extends Controller
             $result = $this->setting->processDeleteLogoRequest($request->file);
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -81,13 +81,13 @@ class SettingController extends Controller
             $result = $this->setting->processDeleteFaviconRequest($request->file);
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     public function storeMailSettings(Request $request)
     {
         $result = $this->setting->storeMailSettings($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 }

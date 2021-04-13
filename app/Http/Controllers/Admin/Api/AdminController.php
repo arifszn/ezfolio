@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use Constants;
+use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AdminInterface;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +37,7 @@ class AdminController extends Controller
     {
         $result = $this->admin->handleLogin($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -51,7 +51,7 @@ class AdminController extends Controller
     {
         $result = $this->admin->handleForgetPassword($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -65,7 +65,7 @@ class AdminController extends Controller
     {
         $result = $this->admin->handleResetPassword($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -77,7 +77,7 @@ class AdminController extends Controller
     {
         $result = $this->admin->me();
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -89,7 +89,7 @@ class AdminController extends Controller
     {
         $result = $this->admin->refreshToken();
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -106,6 +106,6 @@ class AdminController extends Controller
             $result = $this->admin->changeCredential($request->all());
         }
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 }

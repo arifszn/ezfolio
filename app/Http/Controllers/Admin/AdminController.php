@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Constants;
+use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\SettingInterface;
 use Illuminate\Contracts\View\View;
@@ -35,7 +35,7 @@ class AdminController extends Controller
     {
         $result = $this->setting->getSettingsData();
 
-        if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+        if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
             $settings = $result['payload'];
         } else {
             return view('errors.custom')->with([

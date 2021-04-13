@@ -1,5 +1,5 @@
 import { notification, message as tinyMessage } from 'antd';
-import Constants from './Constants';
+import CoreConstants from './CoreConstants';
 import { changeAntdTheme } from 'mini-dynamic-antd-theme';
 
 /**
@@ -79,13 +79,13 @@ const handleException = (error, callback = null) => {
 
     if (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined') {
         if (typeof error.response.data.message !== 'undefined') {
-            if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status === Constants.STATUS_CODE_BAD_REQUEST)) {
+            if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status === CoreConstants.STATUS_CODE_BAD_REQUEST)) {
                 if (error.response.data.payload && typeof error.response.data.payload ==='object') {
                     handleBadRequest(error.response.data.payload);
                 } else {
                     showNotification(error.response.data.message, 'error');
                 }
-            } else if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status !== Constants.STATUS_CODE_SUCCESS)) {
+            } else if ((typeof error.response.data.status !== 'undefined') && (error.response.data.status !== CoreConstants.STATUS_CODE_SUCCESS)) {
                 showNotification(error.response.data.message, 'error');
             } else {
                 showNotification(error.response.data.message, 'error');
@@ -109,19 +109,19 @@ const handleException = (error, callback = null) => {
  */
 const handleSuccessResponse = (response, successCallback, errorCallback = null) => {
     if (typeof response.data !== 'undefined') {
-        if ((typeof response.data.status !== 'undefined') && (response.data.status === Constants.STATUS_CODE_BAD_REQUEST)) {
+        if ((typeof response.data.status !== 'undefined') && (response.data.status === CoreConstants.STATUS_CODE_BAD_REQUEST)) {
             if (response.data.payload && typeof response.data.payload ==='object') {
                 handleBadRequest(response.data.payload);
             } else {
                 showNotification(response.data.message, 'error');
             }
-        } else if ((typeof response.data.status !== 'undefined') && (response.data.status !== Constants.STATUS_CODE_SUCCESS)) {
+        } else if ((typeof response.data.status !== 'undefined') && (response.data.status !== CoreConstants.STATUS_CODE_SUCCESS)) {
             showNotification(response.data.message, 'error');
             
             if (errorCallback) {
                 return errorCallback();
             }
-        } else if ((typeof response.data.status !== 'undefined') && (response.data.status === Constants.STATUS_CODE_SUCCESS)) {
+        } else if ((typeof response.data.status !== 'undefined') && (response.data.status === CoreConstants.STATUS_CODE_SUCCESS)) {
             return successCallback();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
-use Constants;
+use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\EducationInterface;
 use Illuminate\Http\JsonResponse;
@@ -36,7 +36,7 @@ class EducationController extends Controller
     {
         $result = $this->education->getAllFieldsWithPaginate($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -49,7 +49,7 @@ class EducationController extends Controller
     {
         $result = $this->education->store($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -62,7 +62,7 @@ class EducationController extends Controller
     {
         $result = $this->education->getById($id);
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -76,7 +76,7 @@ class EducationController extends Controller
     {
         $result = $this->education->store($request->all());
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 
     /**
@@ -89,6 +89,6 @@ class EducationController extends Controller
     {
         $result = $this->education->deleteByIds($request->ids);
 
-        return response()->json($result, !empty($result['status']) ? $result['status'] : Constants::STATUS_CODE_SUCCESS);
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
 }

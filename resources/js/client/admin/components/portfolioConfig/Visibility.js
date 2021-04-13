@@ -5,7 +5,7 @@ import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import styled from 'styled-components';
-import Constants from '../../../common/helpers/Constants';
+import CoreConstants from '../../../common/helpers/CoreConstants';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 const { Item } = List;
@@ -78,11 +78,11 @@ const Visibility = (props) => {
                     itemLayout="horizontal"
                     size="large"
                 >
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_ABOUT}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_ABOUT}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'about'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_ABOUT}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_ABOUT}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={about}
@@ -90,18 +90,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setAbout(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_ABOUT, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_ABOUT, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'About'} description={'Display about section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SKILL}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'skills'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SKILL}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={skills}
@@ -109,18 +109,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setSkills(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_SKILL, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_SKILL, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Skills'} description={'Display skills section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_EDUCATION}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_EDUCATION}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'education'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_EDUCATION}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_EDUCATION}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={education}
@@ -128,18 +128,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setEducation(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_EDUCATION, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_EDUCATION, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Education'} description={'Display education section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_EXPERIENCE}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_EXPERIENCE}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'experiences'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_EXPERIENCE}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_EXPERIENCE}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={experiences}
@@ -147,18 +147,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setExperiences(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_EXPERIENCE, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_EXPERIENCE, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Experiences'} description={'Display experiences section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_PROJECT}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_PROJECT}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'projects'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_PROJECT}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_PROJECT}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={projects}
@@ -166,18 +166,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setProjects(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_PROJECT, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_PROJECT, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Projects'} description={'Display projects section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SERVICE}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SERVICE}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'services'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SERVICE}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SERVICE}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={services}
@@ -185,18 +185,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setServices(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_SERVICE, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_SERVICE, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Services'} description={'Display services section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_CONTACT}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_CONTACT}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'contact'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_CONTACT}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_CONTACT}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={contact}
@@ -204,18 +204,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setContact(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_CONTACT, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_CONTACT, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Contact Form'} description={'Display contact form section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_FOOTER}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_FOOTER}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'footer'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_FOOTER}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_FOOTER}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={footer}
@@ -223,18 +223,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setFooter(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_FOOTER, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_FOOTER, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'Footer'} description={'Display footer section.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_CV}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_CV}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'cv'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_CV}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_CV}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={cv}
@@ -242,18 +242,18 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setCv(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_CV, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_CV, checked, callback);
                                 }}
                             />
                         ]}>
                             <Item.Meta title={'CV'} description={'Display CV download button.'}/>
                         </StyledListItem>
                     </Spin>
-                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}>
+                    <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}>
                         <StyledListItem actions={[
                             <Switch
                                 key={'skill-proficiency'}
-                                loading={loading && currentSettingToChange === Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}
+                                loading={loading && currentSettingToChange === CoreConstants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
                                 checked={skillProficiency}
@@ -261,7 +261,7 @@ const Visibility = (props) => {
                                     const callback = () => {
                                         setSkillProficiency(checked);
                                     }
-                                    submitData(Constants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY, checked, callback);
+                                    submitData(CoreConstants.portfolioConfig.VISIBILITY_SKILL_PROFICIENCY, checked, callback);
                                 }}
                             />
                         ]}>

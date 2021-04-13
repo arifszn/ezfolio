@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Constants;
+use CoreConstants;
 use App\Models\PortfolioConfig;
 use App\Services\Contracts\PortfolioConfigInterface;
 use Log;
@@ -45,7 +45,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
                 return [
                     'message' => 'Validation Error',
                     'payload' => $validate->errors(),
-                    'status'  => Constants::STATUS_CODE_BAD_REQUEST
+                    'status'  => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -68,13 +68,13 @@ class PortfolioConfigService implements PortfolioConfigInterface
                 return [
                     'message' => 'Data is successfully updated',
                     'payload' => $result,
-                    'status'  => Constants::STATUS_CODE_SUCCESS
+                    'status'  => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Something went wrong',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_ERROR
+                    'status'  => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -82,7 +82,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -105,13 +105,13 @@ class PortfolioConfigService implements PortfolioConfigInterface
                 return [
                     'message' => 'Config is fetched successfully',
                     'payload' => $result,
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Config is not found',
                     'payload' => null,
-                    'status'  => Constants::STATUS_CODE_NOT_FOUND
+                    'status'  => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -119,7 +119,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -149,8 +149,8 @@ class PortfolioConfigService implements PortfolioConfigInterface
             $data = [];
 
             if ($template) {
-                $result = $this->getConfigByKey(PortfolioConfig::TEMPLATE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__TEMPLATE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['template'] = $result['payload']->setting_value;
                 } else {
                     $data['template'] = 'procyon';
@@ -158,8 +158,8 @@ class PortfolioConfigService implements PortfolioConfigInterface
             }
 
             if ($accentColor) {
-                $result = $this->getConfigByKey(PortfolioConfig::ACCENT_COLOR, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__ACCENT_COLOR, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['accentColor'] = $result['payload']->setting_value;
                 } else {
                     $data['accentColor'] = '#0168fa';
@@ -167,8 +167,8 @@ class PortfolioConfigService implements PortfolioConfigInterface
             }
 
             if ($googleAnalyticsId) {
-                $result = $this->getConfigByKey(PortfolioConfig::GOOGLE_ANALYTICS_ID, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__GOOGLE_ANALYTICS_ID, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['googleAnalyticsId'] = $result['payload']->setting_value;
                 } else {
                     $data['googleAnalyticsId'] = '';
@@ -176,96 +176,96 @@ class PortfolioConfigService implements PortfolioConfigInterface
             }
 
             if ($maintenanceMode) {
-                $result = $this->getConfigByKey(PortfolioConfig::MAINTENANCE_MODE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__MAINTENANCE_MODE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['maintenanceMode'] = $result['payload']->setting_value;
                 } else {
-                    $data['maintenanceMode'] = Constants::FALSE;
+                    $data['maintenanceMode'] = CoreConstants::FALSE;
                 }
             }
 
             if ($visibility) {
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_ABOUT, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_ABOUT, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['about'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['about'] = Constants::TRUE;
+                    $data['visibility']['about'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SKILL, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['skills'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['skills'] = Constants::TRUE;
+                    $data['visibility']['skills'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_EDUCATION, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_EDUCATION, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['education'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['education'] = Constants::TRUE;
+                    $data['visibility']['education'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_EXPERIENCE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_EXPERIENCE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['experiences'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['experiences'] = Constants::TRUE;
+                    $data['visibility']['experiences'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_PROJECT, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_PROJECT, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['projects'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['projects'] = Constants::TRUE;
+                    $data['visibility']['projects'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SERVICE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SERVICE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['services'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['services'] = Constants::TRUE;
+                    $data['visibility']['services'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_CONTACT, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_CONTACT, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['contact'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['contact'] = Constants::TRUE;
+                    $data['visibility']['contact'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_FOOTER, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_FOOTER, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['footer'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['footer'] = Constants::TRUE;
+                    $data['visibility']['footer'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_CV, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_CV, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['cv'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['cv'] = Constants::TRUE;
+                    $data['visibility']['cv'] = CoreConstants::TRUE;
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::VISIBILITY_SKILL_PROFICIENCY, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__VISIBILITY_SKILL_PROFICIENCY, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['visibility']['skillProficiency'] = $result['payload']->setting_value;
                 } else {
-                    $data['visibility']['skillProficiency'] = Constants::TRUE;
+                    $data['visibility']['skillProficiency'] = CoreConstants::TRUE;
                 }
             }
 
             if ($script) {
-                $result = $this->getConfigByKey(PortfolioConfig::SCRIPT_HEADER, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__SCRIPT_HEADER, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['script']['header'] = $result['payload']->setting_value;
                 } else {
                     $data['script']['header'] = '';
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::SCRIPT_FOOTER, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__SCRIPT_FOOTER, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['script']['footer'] = $result['payload']->setting_value;
                 } else {
                     $data['script']['footer'] = '';
@@ -273,29 +273,29 @@ class PortfolioConfigService implements PortfolioConfigInterface
             }
 
             if ($seo) {
-                $result = $this->getConfigByKey(PortfolioConfig::META_TITLE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_TITLE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['seo']['title'] = $result['payload']->setting_value;
                 } else {
                     $data['seo']['title'] = '';
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::META_AUTHOR, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_AUTHOR, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['seo']['author'] = $result['payload']->setting_value;
                 } else {
                     $data['seo']['author'] = '';
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::META_DESCRIPTION, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_DESCRIPTION, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['seo']['description'] = $result['payload']->setting_value;
                 } else {
                     $data['seo']['description'] = '';
                 }
 
-                $result = $this->getConfigByKey(PortfolioConfig::META_IMAGE, ['setting_value']);
-                if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                $result = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_IMAGE, ['setting_value']);
+                if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['seo']['image'] = $result['payload']->setting_value;
                 } else {
                     $data['seo']['image'] = '';
@@ -305,14 +305,14 @@ class PortfolioConfigService implements PortfolioConfigInterface
             return [
                 'message' => 'Configs are fetched successfully',
                 'payload' => $data,
-                'status' => Constants::STATUS_CODE_SUCCESS
+                'status' => CoreConstants::STATUS_CODE_SUCCESS
             ];
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -334,7 +334,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
                 return [
                     'message' => 'Validation Error',
                     'payload' => $validate->errors(),
-                    'status' => Constants::STATUS_CODE_BAD_REQUEST
+                    'status' => CoreConstants::STATUS_CODE_BAD_REQUEST
                 ];
             }
 
@@ -343,11 +343,11 @@ class PortfolioConfigService implements PortfolioConfigInterface
 
             $result = $this->insertOrUpdate($newData);
             
-            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 return [
                     'message' => 'Config is successfully updated',
                     'payload' => $result['payload'],
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return $result;
@@ -357,7 +357,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
@@ -377,12 +377,12 @@ class PortfolioConfigService implements PortfolioConfigInterface
             foreach ($data as $key => $value) {
                 if ($key === 'title') {
                     $newData = [
-                        'setting_key' => PortfolioConfig::META_TITLE,
+                        'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_TITLE,
                         'setting_value' => isset($value) ? $value : '',
                     ];
                     $result = $this->insertOrUpdate($newData);
 
-                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                         $count++;
                         $inserted['title'] = $result['payload']->setting_value;
                     } else {
@@ -390,12 +390,12 @@ class PortfolioConfigService implements PortfolioConfigInterface
                     }
                 } elseif ($key === 'author') {
                     $newData = [
-                        'setting_key' => PortfolioConfig::META_AUTHOR,
+                        'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_AUTHOR,
                         'setting_value' => isset($value) ? $value : '',
                     ];
                     $result = $this->insertOrUpdate($newData);
 
-                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                         $count++;
                         $inserted['author'] = $result['payload']->setting_value;
                     } else {
@@ -403,12 +403,12 @@ class PortfolioConfigService implements PortfolioConfigInterface
                     }
                 } elseif ($key === 'description') {
                     $newData = [
-                        'setting_key' => PortfolioConfig::META_DESCRIPTION,
+                        'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_DESCRIPTION,
                         'setting_value' => isset($value) ? $value : '',
                     ];
                     $result = $this->insertOrUpdate($newData);
 
-                    if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                    if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                         $count++;
                         $inserted['description'] = $result['payload']->setting_value;
                     } else {
@@ -428,8 +428,8 @@ class PortfolioConfigService implements PortfolioConfigInterface
                         if ($file->move($pathName, $fileName)) {
                             //delete previous image
                             try {
-                                $oldImageResponse = $this->getConfigByKey(PortfolioConfig::META_IMAGE);
-                                if ($oldImageResponse['status'] === Constants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
+                                $oldImageResponse = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_IMAGE);
+                                if ($oldImageResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
                                     unlink($oldImageResponse['payload']->setting_value);
                                 }
                             } catch (\Throwable $th) {
@@ -437,12 +437,12 @@ class PortfolioConfigService implements PortfolioConfigInterface
                             }
 
                             $newData = [
-                                'setting_key' => PortfolioConfig::META_IMAGE,
+                                'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_IMAGE,
                                 'setting_value' => $pathName.$fileName,
                             ];
                             $result = $this->insertOrUpdate($newData);
 
-                            if ($result['status'] === Constants::STATUS_CODE_SUCCESS) {
+                            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                                 $count++;
                                 $inserted['image'] = $result['payload']->setting_value;
                             } else {
@@ -452,8 +452,8 @@ class PortfolioConfigService implements PortfolioConfigInterface
                     } else {
                         //delete previous image
                         try {
-                            $oldImageResponse = $this->getConfigByKey(PortfolioConfig::META_IMAGE);
-                            if ($oldImageResponse['status'] === Constants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
+                            $oldImageResponse = $this->getConfigByKey(CoreConstants::PORTFOLIO_CONFIG__META_IMAGE);
+                            if ($oldImageResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && file_exists($oldImageResponse['payload']->setting_value)) {
                                 unlink($oldImageResponse['payload']->setting_value);
                             }
                         } catch (\Throwable $th) {
@@ -461,7 +461,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
                         }
 
                         $newData = [
-                            'setting_key' => PortfolioConfig::META_IMAGE,
+                            'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_IMAGE,
                             'setting_value' => '',
                         ];
                         $result = $this->insertOrUpdate($newData);
@@ -475,13 +475,13 @@ class PortfolioConfigService implements PortfolioConfigInterface
                         'count' => $count,
                         'inserted' => $inserted
                     ],
-                    'status' => Constants::STATUS_CODE_SUCCESS
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Nothing is updated',
                     'payload' => null,
-                    'status' => Constants::STATUS_CODE_ERROR
+                    'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -489,7 +489,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status'  => Constants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }
