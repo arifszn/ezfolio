@@ -35,7 +35,7 @@ const Services = () => {
             // eslint-disable-next-line react/display-name
             render: (text, row) => {
                 return (
-                    <Avatar size="large" icon={<i className={`accentColor ${row.icon}`}></i>} />
+                    <Avatar style={{ backgroundColor: 'var(--z-accent-color)' }} icon={<i className={row.icon}></i>} />
                 )
             }
         },
