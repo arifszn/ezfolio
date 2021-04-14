@@ -9,6 +9,7 @@ use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\ExperienceInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\ProjectInterface;
+use App\Services\Contracts\ServiceInterface;
 use App\Services\Contracts\SkillInterface;
 use Illuminate\Database\Seeder;
 use Log;
@@ -29,6 +30,7 @@ class PortfolioSeeder extends Seeder
             $skill = resolve(SkillInterface::class);
             $experience = resolve(ExperienceInterface::class);
             $project = resolve(ProjectInterface::class);
+            $service = resolve(ServiceInterface::class);
 
             //portfolio config table seed
 
@@ -511,6 +513,32 @@ class PortfolioSeeder extends Seeder
                 }
                 
                 $project->store($data);
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            //service table seed
+            try {
+                $data = [
+                    'title' => 'Website Developing',
+                    'icon' => 'fas fa-code',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $service->store($data);
+
+                $data = [
+                    'title' => 'UI/UX Design',
+                    'icon' => 'fas fa-basketball-ball',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $service->store($data);
+
+                $data = [
+                    'title' => 'Security',
+                    'icon' => 'fas fa-shield-alt',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                ];
+                $service->store($data);
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }

@@ -69,6 +69,12 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/projects/{id}', ['App\Http\Controllers\Admin\Api\ProjectController', 'show']);
             Route::put('/projects/{id}', ['App\Http\Controllers\Admin\Api\ProjectController', 'update']);
             Route::delete('/projects', ['App\Http\Controllers\Admin\Api\ProjectController', 'destroy']);
+
+            Route::get('/services', ['App\Http\Controllers\Admin\Api\ServiceController', 'index']);
+            Route::post('/services', ['App\Http\Controllers\Admin\Api\ServiceController', 'store']);
+            Route::get('/services/{id}', ['App\Http\Controllers\Admin\Api\ServiceController', 'show']);
+            Route::put('/services/{id}', ['App\Http\Controllers\Admin\Api\ServiceController', 'update']);
+            Route::delete('/services', ['App\Http\Controllers\Admin\Api\ServiceController', 'destroy']);
         });
     });
 });
