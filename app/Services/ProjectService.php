@@ -39,11 +39,11 @@ class ProjectService implements ProjectInterface
     public function getAllFields(array $select = ['*'])
     {
         try {
-            $response = $this->model->select($select)->get();
-            if ($response) {
+            $result = $this->model->select($select)->get();
+            if ($result) {
                 return [
                     'message' => 'Data is fetched successfully',
-                    'payload' => $response,
+                    'payload' => $result,
                     'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
@@ -104,14 +104,14 @@ class ProjectService implements ProjectInterface
             if (isset($data['seederThumbnail']) && isset($data['seederImages'])) {
                 $newData['thumbnail'] = $data['seederThumbnail'];
                 $newData['images'] = json_encode($data['seederImages']);
-                $response = $this->model->create($newData);
+                $result = $this->model->create($newData);
             } else {
                 if (!empty($data['id'])) {
-                    $response = $this->getById($data['id'], ['*']);
-                    if ($response['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $response;
+                    $result = $this->getById($data['id'], ['*']);
+                    if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
+                        return $result;
                     } else {
-                        $existingData = $response['payload'];
+                        $existingData = $result['payload'];
                     }
 
                     //process thumbnail
@@ -127,7 +127,7 @@ class ProjectService implements ProjectInterface
                     $newData['thumbnail'] = $processThumbnail['payload']['file'];
                     $newData['images'] = json_encode($processImages['payload']['files']);
 
-                    $response = $existingData->update($newData);
+                    $result = $existingData->update($newData);
                 } else {
                     //process thumbnail
                     $processThumbnail = $this->processThumbnail($data['thumbnail']);
@@ -143,14 +143,14 @@ class ProjectService implements ProjectInterface
 
                     $newData['thumbnail'] = $processThumbnail['payload']['file'];
                     $newData['images'] = json_encode($processImages['payload']['files']);
-                    $response = $this->model->create($newData);
+                    $result = $this->model->create($newData);
                 }
             }
 
-            if ($response) {
+            if ($result) {
                 return [
                     'message' => isset($data['id']) ? 'Data is successfully updated' : 'Data is successfully saved',
-                    'payload' => $response,
+                    'payload' => $result,
                     'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
