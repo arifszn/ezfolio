@@ -2,7 +2,7 @@
 
 namespace App\Services\Contracts;
 
-interface SkillInterface
+interface ProjectInterface
 {
     /**
      * Get all fields

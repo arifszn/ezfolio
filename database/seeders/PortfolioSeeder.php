@@ -8,6 +8,7 @@ use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\ExperienceInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
+use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\SkillInterface;
 use Illuminate\Database\Seeder;
 use Log;
@@ -27,6 +28,7 @@ class PortfolioSeeder extends Seeder
             $education = resolve(EducationInterface::class);
             $skill = resolve(SkillInterface::class);
             $experience = resolve(ExperienceInterface::class);
+            $project = resolve(ProjectInterface::class);
 
             //portfolio config table seed
 
@@ -420,6 +422,95 @@ class PortfolioSeeder extends Seeder
                     'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
                 ];
                 $experience->store($data);
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            //project table seed
+            try {
+                try {
+                    //images
+                    if (is_dir('public/assets/common/img/projects')) {
+                        $dir = 'public/assets/common/img/projects';
+                    } else {
+                        $dir = 'assets/common/img/projects';
+                    }
+                    
+                    $leave_files = array('.gitkeep');
+                    
+                    foreach (glob("$dir/*") as $file) {
+                        if (!in_array(basename($file), $leave_files)) {
+                            unlink($file);
+                        }
+                    }
+                } catch (\Throwable $th) {
+                    Log::error($th->getMessage());
+                }
+
+                $data = [
+                    'title' => 'Demo Project 1',
+                    'categories' => ['personal'],
+                    'link' => 'https://www.youtube.com',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'seederThumbnail' => 'assets/common/img/projects/demo_project_1_1.png',
+                    'seederImages' => [
+                        'assets/common/img/projects/demo_project_1_1.png',
+                        'assets/common/img/projects/demo_project_1_2.png'
+                    ]
+                ];
+                if (is_dir('public/assets/common/default/projects')) {
+                    copy('public/assets/common/default/projects/demo_project_1_1.png', $dir.'/demo_project_1_1.png');
+                    copy('public/assets/common/default/projects/demo_project_1_2.png', $dir.'/demo_project_1_2.png');
+                } else {
+                    copy('assets/common/default/projects/demo_project_1_1.png', $dir.'/demo_project_1_1.png');
+                    copy('assets/common/default/projects/demo_project_1_2.png', $dir.'/demo_project_1_2.png');
+                }
+                
+                $project->store($data);
+
+                $data = [
+                    'title' => 'Demo Project 2',
+                    'categories' => ['professional'],
+                    'link' => 'https://www.facebook.com',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'seederThumbnail' => 'assets/common/img/projects/demo_project_2_1.png',
+                    'seederImages' => [
+                        'assets/common/img/projects/demo_project_2_1.png',
+                        'assets/common/img/projects/demo_project_2_2.png'
+                    ]
+                ];
+
+                if (is_dir('public/assets/common/default/projects')) {
+                    copy('public/assets/common/default/projects/demo_project_2_1.png', $dir.'/demo_project_2_1.png');
+                    copy('public/assets/common/default/projects/demo_project_2_2.png', $dir.'/demo_project_2_2.png');
+                } else {
+                    copy('assets/common/default/projects/demo_project_2_1.png', $dir.'/demo_project_2_1.png');
+                    copy('assets/common/default/projects/demo_project_2_2.png', $dir.'/demo_project_2_2.png');
+                }
+
+                $project->store($data);
+
+                $data = [
+                    'title' => 'Demo Project 3',
+                    'categories' => ['personal'],
+                    'link' => 'https://www.linkedin.com',
+                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'seederThumbnail' => 'assets/common/img/projects/demo_project_3_1.png',
+                    'seederImages' => [
+                        'assets/common/img/projects/demo_project_3_1.png',
+                        'assets/common/img/projects/demo_project_3_2.png'
+                    ]
+                ];
+                
+                if (is_dir('public/assets/common/default/projects')) {
+                    copy('public/assets/common/default/projects/demo_project_3_1.png', $dir.'/demo_project_3_1.png');
+                    copy('public/assets/common/default/projects/demo_project_3_2.png', $dir.'/demo_project_3_2.png');
+                } else {
+                    copy('assets/common/default/projects/demo_project_3_1.png', $dir.'/demo_project_3_1.png');
+                    copy('assets/common/default/projects/demo_project_3_2.png', $dir.'/demo_project_3_2.png');
+                }
+                
+                $project->store($data);
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }

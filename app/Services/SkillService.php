@@ -122,7 +122,7 @@ class SkillService implements SkillInterface
     }
 
     /**
-     * Fetch data by id
+     * Fetch item by id
      *
      * @param int $id
      * @param array $select

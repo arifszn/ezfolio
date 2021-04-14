@@ -15,6 +15,7 @@ const web = {
         portfolioEducation: '/admin/portfolio/education',
         portfolioSkills: '/admin/portfolio/skills',
         portfolioExperiences: '/admin/portfolio/experiences',
+        portfolioProjects: '/admin/portfolio/projects',
         systemLogs: '/admin/system-logs',
     },
     user: {
@@ -43,6 +44,7 @@ const api = {
         education: Utils.backend+'/api/'+Utils.apiVersion+'/admin/education',
         skills: Utils.backend+'/api/'+Utils.apiVersion+'/admin/skills',
         experiences: Utils.backend+'/api/'+Utils.apiVersion+'/admin/experiences',
+        projects: Utils.backend+'/api/'+Utils.apiVersion+'/admin/projects',
     },
 };
 

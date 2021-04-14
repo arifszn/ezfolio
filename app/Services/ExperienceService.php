@@ -123,7 +123,7 @@ class ExperienceService implements ExperienceInterface
     }
 
     /**
-     * Fetch data by id
+     * Fetch item by id
      *
      * @param int $id
      * @param array $select

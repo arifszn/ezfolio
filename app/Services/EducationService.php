@@ -125,7 +125,7 @@ class EducationService implements EducationInterface
     }
 
     /**
-     * Fetch data by id
+     * Fetch item by id
      *
      * @param int $id
      * @param array $select
@@ -226,7 +226,7 @@ class EducationService implements EducationInterface
     }
 
     /**
-     * Delete data by id array
+     * Delete items by id array
      *
      * @param array $ids
      * @return array

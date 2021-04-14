@@ -21,7 +21,7 @@ interface ExperienceInterface
     public function store(array $data);
 
     /**
-     * Fetch skill by id
+     * Fetch item by id
      *
      * @param int $id
      * @param array $select

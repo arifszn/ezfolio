@@ -118,7 +118,6 @@ const FileUploaderFormInput = (props) => {
 FileUploaderFormInput.propTypes = {
     labelIdle: PropTypes.string,
     disabled: PropTypes.bool,
-    serverUrl: PropTypes.string.isRequired,
     previewFile: PropTypes.string,
     name: PropTypes.string,
     maxFiles: PropTypes.number,

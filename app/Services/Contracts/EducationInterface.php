@@ -21,7 +21,7 @@ interface EducationInterface
     public function store(array $data);
 
     /**
-     * Fetch skill by id
+     * Fetch item by id
      *
      * @param int $id
      * @param array $select
@@ -39,7 +39,7 @@ interface EducationInterface
     public function getAllFieldsWithPaginate(array $data, array $select = ['*']);
 
     /**
-     * Delete skill by id array
+     * Delete items by id array
      *
      * @param array $ids
      * @return array

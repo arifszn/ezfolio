@@ -1,4 +1,4 @@
-import { Button, Menu, PageHeader, Space, Dropdown, Modal } from 'antd';
+import { Button, Menu, PageHeader, Space, Dropdown, Modal, Avatar, Tag, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 import PageWrapper from '../layout/PageWrapper';
 import ProTable from '@ant-design/pro-table';
@@ -6,40 +6,83 @@ import { DownOutlined, ExclamationCircleOutlined, EditOutlined, DeleteOutlined }
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import Experience from './Experience';
+import Project from './Project';
 
 const { confirm } = Modal;
 
-const Experiences = () => {
+const Projects = () => {
     const [loading, setLoading] = useState(false);
     const actionRef = useRef();
     const [modalVisible, setModalVisible] = useState(false);
     const [itemToEdit, setItemToEdit] = useState(null);
+    const [categories, setCategories] = useState([]);
 
     const columns = [
         {
-            title: 'Company',
-            dataIndex: 'company',
+            title: 'Title',
+            dataIndex: 'title',
             search: true,
             sorter: true,
             width: 170,
             ellipsis:true
         },
         {
-            title: 'Period',
-            dataIndex: 'period',
-            sorter: true,
-            search: true,
-            width: 170,
-            ellipsis:true
+            title: 'Thumbnail',
+            dataIndex: 'thumbnail',
+            sorter: false,
+            align: 'center',
+            width: 130,
+            search: false,
+            render: (_, row) => (
+                row.thumbnail ?
+                <Space>
+                    <Avatar
+                        shape="circle"
+                        size="large"
+                        src={Utils.backend + '/' + row.thumbnail}
+                    />
+                </Space>
+                :
+                '-'
+            ),
         },
         {
-            title: 'Position',
-            dataIndex: 'position',
-            sorter: true,
-            search: true,
+            title: 'Link',
+            dataIndex: 'link',
+            sorter: false,
+            align: 'center',
+            width: 130,
+            search: false,
+            ellipsis:true,
+            render: (_, row) => (
+                row.link ?
+                <Space>
+                    <Button size={'small'}>
+                        <a href={row.link} target="_blank" rel="noreferrer">
+                            <Typography.Text ellipsis style={{ width: 130 }}>
+                                {row.link}
+                            </Typography.Text>
+                        </a>
+                    </Button>
+                </Space>
+                :
+                '-'
+            ),
+        },
+        {
+            title: 'Category',
+            dataIndex: 'categories',
+            sorter: false,
+            align: 'center',
             width: 170,
-            ellipsis:true
+            search: false,
+            render: (_, row) => {
+                return (
+                    JSON.parse(row.categories).map((category, index) => {
+                        return <Tag key={index} color="cyan">{category}</Tag>;
+                    })
+                )
+            },
         },
         {
             title: 'Details',
@@ -77,7 +120,7 @@ const Experiences = () => {
             mask: true,
             onOk() {
                 setLoading(true);
-                HTTP.delete(Routes.api.admin.experiences, {
+                HTTP.delete(Routes.api.admin.projects, {
                     params: {
                         ids: ids
                     }
@@ -124,8 +167,8 @@ const Experiences = () => {
             <PageWrapper>
                 <PageHeader
                     style={{padding: 0}}
-                    title="Experiences"
-                    subTitle="Your job history"
+                    title="Projects"
+                    subTitle="Your projects to showcase"
                     extra={[
                         <Button key="add" type="primary" onClick={() => setModalVisible(true)}>
                             Add New
@@ -146,7 +189,6 @@ const Experiences = () => {
                             // onChange: (_, selectedRows) => setSelectedRows(selectedRows),
                         }}
                         expandable={{
-                            // eslint-disable-next-line react/display-name
                             expandedRowRender: record => <p style={{ margin: '0 17px' }}>Details: {record.details}</p>,
                         }}
                         tableAlertRender={({ selectedRowKeys, onCleanSelected }) => (
@@ -171,7 +213,7 @@ const Experiences = () => {
                         )}
                         actionRef={actionRef}
                         request={async (params, sorter) => {
-                            return HTTP.get(Routes.api.admin.experiences+'?page='+params.current, {
+                            return HTTP.get(Routes.api.admin.projects+'?page='+params.current, {
                                 params: {
                                     params,
                                     sorter,
@@ -179,6 +221,16 @@ const Experiences = () => {
                                 }
                             }).then(response => {
                                 return Utils.handleSuccessResponse(response, () => {
+                                    if (response.data.payload.data.length) {
+                                        let newCategories = [...categories];
+                                        response.data.payload.data.forEach(row => {
+                                            JSON.parse(row.categories).map((category) => {
+                                                newCategories.push(category);
+                                            })
+                                        });
+                                        setCategories([...new Set(newCategories)]);
+                                    }
+
                                     return response.data.payload
                                 })
                             })
@@ -197,9 +249,10 @@ const Experiences = () => {
             </PageWrapper>
             {
                 modalVisible && (
-                    <Experience
-                        title={itemToEdit ? 'Edit Experience' : 'Add Experience'}
+                    <Project
+                        title={itemToEdit ? 'Edit Project' : 'Add Project'}
                         itemToEdit={itemToEdit}
+                        categories={categories}
                         visible={modalVisible}
                         handleCancel={
                             () => {
@@ -221,4 +274,4 @@ const Experiences = () => {
     )
 }
 
-export default Experiences;
+export default Projects;
