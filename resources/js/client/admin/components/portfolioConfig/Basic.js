@@ -231,7 +231,7 @@ const Basic = (props) => {
                                 Change
                             </a>,
                         ]}>
-                            <Item.Meta title={<React.Fragment>Google Analytics ID <small><Text type="secondary">(Optional)</Text></small></React.Fragment>} description={changeGoogleAnalyticsId}/>
+                            <Item.Meta title={'Google Analytics ID'} description={changeGoogleAnalyticsId}/>
                         </StyledListItem>
                     </Spin>
                     <StyledListItem actions={

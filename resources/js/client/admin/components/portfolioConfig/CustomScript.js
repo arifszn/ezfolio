@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Spin, List, PageHeader, Typography } from 'antd';
+import { Spin, List, PageHeader } from 'antd';
 import PropTypes from 'prop-types';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
@@ -77,7 +77,7 @@ const CustomScript = (props) => {
                                 </a>,
                             ]
                         }>
-                            <Item.Meta title={<React.Fragment>Portfolio Header Script <small><Typography.Text type="secondary">(Optional)</Typography.Text></small></React.Fragment>} description={'Set script which will be placed in header.'} />
+                            <Item.Meta title={'Portfolio Header Script'} description={'Set script which will be placed in header.'} />
                         </StyledListItem>
                     </Spin>
                     <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.SCRIPT_FOOTER}>
@@ -93,7 +93,7 @@ const CustomScript = (props) => {
                                 </a>,
                             ]
                         }>
-                            <Item.Meta title={<React.Fragment>Portfolio Footer Script <small><Typography.Text type="secondary">(Optional)</Typography.Text></small></React.Fragment>} description={'Set script which will be placed in footer.'} />
+                            <Item.Meta title={'Portfolio Header Script'} description={'Set script which will be placed in footer.'} />
                         </StyledListItem>
                     </Spin>
                 </List>

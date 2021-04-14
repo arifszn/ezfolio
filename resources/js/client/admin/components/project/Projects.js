@@ -33,6 +33,7 @@ const Projects = () => {
             align: 'center',
             width: 130,
             search: false,
+            // eslint-disable-next-line react/display-name
             render: (_, row) => (
                 row.thumbnail ?
                 <Space>
@@ -54,6 +55,7 @@ const Projects = () => {
             width: 130,
             search: false,
             ellipsis:true,
+            // eslint-disable-next-line react/display-name
             render: (_, row) => (
                 row.link ?
                 <Space>
@@ -189,6 +191,7 @@ const Projects = () => {
                             // onChange: (_, selectedRows) => setSelectedRows(selectedRows),
                         }}
                         expandable={{
+                            // eslint-disable-next-line react/display-name
                             expandedRowRender: record => <p style={{ margin: '0 17px' }}>Details: {record.details}</p>,
                         }}
                         tableAlertRender={({ selectedRowKeys, onCleanSelected }) => (

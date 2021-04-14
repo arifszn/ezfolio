@@ -6,7 +6,7 @@ import HTTP from '../../../common/helpers/HTTP';
 import Utils from '../../../common/helpers/Utils';
 import Routes from '../../../common/helpers/Routes';
 import FileUploaderFormInput from '../uploader/FileUploaderFormInput';
-import { UploadOutlined, InboxOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -294,7 +294,7 @@ const Project = (props) => {
                             listType="picture-card"
                             fileList={imageFileList}
                             beforeUpload={
-                                file => {
+                                () => {
                                     return false;
                                 }
                             }
