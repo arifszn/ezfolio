@@ -43,37 +43,37 @@ class FrontendService implements FrontendInterface
             }
 
             //about
-            $result = resolve(AboutInterface::class)->getAllFields();
+            $result = resolve(AboutInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['about'] = $result['payload'];
             }
 
             //skill
-            $result = resolve(SkillInterface::class)->getAllFields();
+            $result = resolve(SkillInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['skills'] = $result['payload'];
             }
 
             //education
-            $result = resolve(EducationInterface::class)->getAllFields();
+            $result = resolve(EducationInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['education'] = $result['payload'];
             }
 
             //experiences
-            $result = resolve(ExperienceInterface::class)->getAllFields();
+            $result = resolve(ExperienceInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['experiences'] = $result['payload'];
             }
 
             //projects
-            $result = resolve(ProjectInterface::class)->getAllFields();
+            $result = resolve(ProjectInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['projects'] = $result['payload'];
             }
 
             //services
-            $result = resolve(ServiceInterface::class)->getAllFields();
+            $result = resolve(ServiceInterface::class)->getAll();
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['services'] = $result['payload'];
             }
@@ -101,7 +101,7 @@ class FrontendService implements FrontendInterface
     public function getAllProjects()
     {
         try {
-            $result = resolve(ProjectInterface::class)->getAllFields();
+            $result = resolve(ProjectInterface::class)->getAll();
 
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 return [

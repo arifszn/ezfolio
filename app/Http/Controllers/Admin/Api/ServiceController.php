@@ -33,7 +33,7 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $result = $this->service->getAllFieldsWithPaginate($request->all());
+        $result = $this->service->getAllWithPaginate($request->all());
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }

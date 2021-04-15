@@ -34,7 +34,7 @@ class SkillController extends Controller
      */
     public function index(Request $request)
     {
-        $result = $this->skill->getAllFieldsWithPaginate($request->all());
+        $result = $this->skill->getAllWithPaginate($request->all());
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }

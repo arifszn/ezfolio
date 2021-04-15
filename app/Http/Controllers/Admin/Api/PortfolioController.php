@@ -73,7 +73,7 @@ class PortfolioController extends Controller
     public function about(Request $request)
     {
         if ($request->isMethod('get')) {
-            $result = $this->about->getAllFields();
+            $result = $this->about->getAll();
         } elseif ($request->isMethod('post')) {
             $result = $this->about->store($request->all());
         }

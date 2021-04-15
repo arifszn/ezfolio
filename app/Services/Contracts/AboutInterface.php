@@ -10,7 +10,7 @@ interface AboutInterface
      * @param array $select
      * @return array
      */
-    public function getAllFields(array $select = ['*']);
+    public function getAll(array $select = ['*']);
 
     /**
      * Store/update data

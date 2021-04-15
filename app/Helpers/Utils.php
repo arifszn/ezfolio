@@ -77,7 +77,7 @@ class Utils
     {
         try {
             $about = resolve(AboutInterface::class);
-            $result = $about->getAllFields(['avatar']);
+            $result = $about->getAll(['avatar']);
 
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 return asset($result['payload']->avatar);
@@ -98,7 +98,7 @@ class Utils
     {
         try {
             $about = resolve(AboutContract::class);
-            $result = $about->getAllFields(['cover']);
+            $result = $about->getAll(['cover']);
 
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 return asset($result['payload']->cover);

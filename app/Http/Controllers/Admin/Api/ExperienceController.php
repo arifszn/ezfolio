@@ -33,7 +33,7 @@ class ExperienceController extends Controller
      */
     public function index(Request $request)
     {
-        $result = $this->experience->getAllFieldsWithPaginate($request->all());
+        $result = $this->experience->getAllWithPaginate($request->all());
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }

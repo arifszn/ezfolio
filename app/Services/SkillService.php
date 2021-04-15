@@ -34,7 +34,7 @@ class SkillService implements SkillInterface
      * @param array $select
      * @return array
      */
-    public function getAllFields(array $select = ['*'])
+    public function getAll(array $select = ['*'])
     {
         try {
             $result = $this->model->select($select)->get();
@@ -164,7 +164,7 @@ class SkillService implements SkillInterface
      * @param array $select
      * @return array
      */
-    public function getAllFieldsWithPaginate(array $data, array $select = ['*'])
+    public function getAllWithPaginate(array $data, array $select = ['*'])
     {
         try {
             $perPage  = !empty($data['params']) && !empty(json_decode($data['params'])->pageSize) ? json_decode($data['params'])->pageSize : 10;

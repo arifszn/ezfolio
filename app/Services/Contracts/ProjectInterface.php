@@ -10,7 +10,7 @@ interface ProjectInterface
      * @param array $select
      * @return array
      */
-    public function getAllFields(array $select = ['*']);
+    public function getAll(array $select = ['*']);
 
     /**
      * Store/update data
@@ -36,7 +36,7 @@ interface ProjectInterface
      * @param array $select
      * @return array
      */
-    public function getAllFieldsWithPaginate(array $data, array $select = ['*']);
+    public function getAllWithPaginate(array $data, array $select = ['*']);
 
     /**
      * Delete items by id array

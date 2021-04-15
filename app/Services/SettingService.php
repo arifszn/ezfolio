@@ -208,7 +208,7 @@ class SettingService implements SettingInterface
             //get cover photo
             $about = resolve(AboutInterface::class);
 
-            $result = $about->getAllFields(['cover', 'id']);
+            $result = $about->getAll(['cover', 'id']);
 
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['cover'] = $result['payload']->cover;
@@ -217,7 +217,7 @@ class SettingService implements SettingInterface
             }
 
             //get avatar
-            $result = $about->getAllFields(['avatar', 'id']);
+            $result = $about->getAll(['avatar', 'id']);
 
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['avatar'] = $result['payload']->avatar;

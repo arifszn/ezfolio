@@ -35,7 +35,7 @@ class AboutService implements AboutInterface
      * @param array $select
      * @return array
      */
-    public function getAllFields(array $select = ['*'])
+    public function getAll(array $select = ['*'])
     {
         try {
             $result = $this->model->select($select)->first();
@@ -115,7 +115,7 @@ class AboutService implements AboutInterface
             }
             $newData['social_links'] = count($newSocialLinksArray) ? json_encode($newSocialLinksArray) : null;
             
-            $existedRecord = $this->getAllFields();
+            $existedRecord = $this->getAll();
 
             if ($existedRecord['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $existedRecord = $existedRecord['payload'];
@@ -181,7 +181,7 @@ class AboutService implements AboutInterface
 
             if ($file->move($pathName, $fileName)) {
                 //delete previous avatar
-                $oldAvatarResponse = $this->getAllFields(['avatar', 'id']);
+                $oldAvatarResponse = $this->getAll(['avatar', 'id']);
                 try {
                     if ($oldAvatarResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldAvatarResponse['payload']->avatar !== 'assets/common/img/avatar/default.png' && file_exists($oldAvatarResponse['payload']->avatar)) {
                         unlink($oldAvatarResponse['payload']->avatar);
@@ -247,7 +247,7 @@ class AboutService implements AboutInterface
 
             if (unlink($file)) {
                 $defaultAvatar = 'assets/common/img/avatar/default.png';
-                $result = $this->getAllFields();
+                $result = $this->getAll();
 
                 if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
@@ -323,7 +323,7 @@ class AboutService implements AboutInterface
 
             if ($file->move($pathName, $fileName)) {
                 //delete previous cover
-                $oldCoverResponse = $this->getAllFields(['cover', 'id']);
+                $oldCoverResponse = $this->getAll(['cover', 'id']);
                 try {
                     if ($oldCoverResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldCoverResponse['payload']->cover !== 'assets/common/img/cover/default.png' && file_exists($oldCoverResponse['payload']->cover)) {
                         unlink($oldCoverResponse['payload']->cover);
@@ -389,7 +389,7 @@ class AboutService implements AboutInterface
 
             if (unlink($file)) {
                 $defaultCover = 'assets/common/img/cover/default.png';
-                $result = $this->getAllFields();
+                $result = $this->getAll();
 
                 if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
@@ -465,7 +465,7 @@ class AboutService implements AboutInterface
 
             if ($file->move($pathName, $fileName)) {
                 //delete previous cv
-                $oldCVResponse = $this->getAllFields(['cv', 'id']);
+                $oldCVResponse = $this->getAll(['cv', 'id']);
                 try {
                     if ($oldCVResponse['status'] === CoreConstants::STATUS_CODE_SUCCESS && $oldCVResponse['payload']->cv !== 'assets/common/cv/default.pdf' && file_exists($oldCVResponse['payload']->cv)) {
                         unlink($oldCVResponse['payload']->cv);
@@ -530,7 +530,7 @@ class AboutService implements AboutInterface
             }
 
             if (unlink($file)) {
-                $result = $this->getAllFields();
+                $result = $this->getAll();
                 if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
                     return $result;
                 } else {

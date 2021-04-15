@@ -34,7 +34,7 @@ class EducationController extends Controller
      */
     public function index(Request $request)
     {
-        $result = $this->education->getAllFieldsWithPaginate($request->all());
+        $result = $this->education->getAllWithPaginate($request->all());
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
