@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Button, Spin, Input, Form, Divider, Carousel, Row, Col, Image } from 'antd';
+import { Drawer, Button, Spin, Divider, Carousel, Row, Col, Image, Tag } from 'antd';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Utils from '../../common/helpers/Utils';
@@ -19,12 +19,11 @@ const StyledTitle = styled.p`
     color: rgba(0, 0, 0, 0.85);
     font-size: 16px;
     line-height: 1.5715;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 `;
 
 const ProjectPopup = (props) => {
     const [visible, setVisible] = useState(false);
-    const [loading, setLoading] = useState((typeof props.loading !== 'undefined') ? props.loading : false);
     const [componentLoading, setComponentLoading] = useState((typeof props.componentLoading !== 'undefined') ? props.componentLoading : false);
 
     useEffect(() => {
@@ -32,12 +31,6 @@ const ProjectPopup = (props) => {
             setVisible(props.visible);
         }, 400);
     }, [props.visible])
-
-    useEffect(() => {
-        if (typeof props.loading !== 'undefined') {
-            setLoading(props.loading)
-        }
-    }, [props.loading])
 
     useEffect(() => {
         if (typeof props.componentLoading !== 'undefined') {
@@ -49,7 +42,7 @@ const ProjectPopup = (props) => {
         setVisible(false);
         setTimeout(() => {
             props.handleCancel();
-        }, 800);
+        }, 400);
     };
 
     return (
@@ -79,7 +72,7 @@ const ProjectPopup = (props) => {
                         <Carousel autoplay pauseOnHover={false}>
                             {
                                 JSON.parse(props.project.images).map((image, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <Image
                                             src={Utils.backend + '/' + image}
                                             preview={false}
@@ -97,8 +90,44 @@ const ProjectPopup = (props) => {
                     </Col>
                 </Row>
                 <Divider />
-                <StyledTitle>Images</StyledTitle>
-                sdfsdf
+                <StyledTitle>Category</StyledTitle>
+                <Row>
+                    <Col span={24}>
+                        {
+                            JSON.parse(props.project.categories).map((category, index) => (
+                                <Tag key={index} style={{background: 'var(--z-accent-color)', color: 'white', textTransform: 'capitalize'}}>{category}</Tag>
+                            ))
+                        }
+                    </Col>
+                </Row>
+                {
+                    (props.project.details !== null) && props.project.details !== '' && (
+                        <React.Fragment>
+                            <Divider/>
+                            <StyledTitle>Description</StyledTitle>
+                            <Row>
+                                <Col span={24}>
+                                    {props.project.details}
+                                </Col>
+                            </Row>
+                        </React.Fragment>
+                    )
+                }
+                {
+                    props.project.link && props.project.link !== '' && (
+                        <React.Fragment>
+                            <Divider/>
+                            <StyledTitle>Link</StyledTitle>
+                            <Row>
+                                <Col span={24}>
+                                    <a href={props.project.link} target="_blank" rel="noreferrer">
+                                        {props.project.link}
+                                    </a>
+                                </Col>
+                            </Row>
+                        </React.Fragment>
+                    )
+                }
             </Spin>
         </StyledDrawer>
     )
@@ -108,7 +137,6 @@ ProjectPopup.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
     project: PropTypes.object,
-    loading: PropTypes.bool,
     componentLoading: PropTypes.bool,
     title: PropTypes.node,
 }

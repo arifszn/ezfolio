@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { FaFolder, FaFolderOpen } from 'react-icons/fa';
-import { IconContext } from 'react-icons';
-import { Card, Image, List, Radio, Row, Space, Tabs, Typography } from 'antd';
-import styled from 'styled-components';
+import { Card, Image, List, Radio, Space } from 'antd';
 import '../../common/assets/css/projects.scss';
 import ProjectPopup from '../components/ProjectPopup';
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { FaRegHandPointer } from 'react-icons/fa';
 import Routes from '../../common/helpers/Routes';
 import HTTP from '../../common/helpers/HTTP';
 import Utils from '../../common/helpers/Utils';
 
+const accentColor = document.querySelector('[data-accentcolor]') ? document.querySelector('[data-accentcolor]').dataset.accentcolor : null;
 
 const thumbnailStyle = {
     height: '150px',
@@ -29,6 +25,10 @@ function App() {
     const [selectedProject, setSelectedProject] = useState(null);
 
     useEffect(() => {
+        if (accentColor) {
+            Utils.changeAccentColor(accentColor);
+        }
+
         loadData();
     }, [])
 
@@ -45,7 +45,7 @@ function App() {
                 if (response.data.payload.length) {
                     let newCategories = [...categories];
                     response.data.payload.forEach(row => {
-                        JSON.parse(row.categories).map((category, index) => {
+                        JSON.parse(row.categories).map((category) => {
                             newCategories.push(category);
                         })
                     });
@@ -68,7 +68,7 @@ function App() {
                     <div className="text-center col-md-12">
                         <Space direction="vertical" size={'large'}>
                             {
-                                !loading && (
+                                (categories.length !== 0) && (
                                     <div data-aos="zoom-in">
                                         <Radio.Group onChange={(e) => {
                                             if (typeof e.target.value === 'undefined') {
@@ -80,7 +80,7 @@ function App() {
                                             <Radio.Button>All</Radio.Button>
                                             {
                                                 categories.map((category, index) => (
-                                                    <Radio.Button key={index} value={category}>{category}</Radio.Button>
+                                                    <Radio.Button key={index} value={category} style={{textTransform: 'capitalize'}}>{category}</Radio.Button>
                                                 ))
                                             }
                                         </Radio.Group>

@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->longText('categories');
             $table->text('thumbnail');
             $table->longText('images');
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->text('link')->nullable();
             $table->timestamps();
         });

@@ -75,7 +75,6 @@ class ProjectService implements ProjectInterface
             if (isset($data['seederThumbnail']) && isset($data['seederImages'])) {
                 $validate = Validator::make($data, [
                     'title' => 'required|string',
-                    'details' => 'required',
                     'categories' => 'required'
                 ]);
             } else {
@@ -83,7 +82,6 @@ class ProjectService implements ProjectInterface
                     'title' => 'required|string',
                     'thumbnail' => 'required',
                     'images' => 'required',
-                    'details' => 'required',
                     'categories' => 'required'
                 ]);
             }
@@ -98,8 +96,8 @@ class ProjectService implements ProjectInterface
 
             $newData['title'] = $data['title'];
             $newData['categories'] = json_encode($data['categories']);
-            $newData['details'] = $data['details'];
             $newData['link'] = isset($data['link']) ? $data['link'] : null;
+            $newData['details'] = isset($data['details']) ? $data['details'] : null;
 
             if (isset($data['seederThumbnail']) && isset($data['seederImages'])) {
                 $newData['thumbnail'] = $data['seederThumbnail'];

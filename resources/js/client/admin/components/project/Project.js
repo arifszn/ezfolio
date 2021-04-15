@@ -88,7 +88,7 @@ const Project = (props) => {
         setVisible(false);
         setTimeout(() => {
             props.handleCancel();
-        }, 800);
+        }, 400);
     };
 
     const handleOk = () => {
@@ -119,7 +119,8 @@ const Project = (props) => {
                 formData.append(`images[]`, fileBlob); 
             }
             
-            formData.append('details', values.details);
+            values.details && formData.append('details', values.details);
+
             values.link && formData.append('link', values.link);
 
             HTTP.post(Routes.api.admin.projects+(values.id ? `/${values.id}` : '' ), formData)
@@ -319,11 +320,6 @@ const Project = (props) => {
                     <Form.Item 
                         name="details" 
                         label="Details"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
                     >
                         <Input.TextArea rows={4} placeholder="Enter Details"/>
                     </Form.Item>

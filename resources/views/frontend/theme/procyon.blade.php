@@ -372,7 +372,7 @@
                     <h2 class="mb-4">Projects</h2>
                 </div>
             </div>
-            <div id="react-project-root"></div>
+            <div id="react-project-root" data-accentcolor="{{$accentColor}}"></div>
             <div class="mb-5"></div>
         </div>
     </section>
