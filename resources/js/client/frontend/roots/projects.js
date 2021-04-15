@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import { Card, Image, List, Radio, Row, Space, Tabs, Typography } from 'antd';
 import styled from 'styled-components';
 import '../../common/assets/css/projects.scss';
-import ProjectPreview from '../components/ProjectPreview';
+import ProjectPopup from '../components/ProjectPopup';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { FaRegHandPointer } from 'react-icons/fa';
 import Routes from '../../common/helpers/Routes';
@@ -22,9 +22,11 @@ const thumbnailStyle = {
 
 function App() {
     const [loading, setLoading] = useState(true);
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     const [categories, setCategories] = useState([]);
     const [data, setData] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedProject, setSelectedProject] = useState(null);
 
     useEffect(() => {
         loadData();
@@ -65,84 +67,85 @@ function App() {
                 <div className="row">
                     <div className="text-center col-md-12">
                         <Space direction="vertical" size={'large'}>
-                            <Radio.Group defaultValue="a">
-                                <Radio.Button value="a">Hangzhou</Radio.Button>
-                                <Radio.Button value="b">Shanghai</Radio.Button>
-                                <Radio.Button value="c">Beijing</Radio.Button>
-                                <Radio.Button value="d">Chengdu</Radio.Button>
-                            </Radio.Group>
+                            {
+                                !loading && (
+                                    <div data-aos="zoom-in">
+                                        <Radio.Group onChange={(e) => {
+                                            if (typeof e.target.value === 'undefined') {
+                                                setSelectedCategory(null);
+                                            } else {
+                                                setSelectedCategory(e.target.value);
+                                            }
+                                        }}>
+                                            <Radio.Button>All</Radio.Button>
+                                            {
+                                                categories.map((category, index) => (
+                                                    <Radio.Button key={index} value={category}>{category}</Radio.Button>
+                                                ))
+                                            }
+                                        </Radio.Group>
+                                    </div>
+                                )
+                            }
                             <List
                                 grid={{ gutter: 24, xl:4, lg: 4, md: 2, sm: 1, xs: 1 }}
-                                dataSource={data}
+                                dataSource={data.filter(project => selectedCategory === null || (selectedCategory !== null && JSON.parse(project.categories).includes(selectedCategory)))}
                                 loading={loading}
                                 renderItem={item => (
-                                <List.Item style={{marginBottom: '24px'}}>
-                                    <Card
-                                        loading={loading}
-                                        style={{width: '100%'}}
-                                        bodyStyle={{padding: '14px'}}
-                                        hoverable
-                                        className={'z-hover z-shadow'}
-                                        data-aos="fade-up" data-aos-anchor-placement="top-bottom"
-                                        bordered={false}
-                                        cover={
-                                            <div style={{opacity: '0.7'}}>
-                                                <Image
-                                                    src={Utils.backend + '/' + item.thumbnail}
-                                                    style={thumbnailStyle}
-                                                    preview={false}
-                                                    placeholder={true}
-                                                />
-                                            </div>
-                                        }
-                                        actions={[
-                                            <React.Fragment key="view">
-                                                See Details
-                                            </React.Fragment>
-                                        ]}
-                                    >
-                                        <Card.Meta
-                                            title={item.title}
-                                        />
-                                    </Card>
-                                    {/* <ProjectPreview/> */}
-                                </List.Item>
+                                    <List.Item style={{marginBottom: '24px'}}>
+                                        <Card
+                                            onClick={() => {
+                                                setSelectedProject(item);
+                                                setModalVisible(true);
+                                            }}
+                                            loading={loading}
+                                            style={{width: '100%'}}
+                                            bodyStyle={{padding: '14px'}}
+                                            hoverable
+                                            className={'z-hover z-shadow'}
+                                            data-aos="fade-up" data-aos-anchor-placement="top-bottom"
+                                            bordered={false}
+                                            cover={
+                                                <div style={{opacity: '0.7'}}>
+                                                    <Image
+                                                        src={Utils.backend + '/' + item.thumbnail}
+                                                        style={thumbnailStyle}
+                                                        preview={false}
+                                                        placeholder={true}
+                                                    />
+                                                </div>
+                                            }
+                                            actions={[
+                                                <React.Fragment key="view">
+                                                    See Details
+                                                </React.Fragment>
+                                            ]}
+                                        >
+                                            <Card.Meta
+                                                title={item.title}
+                                            />
+                                        </Card>
+                                    </List.Item>
                                 )}
                             />
                         </Space>
                     </div>
                 </div>
             </div>
-            {/* <Wrapper>
-                <Col span={24}>
-                    <Tabs defaultActiveKey="1" centered>
-                        <TabPane tab="Tab 1" key="1">
-                        Content of Tab Pane 1
-                        </TabPane>
-                        <TabPane tab="Tab 2" key="2">
-                        Content of Tab Pane 2
-                        </TabPane>
-                        <TabPane tab="Tab 3" key="3">
-                        Content of Tab Pane 3
-                        </TabPane>
-                    </Tabs>
-                </Col>
-            </Wrapper> */}
-            {/* <Row gutter={24}>
-                <Col span={24}>
-                    <Tabs defaultActiveKey="1" centered>
-                        <TabPane tab="Tab 1" key="1">
-                        Content of Tab Pane 1
-                        </TabPane>
-                        <TabPane tab="Tab 2" key="2">
-                        Content of Tab Pane 2
-                        </TabPane>
-                        <TabPane tab="Tab 3" key="3">
-                        Content of Tab Pane 3
-                        </TabPane>
-                    </Tabs>
-                </Col>
-            </Row> */}
+            {
+                modalVisible && (
+                    <ProjectPopup
+                        title={selectedProject ? selectedProject.title : ''}
+                        project={selectedProject}
+                        visible={modalVisible}
+                        handleCancel={
+                            () => {
+                                setModalVisible(false);
+                            }
+                        }
+                    />
+                )
+            }
         </React.Fragment>
     );
 }

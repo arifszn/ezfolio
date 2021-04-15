@@ -347,7 +347,7 @@
                 @if (!empty($services))
                     @foreach ($services as $service)
                         <div class="col-md-4 text-center d-flex" data-aos="zoom-in">
-                            <a href="#" class="services-1 shadow">
+                            <div class="services-1 shadow">
                                 <span class="icon">
                                     <i class="{{$service->icon}}"></i>
                                 </span>
@@ -355,7 +355,7 @@
                                     <h3 class="mb-5">{{$service->title}}</h3>
                                     <p>{{$service->details}}</p>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     @endforeach
                 @endif
