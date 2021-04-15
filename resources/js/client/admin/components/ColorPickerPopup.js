@@ -29,7 +29,7 @@ const ColorPickerPopup = (props) => {
         setVisible(false);
         setTimeout(() => {
             props.handleCancel(_previousColor);
-        }, 800);
+        }, 400);
     }
 
     return (

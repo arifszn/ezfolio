@@ -52,7 +52,7 @@ const Service = (props) => {
         setVisible(false);
         setTimeout(() => {
             props.handleCancel();
-        }, 800);
+        }, 400);
     };
 
     const handleOk = () => {
