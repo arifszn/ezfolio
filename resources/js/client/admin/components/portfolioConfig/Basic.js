@@ -219,7 +219,7 @@ const Basic = (props) => {
                                 </a>,
                             ]
                         }>
-                            <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of portfolio.'} />
+                            <Item.Meta title={'Portfolio Accent Color'} description={'Change accent color of frontend.'} />
                         </StyledListItem>
                     </Spin>
                     <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.portfolioConfig.GOOGLE_ANALYTICS_ID}>

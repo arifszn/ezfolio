@@ -77,4 +77,6 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/services', ['App\Http\Controllers\Admin\Api\ServiceController', 'destroy']);
         });
     });
+
+    Route::get('/frontend/projects', ['App\Http\Controllers\Frontend\Api\GeneralController', 'getProjects']);
 });

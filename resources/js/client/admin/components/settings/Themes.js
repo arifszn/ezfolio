@@ -140,7 +140,7 @@ const Themes = (props) => {
                                 </a>,
                             ]
                         }>
-                            <Item.Meta title={'Accent Color'} description={'Change accent color of app.'} />
+                            <Item.Meta title={'Accent Color'} description={'Change accent color of admin portion.'} />
                         </StyledListItem>
                     </Spin>
                     <Spin delay={500} size="small" spinning={loading && currentSettingToChange === CoreConstants.settings.MENU_LAYOUT}>

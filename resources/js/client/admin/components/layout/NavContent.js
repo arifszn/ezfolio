@@ -31,7 +31,7 @@ const NavContent = () => {
         <React.Fragment>
             <Wrapper>
                 <ItemWrapper className="z-hover">
-                    <a href={Routes.web.user.home} target="_blank" rel="noreferrer" title="Visit Frontend">
+                    <a href={Routes.web.frontend.home} target="_blank" rel="noreferrer" title="Visit Frontend">
                         <Avatar icon={<SelectOutlined />} size="small"/>
                     </a>
                 </ItemWrapper>

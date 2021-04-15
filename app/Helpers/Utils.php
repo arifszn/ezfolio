@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use CoreConstants;
 use App\Models\Setting;
+use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\SettingInterface;
 
 class Utils
@@ -44,5 +45,68 @@ class Utils
         $accentColorRGB = $r . ", " . $g . ", " . $b; //e.g. 255, 255, 255
         
         return $accentColorRGB;
+    }
+
+    /**
+     * Get the logo path
+     *
+     * @return string
+     */
+    public static function getLogo()
+    {
+        try {
+            $setting = resolve(SettingInterface::class);
+            $result = $setting->getSettingByKey(CoreConstants::SETTING__LOGO, ['value']);
+
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
+                return asset($result['payload']->value);
+            } else {
+                return asset('assets/common/img/logo/default.png');
+            }
+        } catch (\Throwable $th) {
+            return asset('assets/common/img/logo/default.png');
+        }
+    }
+
+    /**
+     * Get the avatar path
+     *
+     * @return string
+     */
+    public static function getAvatar()
+    {
+        try {
+            $about = resolve(AboutInterface::class);
+            $result = $about->getAllFields(['avatar']);
+
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
+                return asset($result['payload']->avatar);
+            }
+
+            return asset('assets/common/img/avatar/default.png');
+        } catch (\Throwable $th) {
+            return asset('assets/common/img/avatar/default.png');
+        }
+    }
+
+    /**
+     * Get the cover path
+     *
+     * @return string
+     */
+    public static function getCover()
+    {
+        try {
+            $about = resolve(AboutContract::class);
+            $result = $about->getAllFields(['cover']);
+
+            if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
+                return asset($result['payload']->cover);
+            }
+
+            return asset('assets/common/img/cover/default.png');
+        } catch (\Throwable $th) {
+            return asset('assets/common/img/cover/default.png');
+        }
     }
 }

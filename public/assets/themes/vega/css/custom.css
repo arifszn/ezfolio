@@ -79,7 +79,7 @@
     font-size: 36px;
     transition: 0.5s;
     position: relative;
-    color: var(--accent-color);
+    color: var(--z-accent-color);
 }
 
 #services .icon-box:hover {
@@ -88,7 +88,7 @@
 }
 
 #services .icon-box:hover .icon path {
-    fill: var(--accent-color);
+    fill: var(--z-accent-color);
 }
 
 #services .icon-box:hover .icon i {
@@ -157,7 +157,7 @@ body .skill-progress-wrapper .progress-bar {
     border-style: solid;
     position: absolute;
     top: 0;
-    border-color: var(--accent-color);
+    border-color: var(--z-accent-color);
 }
 .skill-progress-wrapper .progress .progress-left .progress-bar {
     left: 100%;

@@ -19,7 +19,7 @@ const web = {
         portfolioServices: '/admin/portfolio/services',
         systemLogs: '/admin/system-logs',
     },
-    user: {
+    frontend: {
         home: '/',
         notFound: '/not-found',
     }
@@ -47,6 +47,9 @@ const api = {
         experiences: Utils.backend+'/api/'+Utils.apiVersion+'/admin/experiences',
         projects: Utils.backend+'/api/'+Utils.apiVersion+'/admin/projects',
         services: Utils.backend+'/api/'+Utils.apiVersion+'/admin/services',
+    },
+    frontend: {
+        projects: Utils.backend+'/api/'+Utils.apiVersion+'/frontend/projects',
     },
 };
 

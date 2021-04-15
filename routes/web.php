@@ -25,3 +25,11 @@ Route::get('/admin/system-logs', ['\Rap2hpoutre\LaravelLogViewer\LogViewerContro
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/{path?}', ['App\Http\Controllers\Admin\AdminController', 'app'])->where('path', '.*')->name('admin.app');
 });
+
+#region [frontend]
+
+Route::get('/', ['App\Http\Controllers\Frontend\FrontendController', 'index'])->name('frontend');
+Route::post('/contact-me', ['App\Http\Controllers\Frontend\FrontendController', 'contactMe'])->name('contact-me');
+Route::get('/pixel-tracker', ['App\Http\Controllers\Frontend\FrontendController', 'pixelTracker'])->name('pixel-tracker');
+
+#endregion

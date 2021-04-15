@@ -1,0 +1,25 @@
+@import '~antd/dist/antd.css';
+
+.z-shadow, .z-card {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1);
+}
+
+.z-center {
+    align-items: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    display: inline-flex;
+}
+
+.z-hover {
+    transition-duration: 0.8s !important;
+}
+
+.z-hover:hover,
+.z-hover:focus,
+.z-hover:active {
+    transition: transform .2s !important;
+    -ms-transform: scale(1.05) !important;
+    -webkit-transform: scale(1.05) !important; 
+    transform: scale(1.05) !important;
+}

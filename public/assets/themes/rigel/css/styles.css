@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 :root {
-    --accent-color: #0168fa;
+    --z-accent-color: #0168fa;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 }
 
 a {
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 a:hover {
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50px;
   right: 15px;
   bottom: 15px;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   color: #fff;
   transition: display 0.5s ease-in-out;
   z-index: 99999;
@@ -56,7 +56,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .back-to-top:hover {
   color: #fff;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   transition: background 0.2s ease-in-out;
 }
 
@@ -79,7 +79,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid var(--accent-color);
+  border: 6px solid var(--z-accent-color);
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #fff;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
 }
 
 .nav-menu a:hover span, .nav-menu .active > a span, .nav-menu li:hover > a span {
@@ -242,7 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav-active .mobile-nav-toggle i {
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 /*--------------------------------------------------------------
@@ -290,7 +290,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero p span {
-  color: var(--accent-color);
+  color: var(--z-accent-color);
   letter-spacing: 1px;
 }
 
@@ -308,7 +308,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .social-links a:hover {
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 @media (max-width: 992px) {
@@ -366,7 +366,7 @@ section {
   display: block;
   width: 40px;
   height: 3px;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   bottom: 0;
   left: calc(50% - 20px);
 }
@@ -396,7 +396,7 @@ section {
 .about .content ul i {
   font-size: 20px;
   padding-right: 2px;
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 .about .content p:last-child {
@@ -421,7 +421,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   font-size: 24px;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   padding: 12px;
   color: #fff;
   border-radius: 50px;
@@ -473,7 +473,7 @@ section {
   width: 1px;
   height: 10px;
   transition: .9s;
-  background-color: var(--accent-color);
+  background-color: var(--z-accent-color);
 }
 
 /*--------------------------------------------------------------
@@ -490,7 +490,7 @@ section {
 .resume .resume-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
-  border-left: 2px solid var(--accent-color);
+  border-left: 2px solid var(--z-accent-color);
   position: relative;
 }
 
@@ -500,7 +500,7 @@ section {
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
-  color: var(--accent-color);
+  color: var(--z-accent-color);
   margin-bottom: 10px;
 }
 
@@ -534,7 +534,7 @@ section {
   left: -9px;
   top: 0;
   background: #fff;
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--z-accent-color);
 }
 
 /*--------------------------------------------------------------
@@ -568,7 +568,7 @@ section {
 }
 
 .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -719,7 +719,7 @@ section {
   font-size: 36px;
   transition: 0.5s;
   position: relative;
-  color: var(--accent-color);
+  color: var(--z-accent-color);
 }
 
 .services .icon-box .icon svg {
@@ -828,7 +828,7 @@ section {
 }
 
 #services .icon-box:hover .icon path {
-    fill: var(--accent-color);
+    fill: var(--z-accent-color);
 }
 
 #services .icon-box:hover .icon i {
@@ -904,7 +904,7 @@ section {
 }
 
 .testimonials .owl-dot.active {
-  background-color: var(--accent-color) !important;
+  background-color: var(--z-accent-color) !important;
 }
 
 @media (min-width: 992px) {
@@ -923,7 +923,7 @@ section {
 
 .contact .info i {
   font-size: 20px;
-  color: var(--accent-color);
+  color: var(--z-accent-color);
   float: left;
   width: 44px;
   height: 44px;
@@ -955,7 +955,7 @@ section {
 }
 
 .contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   color: #fff;
 }
 
@@ -1033,7 +1033,7 @@ section {
 }
 
 .contact .php-email-form button[type="submit"] {
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -1042,7 +1042,7 @@ section {
 }
 
 .contact .php-email-form button[type="submit"]:hover {
-  background: var(--accent-color);
+  background: var(--z-accent-color);
 }
 
 @-webkit-keyframes animate-loading {
@@ -1091,7 +1091,7 @@ section {
 }
 
 .portfolio-details .portfolio-details-carousel .owl-dot.active {
-  background-color: var(--accent-color) !important;
+  background-color: var(--z-accent-color) !important;
 }
 
 .portfolio-details .portfolio-info {
@@ -1159,7 +1159,7 @@ section {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -1172,7 +1172,7 @@ section {
 }
 
 #footer .social-links a:hover {
-  background: var(--accent-color);
+  background: var(--z-accent-color);
   color: #fff;
   text-decoration: none;
 }
