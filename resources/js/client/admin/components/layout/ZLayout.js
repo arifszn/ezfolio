@@ -11,11 +11,13 @@ import {
   ExperimentOutlined,
   ControlOutlined,
   PieChartOutlined,
-  MailOutlined
+  MailOutlined,
+  ThunderboltOutlined,
 } from '@ant-design/icons';
-import { BackTop } from 'antd';
+import { BackTop, message } from 'antd';
 import NavContent from './NavContent';
 import { useIsMobile } from '../../../common/hooks/IsMobile';
+import axios from 'axios';
 
 const ZLayout = ({ children }) => {
     const isMobile = useIsMobile();
@@ -28,10 +30,38 @@ const ZLayout = ({ children }) => {
     const layout = globalState.menuLayout;
     const [collapsed, setCollapsed] = useState(false);
     let history = useHistory();
+    const [optimizerLoading, setOptimizerLoading] = useState(false);
 
     useEffect(() => {
         !isMobile && setCollapsed(globalState.shortMenu);
     }, [globalState.shortMenu])
+
+    const optimizeOnClick = () => {
+        message.loading({
+            content: 'Action in progress..',
+            duration: 0,
+            key: 'optimize'
+        });
+
+        axios.get(Routes.web.frontend.optimize, {
+            headers: { 
+                Accept: 'application/json'
+            }
+        })
+        .then(response => {
+            Utils.handleSuccessResponse(response, () => {
+                message.success({ 
+                    content: response.data.message, 
+                    key: 'optimize'
+                });
+            })
+        })
+        .catch((error) => {
+            Utils.handleException(error);
+        }).finally(() => {
+            setOptimizerLoading(false);
+        });
+    }
 
     const defaultProps = {
         title: siteName,
@@ -70,7 +100,7 @@ const ZLayout = ({ children }) => {
                         {
                             path: Routes.web.admin.portfolioSkills,
                             key: Routes.web.admin.portfolioSkills,
-                            name: 'Skills',
+                            name: 'Skill',
                         },
                         {
                             path: Routes.web.admin.portfolioEducation,
@@ -107,10 +137,17 @@ const ZLayout = ({ children }) => {
                     icon: <MailOutlined/>,
                 },
                 {
+                    path: Routes.web.frontend.optimize,
+                    key: Routes.web.frontend.optimize,
+                    name: 'Optimize',
+                    onclickHandle: optimizeOnClick,
+                    icon: <ThunderboltOutlined/>,
+                },
+                {
                     path: Routes.web.admin.systemLogs,
                     key: Routes.web.admin.systemLogs,
                     name: 'System Logs',
-                    isExternalLink: true,
+                    onclickHandle: () => { window.open(Routes.web.admin.systemLogs) },
                     icon: <FileTextOutlined/>,
                 },
                 {
@@ -143,8 +180,9 @@ const ZLayout = ({ children }) => {
                         <a
                             onClick={(e) => {
                                 e.preventDefault();
-                                if (typeof item.isExternalLink !== 'undefined' && item.isExternalLink) {
-                                    window.open(item.path);
+
+                                if (typeof item.onclickHandle !== 'undefined') {
+                                    item.onclickHandle();
                                 } else {
                                     navigateToPath(item.path);
                                 }

@@ -23,6 +23,7 @@ const web = {
     },
     frontend: {
         home: '/',
+        optimize: '/optimize',
         notFound: '/not-found',
     }
 };

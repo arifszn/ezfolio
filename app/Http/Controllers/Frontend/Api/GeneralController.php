@@ -7,7 +7,6 @@ use App\Services\Contracts\FrontendInterface;
 use App\Services\Contracts\MessageInterface;
 use CoreConstants;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
