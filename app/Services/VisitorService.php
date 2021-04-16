@@ -379,22 +379,22 @@ class VisitorService implements VisitorInterface
     /**
      * Get visitors stats
      *
-     * @param string $startTime UTC start time
-     * @param string $endTime UTC end time
+     * @param string $startDate UTC start date
+     * @param string $endEnd UTC end date
      * @return array
      */
-    public function getVisitorsStats($startTime = null, $endTime = null)
+    public function getVisitorsStats($startDate = null, $endEnd = null)
     {
         try {
             $result = $this->model;
 
-            if ($startTime) {
-                $startTime = Carbon::parse($startTime)->format('Y-m-d H:i:s');
-                $result = $result->where('created_at', '>=', $startTime);
+            if ($startDate) {
+                $startDate = Carbon::parse($startDate)->format('Y-m-d H:i:s');
+                $result = $result->where('created_at', '>=', $startDate);
             }
-            if ($endTime) {
-                $endTime = Carbon::parse($endTime)->format('Y-m-d H:i:s');
-                $result = $result->where('created_at', '<=', $endTime);
+            if ($endEnd) {
+                $endEnd = Carbon::parse($endEnd)->format('Y-m-d H:i:s');
+                $result = $result->where('created_at', '<=', $endEnd);
             }
 
             //visitors

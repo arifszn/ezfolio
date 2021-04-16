@@ -108,4 +108,24 @@ class AdminController extends Controller
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
     }
+
+    /**
+     * Get stats for dashboard
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function stats(Request $request)
+    {
+        $result = $this->admin->getStats(
+            $request->todayStartDate,
+            $request->todayEndDate,
+            $request->thisWeekStartDate,
+            $request->thisWeekEndDate,
+            $request->thisMonthStartDate,
+            $request->thisMonthEndDate
+        );
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
+    }
 }

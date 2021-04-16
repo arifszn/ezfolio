@@ -30,7 +30,6 @@ const ZLayout = ({ children }) => {
     const layout = globalState.menuLayout;
     const [collapsed, setCollapsed] = useState(false);
     let history = useHistory();
-    const [optimizerLoading, setOptimizerLoading] = useState(false);
 
     useEffect(() => {
         !isMobile && setCollapsed(globalState.shortMenu);
@@ -58,8 +57,6 @@ const ZLayout = ({ children }) => {
         })
         .catch((error) => {
             Utils.handleException(error);
-        }).finally(() => {
-            setOptimizerLoading(false);
         });
     }
 

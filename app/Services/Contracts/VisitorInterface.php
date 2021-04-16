@@ -58,11 +58,11 @@ interface VisitorInterface
     /**
      * Get visitors stats
      *
-     * @param string $startTime UTC start time
-     * @param string $endTime UTC end time
+     * @param string $startDate UTC start date
+     * @param string $endEnd UTC end date
      * @return array
      */
-    public function getVisitorsStats($startTime = null, $endTime = null);
+    public function getVisitorsStats($startDate = null, $endEnd = null);
 
     /**
      * Delete all entries

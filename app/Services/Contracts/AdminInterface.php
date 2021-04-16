@@ -89,4 +89,39 @@ interface AdminInterface
      * @throws InvalidArgumentException
      */
     public function getAdminById(int $adminId, array $select = ['*']);
+
+    /**
+     * Get stats
+     *
+     * @param string $todayStartDate
+     * @param string $todayEndDate
+     * @param string $thisWeekStartDate
+     * @param string $thisWeekEndDate
+     * @param string $thisMonthStartDate
+     * @param string $thisMonthEndDate
+     * @param boolean $visitorData
+     * @param boolean $messageData
+     * @param boolean $skillData
+     * @param boolean $educationData
+     * @param boolean $experienceData
+     * @param boolean $projectData
+     * @param boolean $currentTemplate
+     * @return array
+     */
+    public function getStats(
+        string $todayStartDate = null,
+        string $todayEndDate = null,
+        string $thisWeekStartDate = null,
+        string $thisWeekEndDate = null,
+        string $thisMonthStartDate = null,
+        string $thisMonthEndDate = null,
+        bool $visitorData = true,
+        bool $messageData = true,
+        bool $skillData = true,
+        bool $educationData = true,
+        bool $experienceData = true,
+        bool $projectData = true,
+        bool $serviceData = true,
+        bool $currentTemplate = true
+    );
 }
