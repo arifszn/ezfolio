@@ -18,6 +18,7 @@ const web = {
         portfolioProjects: '/admin/portfolio/projects',
         portfolioServices: '/admin/portfolio/services',
         visitors: '/admin/visitors',
+        messages: '/admin/messages',
         systemLogs: '/admin/system-logs',
     },
     frontend: {
@@ -49,6 +50,7 @@ const api = {
         projects: Utils.backend+'/api/'+Utils.apiVersion+'/admin/projects',
         services: Utils.backend+'/api/'+Utils.apiVersion+'/admin/services',
         visitorsStats: Utils.backend+'/api/'+Utils.apiVersion+'/admin/visitors/stats',
+        messages: Utils.backend+'/api/'+Utils.apiVersion+'/admin/messages',
     },
     frontend: {
         projects: Utils.backend+'/api/'+Utils.apiVersion+'/frontend/projects',

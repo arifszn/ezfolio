@@ -401,7 +401,7 @@
                             <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                            <textarea id="body" name="body" cols="30" rows="7" class="form-control" placeholder="Body"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
@@ -515,7 +515,7 @@
                     subject: {
                         required: true
                     },
-                    message: {
+                    body: {
                         required: true
                     }
                 },

@@ -10,6 +10,7 @@ use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\ExperienceInterface;
 use App\Services\Contracts\FrontendInterface;
+use App\Services\Contracts\MessageInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\ServiceInterface;
@@ -19,6 +20,7 @@ use App\Services\Contracts\VisitorInterface;
 use App\Services\EducationService;
 use App\Services\ExperienceService;
 use App\Services\FrontendService;
+use App\Services\MessageService;
 use App\Services\PortfolioConfigService;
 use App\Services\ProjectService;
 use App\Services\ServiceService;
@@ -51,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ServiceInterface::class, ServiceService::class);
         $this->app->bind(FrontendInterface::class, FrontendService::class);
         $this->app->bind(VisitorInterface::class, VisitorService::class);
+        $this->app->bind(MessageInterface::class, MessageService::class);
     }
 
     /**

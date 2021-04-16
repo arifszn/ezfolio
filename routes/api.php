@@ -78,8 +78,15 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/services/{id}', ['App\Http\Controllers\Admin\Api\ServiceController', 'show']);
             Route::put('/services/{id}', ['App\Http\Controllers\Admin\Api\ServiceController', 'update']);
             Route::delete('/services', ['App\Http\Controllers\Admin\Api\ServiceController', 'destroy']);
+
+            Route::get('/messages', ['App\Http\Controllers\Admin\Api\MessageController', 'index']);
+            Route::post('/messages', ['App\Http\Controllers\Admin\Api\MessageController', 'store']);
+            Route::get('/messages/{id}', ['App\Http\Controllers\Admin\Api\MessageController', 'show']);
+            Route::put('/messages/{id}', ['App\Http\Controllers\Admin\Api\MessageController', 'update']);
+            Route::delete('/messages', ['App\Http\Controllers\Admin\Api\MessageController', 'destroy']);
         });
     });
 
     Route::get('/frontend/projects', ['App\Http\Controllers\Frontend\Api\GeneralController', 'getProjects']);
+    Route::post('/messages', ['App\Http\Controllers\Frontend\Api\GeneralController', 'store'])->name('contact-me');
 });

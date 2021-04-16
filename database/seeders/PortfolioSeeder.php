@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use CoreConstants;
-use App\Models\PortfolioConfig;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\EducationInterface;
 use App\Services\Contracts\ExperienceInterface;
+use App\Services\Contracts\MessageInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\ServiceInterface;
@@ -27,6 +27,8 @@ class PortfolioSeeder extends Seeder
     public function run()
     {
         try {
+            $faker = Faker::create();
+
             $portfolioConfig = resolve(PortfolioConfigInterface::class);
             $about = resolve(AboutInterface::class);
             $education = resolve(EducationInterface::class);
@@ -35,6 +37,7 @@ class PortfolioSeeder extends Seeder
             $project = resolve(ProjectInterface::class);
             $service = resolve(ServiceInterface::class);
             $visitor = resolve(VisitorInterface::class);
+            $message = resolve(MessageInterface::class);
 
             //portfolio config table seed
 
@@ -322,7 +325,7 @@ class PortfolioSeeder extends Seeder
                         'institution' => 'University of Colorado Boulder',
                         'period' => '2006-2010',
                         'degree' => 'Bachelor of Science',
-                        'cgpa'  => '4.00 out of 4.00',
+                        'cgpa' => '4.00 out of 4.00',
                         'department' => 'Computer Science & Engineering',
                         'thesis' => 'Web Development Track'
                     ];
@@ -347,55 +350,55 @@ class PortfolioSeeder extends Seeder
             //skill table seed
             try {
                 $data = [
-                    'name'    => 'Laravel',
+                    'name' => 'Laravel',
                     'proficiency' => '100'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'PHP',
+                    'name' => 'PHP',
                     'proficiency' => '100'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'JavaScript',
+                    'name' => 'JavaScript',
                     'proficiency' => '95'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'React.js',
+                    'name' => 'React.js',
                     'proficiency' => '95'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'Vue.js',
+                    'name' => 'Vue.js',
                     'proficiency' => '90'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'jQuery',
+                    'name' => 'jQuery',
                     'proficiency' => '90'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'MySQL',
+                    'name' => 'MySQL',
                     'proficiency' => '90'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'CSS',
+                    'name' => 'CSS',
                     'proficiency' => '90'
                 ];
                 $skill->store($data);
 
                 $data = [
-                    'name'    => 'Node.js',
+                    'name' => 'Node.js',
                     'proficiency' => '80'
                 ];
                 $skill->store($data);
@@ -549,18 +552,33 @@ class PortfolioSeeder extends Seeder
 
             try {
                 //visitor table seed
-                $faker = Faker::create();
-                foreach (range(1, 100) as $index) {
+                foreach (range(1, 70) as $index) {
                     $data = [
                         'tracking_id' => Str::random(30),
                         'is_new' => $faker->boolean(60),
-                        'ip' => '127.0.0.1',
+                        'ip' => $faker->ipv4,
                         'is_desktop' => $faker->boolean(70),
                         'browser' => $faker->randomElement(['Chrome', 'Firefox', 'Safari', 'Opera', 'Edge']),
                         'platform' => $faker->randomElement(['Windows', 'Mac', 'Android', 'Iphone']),
                         'location' => $faker->country,
                     ];
                     $visitor->forceStore($data);
+                }
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            try {
+                //response table seed
+                foreach (range(1, 3) as $index) {
+                    $data = [
+                        'name' => $faker->name(),
+                        'email' => $faker->email,
+                        'subject' => 'Lorem ipsum dolor sit amet',
+                        'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                        'replied' => CoreConstants::TRUE,
+                    ];
+                    $message->store($data);
                 }
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());

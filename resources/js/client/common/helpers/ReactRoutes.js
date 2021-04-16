@@ -19,6 +19,7 @@ const Experiences = loadable(() => import('../../admin/components/experience/Exp
 const Projects = loadable(() => import('../../admin/components/project/Projects'));
 const Services = loadable(() => import('../../admin/components/service/Services'));
 const Visitors = loadable(() => import('../../admin/components/visitor/Visitors'));
+const Messages = loadable(() => import('../../admin/components/message/Messages'));
 
 const RedirectLogin = () => {
     const apiToken = useSelector(state => state.globalState.apiToken);
@@ -136,6 +137,13 @@ const admin = [
         path: Routes.web.admin.visitors,
         exact: true,
         component: Visitors,
+        private: true
+    },
+    {
+        title: 'messages',
+        path: Routes.web.admin.messages,
+        exact: true,
+        component: Messages,
         private: true
     },
 ]
