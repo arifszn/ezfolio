@@ -106,8 +106,8 @@ class AboutService implements AboutInterface
             $newData['taglines'] = count($newTagLinesArray) ? json_encode($newTagLinesArray) : null;
             
             $newSocialLinksArray = [];
-            if (isset($data['socialLinks'])) {
-                foreach ($data['socialLinks'] as $key => $socialLink) {
+            if (isset($data['social_links'])) {
+                foreach ($data['social_links'] as $key => $socialLink) {
                     if ($socialLink !== '' && !empty($socialLink['title']) && !empty($socialLink['link']) && !empty($socialLink['iconClass'])) {
                         array_push($newSocialLinksArray, $socialLink);
                     }

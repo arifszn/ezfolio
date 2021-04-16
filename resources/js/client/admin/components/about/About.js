@@ -193,7 +193,7 @@ const About = () => {
                 address: values.address,
                 description: values.description,
                 taglines: taglines,
-                socialLinks: socialLinks,
+                social_links: socialLinks,
             })
             .then(response => {
                 Utils.handleSuccessResponse(response, () => {

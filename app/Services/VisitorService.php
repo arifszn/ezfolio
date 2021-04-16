@@ -3,31 +3,33 @@
 namespace App\Services;
 
 use CoreConstants;
-use App\Models\Project;
-use App\Services\Contracts\ProjectInterface;
-use Illuminate\Http\UploadedFile;
+use App\Models\Visitor;
+use App\Services\Contracts\VisitorInterface;
+use Carbon\Carbon;
+use DB;
 use Log;
-use Str;
 use Validator;
+use Jenssegers\Agent\Agent;
+use Stevebauman\Location\Facades\Location;
 
-class ProjectService implements ProjectInterface
+class VisitorService implements VisitorInterface
 {
     /**
      * Eloquent instance
      *
-     * @var Project
+     * @var Visitor
      */
     private $model;
 
     /**
      * Create a new service instance
      *
-     * @param Project $project
+     * @param Visitor $visitor
      * @return void
      */
-    public function __construct(Project $project)
+    public function __construct(Visitor $visitor)
     {
-        $this->model = $project;
+        $this->model = $visitor;
     }
 
     /**
@@ -40,6 +42,7 @@ class ProjectService implements ProjectInterface
     {
         try {
             $result = $this->model->select($select)->get();
+            
             if ($result) {
                 return [
                     'message' => 'Data is fetched successfully',
@@ -72,19 +75,9 @@ class ProjectService implements ProjectInterface
     public function store(array $data)
     {
         try {
-            if (isset($data['seeder_thumbnail']) && isset($data['seeder_images'])) {
-                $validate = Validator::make($data, [
-                    'title' => 'required|string',
-                    'categories' => 'required'
-                ]);
-            } else {
-                $validate = Validator::make($data, [
-                    'title' => 'required|string',
-                    'thumbnail' => 'required',
-                    'images' => 'required',
-                    'categories' => 'required'
-                ]);
-            }
+            $validate = Validator::make($data, [
+                'tracking_id' => 'required',
+            ]);
 
             if ($validate->fails()) {
                 return [
@@ -94,55 +87,40 @@ class ProjectService implements ProjectInterface
                 ];
             }
 
-            $newData['title'] = $data['title'];
-            $newData['categories'] = json_encode($data['categories']);
-            $newData['link'] = isset($data['link']) ? $data['link'] : null;
-            $newData['details'] = isset($data['details']) ? $data['details'] : null;
+            $agent = new Agent();
 
-            if (isset($data['seeder_thumbnail']) && isset($data['seeder_images'])) {
-                $newData['thumbnail'] = $data['seeder_thumbnail'];
-                $newData['images'] = json_encode($data['seeder_images']);
-                $result = $this->model->create($newData);
-            } else {
-                if (!empty($data['id'])) {
-                    $result = $this->getById($data['id'], ['*']);
-                    if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $result;
-                    } else {
-                        $existingData = $result['payload'];
-                    }
+            $trackingId = $data['tracking_id'];
+            $isNew = true;
+            $existingData = $this->getByTrackingId($trackingId);
 
-                    //process thumbnail
-                    $processThumbnail = $this->processThumbnail($data['thumbnail'], $existingData);
-                    if ($processThumbnail['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $processThumbnail;
-                    }
-                    //process images
-                    $processImages = $this->processImages($data['images'], $existingData);
-                    if ($processImages['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $processImages;
-                    }
-                    $newData['thumbnail'] = $processThumbnail['payload']['file'];
-                    $newData['images'] = json_encode($processImages['payload']['files']);
+            if ($existingData['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
+                $isNew = false;
+            }
 
-                    $result = $existingData->update($newData);
+            $ip = request()->getClientIp();
+            $isDesktop = $agent->isDesktop();
+            $browser = $agent->browser();
+            $platform = $agent->platform();
+            $locationJson = Location::get($ip);
+
+            $newData['tracking_id'] = $trackingId;
+            $newData['is_new'] = $isNew;
+            $newData['ip'] = $ip;
+            $newData['is_desktop'] = $isDesktop;
+            $newData['browser'] = $browser;
+            $newData['platform'] = $platform;
+            $newData['location'] = $locationJson ? $locationJson->countryName : 'Unknown';
+            
+            if (isset($data['id'])) {
+                $result = $this->getById($data['id'], ['id']);
+                if ($result['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
+                    return $result;
                 } else {
-                    //process thumbnail
-                    $processThumbnail = $this->processThumbnail($data['thumbnail']);
-                    if ($processThumbnail['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $processThumbnail;
-                    }
-
-                    //process images
-                    $processImages = $this->processImages($data['images']);
-                    if ($processImages['status'] !== CoreConstants::STATUS_CODE_SUCCESS) {
-                        return $processImages;
-                    }
-
-                    $newData['thumbnail'] = $processThumbnail['payload']['file'];
-                    $newData['images'] = json_encode($processImages['payload']['files']);
-                    $result = $this->model->create($newData);
+                    $existingData = $result['payload'];
                 }
+                $result = $existingData->update($newData);
+            } else {
+                $result = $this->model->create($newData);
             }
 
             if ($result) {
@@ -169,45 +147,53 @@ class ProjectService implements ProjectInterface
     }
 
     /**
-     * Process the thumbnail
+     * Store item for seed
      *
-     * @param UploadedFile $file
-     * @param Project|null $project
+     * @param array $request
      * @return array
      */
-    private function processThumbnail(UploadedFile $file, $project = null)
+    public function forceStore(array $data)
     {
-        if ($project) {
-            //delete previous
-            try {
-                if (file_exists($project->thumbnail)) {
-                    unlink($project->thumbnail);
-                }
-            } catch (\Throwable $th) {
-                Log::error($th->getMessage());
-            }
-        }
-        //new entry
         try {
-            $fileName = time().'_'.Str::random(10).'.png';
-            $pathName = 'assets/common/img/projects/';
-            
-            if (!file_exists($pathName)) {
-                mkdir($pathName, 0777, true);
-            }
-            if ($file->move($pathName, $fileName)) {
+            $validate = Validator::make($data, [
+                'tracking_id' => 'required',
+                'is_new' => 'required',
+                'ip' => 'required',
+                'is_desktop' => 'required',
+                'browser' => 'required',
+                'platform' => 'required',
+                'location' => 'required',
+            ]);
+
+            if ($validate->fails()) {
                 return [
-                    'message' => 'File is successfully saved',
-                    'payload' => [
-                        'file' => $pathName.$fileName
-                    ],
-                    'status' => CoreConstants::STATUS_CODE_SUCCESS
+                    'message' => 'Validation Error',
+                    'payload' => $validate->errors(),
+                    'status'  => CoreConstants::STATUS_CODE_BAD_REQUEST
+                ];
+            }
+
+            $newData['tracking_id'] = $data['tracking_id'];
+            $newData['is_new'] = $data['is_new'];
+            $newData['ip'] = $data['ip'];
+            $newData['is_desktop'] = $data['is_desktop'];
+            $newData['browser'] = $data['browser'];
+            $newData['platform'] = $data['platform'];
+            $newData['location'] = $data['location'];
+            
+            $response = $this->model->create($newData);
+
+            if ($response) {
+                return [
+                    'message' => 'Data is successfully saved',
+                    'payload' => $response,
+                    'status'  => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
-                    'message' => 'File could not be saved',
+                    'message' => 'Something went wrong',
                     'payload' => null,
-                    'status' => CoreConstants::STATUS_CODE_ERROR
+                    'status'  => CoreConstants::STATUS_CODE_ERROR
                 ];
             }
         } catch (\Throwable $th) {
@@ -221,59 +207,28 @@ class ProjectService implements ProjectInterface
     }
 
     /**
-     * Process the image file array
+     * Fetch item by tracking id
      *
-     * @param array $fileArray
-     * @param Project|null $project
+     * @param string $trackingId
+     * @param array $select
      * @return array
      */
-    private function processImages(Array $fileArray, $project = null)
+    public function getByTrackingId(string $trackingId, array $select = ['*'])
     {
-        if ($project) {
-            //delete previous
-            try {
-                $existingImages = json_decode($project->images, true);
-                foreach ($existingImages as $key => $existingImage) {
-                    if (file_exists($existingImage)) {
-                        unlink($existingImage);
-                    }
-                }
-            } catch (\Throwable $th) {
-                Log::error($th->getMessage());
-            }
-        }
-        //new entry
         try {
-            $savedFileArray = [];
-            foreach ($fileArray as $key => $file) {
-                try {
-                    $fileName = time().'_'.Str::random(10).'.png';
-                    $pathName = 'assets/common/img/projects/';
-                    
-                    if (!file_exists($pathName)) {
-                        mkdir($pathName, 0777, true);
-                    }
-                    if ($file->move($pathName, $fileName)) {
-                        array_push($savedFileArray, $pathName.$fileName);
-                    }
-                } catch (\Throwable $th) {
-                    Log::error($th->getMessage());
-                }
-            }
-
-            if (count($savedFileArray)) {
+            $data = $this->model->select($select)->where('tracking_id', $trackingId)->first();
+            
+            if ($data) {
                 return [
-                    'message' => 'Files are successfully saved',
-                    'payload' => [
-                        'files' => $savedFileArray
-                    ],
-                    'status' => CoreConstants::STATUS_CODE_SUCCESS
+                    'message' => 'Data is fetched successfully',
+                    'payload' => $data,
+                    'status'  => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
-                    'message' => 'No file could not be saved',
+                    'message' => 'No result is found',
                     'payload' => null,
-                    'status' => CoreConstants::STATUS_CODE_ERROR
+                    'status'  => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
             }
         } catch (\Throwable $th) {
@@ -396,44 +351,112 @@ class ProjectService implements ProjectInterface
     public function deleteByIds(array $ids)
     {
         try {
-            $entries = $this->model->whereIn('id', $ids)->get();
-            $deleted = 0;
-
-            foreach ($entries as $key => $entry) {
-                //delete thumbnail
-                try {
-                    if (file_exists($entry->thumbnail)) {
-                        unlink($entry->thumbnail);
-                    }
-                } catch (\Throwable $th) {
-                    Log::error($th->getMessage());
-                }
-                //delete images
-                try {
-                    $existingImages = json_decode($entry->images, true);
-                    foreach ($existingImages as $key => $existingImage) {
-                        if (file_exists($existingImage)) {
-                            unlink($existingImage);
-                        }
-                    }
-                } catch (\Throwable $th) {
-                    Log::error($th->getMessage());
-                }
-                $entry->delete();
-                $deleted++;
-            }
-
-            if ($deleted) {
+            $data = $this->model->whereIn('id', $ids)->delete();
+            
+            if ($data) {
                 return [
                     'message' => 'Data is deleted successfully',
-                    'payload' => [
-                        'totalDeleted' => $deleted
-                    ],
-                    'status'  => CoreConstants::STATUS_CODE_SUCCESS
+                    'payload' => $data,
+                    'status' => CoreConstants::STATUS_CODE_SUCCESS
                 ];
             } else {
                 return [
                     'message' => 'Nothing to Delete',
+                    'payload' => null,
+                    'status' => CoreConstants::STATUS_CODE_ERROR
+                ];
+            }
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return [
+                'message' => 'Something went wrong',
+                'payload' => $th->getMessage(),
+                'status' => CoreConstants::STATUS_CODE_ERROR
+            ];
+        }
+    }
+
+    /**
+     * Get visitors stats
+     *
+     * @param string $startTime UTC start time
+     * @param string $endTime UTC end time
+     * @return array
+     */
+    public function getVisitorsStats($startTime = null, $endTime = null)
+    {
+        try {
+            $result = $this->model;
+
+            if ($startTime) {
+                $startTime = Carbon::parse($startTime)->format('Y-m-d H:i:s');
+                $result = $result->where('created_at', '>=', $startTime);
+            }
+            if ($endTime) {
+                $endTime = Carbon::parse($endTime)->format('Y-m-d H:i:s');
+                $result = $result->where('created_at', '<=', $endTime);
+            }
+
+            //visitors
+            $data['visitors']['total'] = $totalVisitors = (clone $result)->count();
+            $data['visitors']['new'] = (clone $result)->where('is_new', CoreConstants::TRUE)->count();
+            $data['visitors']['old'] = (clone $result)->where('is_new', CoreConstants::FALSE)->count();
+            
+            //location
+            $data['location'] = (clone $result)->select('location', DB::raw('count(*) as total'))->groupBy('location')->get();
+
+            //device
+            if ($totalVisitors) {
+                $data['device']['desktop'] = ((clone $result)->where('is_desktop', CoreConstants::TRUE)->count());
+                $data['device']['mobile'] = ((clone $result)->where('is_desktop', CoreConstants::FALSE)->count());
+
+                // $data['device']['mobile'] = ((clone $result)->where('is_desktop', CoreConstants::FALSE)->count() * 100) / $totalVisitors;
+            } else {
+                $data['device']['desktop'] = 0;
+                $data['device']['mobile'] = 0;
+            }
+
+            //browser
+            $data['browser'] = (clone $result)->select('browser', DB::raw('count(*) as total'))->groupBy('browser')->get();
+
+            //platform
+            $data['platform'] = (clone $result)->select('platform', DB::raw('count(*) as total'))->groupBy('platform')->get();
+            
+
+            return [
+                'message' => 'Data is fetched Successfully',
+                'payload' => $data,
+                'status'  => CoreConstants::STATUS_CODE_SUCCESS
+            ];
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return [
+                'message' => 'Something went wrong',
+                'payload' => $th->getMessage(),
+                'status'  => CoreConstants::STATUS_CODE_ERROR
+            ];
+        }
+    }
+
+    /**
+     * Delete all entries
+     *
+     * @return array
+     */
+    public function deleteAll()
+    {
+        try {
+            $data = $this->model->truncate();
+            
+            if ($data) {
+                return [
+                    'message' => 'Stats are removed successfully',
+                    'payload' => null,
+                    'status'  => CoreConstants::STATUS_CODE_SUCCESS
+                ];
+            } else {
+                return [
+                    'message' => 'Nothing to remove',
                     'payload' => null,
                     'status'  => CoreConstants::STATUS_CODE_NOT_FOUND
                 ];
@@ -443,7 +466,7 @@ class ProjectService implements ProjectInterface
             return [
                 'message' => 'Something went wrong',
                 'payload' => $th->getMessage(),
-                'status' => CoreConstants::STATUS_CODE_ERROR
+                'status'  => CoreConstants::STATUS_CODE_ERROR
             ];
         }
     }

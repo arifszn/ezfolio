@@ -6,8 +6,11 @@ use CoreConstants;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\AboutInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
+use App\Services\Contracts\VisitorInterface;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
 class PortfolioController extends Controller
 {
@@ -127,6 +130,25 @@ class PortfolioController extends Controller
             $result = $this->about->processUpdateCoverRequest($request->all());
         } elseif ($request->isMethod('delete')) {
             $result = $this->about->processDeleteCoverRequest($request->file);
+        }
+
+        return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);
+    }
+
+    /**
+     * Handle visitor stats request
+     *
+     * @param Request $request
+     * @return JsonResponse|void
+     */
+    public function visitorsStats(Request $request)
+    {
+        $visitor = resolve(VisitorInterface::class);
+        
+        if ($request->isMethod('get')) {
+            $result = $visitor->getVisitorsStats($request->startDate, $request->endDate);
+        } elseif ($request->isMethod('delete')) {
+            $result = $visitor->deleteAll();
         }
 
         return response()->json($result, !empty($result['status']) ? $result['status'] : CoreConstants::STATUS_CODE_SUCCESS);

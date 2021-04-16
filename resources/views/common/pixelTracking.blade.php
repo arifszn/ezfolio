@@ -9,6 +9,6 @@
         } else {
             trackingId = localStorage.getItem("pixel-tracking");
         }
-        $('#pixel-tracking').attr("src", "{{ route('pixel-tracker') }}?event=pageVisit&trackingId="+trackingId);         
+        $('#pixel-tracking').attr("src", "{{ route('pixel-tracker') }}?event=page_visit&tracking_id="+trackingId);         
     });
 </script>

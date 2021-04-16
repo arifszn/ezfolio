@@ -11,8 +11,11 @@ use App\Services\Contracts\PortfolioConfigInterface;
 use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\ServiceInterface;
 use App\Services\Contracts\SkillInterface;
+use App\Services\Contracts\VisitorInterface;
 use Illuminate\Database\Seeder;
 use Log;
+use Str;
+use Faker\Factory as Faker;
 
 class PortfolioSeeder extends Seeder
 {
@@ -31,6 +34,7 @@ class PortfolioSeeder extends Seeder
             $experience = resolve(ExperienceInterface::class);
             $project = resolve(ProjectInterface::class);
             $service = resolve(ServiceInterface::class);
+            $visitor = resolve(VisitorInterface::class);
 
             //portfolio config table seed
 
@@ -286,7 +290,7 @@ class PortfolioSeeder extends Seeder
                     'address' => '1609 Nuzum Court, Cheektowaga, NY 14225',
                     'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
                     'taglines' => ["I am Software Engineer", "I am Web Developer", "I am Full Stack Engineer"],
-                    'socialLinks' => [
+                    'social_links' => [
                         [
                             'title' => 'LinkedIn',
                             'iconClass' => 'fab fa-linkedin-in',
@@ -454,8 +458,8 @@ class PortfolioSeeder extends Seeder
                     'categories' => ['personal'],
                     'link' => 'https://www.youtube.com',
                     'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
-                    'seederThumbnail' => 'assets/common/img/projects/demo_project_1_1.png',
-                    'seederImages' => [
+                    'seeder_thumbnail' => 'assets/common/img/projects/demo_project_1_1.png',
+                    'seeder_images' => [
                         'assets/common/img/projects/demo_project_1_1.png',
                         'assets/common/img/projects/demo_project_1_2.png'
                     ]
@@ -475,8 +479,8 @@ class PortfolioSeeder extends Seeder
                     'categories' => ['professional'],
                     'link' => 'https://www.facebook.com',
                     'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
-                    'seederThumbnail' => 'assets/common/img/projects/demo_project_2_1.png',
-                    'seederImages' => [
+                    'seeder_thumbnail' => 'assets/common/img/projects/demo_project_2_1.png',
+                    'seeder_images' => [
                         'assets/common/img/projects/demo_project_2_1.png',
                         'assets/common/img/projects/demo_project_2_2.png'
                     ]
@@ -497,8 +501,8 @@ class PortfolioSeeder extends Seeder
                     'categories' => ['personal'],
                     'link' => 'https://www.linkedin.com',
                     'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
-                    'seederThumbnail' => 'assets/common/img/projects/demo_project_3_1.png',
-                    'seederImages' => [
+                    'seeder_thumbnail' => 'assets/common/img/projects/demo_project_3_1.png',
+                    'seeder_images' => [
                         'assets/common/img/projects/demo_project_3_1.png',
                         'assets/common/img/projects/demo_project_3_2.png'
                     ]
@@ -539,6 +543,25 @@ class PortfolioSeeder extends Seeder
                     'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
                 ];
                 $service->store($data);
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            try {
+                //visitor table seed
+                $faker = Faker::create();
+                foreach (range(1, 100) as $index) {
+                    $data = [
+                        'tracking_id' => Str::random(30),
+                        'is_new' => $faker->boolean(60),
+                        'ip' => '127.0.0.1',
+                        'is_desktop' => $faker->boolean(70),
+                        'browser' => $faker->randomElement(['Chrome', 'Firefox', 'Safari', 'Opera', 'Edge']),
+                        'platform' => $faker->randomElement(['Windows', 'Mac', 'Android', 'Iphone']),
+                        'location' => $faker->country,
+                    ];
+                    $visitor->forceStore($data);
+                }
             } catch (\Throwable $th) {
                 Log::error($th->getMessage());
             }

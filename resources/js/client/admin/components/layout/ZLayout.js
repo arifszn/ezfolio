@@ -10,6 +10,7 @@ import {
   FileTextOutlined,
   ExperimentOutlined,
   ControlOutlined,
+  PieChartOutlined
 } from '@ant-design/icons';
 import { BackTop } from 'antd';
 import NavContent from './NavContent';
@@ -91,6 +92,12 @@ const ZLayout = ({ children }) => {
                             name: 'Service',
                         },
                     ],
+                },
+                {
+                    path: Routes.web.admin.visitors,
+                    key: Routes.web.admin.visitors,
+                    name: 'Visitor',
+                    icon: <PieChartOutlined/>,
                 },
                 {
                     path: Routes.web.admin.systemLogs,

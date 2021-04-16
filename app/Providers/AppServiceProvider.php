@@ -15,6 +15,7 @@ use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\ServiceInterface;
 use App\Services\Contracts\SettingInterface;
 use App\Services\Contracts\SkillInterface;
+use App\Services\Contracts\VisitorInterface;
 use App\Services\EducationService;
 use App\Services\ExperienceService;
 use App\Services\FrontendService;
@@ -23,6 +24,7 @@ use App\Services\ProjectService;
 use App\Services\ServiceService;
 use App\Services\SettingService;
 use App\Services\SkillService;
+use App\Services\VisitorService;
 use Config;
 use Illuminate\Support\ServiceProvider;
 use Schema;
@@ -48,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProjectInterface::class, ProjectService::class);
         $this->app->bind(ServiceInterface::class, ServiceService::class);
         $this->app->bind(FrontendInterface::class, FrontendService::class);
+        $this->app->bind(VisitorInterface::class, VisitorService::class);
     }
 
     /**

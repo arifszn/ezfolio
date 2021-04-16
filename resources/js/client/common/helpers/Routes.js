@@ -17,6 +17,7 @@ const web = {
         portfolioExperiences: '/admin/portfolio/experiences',
         portfolioProjects: '/admin/portfolio/projects',
         portfolioServices: '/admin/portfolio/services',
+        visitors: '/admin/visitors',
         systemLogs: '/admin/system-logs',
     },
     frontend: {
@@ -47,6 +48,7 @@ const api = {
         experiences: Utils.backend+'/api/'+Utils.apiVersion+'/admin/experiences',
         projects: Utils.backend+'/api/'+Utils.apiVersion+'/admin/projects',
         services: Utils.backend+'/api/'+Utils.apiVersion+'/admin/services',
+        visitorsStats: Utils.backend+'/api/'+Utils.apiVersion+'/admin/visitors/stats',
     },
     frontend: {
         projects: Utils.backend+'/api/'+Utils.apiVersion+'/frontend/projects',

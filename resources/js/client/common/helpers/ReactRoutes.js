@@ -18,6 +18,7 @@ const Skills = loadable(() => import('../../admin/components/skill/Skills'));
 const Experiences = loadable(() => import('../../admin/components/experience/Experiences'));
 const Projects = loadable(() => import('../../admin/components/project/Projects'));
 const Services = loadable(() => import('../../admin/components/service/Services'));
+const Visitors = loadable(() => import('../../admin/components/visitor/Visitors'));
 
 const RedirectLogin = () => {
     const apiToken = useSelector(state => state.globalState.apiToken);
@@ -128,6 +129,13 @@ const admin = [
         path: Routes.web.admin.portfolioServices,
         exact: true,
         component: Services,
+        private: true
+    },
+    {
+        title: 'visitors',
+        path: Routes.web.admin.visitors,
+        exact: true,
+        component: Visitors,
         private: true
     },
 ]

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\FrontendVisited;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\FrontendInterface;
 use CoreConstants;
@@ -52,8 +53,22 @@ class FrontendController extends Controller
             return view('frontend.maintenance', $data);
         }
 
-        // dd($data);
-
         return view('frontend.theme.'.$data['portfolioConfig']['template'], $data);
+    }
+
+    /**
+     * Handle pixel tracker
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function pixelTracker(Request $request)
+    {
+        if (!empty($request->event) && $request->event == 'page_visit') {
+            FrontendVisited::dispatch($request->all());
+        }
+        
+        header('Content-type: image/gif');
+        echo base64_decode('R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
     }
 }
