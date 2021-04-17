@@ -29,6 +29,10 @@ const Visibility = (props) => {
     const [skillProficiency, setSkillProficiency] = useState(false);
 
     useEffect(() => {
+        props.mountedCallBack();
+    }, [])
+
+    useEffect(() => {
         if (props.config) {
             setAbout(parseInt(props.config.visibility.about));
             setSkills(parseInt(props.config.visibility.skills));
@@ -276,6 +280,7 @@ const Visibility = (props) => {
 
 Visibility.propTypes = {
     config: PropTypes.object,
+    mountedCallBack: PropTypes.func.isRequired
 }
 
 export default Visibility;

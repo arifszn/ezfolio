@@ -47,6 +47,7 @@ const ProjectPopup = (props) => {
 
     return (
         <StyledDrawer
+            zIndex={999999999}
             title={props.title}
             onClose={handleClose}
             visible={visible}

@@ -10,14 +10,18 @@ import { BiMenu, BiCodeAlt } from 'react-icons/bi';
 import { AiOutlineControl } from 'react-icons/ai';
 import Visibility from './Visibility';
 import CustomScript from './CustomScript';
+import { Spin } from 'antd';
 
 const PortfolioConfig = () => {
     const [config, setConfig] = useState(null);
-    const [componentLoading, setComponentLoading] = useState(true);
+    const [componentLoading, setComponentLoading] = useState(false);
+    const [triggerLoadConfig, setTriggerLoadConfig] = useState(0);
 
     useEffect(() => {
-        loadConfig(true);
-    }, [])
+        if (triggerLoadConfig !== 0) {
+            loadConfig(true);
+        }
+    }, [triggerLoadConfig])
 
     const loadConfig = (_componentLoadingState = false) => {
         setComponentLoading(_componentLoadingState);
@@ -39,25 +43,27 @@ const PortfolioConfig = () => {
         {
             key: 'basic',
             title: <React.Fragment><Icon component={AiOutlineControl}/> Basic</React.Fragment>,
-            content: <Basic config={config}/>
+            content: <Basic mountedCallBack={() => setTriggerLoadConfig(triggerLoadConfig + 1)} config={config}/>
         },
         {
             key: 'visibility',
             title: <React.Fragment><Icon component={BiMenu}/> Visibility</React.Fragment>,
-            content: <Visibility config={config}/>
+            content: <Visibility mountedCallBack={() => setTriggerLoadConfig(triggerLoadConfig + 1)} config={config}/>
         },
         {
             key: 'custom-script',
             title: <React.Fragment><Icon component={BiCodeAlt}/> Custom Script</React.Fragment>,
-            content: <CustomScript config={config}/>
+            content: <CustomScript mountedCallBack={() => setTriggerLoadConfig(triggerLoadConfig + 1)} config={config}/>
         },
     ]
 
     return (
         <React.Fragment>
-            <PageWrapper loading={componentLoading} noPadding>
-                <ZTabs tabs={tabs}/>
-            </PageWrapper>
+            <Spin delay={500} size="large" spinning={componentLoading}>
+                <PageWrapper noPadding>
+                    <ZTabs tabs={tabs}/>
+                </PageWrapper>
+            </Spin>
         </React.Fragment>
     )
 }

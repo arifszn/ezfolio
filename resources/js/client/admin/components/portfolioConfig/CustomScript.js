@@ -23,6 +23,10 @@ const CustomScript = (props) => {
     const [footerCodeEditorVisible, setFooterCodeEditorVisible] = useState(false);
 
     useEffect(() => {
+        props.mountedCallBack();
+    }, [])
+
+    useEffect(() => {
         if (props.config) {
             setHeaderScript(props.config.script.header);
             setFooterScript(props.config.script.footer);
@@ -152,6 +156,7 @@ const CustomScript = (props) => {
 
 CustomScript.propTypes = {
     config: PropTypes.object,
+    mountedCallBack: PropTypes.func.isRequired
 }
 
 export default CustomScript;
