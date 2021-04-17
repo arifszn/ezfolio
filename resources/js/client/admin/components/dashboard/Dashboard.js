@@ -11,7 +11,7 @@ import StatCard from './StatCard';
 import { GoKeyboard } from 'react-icons/go';
 import { BsBriefcase } from 'react-icons/bs';
 import { GiSecretBook } from 'react-icons/gi';
-import { FiUsers } from 'react-icons/fi';
+import { AiOutlineTeam } from 'react-icons/ai';
 import { RiServiceLine, RiMessage3Line } from 'react-icons/ri';
 import { TinyArea } from '@ant-design/charts';
 import RedditImageFetcher from 'reddit-image-fetcher';
@@ -382,7 +382,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={FiUsers}/>}
+                                            icon={<Icon component={AiOutlineTeam}/>}
                                             color={colors.visitor} 
                                             title='Total' 
                                             number={visitorData.total}
@@ -392,7 +392,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={FiUsers}/>}
+                                            icon={<Icon component={AiOutlineTeam}/>}
                                             color={colors.visitor} 
                                             title='This Month' 
                                             number={visitorData.thisMonth}
@@ -402,7 +402,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={FiUsers}/>}
+                                            icon={<Icon component={AiOutlineTeam}/>}
                                             color={colors.visitor} 
                                             title='This Week' 
                                             number={visitorData.thisWeek}
@@ -412,7 +412,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={FiUsers}/>}
+                                            icon={<Icon component={AiOutlineTeam}/>}
                                             color={colors.visitor} 
                                             title='Today' 
                                             number={visitorData.today}
@@ -517,7 +517,10 @@ const Dashboard = () => {
                                         alt={currentTemplate && currentTemplate.title}
                                         width={'100%'}
                                         height={imageHeight}
-                                        style={imageStyle}
+                                        style={{
+                                            objectFit: 'fill',
+                                            opacity: '0.8'
+                                        }}
                                         preview={false}
                                         src={currentTemplate && currentTemplate.image}
                                         placeholder={<Spin><WallpaperLoading/></Spin>}
