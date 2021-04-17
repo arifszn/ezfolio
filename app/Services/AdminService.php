@@ -700,8 +700,8 @@ class AdminService implements AdminInterface
                                                 DB::raw('COUNT(*) as "count"')
                                             )
                                             ->groupBy('date')
-                                            ->orderBy('date', 'DESC')
                                             ->get();
+                                            
                 if (!empty($lastThirtyDaysVisitors)) {
                     $data['visitors']['trend'] = $lastThirtyDaysVisitors;
                 } else {
