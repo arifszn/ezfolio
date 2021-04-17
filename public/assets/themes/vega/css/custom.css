@@ -43,10 +43,6 @@
     display: inline-flex;
 }
 
-.animate__animated {
-    --animate-duration: 800ms;
-}
-
 .social-icons .social-icon {
     margin: 0 1.5rem 1rem 0;
 }

@@ -52,7 +52,6 @@
     <link rel="shortcut icon" type="image/x-icon"  href="{{ Utils::getFavicon() }}">
     <link href="{{ asset('assets/common/lib/mdi-icon/css/materialdesignicons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/fontawesome/css/all.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/common/lib/animate/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/common/lib/iziToast/css/iziToast.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/themes/vega/css/styles.css') }}" rel="stylesheet" />
@@ -127,7 +126,7 @@
     <div class="container-fluid p-0">
         @if ($portfolioConfig['visibility']['about'])
             <!-- About-->
-            <section class="resume-section" id="about" data-aos-anchor-placement="top-bottom">
+            <section class="resume-section" id="about">
                 <div class="resume-section-content">
                     <h1 class="mb-0" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                         {{ $about->name }}
@@ -287,7 +286,7 @@
             <section class="resume-section" id="contact" data-aos="zoom-in">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Contact</h2>
-                    <div class="card border-0 mb-0 wow animate__animated animate__fadeInUp">
+                    <div class="card border-0 mb-0">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card-body">

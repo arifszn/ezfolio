@@ -50,7 +50,6 @@
     <link href="{{ asset('assets/common/lib/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/common/lib/mdi-icon/css/materialdesignicons.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/common/lib/boxicons/css/boxicons.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/common/lib/animate/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/iziToast/css/iziToast.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/aos/aos.css') }}" rel="stylesheet">
 
@@ -59,14 +58,14 @@
     <link href="{{ asset('assets/themes/rigel/css/custom.css') }}" rel="stylesheet">
     <style>
         :root {
-          --z-accent-color: {{$portfolioConfig['accentColor']}};
+          --z-accent-color: {{$accentColor}};
         }
         .bg-primary, .progress-bar {
-            background-color: {{$portfolioConfig['accentColor'].' !important'}};
+            background-color: {{$accentColor.' !important'}};
         }
 
         a {
-            color: {{$portfolioConfig['accentColor']}};
+            color: {{$accentColor}};
         }
 
         a:hover {
@@ -79,7 +78,7 @@
         }
 
         .text-primary {
-            color: {{$portfolioConfig['accentColor'].' !important'}};
+            color: {{$accentColor.' !important'}};
         }
     </style>
 </head>
@@ -179,7 +178,7 @@
         @if ($portfolioConfig['visibility']['skills'])
         <!-- ======= Skills Section ======= -->
         <section id="skills" class="skills section-bg">
-            <div class="container" data-aos="fade-up">
+            <div class="container">
                 <div class="section-title">
                     <h2>Skills</h2>
                 </div>
@@ -188,7 +187,7 @@
                         @foreach ($skills as $skill)
                             @if ((int)$portfolioConfig['visibility']['skillProficiency'])
                             <div class="col-lg-6">
-                                <div class="progress">
+                                <div class="progress" data-aos="fade-up">
                                     <span class="skill">{{$skill->name}} <i class="val">{{$skill->proficiency}}%</i></span>
                                     <div class="progress-bar-wrap">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="{{$skill->proficiency}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -214,14 +213,14 @@
         @if ($portfolioConfig['visibility']['experiences'])
         <!-- ======= Experiences Section ======= -->
         <section id="experiences" class="resume">
-            <div class="container" data-aos="fade-up">
+            <div class="container">
                 <div class="section-title">
                     <h2>Experiences</h2>
                 </div>
                 <div>
                     @if ($experiences)
                         @foreach ($experiences as $experience)
-                            <div class="resume-item">
+                            <div class="resume-item" data-aos="fade-up">
                                 <h4>{{$experience->position ? $experience->position : ''}}</h4>
                                 <h5>{{$experience->period ? $experience->period : ''}}</h5>
                                 <p class="font-weight-bold text-muted">{{$experience->company ? $experience->company : ''}}</p>
@@ -237,14 +236,14 @@
         @if ($portfolioConfig['visibility']['education'])
         <!-- ======= Education Section ======= -->
         <section id="education" class="resume">
-            <div class="container" data-aos="fade-up">
+            <div class="container">
                 <div class="section-title">
                     <h2>Education</h2>
                 </div>
                 <div>
                     @if ($education)
                         @foreach ($education as $value)
-                            <div class="resume-item">
+                            <div class="resume-item" data-aos="fade-up">
                                 <h4>{{$value->degree ? $value->degree : ''}}</h4>
                                 <h5>{{$value->period ? $value->period : ''}}</h5>
                                 <p class="font-weight-bold text-muted">{{$value->institution ? $value->institution : ''}}</p>
@@ -261,7 +260,7 @@
         @if ($portfolioConfig['visibility']['projects'])
         <!-- ======= Projects Section ======= -->
         <section id="projects" class="resume">
-            <div class="container" data-aos="fade-up">
+            <div class="container">
                 <div class="section-title">
                     <h2>Projects</h2>
                 </div>
@@ -280,14 +279,14 @@
         @if ($portfolioConfig['visibility']['services'])
         <!-- ======= Services Section ======= -->
         <section id="services" class="services">
-            <div class="container" data-aos="zoom-in">
+            <div class="container">
                 <div class="section-title">
                     <h2>Services</h2>
                 </div>
                 <div class="row">
                     @if (!empty($services))
                         @foreach ($services as $service)
-                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
                                 <div class="icon-box">
                                     <div class="icon">
                                         <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">

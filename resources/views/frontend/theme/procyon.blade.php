@@ -52,19 +52,18 @@
     <link href="{{ asset('assets/common/lib/iziToast/css/iziToast.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/aos/aos.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/themes/procyon/css/animate.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/themes/procyon/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/themes/procyon/css/custom.css') }}" rel="stylesheet">
     <style>
         :root {
-          --z-accent-color: {{$portfolioConfig['accentColor']}};
+          --z-accent-color: {{$accentColor}};
         }
         .bg-primary, {
-            background-color: {{$portfolioConfig['accentColor'].' !important'}};
+            background-color: {{$accentColor.' !important'}};
         }
 
         a {
-            color: {{$portfolioConfig['accentColor']}};
+            color: {{$accentColor}};
         }
 
         a:hover {
@@ -81,7 +80,7 @@
         }
 
         .text-primary {
-            color: {{$portfolioConfig['accentColor'].' !important'}};
+            color: {{$accentColor.' !important'}};
         }
     </style>
 </head>
