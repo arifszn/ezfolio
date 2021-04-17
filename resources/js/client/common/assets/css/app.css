@@ -135,8 +135,4 @@ body .ant-menu-submenu-title:active {
     background: var(--primary-shadow-color);
 }
 
-body .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
-    background-color: var(--z-accent-color);
-    border-color: var(--z-accent-color);
-}
 /*#endregion And Design Custom*/
