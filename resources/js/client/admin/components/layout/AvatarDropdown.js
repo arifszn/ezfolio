@@ -40,7 +40,7 @@ const AvatarDropdown = () => {
         <React.Fragment>
             <Dropdown overlay={menuHeaderDropdown}>
                 <span>
-                    <Avatar icon={<UserOutlined />} size="small" alt="avatar" />
+                    <Avatar style={{ backgroundColor: 'var(--z-accent-color)' }} icon={<UserOutlined />} size="small" alt="avatar" />
                 </span>
             </Dropdown>
         </React.Fragment>

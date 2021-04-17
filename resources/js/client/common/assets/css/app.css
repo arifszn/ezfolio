@@ -50,19 +50,6 @@
     background: #fff;
 }
 
-.ant-carousel .slick-prev,
-.ant-carousel .slick-next {
-  color: unset;
-  font-size: unset;
-}
-
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-next:hover,
-.ant-carousel .slick-prev:focus,
-.ant-carousel .slick-next:focus {
-  color: unset;
-}
-
 .z-hover {
     transition-duration: 0.8s;
 }
@@ -107,6 +94,21 @@
     display: inline-flex;
 }
 
+/*#region And Design Custom*/
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  color: unset;
+  font-size: unset;
+}
+
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-prev:focus,
+.ant-carousel .slick-next:focus {
+  color: unset;
+}
+
 body .ant-menu-horizontal > .ant-menu-item:hover,
 body .ant-menu-horizontal > .ant-menu-submenu:hover,
 body .ant-menu-horizontal > .ant-menu-item-active,
@@ -121,3 +123,20 @@ body .ant-menu-horizontal > .ant-menu-submenu-selected {
 .ant-menu-horizontal > .ant-menu-item > a:hover {
     color: unset !important;
 }
+
+body .ant-pro-global-header-logo a h1,
+body .ant-pro-sider.ant-layout-sider-light .ant-menu-item-selected a, 
+body .ant-pro-sider.ant-layout-sider-light .ant-menu-item a:hover {
+    color: var(--z-accent-color);
+}
+
+body .ant-menu-item:active, 
+body .ant-menu-submenu-title:active {
+    background: var(--primary-shadow-color);
+}
+
+body .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+    background-color: var(--z-accent-color);
+    border-color: var(--z-accent-color);
+}
+/*#endregion And Design Custom*/

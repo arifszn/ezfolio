@@ -33,7 +33,7 @@ const NavContent = () => {
             <Wrapper>
                 <ItemWrapper className="z-hover">
                     <a href={Routes.web.frontend.home} target="_blank" rel="noreferrer" title="Visit Frontend">
-                        <Avatar icon={<Icon component={CgMouse} />} size="small"/>
+                        <Avatar style={{ backgroundColor: 'var(--z-accent-color)' }} icon={<Icon component={CgMouse} />} size="small"/>
                     </a>
                 </ItemWrapper>
                 <ItemWrapper className="z-hover">
