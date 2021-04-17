@@ -45,13 +45,13 @@
     <meta property="og:image:secure_url" content="{{asset($portfolioConfig['seo']['image'])}}" />
     <title>{{$about->name}}</title>
     <link rel="shortcut icon" type="image/x-icon"  href="{{ Utils::getFavicon() }}">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <link href="{{ asset('assets/common/lib/mdi-icon/css/materialdesignicons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/fontawesome/css/all.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/boxicons/css/boxicons.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/common/lib/iziToast/css/iziToast.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/common/lib/aos/aos.css') }}" rel="stylesheet">
+    <!-- Template Main CSS File -->
     <link href="{{ asset('assets/themes/procyon/css/animate.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/themes/procyon/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/themes/procyon/css/custom.css') }}" rel="stylesheet">
@@ -372,7 +372,11 @@
                     <h2 class="mb-4">Projects</h2>
                 </div>
             </div>
-            <div id="react-project-root" data-accentcolor="{{$accentColor}}" data-demomode="{{$demoMode}}"></div>
+            <div 
+                id="react-project-root" 
+                data-accentcolor="{{$accentColor}}" 
+                data-demomode="{{$demoMode}}"
+            />
             <div class="mb-5"></div>
         </div>
     </section>
@@ -538,13 +542,13 @@
                                 var errorArray = response.payload;
                                 $.each( errorArray, function( key, errors ) {
                                     $.each( errors, function( key2, errorMessage ) {
-                                        showZNotification( errorMessage, 'error', false);
+                                        showNotification( errorMessage, 'error', false);
                                     });
                                 });
                             } else if (response.status !== 200) {
-                                showZNotification(response.message, 'error', false);
+                                showNotification(response.message, 'error', false);
                             } else if (response.status === 200) {
-                                showZNotification(response.message, 'success', false);
+                                showNotification(response.message, 'success', false);
                                 $('#contact-me-form').trigger('reset');
                             }
                         },
@@ -564,7 +568,7 @@
                 }
             });
             
-            function showZNotification(message = 'Something went wrong', type = 'error', sticky = false) {
+            function showNotification(message = 'Something went wrong', type = 'error', sticky = false) {
                 iziToast.show({
                     title: '',
                     message: message,
