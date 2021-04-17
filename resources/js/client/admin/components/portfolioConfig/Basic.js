@@ -46,6 +46,10 @@ const Basic = (props) => {
     const [seo, setSeo] = useState(null);
 
     useEffect(() => {
+        props.mountedCallBack();
+    }, [])
+
+    useEffect(() => {
         if (props.config) {
             setTemplate(props.config.template);
             setAccentColor(props.config.accentColor);     
@@ -300,6 +304,7 @@ const Basic = (props) => {
 
 Basic.propTypes = {
     config: PropTypes.object,
+    mountedCallBack: PropTypes.func.isRequired
 }
 
 export default Basic;
