@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +12,36 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.disableNotifications();
+
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.less$/,
+                loader: 'less-loader',
+                options: {
+                    lessOptions: {
+                        javascriptEnabled: true,
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [
+        new ESLintPlugin({
+            extensions: [`js`, `jsx`],
+            exclude: [
+                'node_modules'
+            ],
+        })
+    ],
+});
+
+mix.js('resources/js/client/admin/roots/app.js', 'public/js/client/admin/roots')
+    .js('resources/js/client/frontend/roots/projects.js', 'public/js/client/frontend/roots/projects.js')
+    .react();
+
+if (mix.inProduction()) {
+    mix.version();
+}

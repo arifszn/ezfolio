@@ -1,0 +1,66 @@
+::-webkit-scrollbar-track {
+   /* border-radius: 0px; */
+   box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	  -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+* {
+  scrollbar-width: thin;
+  /* scrollbar-color: darkgrey #F5F5F5; */
+}
+
+@media screen and (min-width: 966px) {
+  ::-webkit-scrollbar, .scroller {
+    width: 8px;
+    height: 8px;
+    background-color: #f1f1f1;
+  }
+}
+ 
+::-webkit-scrollbar-thumb {
+    /* border-radius: 0px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);  */
+   background-color: #888;
+   border-radius: 10px;
+}
+
+.center-this {
+    align-items: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    display: inline-flex;
+}
+.footer {
+    background: #e1e5e8;
+    padding: 10px 0;
+}
+
+#hero {
+    background-position-x: right;
+    background-position-y: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#hero:before {
+  content: "";
+  background: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.social-icon-block .box .icon {
+    width: 60px;
+    height: 60px;
+}
+
+.social-icon-block .box {
+    border-radius: 2px;
+}
