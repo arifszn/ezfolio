@@ -11,7 +11,8 @@ import StatCard from './StatCard';
 import { GoKeyboard } from 'react-icons/go';
 import { BsBriefcase } from 'react-icons/bs';
 import { GiSecretBook } from 'react-icons/gi';
-import { RiServiceLine, RiTeamLine, RiMessage3Line } from 'react-icons/ri';
+import { FiUsers } from 'react-icons/fi';
+import { RiServiceLine, RiMessage3Line } from 'react-icons/ri';
 import { TinyArea } from '@ant-design/charts';
 import RedditImageFetcher from 'reddit-image-fetcher';
 import styled from 'styled-components';
@@ -381,7 +382,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={RiTeamLine}/>}
+                                            icon={<Icon component={FiUsers}/>}
                                             color={colors.visitor} 
                                             title='Total' 
                                             number={visitorData.total}
@@ -391,7 +392,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={RiTeamLine}/>}
+                                            icon={<Icon component={FiUsers}/>}
                                             color={colors.visitor} 
                                             title='This Month' 
                                             number={visitorData.thisMonth}
@@ -401,7 +402,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={RiTeamLine}/>}
+                                            icon={<Icon component={FiUsers}/>}
                                             color={colors.visitor} 
                                             title='This Week' 
                                             number={visitorData.thisWeek}
@@ -411,7 +412,7 @@ const Dashboard = () => {
                                         <StatCard
                                             isCard={false}
                                             loading={loading}
-                                            icon={<Icon component={RiTeamLine}/>}
+                                            icon={<Icon component={FiUsers}/>}
                                             color={colors.visitor} 
                                             title='Today' 
                                             number={visitorData.today}
