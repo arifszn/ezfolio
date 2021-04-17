@@ -33,3 +33,4 @@ public/assets/common/cv/*
 !public/assets/common/cv/default.png
 public/assets/common/img/projects/*
 !public/assets/common/img/projects/.gitkeep
+public/mix-manifest.json
