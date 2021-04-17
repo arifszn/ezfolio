@@ -372,14 +372,14 @@
                     <h2 class="mb-4">Projects</h2>
                 </div>
             </div>
-            <div id="react-project-root" data-accentcolor="{{$accentColor}}"></div>
+            <div id="react-project-root" data-accentcolor="{{$accentColor}}" data-demomode="{{$demoMode}}"></div>
             <div class="mb-5"></div>
         </div>
     </section>
     @endif
 
     @if ($portfolioConfig['visibility']['contact'])
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+    <section class="ftco-section contact-section ftco-no-pb" id="contact-section" data-aos="zoom-in">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section text-center">
@@ -387,7 +387,7 @@
                 </div>
             </div>
     
-            <div class="row no-gutters block-9" data-aos="zoom-in">
+            <div class="row no-gutters block-9">
                 <div class="col-md-6 order-md-last d-flex">
                     <form action="#" method="POST" id="contact-me-form" class="bg-light p-4 p-md-5 contact-form" >
                         @csrf

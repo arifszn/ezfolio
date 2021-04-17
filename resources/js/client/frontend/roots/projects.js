@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Card, Image, List, Radio, Space } from 'antd';
-import '../../common/assets/css/projects.scss';
+import { Card, Image, List, notification, Radio, Space } from 'antd';
+import '../../common/assets/css/projects.css';
 import ProjectPopup from '../components/ProjectPopup';
 import Routes from '../../common/helpers/Routes';
 import HTTP from '../../common/helpers/HTTP';
 import Utils from '../../common/helpers/Utils';
+import { FaRegStar } from 'react-icons/fa';
 
 const accentColor = document.querySelector('[data-accentcolor]') ? document.querySelector('[data-accentcolor]').dataset.accentcolor : null;
+const demoMode = document.querySelector('[data-demomode]') ? document.querySelector('[data-demomode]').dataset.demomode : false;
 
 const thumbnailStyle = {
     height: '150px',
@@ -30,6 +32,24 @@ function App() {
         }
 
         loadData();
+
+        if (demoMode) {
+            notification.open({
+                description: <React.Fragment>
+                    <Space direction="vertical" size="middle">
+                        <div style={{paddingTop: 16}}>
+                            We need your support. Please <FaRegStar /> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a> to help us increase. <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>
+                        </div>
+                        <div style={{textAlign: 'center'}}>
+                            <a href={Routes.web.admin.admin} target="_blank" rel="noreferrer">Visit Admin Panel</a>
+                        </div>
+                    </Space>
+                </React.Fragment>,
+                placement: 'bottomRight',
+                duration: 0,
+                key: 'star-notification'
+            });
+        }
     }, [])
 
     const loadData = () => {

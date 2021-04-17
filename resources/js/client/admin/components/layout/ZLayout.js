@@ -10,7 +10,7 @@ import {
   FileTextOutlined,
   ExperimentOutlined,
   ControlOutlined,
-  PieChartOutlined,
+  TeamOutlined,
   MailOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons';
@@ -125,7 +125,7 @@ const ZLayout = ({ children }) => {
                     path: Routes.web.admin.visitors,
                     key: Routes.web.admin.visitors,
                     name: 'Visitor',
-                    icon: <PieChartOutlined/>,
+                    icon: <TeamOutlined/>,
                 },
                 {
                     path: Routes.web.admin.messages,

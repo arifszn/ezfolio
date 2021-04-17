@@ -13,7 +13,6 @@ const ESLintPlugin = require('eslint-webpack-plugin');
  */
 
 mix.disableNotifications();
-mix.browserSync('http://ezfolio.test');
 
 mix.webpackConfig({
     module: {

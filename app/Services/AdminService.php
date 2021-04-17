@@ -18,6 +18,7 @@ use App\Services\Contracts\AdminInterface;
 use App\Services\Contracts\PortfolioConfigInterface;
 use Auth;
 use Carbon\Carbon;
+use DB;
 use Hash;
 use Log;
 use Str;
@@ -690,6 +691,21 @@ class AdminService implements AdminInterface
                                                             ->where('created_at', '>=', $thisMonthStartDate)
                                                             ->where('created_at', '<=', $thisMonthEndDate)
                                                             ->count();
+                }
+
+                $lastThirtyDaysVisitors = $visitorModel
+                                            ->where('created_at', '>=', Carbon::now()->subMonth())
+                                            ->select(
+                                                DB::raw('Date(created_at) as date'),
+                                                DB::raw('COUNT(*) as "count"')
+                                            )
+                                            ->groupBy('date')
+                                            ->orderBy('date', 'DESC')
+                                            ->get();
+                if (!empty($lastThirtyDaysVisitors)) {
+                    $data['visitors']['trend'] = $lastThirtyDaysVisitors;
+                } else {
+                    $data['visitors']['trend'] = [];
                 }
             }
 

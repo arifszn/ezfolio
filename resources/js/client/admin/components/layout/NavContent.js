@@ -3,7 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Routes from '../../../common/helpers/Routes';
 import AvatarDropdown from './AvatarDropdown';
-import { SelectOutlined } from '@ant-design/icons';
+import Icon from '@ant-design/icons';
+import { CgMouse } from 'react-icons/cg'
 
 const Wrapper = styled.div`
     display: flex;
@@ -32,7 +33,7 @@ const NavContent = () => {
             <Wrapper>
                 <ItemWrapper className="z-hover">
                     <a href={Routes.web.frontend.home} target="_blank" rel="noreferrer" title="Visit Frontend">
-                        <Avatar icon={<SelectOutlined />} size="small"/>
+                        <Avatar icon={<Icon component={CgMouse} />} size="small"/>
                     </a>
                 </ItemWrapper>
                 <ItemWrapper className="z-hover">

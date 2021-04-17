@@ -552,7 +552,7 @@ class PortfolioSeeder extends Seeder
 
             try {
                 //visitor table seed
-                foreach (range(1, 70) as $index) {
+                foreach (range(1, 72) as $index) {
                     $data = [
                         'tracking_id' => Str::random(30),
                         'is_new' => $faker->boolean(60),
@@ -561,6 +561,7 @@ class PortfolioSeeder extends Seeder
                         'browser' => $faker->randomElement(['Chrome', 'Firefox', 'Safari', 'Opera', 'Edge']),
                         'platform' => $faker->randomElement(['Windows', 'Mac', 'Android', 'Iphone']),
                         'location' => $faker->country,
+                        'created_at' => $faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
                     ];
                     $visitor->forceStore($data);
                 }
@@ -569,7 +570,7 @@ class PortfolioSeeder extends Seeder
             }
 
             try {
-                //response table seed
+                //message table seed
                 foreach (range(1, 3) as $index) {
                     $data = [
                         'name' => $faker->name(),

@@ -66,6 +66,7 @@ class AdminController extends Controller
      */
     public function optimize(Request $request)
     {
+        Artisan::call('key:generate');
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         Artisan::call('view:clear');

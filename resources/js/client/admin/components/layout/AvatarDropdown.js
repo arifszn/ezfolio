@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown, Menu, Avatar } from 'antd';
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined, ProfileOutlined, UnlockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import Routes from '../../../common/helpers/Routes';
 
@@ -12,12 +12,24 @@ const AvatarDropdown = () => {
 
         if (key === 'logout') {
             history.push(Routes.web.admin.logout);
+        } else if (key === 'profile') {
+            history.push(Routes.web.admin.portfolioAbout);
+        } else if (key === 'password') {
+            history.push(Routes.web.admin.settings);
         }
     }
 
     const menuHeaderDropdown = (
         <Menu selectedKeys={[]} onClick={onMenuClick}>
-            <Menu.Item key="logout" style={{textAlign: 'center'}}>
+            <Menu.Item key="profile">
+                <ProfileOutlined />
+                Profile
+            </Menu.Item>
+            <Menu.Item key="password">
+                <UnlockOutlined />
+                Password
+            </Menu.Item>
+            <Menu.Item key="logout">
                 <LogoutOutlined />
                 Log out
             </Menu.Item>

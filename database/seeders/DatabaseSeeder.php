@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use Artisan;
 use DB;
 use Illuminate\Database\Seeder;
 use Log;
 use Schema;
+use Session;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +33,12 @@ class DatabaseSeeder extends Seeder
 
             $this->call(AdminSeeder::class);
             $this->call(PortfolioSeeder::class);
+
+            Artisan::call('key:generate');
+            Artisan::call('config:clear');
+            Artisan::call('cache:clear');
+            Artisan::call('view:clear');
+            Session::flush();
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
         }

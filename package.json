@@ -20,9 +20,7 @@
         "postcss": "^8.1.14",
         "prop-types": "^15.7.2",
         "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "sass": "^1.32.8",
-        "sass-loader": "^11.0.1"
+        "react-dom": "^17.0.2"
     },
     "dependencies": {
         "@ant-design/charts": "^1.1.2",
@@ -38,7 +36,6 @@
         "less": "^4.1.1",
         "less-loader": "^8.0.0",
         "mini-dynamic-antd-theme": "^0.5.3",
-        "node-sass": "^5.0.0",
         "nprogress": "^0.2.0",
         "rc-queue-anim": "^1.8.5",
         "react-color": "^2.19.3",

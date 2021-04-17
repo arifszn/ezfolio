@@ -180,7 +180,8 @@ class VisitorService implements VisitorInterface
             $newData['browser'] = $data['browser'];
             $newData['platform'] = $data['platform'];
             $newData['location'] = $data['location'];
-            
+            isset($data['created_at']) && $newData['created_at'] = $data['created_at'];
+
             $response = $this->model->create($newData);
 
             if ($response) {
@@ -450,7 +451,7 @@ class VisitorService implements VisitorInterface
             
             if ($data) {
                 return [
-                    'message' => 'Stats are removed successfully',
+                    'message' => 'Stats are reset successfully',
                     'payload' => null,
                     'status'  => CoreConstants::STATUS_CODE_SUCCESS
                 ];

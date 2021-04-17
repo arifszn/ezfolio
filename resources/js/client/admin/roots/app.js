@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Routes from '../../common/helpers/Routes';
 import SuspenseErrorBoundary from '../../common/components/SuspenseErrorBoundary';
 import {ErrorBoundaryFallbackUI} from '../../common/components/ErrorBoundaryFallbackUI';
-import '../../common/assets/css/app.scss';
+import '../../common/assets/css/app.css';
 import ReactRoutes from '../../common/helpers/ReactRoutes';
 import { Provider, useDispatch } from 'react-redux';
 import { initializeGlobalState } from '../redux/ActionCreators';

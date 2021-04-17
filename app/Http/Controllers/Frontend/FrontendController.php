@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\FrontendVisited;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\FrontendInterface;
+use Config;
 use CoreConstants;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
@@ -44,6 +45,8 @@ class FrontendController extends Controller
         } else {
             $data = $data['payload'];
         }
+
+        $data['demoMode'] = Config::get('custom.demo_mode');
         
         if (empty($data['about'])) {
             return view('errors.custom', ['message' => 'Database has not propagated properly']);
@@ -53,7 +56,9 @@ class FrontendController extends Controller
             return view('frontend.maintenance', $data);
         }
 
-        return view('frontend.theme.'.$data['portfolioConfig']['template'], $data);
+        $template = $data['portfolioConfig']['template'];
+
+        return view('frontend.theme.'.$template, $data);
     }
 
     /**
