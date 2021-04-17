@@ -45,8 +45,8 @@ class AdminSeeder extends Seeder
                         //accent color
                         $data = [
                             'setting_key' => CoreConstants::SETTING__ACCENT_COLOR,
-                            'setting_value' => '#00bfa5',
-                            'default_value' => '#00bfa5',
+                            'setting_value' => '#1890ff',
+                            'default_value' => '#1890ff',
                         ];
                         $settingService->insertOrUpdate($data);
 

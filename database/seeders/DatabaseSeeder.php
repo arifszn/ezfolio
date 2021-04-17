@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
             Artisan::call('config:clear');
             Artisan::call('cache:clear');
             Artisan::call('view:clear');
-            Session::flush();
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
         }

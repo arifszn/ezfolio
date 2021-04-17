@@ -52,8 +52,8 @@ class PortfolioSeeder extends Seeder
             //accent color
             $data = [
                 'setting_key' => CoreConstants::PORTFOLIO_CONFIG__ACCENT_COLOR,
-                'setting_value' => '#0168fa',
-                'default_value' => '#0168fa',
+                'setting_value' => '#1890ff',
+                'default_value' => '#1890ff',
             ];
             $portfolioConfig->insertOrUpdate($data);
 

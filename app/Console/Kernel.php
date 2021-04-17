@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ResetApp;
+use Config;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        ResetApp::class
     ];
 
     /**
@@ -24,7 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        if (Config::get('custom.demo_mode')) {
+            $schedule->command('reset:app')->everyThirtyMinutes();
+        }
     }
 
     /**

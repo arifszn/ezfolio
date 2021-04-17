@@ -70,7 +70,6 @@ class AdminController extends Controller
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
-        Session::flush();
         
         if ($request->ajax() || $request->wantsJson()) {
             return response([
