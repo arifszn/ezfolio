@@ -140,7 +140,7 @@ const EducationList = () => {
             <PageWrapper>
                 <PageHeader
                     style={{padding: 0}}
-                    title="Education History"
+                    title="Education"
                     subTitle="Your education history"
                     extra={[
                         <Button key="add" type="primary" onClick={() => setModalVisible(true)}>
