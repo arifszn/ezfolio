@@ -333,9 +333,6 @@ const Dashboard = () => {
                             style={{marginBottom: 24}}
                         >
                             <Card
-                                onClick={() => {
-                                    history.push(Routes.web.admin.visitors);
-                                }}
                                 hoverable={true}
                                 bordered={false}
                                 loading={loading}
