@@ -67,10 +67,11 @@ Ezfolio is a beautiful and professional Portfolio CMS built using Laravel, React
 
 - Clone the repo
 - Run ```composer install```
-- Run ```npm install```
 - Run ```cp .env.example .env```
 - Provide db name, username and password in .env
 - Run ```php artisan migrate --seed```
+- Run ```npm install```
+- Run ```npm run prod``` or ```npm run watch```
 
 For more info, visit the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 
