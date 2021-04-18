@@ -410,7 +410,7 @@ class PortfolioSeeder extends Seeder
                 $data = [
                     'company' => 'ABC LIMITED',
                     'period' => '2019-Present',
-                    'position' => 'Senior Web Developer',
+                    'position' => 'Senior Software Engineer',
                     'details' => $faker->text()
                 ];
                 $experience->store($data);
@@ -418,7 +418,7 @@ class PortfolioSeeder extends Seeder
                 $data = [
                     'company' => 'ABC LIMITED',
                     'period' => '2017-2019',
-                    'position' => 'Web Developer',
+                    'position' => 'Software Engineer',
                     'details' => $faker->text()
                 ];
                 $experience->store($data);
@@ -426,7 +426,7 @@ class PortfolioSeeder extends Seeder
                 $data = [
                     'company' => 'XYZ LIMITED',
                     'period' => '2015-2017',
-                    'position' => 'Junior Web Developer',
+                    'position' => 'Junior Software Engineer',
                     'details' => $faker->text()
                 ];
                 $experience->store($data);
