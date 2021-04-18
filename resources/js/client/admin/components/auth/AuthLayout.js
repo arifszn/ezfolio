@@ -1,18 +1,29 @@
 import { Card, Col, Layout, Row, Typography } from 'antd';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import Utils from '../../../common/helpers/Utils';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
+const zoomInAnimation = keyframes`
+0% {
+-webkit-transform: scale(0.5);
+        transform: scale(0.5);
+}
+100% {
+-webkit-transform: scale(1);
+        transform: scale(1);
+}
+`;
+
 const StyledContent = styled(Layout.Content)`
-    min-height: 100vh;
-    display: table;
+    min-height: 100vh !important;
+    display: table !important;
 `;
 
 const StyledRow = styled(Row)`
-    display: table-cell;
-    vertical-align: middle;
+    display: table-cell !important;
+    vertical-align: middle !important;
 `;
 
 const Title = styled.h4`
@@ -32,7 +43,8 @@ const StyledTitle = styled(Typography.Title)`
 `;
 
 const Wrapper = styled.div`
-    margin: 28px;
+    margin: 28px !important;
+    animation: ${css`${zoomInAnimation} 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;`};
 `;
 
 const StyledCard = styled(Card)`

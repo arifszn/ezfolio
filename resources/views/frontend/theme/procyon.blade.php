@@ -187,7 +187,7 @@
             <div class="row d-flex justify-content-md-center">
                 @if ($about->social_links)
                     @foreach (json_decode($about->social_links) as $social)
-                        <div class="col-6 col-md-4 col-lg-2 fadeInUp mb-lg-4" data-aos="zoom-in">
+                        <div class="col-6 col-md-4 col-lg-2 mb-lg-4" data-aos="zoom-in">
                             <div class="align-self-stretch box text-center p-3 shadow">
                                 <a href="{{$social->link}}" target="_blank">
                                     <div class="icon d-flex align-items-center justify-content-center">

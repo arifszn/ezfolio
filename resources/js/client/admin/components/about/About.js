@@ -41,7 +41,7 @@ const pulseAnimation = keyframes`
 `;
 
 const AnimatedDiv = styled.div`
-animation: ${props => props.animate ? css`${pulseAnimation} 2s ease-in-out infinite` : ''};
+animation: ${props => props.animate ? css`${pulseAnimation} 2s ease-in-out infinite;` : ''};
 `;
 
 const { Title, Text, Paragraph } = Typography;
