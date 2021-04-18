@@ -316,7 +316,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
-                                title={"Visitor Count"}
+                                title={"Count"}
                                 loading={loading}
                                 bordered={false}
                                 hoverable
@@ -432,7 +432,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
-                                title={"Visitor Location"}
+                                title={"Location"}
                                 loading={loading}
                                 bordered={false}
                                 hoverable
