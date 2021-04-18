@@ -33,6 +33,20 @@
     -webkit-box-align: center;
     display: inline-flex;
 }
+
+.z-hover {
+    transition-duration: 0.8s !important;
+}
+
+.z-hover:hover,
+.z-hover:focus,
+.z-hover:active {
+    transition: transform .2s !important;
+    -ms-transform: scale(1.05) !important;
+    -webkit-transform: scale(1.05) !important; 
+    transform: scale(1.05) !important;
+}
+
 .footer {
     background: #e1e5e8;
     padding: 10px 0;

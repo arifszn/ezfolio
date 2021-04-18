@@ -276,7 +276,7 @@
                                     @foreach ($skills as $key => $skill)
                                         @if ($key < 3)
                                             <div class="col-lg-4 mb-4">
-                                                <div class="bg-white rounded-lg shadow p-4" data-aos="zoom-in">
+                                                <div class="bg-white rounded-lg shadow p-4 z-hover" data-aos="zoom-in">
                                                     <h2 class="h5 font-weight-bold text-center mb-4">{{$skill->name}}</h2>
                                                     <div class="progress mx-auto mb-4" data-value='{{$skill->proficiency}}'>
                                                         <span class="progress-left">
@@ -318,7 +318,7 @@
                             <div class="row progress-circle mb-5">
                                 @foreach ($skills as $key => $skill)
                                     <div class="col-lg-4 mb-4">
-                                        <div class="bg-white rounded-lg shadow p-4">
+                                        <div class="bg-white rounded-lg shadow p-4 z-hover">
                                             <h2 class="h5 font-weight-bold text-center">{{$skill->name}}</h2>
                                         </div>
                                     </div>
@@ -346,7 +346,7 @@
                 @if (!empty($services))
                     @foreach ($services as $service)
                         <div class="col-md-4 text-center d-flex" data-aos="zoom-in">
-                            <div class="services-1 shadow">
+                            <div class="services-1 shadow z-hover">
                                 <span class="icon">
                                     <i class="{{$service->icon}}"></i>
                                 </span>
