@@ -160,7 +160,6 @@ class PortfolioSeeder extends Seeder
             ];
             $portfolioConfig->insertOrUpdate($data);
 
-
             //meta title
             $data = [
                 'setting_key' => CoreConstants::PORTFOLIO_CONFIG__META_TITLE,
@@ -412,7 +411,7 @@ class PortfolioSeeder extends Seeder
                     'company' => 'ABC LIMITED',
                     'period' => '2019-Present',
                     'position' => 'Senior Web Developer',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $experience->store($data);
 
@@ -420,7 +419,7 @@ class PortfolioSeeder extends Seeder
                     'company' => 'ABC LIMITED',
                     'period' => '2017-2019',
                     'position' => 'Web Developer',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $experience->store($data);
 
@@ -428,7 +427,7 @@ class PortfolioSeeder extends Seeder
                     'company' => 'XYZ LIMITED',
                     'period' => '2015-2017',
                     'position' => 'Junior Web Developer',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $experience->store($data);
             } catch (\Throwable $th) {
@@ -460,7 +459,7 @@ class PortfolioSeeder extends Seeder
                     'title' => 'Demo Project 1',
                     'categories' => ['personal'],
                     'link' => 'https://www.youtube.com',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'details' => $faker->text(),
                     'seeder_thumbnail' => 'assets/common/img/projects/demo_project_1_1.png',
                     'seeder_images' => [
                         'assets/common/img/projects/demo_project_1_1.png',
@@ -481,7 +480,7 @@ class PortfolioSeeder extends Seeder
                     'title' => 'Demo Project 2',
                     'categories' => ['professional'],
                     'link' => 'https://www.facebook.com',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'details' => $faker->text(),
                     'seeder_thumbnail' => 'assets/common/img/projects/demo_project_2_1.png',
                     'seeder_images' => [
                         'assets/common/img/projects/demo_project_2_1.png',
@@ -503,7 +502,7 @@ class PortfolioSeeder extends Seeder
                     'title' => 'Demo Project 3',
                     'categories' => ['personal'],
                     'link' => 'https://www.linkedin.com',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
+                    'details' => $faker->text(),
                     'seeder_thumbnail' => 'assets/common/img/projects/demo_project_3_1.png',
                     'seeder_images' => [
                         'assets/common/img/projects/demo_project_3_1.png',
@@ -529,21 +528,21 @@ class PortfolioSeeder extends Seeder
                 $data = [
                     'title' => 'Website Developing',
                     'icon' => 'fas fa-code',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $service->store($data);
 
                 $data = [
                     'title' => 'UI/UX Design',
                     'icon' => 'fas fa-basketball-ball',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $service->store($data);
 
                 $data = [
                     'title' => 'Security',
                     'icon' => 'fas fa-shield-alt',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.'
+                    'details' => $faker->text()
                 ];
                 $service->store($data);
             } catch (\Throwable $th) {
@@ -561,7 +560,7 @@ class PortfolioSeeder extends Seeder
                         'browser' => $faker->randomElement(['Chrome', 'Firefox', 'Safari', 'Opera', 'Edge']),
                         'platform' => $faker->randomElement(['Windows', 'Mac', 'Android', 'Iphone']),
                         'location' => $faker->country,
-                        'created_at' => $faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
+                        'created_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
                     ];
                     $visitor->forceStore($data);
                 }
@@ -571,13 +570,14 @@ class PortfolioSeeder extends Seeder
 
             try {
                 //message table seed
-                foreach (range(1, 3) as $index) {
+                foreach (range(1, 17) as $index) {
                     $data = [
                         'name' => $faker->name(),
                         'email' => $faker->email,
-                        'subject' => 'Lorem ipsum dolor sit amet',
-                        'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non corporis assumenda maiores. Impedit quia necessitatibus adipisci sit quibusdam aspernatur mollitia, deleniti, id, molestiae a accusantium modi sint expedita aliquam labore.',
-                        'replied' => CoreConstants::TRUE,
+                        'subject' => $faker->sentence(),
+                        'body' => $faker->text(),
+                        'replied' => $faker->boolean(60),
+                        'created_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
                     ];
                     $message->store($data);
                 }

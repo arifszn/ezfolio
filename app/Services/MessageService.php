@@ -91,6 +91,7 @@ class MessageService implements MessageInterface
             $newData['subject'] = $data['subject'];
             $newData['body'] = $data['body'];
             $newData['replied'] = isset($data['replied']) ? $data['replied'] : CoreConstants::FALSE;
+            isset($data['created_at']) && $newData['created_at'] = $data['created_at'];
             
             if (isset($data['id'])) {
                 $result = $this->getById($data['id'], ['id']);
