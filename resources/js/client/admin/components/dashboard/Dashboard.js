@@ -153,7 +153,7 @@ const Dashboard = () => {
                     let trendArray = [];
 
                     result.visitors.trend.forEach(element => {
-                        trendArray.push(element.count);
+                        trendArray.push(parseInt(element.count));
                     });
 
                     if (trendArray.length === 0) {

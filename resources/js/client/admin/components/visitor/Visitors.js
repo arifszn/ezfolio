@@ -122,9 +122,9 @@ const Visitors = () => {
                 if (result) {
                     //visitors
                     setVisitorsData({
-                        total: result.visitors.total,
-                        new: result.visitors.new,
-                        old: result.visitors.old
+                        total: parseInt(result.visitors.total),
+                        new: parseInt(result.visitors.new),
+                        old: parseInt(result.visitors.old)
                     });
 
                     //location
@@ -132,7 +132,7 @@ const Visitors = () => {
                     result.location.forEach(element => {
                         locationArray.push({
                             name: element.location,
-                            value: element.total,
+                            value: parseInt(element.total)
                         })
                     });
                     setLocationData(locationArray);
@@ -143,14 +143,14 @@ const Visitors = () => {
                     if (parseInt(result.device.desktop)) {
                         deviceArray.push({
                             name: "Desktop",
-                            value: result.device.desktop
+                            value: parseInt(result.device.desktop)
                         })
                     }
                     
                     if (parseInt(result.device.mobile)) {
                         deviceArray.push({
                             name: "Mobile",
-                            value: result.device.mobile
+                            value: parseInt(result.device.mobile)
                         })
                     }
 
@@ -161,7 +161,7 @@ const Visitors = () => {
                     result.browser.forEach(element => {
                         browserArray.push({
                             name: element.browser,
-                            value: element.total
+                            value: parseInt(element.total)
                         })
                     });
                     setBrowserData(browserArray);
@@ -171,7 +171,7 @@ const Visitors = () => {
                     result.platform.forEach(element => {
                         platformArray.push({
                             name: element.platform,
-                            value: element.total
+                            value: parseInt(element.total)
                         })
                     });
                     setPlatformData(platformArray);
