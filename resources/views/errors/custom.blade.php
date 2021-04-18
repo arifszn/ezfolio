@@ -1,4 +1,4 @@
-@extends('errors.minimal')
+@extends('errors.master')
 
 @section('title', __('Error'))
 @section('code', !empty($status) ? $status : '500')

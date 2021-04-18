@@ -40,6 +40,7 @@ mix.webpackConfig({
 
 mix.js('resources/js/client/admin/roots/app.js', 'public/js/client/admin/roots')
     .js('resources/js/client/frontend/roots/projects.js', 'public/js/client/frontend/roots/projects.js')
+    .js('resources/js/client/frontend/roots/error.js', 'public/js/client/frontend/roots/error.js')
     .react();
 
 if (mix.inProduction()) {

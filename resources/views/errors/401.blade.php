@@ -1,4 +1,4 @@
-@extends('errors.minimal')
+@extends('errors.master')
 
 @section('title', __('Unauthorized'))
 @section('code', '401')
