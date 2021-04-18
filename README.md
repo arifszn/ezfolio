@@ -1,62 +1,96 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="http://arifszn.github.io/ezfolio" target="_blank">
+    <img src="https://arifszn.github.io/ezfolio/img/logo/logo.png" alt="Ezfolio" title="Ezfolio" width="80">
+  </a>
 </p>
 
-## About Laravel
+<h1 align="center">Ezfolio</h1>
+<p align="center">Open Source Portfolio CMS</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+    <a href="https://laravel.com/"><img src="https://img.shields.io/badge/laravel-8.12-orange" alt="laravel 8.12"></a>
+    <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/react-17.0.2-blue" alt="react 17.0.2"></a>
+    <a href="https://ant.design/"><img src="https://img.shields.io/badge/antd-4.15.0-blue" alt="antd 4.15.0"></a>
+    <a href="https://github.com/arifszn/ezfolio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/arifszn/ezfolio"/></a>
+    <a href="https://arifszn.github.io/"><img src="https://img.shields.io/badge/author-arifszn-blueviolet" alt="Author arifszn"/></a>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<br/>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p align="center">
+    <img src="https://arifszn.github.io/ezfolio/img/cover.png" width="60%" alt="Cover"/>
+    <br/>
+    <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
+</p>
 
-## Learning Laravel
+Ezfolio is a beautiful and professional Portfolio CMS built using Laravel, React and Ant Design. Choose from awesome responsive templates and control what you like to show your audience. It offers a minimalist admin interface with lots of option for customizations. Get all the features of a portfolio site including visitor tracking, google analytics, maintenance mode, contact form, SEO and many more.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Made with Laravel and React
+- Multiple Templates
+- Minimalist And Modern Design
+- SPA(No Reload)
+- Fully Responsive
+- Dynamic Contents
+- Theme Color Customization
+- Custom Scripting
+- Visitor Tracking
+- Location Tracking
+- Google Analytics
+- Maintenance Mode
+- Contact Form
+- Search Engine Optimization
+- Section Visibility
+- And Much More…
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Table of Contents
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* [Demo](#demo)
+* [Installation](#installation)
+* [Contributing](#contributing)
+* [Thank You](#thank-you)
+* [Support](#support)
+* [License](#license)
 
-### Premium Partners
+## Demo
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+<strong>Admin Panel:</strong> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
+
+`Email: admin@admin.com` <br/>
+`Password: 12345`
+
+<br/>
+<strong>Frontend:</strong> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
+
+
+## Installation
+
+- Clone the repo
+- Run ```composer install```
+- Run ```npm install```
+- Run ```cp .env.example .env```
+- Provide db name, username and password in .env
+- Run ```php artisan migrate --seed```
+
+For more info, visit the <a href="http://arifszn.github.io/ezfolio">docs</a>.
+
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Our vision is to add templates as many as possible. We are looking for contributors to add more frontend templates and features. You can also contribute by participating through issues, discussion and pull requests. Check out our <a href="https://github.com/arifszn/ezfolio/blob/main/CONTRIBUTING.md">contribution guide</a> for more info.
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Thank You
 
-## Security Vulnerabilities
+[![Stargazers repo roster for @arifszn/ezfolio](https://reporoster.com/stars/arifszn/ezfolio)](https://github.com/arifszn/ezfolio/stargazers)
+[![Forkers repo roster for @arifszn/ezfolio](https://reporoster.com/forks/arifszn/ezfolio)](https://github.com/arifszn/ezfolio/network/members)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Support
+
+Show your ❤️ and support by giving a <a href="https://github.com/arifszn/ezfolio">star</a>.
+
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<p>MIT Licensed.</p>
+<p>Copyright © <a href="https://arifszn.github.io">MD. Ariful Alam</a> 2021.</p>
