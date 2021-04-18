@@ -205,7 +205,7 @@ const Visitors = () => {
 
     const showResetConfirm = () => {
         if (demoMode) {
-            Utils.showNotification('This feature has been disabled in Demo', 'error');
+            Utils.showNotification('This feature is not available in Demo', 'warning');
         } else {
             confirm({
                 confirmLoading: loading,
