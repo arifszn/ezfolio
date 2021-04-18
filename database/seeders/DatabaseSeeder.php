@@ -19,6 +19,22 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         try {
+            try {
+                // clear log
+                file_put_contents(storage_path('logs/laravel.log'), '');
+            } catch (\Throwable $th) {
+                Log::error($th->getMessage());
+            }
+
+            Artisan::call('key:generate');
+            Artisan::call('config:clear');
+            Artisan::call('cache:clear');
+            Artisan::call('view:clear');
+
+            if (!env('JWT_SECRET')) {
+                Artisan::call('jwt:secret');
+            }
+
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
             // Truncate all tables, except migrations
@@ -33,11 +49,6 @@ class DatabaseSeeder extends Seeder
 
             $this->call(AdminSeeder::class);
             $this->call(PortfolioSeeder::class);
-
-            Artisan::call('key:generate');
-            Artisan::call('config:clear');
-            Artisan::call('cache:clear');
-            Artisan::call('view:clear');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
         }

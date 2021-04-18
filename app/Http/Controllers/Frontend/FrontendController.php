@@ -49,7 +49,7 @@ class FrontendController extends Controller
         $data['demoMode'] = Config::get('custom.demo_mode');
         
         if (empty($data['about'])) {
-            return view('errors.custom', ['message' => 'Database has not propagated properly']);
+            return view('errors.custom', ['message' => 'Database has not propagated properly. Try running migration with seed.']);
         }
 
         if ((int)$data['portfolioConfig']['maintenanceMode'] === CoreConstants::TRUE) {
