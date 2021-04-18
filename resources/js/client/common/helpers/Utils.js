@@ -176,8 +176,7 @@ const templates = [
  */
 const Utils = {
     client: window.location.origin,
-    // backend: window.location.origin,
-    backend: 'http://ezfolio.test',
+    backend: window.location.origin,
     apiVersion: 'v1',
     showNotification,
     showTinyNotification,
