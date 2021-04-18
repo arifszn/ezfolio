@@ -337,6 +337,7 @@ const Dashboard = () => {
                                 bordered={false}
                                 loading={loading}
                                 className='z-shadow'
+                                style={{cursor: 'default'}}
                             >
                                 <Row>
                                     <Col md={24} sm={24} xs={24} style={{textAlign: 'center'}}>
