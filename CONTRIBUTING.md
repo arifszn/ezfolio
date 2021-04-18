@@ -1,6 +1,6 @@
 # How to Contribute
 
-Thank you for considering to contribute in this project. 
+Thank you for considering contributing to Ezfolio.
 
 ## Getting Started
 
