@@ -36,10 +36,10 @@ const Wrapper = styled.div`
 `;
 
 const StyledCard = styled(Card)`
-    max-width: 380px; 
-    margin: 0 auto;
+    max-width: 380px !important; 
+    margin: 0 auto !important;
     .ant-card-body {
-        padding: 40px 40px 40px 40px;
+        padding: 40px 40px 40px 40px !important;
     }
 `;
 
