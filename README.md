@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://arifszn.github.io/ezfolio" target="_blank">
-    <img src="https://arifszn.github.io/ezfolio/img/logo/logo.png" alt="Ezfolio" title="Ezfolio" width="80">
+    <img src="https://arifszn.github.io/ezfolio/img/short-logo.png" alt="Ezfolio" title="Ezfolio" width="80">
   </a>
 </p>
 
@@ -18,7 +18,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://arifszn.github.io/ezfolio/img/cover.png" width="60%" alt="Cover"/>
+    <img src="https://arifszn.github.io/ezfolio/img/assets/cover.png" width="60%" alt="Cover"/>
     <br/>
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
