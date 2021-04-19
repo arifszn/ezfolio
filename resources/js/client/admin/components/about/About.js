@@ -410,13 +410,17 @@ const About = () => {
                                         CV
                                     </React.Fragment>
                                 } description={
-                                    cv ? (
-                                        <a href={Utils.backend + '/' + cv} download target="_blank" rel="noreferrer">
-                                            <Button type="default" icon={<DownloadOutlined />}>
-                                                Download
-                                            </Button>
-                                        </a>
-                                    ) : ''
+                                    <FileUploader
+                                        allowRevert={false}
+                                        previewFile={cv !== null ? Utils.backend + '/' + cv : null}
+                                        acceptedFileTypes={['text/plain', 'application/pdf', 'application/doc', 'application/rtf']}
+                                        allowMultiple={false}
+                                        name={'file'}
+                                        serverUrl={Routes.api.admin.cv}
+                                        labelIdle={'Drag & Drop your CV or <span class="filepond--label-action">Browse</span>'}
+                                        afterUploadCallback={cvUploadCallback}
+                                        afterRevertCallback={cvUploadCallback}
+                                    />
                                 }/>
                             </Item>
                             <Item>
@@ -614,17 +618,15 @@ const About = () => {
                                     </Text>
                                 }
                             >
-                                <FileUploader
-                                    allowRevert={false}
-                                    previewFile={cv !== null ? Utils.backend + '/' + cv : null}
-                                    acceptedFileTypes={['text/plain', 'application/pdf', 'application/doc', 'application/rtf']}
-                                    allowMultiple={false}
-                                    name={'file'}
-                                    serverUrl={Routes.api.admin.cv}
-                                    labelIdle={'Drag & Drop your CV or <span class="filepond--label-action">Browse</span>'}
-                                    afterUploadCallback={cvUploadCallback}
-                                    afterRevertCallback={cvUploadCallback}
-                                />
+                                {
+                                    cv ? (
+                                        <a href={Utils.backend + '/' + cv} download target="_blank" rel="noreferrer">
+                                            <Button type="default" icon={<DownloadOutlined />}>
+                                                Download
+                                            </Button>
+                                        </a>
+                                    ) : ''
+                                }
                             </Form.Item>
                             <Form.Item
                                 style={{
