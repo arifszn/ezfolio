@@ -15,12 +15,18 @@ const Login = () => {
     const dispatch = useDispatch();
     let history = useHistory();
     let location = useLocation();
-    const globalState = useSelector(state => state.globalState);
-    const siteName = globalState.siteName;
-    const apiToken = globalState.apiToken;
+    const [form] = Form.useForm();
+    const {siteName, apiToken, demoMode} = useSelector(state => state.globalState);
 
     useEffect(() => {
         document.title = `Login - ${siteName}`;
+
+        if (demoMode) {
+            form.setFieldsValue({
+                email: 'admin@admin.com', 
+                password: 12345
+            });
+        }
     }, [])
 
     useEffect(() => {
@@ -57,6 +63,7 @@ const Login = () => {
         <React.Fragment>
             <AuthLayout title={'ADMIN LOGIN'}>
                 <Form
+                    form={form}
                     name="login"
                     onFinish={onSubmit}
                 >

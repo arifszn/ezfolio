@@ -18,12 +18,8 @@ const zoomInAnimation = keyframes`
 
 const StyledContent = styled(Layout.Content)`
     min-height: 100vh !important;
-    display: table !important;
-`;
-
-const StyledRow = styled(Row)`
-    display: table-cell !important;
-    vertical-align: middle !important;
+    display: flex;
+    justify-content: center;
 `;
 
 const Title = styled.h4`
@@ -36,7 +32,6 @@ const StyledTitle = styled(Typography.Title)`
     text-align: center;
     padding-bottom: 30px;
     padding-top: 10px;
-
     img {
         max-height: 58px;
     }
@@ -47,14 +42,6 @@ const Wrapper = styled.div`
     animation: ${css`${zoomInAnimation} 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;`};
 `;
 
-const StyledCard = styled(Card)`
-    max-width: 380px !important; 
-    margin: 0 auto !important;
-    .ant-card-body {
-        padding: 40px 40px 40px 40px !important;
-    }
-`;
-
 const AuthLayout = ({ children, title }) => {
     const logo = useSelector(state => state.globalState.logo);
 
@@ -62,16 +49,18 @@ const AuthLayout = ({ children, title }) => {
         <React.Fragment>
             <Layout>
                 <StyledContent>
-                    <StyledRow 
-                        justify="space-around" 
+                    <Row
+                        justify="center"
                         align="middle"
                     >
-                        <Col span={24}>
+                        <Col>
                             <Wrapper>
-                                <StyledCard
+                                <Card
                                     hoverable={true}
                                     bordered={false}
                                     className="z-shadow"
+                                    style={{maxWidth: 380}}
+                                    bodyStyle={{padding: '40px 40px 40px 40px'}}
                                 >
                                     <Row>
                                         <Col span={24}>
@@ -84,10 +73,10 @@ const AuthLayout = ({ children, title }) => {
                                             {children}
                                         </Col>
                                     </Row>
-                                </StyledCard>
+                                </Card>
                             </Wrapper>
                         </Col>
-                    </StyledRow>
+                    </Row>
                 </StyledContent>
             </Layout>
         </React.Fragment>
