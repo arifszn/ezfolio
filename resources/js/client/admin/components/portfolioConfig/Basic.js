@@ -174,6 +174,7 @@ const Basic = (props) => {
                                             className="z-shadow"
                                             alt={element.title}
                                             width={'100%'}
+                                            height={155}
                                             preview={false}
                                             src={element.image}
                                             placeholder={

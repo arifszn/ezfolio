@@ -9,7 +9,7 @@ import Routes from '../../../common/helpers/Routes';
 const StyledDrawer = styled(Drawer)`
     .ant-drawer-content-wrapper {
         width: 520px !important;
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             max-width: calc(100vw - 16px) !important;
         }
     }
@@ -29,7 +29,7 @@ const Skill = (props) => {
         form.setFieldsValue({
             id: props.itemToEdit ? props.itemToEdit.id : '', 
             name: props.itemToEdit ? props.itemToEdit.name : '', 
-            proficiency: props.itemToEdit ? props.itemToEdit.proficiency : null
+            proficiency: props.itemToEdit ? props.itemToEdit.proficiency : 0
         });
     }, [props.itemToEdit])
 
@@ -62,7 +62,6 @@ const Skill = (props) => {
         form
         .validateFields()
         .then((values) => {
-            
             //save form
             setLoading(true);
 
@@ -137,14 +136,9 @@ const Skill = (props) => {
                     <Form.Item
                         name="proficiency"
                         label="Skill Proficiency"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please enter skill proficiency',
-                            },
-                        ]}
+                        rules={[{ type: "number", min: 1 }]}
                     >
-                        <Slider tooltipVisible tipFormatter={formatter}/>
+                        <Slider tipFormatter={formatter}/>
                     </Form.Item>
                 </Form>
             </Spin>

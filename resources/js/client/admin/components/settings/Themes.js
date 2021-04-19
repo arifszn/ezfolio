@@ -162,7 +162,7 @@ const Themes = (props) => {
                                 />
                             ]
                         }>
-                            <Item.Meta title={'Menu Layout'} description={'Change menu style.'} />
+                            <Item.Meta title={'Menu Layout'} description={'Change menu style for desktop screen.'} />
                         </StyledListItem>
                     </Spin>
                     {

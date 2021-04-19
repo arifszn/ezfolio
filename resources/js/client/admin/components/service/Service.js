@@ -9,7 +9,7 @@ import Routes from '../../../common/helpers/Routes';
 const StyledDrawer = styled(Drawer)`
     .ant-drawer-content-wrapper {
         width: 520px !important;
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             max-width: calc(100vw - 16px) !important;
         }
     }
