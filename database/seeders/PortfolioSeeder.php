@@ -558,7 +558,7 @@ class PortfolioSeeder extends Seeder
                         'ip' => $faker->ipv4,
                         'is_desktop' => $faker->boolean(70),
                         'browser' => $faker->randomElement(['Chrome', 'Firefox', 'Safari', 'Opera', 'Edge']),
-                        'platform' => $faker->randomElement(['Windows', 'Mac', 'Android', 'Iphone']),
+                        'platform' => $faker->randomElement(['Windows', 'OS X', 'AndroidOS', 'iOS']),
                         'location' => $faker->country,
                         'created_at' => $faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
                     ];
