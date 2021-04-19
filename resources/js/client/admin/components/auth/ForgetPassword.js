@@ -26,12 +26,11 @@ const ForgetPassword = () => {
     }, [apiToken]);
 
     const onSubmit = (values) => {
-        setLoading(true);
-
         if (demoMode) {
             Utils.showNotification('This feature is not available in Demo', 'warning');
             return;
         }
+        setLoading(true);
         
         axios.post(Routes.api.admin.forgetPassword, {
             email: values.email,
