@@ -23,11 +23,11 @@
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
 
-Ezfolio is a beautiful and professional Portfolio CMS built using Laravel, React and Ant Design. Choose from awesome responsive templates and control what you like to show your audience. It offers a minimalist admin interface with lots of option for customizations. Get all the features of a portfolio site including visitor tracking, google analytics, maintenance mode, contact form, SEO and many more.
+Ezfolio is a professional open source portfolio CMS built using <b>Laravel</b>, <b>React</b> and <b>Ant Design</b>. Choose from awesome templates and control what you like to show your audience. It offers a minimalist admin interface with lots of option for customizations. Get all the features of a portfolio site including visitor tracking, google analytics, maintenance mode, contact form, SEO and many more.
 
-- Made with Laravel and React
-- Multiple Templates
+- Made with Laravel, React and Ant Design
 - Minimalist And Modern Design
+- Multiple Templates
 - SPA(No Reload)
 - Fully Responsive
 - Dynamic Contents
@@ -54,13 +54,15 @@ Ezfolio is a beautiful and professional Portfolio CMS built using Laravel, React
 
 ## Demo
 
-<strong>Admin Panel:</strong> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
+<b>Admin Panel:</b> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
 
-`Email: admin@admin.com` <br/>
-`Password: 12345`
+```
+Email: admin@admin.com
+Password: 12345
+```
 
 <br/>
-<strong>Frontend:</strong> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
+<b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
 
 
 ## Installation
