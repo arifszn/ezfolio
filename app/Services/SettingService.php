@@ -145,7 +145,7 @@ class SettingService implements SettingInterface
             if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                 $data['accentColor'] = $result['payload']->setting_value;
             } else {
-                $data['accentColor'] = '#FF7F50';
+                $data['accentColor'] = '#1890ff';
             }
 
             //get short menu

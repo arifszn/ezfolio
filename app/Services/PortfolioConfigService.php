@@ -162,7 +162,7 @@ class PortfolioConfigService implements PortfolioConfigInterface
                 if ($result['status'] === CoreConstants::STATUS_CODE_SUCCESS) {
                     $data['accentColor'] = $result['payload']->setting_value;
                 } else {
-                    $data['accentColor'] = '#0168fa';
+                    $data['accentColor'] = '#1890ff';
                 }
             }
 
