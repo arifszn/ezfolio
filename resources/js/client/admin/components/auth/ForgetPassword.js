@@ -10,9 +10,7 @@ import { useSelector } from 'react-redux';
 
 const ForgetPassword = () => {
     const [loading, setLoading] = useState(false);
-    const globalState = useSelector(state => state.globalState);
-    const siteName = globalState.siteName;
-    const apiToken = globalState.apiToken;
+    const {siteName, apiToken, demoMode} = useSelector(state => state.globalState);
     let history = useHistory();
     let location = useLocation();
 
@@ -29,6 +27,11 @@ const ForgetPassword = () => {
 
     const onSubmit = (values) => {
         setLoading(true);
+
+        if (demoMode) {
+            Utils.showNotification('This feature is not available in Demo', 'warning');
+            return;
+        }
         
         axios.post(Routes.api.admin.forgetPassword, {
             email: values.email,
