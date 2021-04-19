@@ -38,7 +38,7 @@ const AvatarDropdown = () => {
 
     return (
         <React.Fragment>
-            <Dropdown overlay={menuHeaderDropdown}>
+            <Dropdown overlay={menuHeaderDropdown} trigger={['click', 'hover']}>
                 <span>
                     <Avatar /* style={{ backgroundColor: 'var(--primary-hover-color)' }} */ icon={<UserOutlined />} size="small" alt="avatar" />
                 </span>
