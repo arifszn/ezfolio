@@ -184,7 +184,7 @@
     </section>
     <section class="contact-section ftco-no-pb social-icon-block">
         <div class="container">
-            <div class="row d-flex justify-content-md-center">
+            <div class="row d-flex">
                 @if ($about->social_links)
                     @foreach (json_decode($about->social_links) as $social)
                         <div class="col-6 col-md-4 col-lg-2 mb-lg-4" data-aos="zoom-in">
@@ -317,7 +317,7 @@
                         @else
                             <div class="row progress-circle mb-5">
                                 @foreach ($skills as $key => $skill)
-                                    <div class="col-lg-4 mb-4">
+                                    <div class="col-lg-4 col-md-6 mb-4">
                                         <div class="bg-white rounded-lg shadow p-4 z-hover">
                                             <h2 class="h5 font-weight-bold text-center">{{$skill->name}}</h2>
                                         </div>

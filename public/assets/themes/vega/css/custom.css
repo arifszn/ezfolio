@@ -68,12 +68,19 @@
     margin-bottom: 20px;
 }
 
+.icon-box-wrapper {
+    margin-bottom: 40px;
+}
+
 #services .icon-box {
+    width: 100%;
     text-align: center;
     padding: 70px 20px 80px 20px;
     transition: all ease-in-out 0.3s;
     background: #fff;
     box-shadow: 0px 5px 90px 0px rgba(110, 123, 131, 0.05);
+    -webkit-box-shadow: 0px 5px 25px 0px rgb(0 0 0 / 11%);
+    box-shadow: 0px 5px 25px 0px rgb(0 0 0 / 11%);
 }
 
 #services .icon-box .icon {
