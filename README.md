@@ -46,6 +46,7 @@ Ezfolio is a professional open source portfolio CMS built using <b>Laravel</b>, 
 ## Table of Contents
 
 * [Demo](#demo)
+* [Screenshots](#screenshots)
 * [Installation](#installation)
 * [Contributing](#contributing)
 * [Thank You](#thank-you)
@@ -63,6 +64,36 @@ Password: 12345
 
 <br/>
 <b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
+
+
+## Screenshots
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" width="50%" alt="Login"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" width="50%" alt="Dashboard"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" width="50%" alt="Config"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" width="50%" alt="Theme"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" width="50%" alt="Visitors"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" width="50%" alt="Project"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" width="50%" alt="Procyon"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" width="50%" alt="Rigel"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" width="50%" alt="Vega"/>
+<br />
 
 
 ## Installation
