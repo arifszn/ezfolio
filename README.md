@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://arifszn.github.io/ezfolio" target="_blank">
-    <img src="https://arifszn.github.io/ezfolio/img/logo/logo.png" alt="Ezfolio" title="Ezfolio" width="80">
+    <img src="https://arifszn.github.io/ezfolio/img/short-logo.png" alt="Ezfolio" title="Ezfolio" width="80">
   </a>
 </p>
 
@@ -8,7 +8,7 @@
 <p align="center">Open Source Portfolio CMS</p>
 
 <p align="center">
-    <a href="https://laravel.com/"><img src="https://img.shields.io/badge/laravel-8.12-orange" alt="laravel 8.12"></a>
+    <a href="https://laravel.com/"><img src="https://img.shields.io/badge/laravel-8.12-blue" alt="laravel 8.12"></a>
     <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/react-17.0.2-blue" alt="react 17.0.2"></a>
     <a href="https://ant.design/"><img src="https://img.shields.io/badge/antd-4.15.0-blue" alt="antd 4.15.0"></a>
     <a href="https://github.com/arifszn/ezfolio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/arifszn/ezfolio"/></a>
@@ -18,7 +18,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://arifszn.github.io/ezfolio/img/cover.png" width="60%" alt="Cover"/>
+    <img src="https://arifszn.github.io/ezfolio/img/assets/cover.png" width="60%" alt="Cover"/>
     <br/>
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
