@@ -4,7 +4,7 @@ use App\Helpers\CoreConstants;
 use Illuminate\Support\Facades\Route;
 
 if (env('APP_ENV') !== 'production') {
-    Route::get('artisan/{cmd}', function ($cmd) {
+    Route::get('command/{cmd}', function ($cmd) {
         try {
             Artisan::call($cmd);
 
