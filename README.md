@@ -18,7 +18,7 @@
 <br/>
 
 <p align="center">
-    <img src="https://arifszn.github.io/ezfolio/img/assets/cover.png" width="60%" alt="Cover"/>
+    <img src="https://arifszn.github.io/ezfolio/img/assets/preview.gif" width="60%" alt="Cover"/>
     <br/>
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
