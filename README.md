@@ -25,14 +25,15 @@
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
 
-Ezfolio is a professional open source portfolio CMS built using <b>Laravel</b>, <b>React</b> and <b>Ant Design</b>. Choose from awesome templates and control what you like to show your audience. It offers a minimalist admin interface with lots of option for customizations. Get all the features of a portfolio site including visitor tracking, google analytics, maintenance mode, contact form, SEO and many more.
+<span className="keyword">Ezfolio</span> is a professional open source portfolio CMS built using <b>Laravel</b>, <b>React</b> and <b>Ant Design</b>. Choose from awesome templates and control what you like to show your audience. It offers a minimalist admin interface with lots of option for customizations. Get all the features of a portfolio site including visitor tracking, google analytics, maintenance mode, contact form, SEO and many more. 
+
+This project can be used as a guide for learning Laravel with React and making a SPA.
 
 - Made with Laravel, React and Ant Design
-- Minimalist And Modern Design
+- JWT Authentication
+- Single Page Application
+- Modern and Responsive Design
 - Multiple Templates
-- SPA(No Reload)
-- Fully Responsive
-- Dynamic Contents
 - Theme Color Customization
 - Custom Scripting
 - Visitor Tracking
