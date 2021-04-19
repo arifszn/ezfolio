@@ -11,14 +11,16 @@
     <a href="https://laravel.com/"><img src="https://img.shields.io/badge/laravel-8.12-blue" alt="laravel 8.12"></a>
     <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/react-17.0.2-blue" alt="react 17.0.2"></a>
     <a href="https://ant.design/"><img src="https://img.shields.io/badge/antd-4.15.0-blue" alt="antd 4.15.0"></a>
-    <a href="https://github.com/arifszn/ezfolio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/arifszn/ezfolio"/></a>
+    <a href="https://github.com/arifszn/ezfolio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/arifszn/ezfolio"/></a>
     <a href="https://arifszn.github.io/"><img src="https://img.shields.io/badge/author-arifszn-blueviolet" alt="Author arifszn"/></a>
 </p>
 
 <br/>
 
 <p align="center">
-    <img src="https://arifszn.github.io/ezfolio/img/assets/cover.png" width="60%" alt="Cover"/>
+    <a href="https://arifszn.github.io/ezfolio">
+        <img src="https://arifszn.github.io/ezfolio/img/assets/preview.gif" width="60%" alt="Cover"/>
+    </a>
     <br/>
     <a href="#arifszn"><img src="https://arifszn.github.io/assets/img/drop-shadow.png" width="60%" alt="Shadow"/></a>
 </p>
@@ -46,6 +48,7 @@ Ezfolio is a professional open source portfolio CMS built using <b>Laravel</b>, 
 ## Table of Contents
 
 * [Demo](#demo)
+* [Screenshots](#screenshots)
 * [Installation](#installation)
 * [Contributing](#contributing)
 * [Thank You](#thank-you)
@@ -63,6 +66,36 @@ Password: 12345
 
 <br/>
 <b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
+
+
+## Screenshots
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" width="50%" alt="Login"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" width="50%" alt="Dashboard"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" width="50%" alt="Config"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" width="50%" alt="Theme"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" width="50%" alt="Visitors"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" width="50%" alt="Project"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" width="50%" alt="Procyon"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" width="50%" alt="Rigel"/>
+<br />
+
+<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" width="50%" alt="Vega"/>
+<br />
 
 
 ## Installation
