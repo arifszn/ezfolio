@@ -267,6 +267,7 @@ const Visitors = () => {
                     <Card 
                         bordered={false}
                         hoverable
+                        style={{cursor: 'default'}}
                         className="z-shadow"
                     >
                         <Row>
@@ -316,6 +317,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
+                                style={{cursor: 'default'}}
                                 title={"Count"}
                                 loading={loading}
                                 bordered={false}
@@ -361,6 +363,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
+                                style={{cursor: 'default'}}
                                 title={"Platform"}
                                 loading={loading}
                                 bordered={false}
@@ -390,6 +393,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
+                                style={{cursor: 'default'}}
                                 title={"Browser"}
                                 loading={loading}
                                 bordered={false}
@@ -432,6 +436,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
+                                style={{cursor: 'default'}}
                                 title={"Location"}
                                 loading={loading}
                                 bordered={false}
@@ -458,6 +463,7 @@ const Visitors = () => {
                             }}
                         >
                             <Card
+                                style={{cursor: 'default'}}
                                 title={"Device"}
                                 loading={loading}
                                 bordered={false}
