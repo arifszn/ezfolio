@@ -14,7 +14,7 @@ import {
   MailOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons';
-import { BackTop, message } from 'antd';
+import { message } from 'antd';
 import NavContent from './NavContent';
 import { useIsMobile } from '../../../common/hooks/IsMobile';
 import axios from 'axios';
