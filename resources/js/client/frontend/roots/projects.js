@@ -112,7 +112,11 @@ function App() {
                                 dataSource={data.filter(project => selectedCategory === null || (selectedCategory !== null && JSON.parse(project.categories).includes(selectedCategory)))}
                                 loading={loading}
                                 renderItem={item => (
-                                    <List.Item style={{marginBottom: '24px'}}>
+                                    <List.Item 
+                                        style={{marginBottom: '24px'}}
+                                        data-aos="fade-up" 
+                                        data-aos-anchor-placement="top-bottom"
+                                    >
                                         <Card
                                             onClick={() => {
                                                 setSelectedProject(item);
@@ -123,7 +127,6 @@ function App() {
                                             bodyStyle={{padding: '14px'}}
                                             hoverable
                                             className={'z-hover z-shadow'}
-                                            data-aos="fade-up" data-aos-anchor-placement="top-bottom"
                                             bordered={false}
                                             cover={
                                                 <div style={{opacity: '0.7'}}>

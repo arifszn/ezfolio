@@ -35,13 +35,15 @@
 }
 
 .z-hover {
-    transition-duration: 0.8s !important;
+    transition-property: opacity,transform;
+    transform: translateZ(0);
+    opacity: 1;
 }
 
 .z-hover:hover,
 .z-hover:focus,
 .z-hover:active {
-    transition: transform .2s !important;
+    transition: transform .8s !important;
     -ms-transform: scale(1.05) !important;
     -webkit-transform: scale(1.05) !important; 
     transform: scale(1.05) !important;

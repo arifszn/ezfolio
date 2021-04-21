@@ -195,8 +195,8 @@
                                 </div>
                             </div>
                             @else
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <div class="card z-hover skill-card text-center" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="card z-hover skill-card text-center">
                                     <div class="card-body center-this">
                                         {{$skill->name}}
                                     </div>
