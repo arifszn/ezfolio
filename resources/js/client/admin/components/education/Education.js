@@ -36,7 +36,7 @@ const Education = (props) => {
     useEffect(() => {
         setTimeout(() => {
             setVisible(props.visible);
-        }, 400);
+        }, 100);
     }, [props.visible])
 
     useEffect(() => {
