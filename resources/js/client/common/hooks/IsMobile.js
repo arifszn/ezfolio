@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useIsMobile = (breakPoint = 768) => {
+export const useIsMobile = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -9,5 +9,5 @@ export const useIsMobile = (breakPoint = 768) => {
         return () => window.removeEventListener("resize", handleWindowResize);
     }, []);
 
-    return width <= breakPoint;
+    return width <= 768;
 }
