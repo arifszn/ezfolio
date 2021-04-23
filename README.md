@@ -45,6 +45,8 @@ This project can be used as a guide for learning Laravel with React and making a
 - Section Visibility
 - And Much More…
 
+> Frontend: https://github.com/arifszn/ezfolio/tree/main/resources/js/client
+
 
 ## Table of Contents
 
