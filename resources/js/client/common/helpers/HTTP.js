@@ -27,9 +27,8 @@ const refreshToken = async (store) => {
             })
         })
         .catch(error => {
-            Utils.handleException(error, () => {
-                throw error;
-            });
+            store.dispatch(removeApiToken());
+            throw error;
         });
     }
 }
@@ -80,7 +79,7 @@ export const setupInterceptors = (store) => {
                         return HTTP(originalRequest);
 
                     } catch (error) {
-                        Utils.handleException(error);
+                        console.log(error);
                     }
                 }
             }

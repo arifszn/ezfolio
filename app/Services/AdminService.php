@@ -510,6 +510,18 @@ class AdminService implements AdminInterface
                     'payload' => CoreConstants::TOKEN_BLACKLISTED,
                     'status' => CoreConstants::STATUS_CODE_ERROR
                 ];
+            } elseif ($th instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return [
+                    'message' => 'Token is Expired',
+                    'payload' => CoreConstants::TOKEN_EXPIRED,
+                    'status' => CoreConstants::STATUS_CODE_ERROR
+                ];
+            } elseif ($th instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return [
+                    'message' => 'Token is Invalid',
+                    'payload' => CoreConstants::TOKEN_INVALID,
+                    'status' => CoreConstants::STATUS_CODE_ERROR
+                ];
             }
 
             return [
