@@ -1,4 +1,4 @@
-import { Button, Menu, PageHeader, Space, Dropdown, Modal, Switch } from 'antd';
+import { Button, Menu, PageHeader, Space, Dropdown, Modal, Switch, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 import moment from 'moment';
 import PageWrapper from '../layout/PageWrapper';
@@ -192,7 +192,14 @@ const Messages = () => {
                 <PageHeader
                     style={{padding: 0}}
                     title="Messages"
-                    subTitle="Messages from portfolio contact section"
+                    subTitle={
+                        <Typography.Text
+                            style={{ width: '100%', color: 'grey' }}
+                            ellipsis={{ tooltip: 'Messages from portfolio contact section' }}
+                        >
+                            Messages from portfolio contact section
+                        </Typography.Text>
+                    }
                 >
                     <ProTable
                         columns={columns}

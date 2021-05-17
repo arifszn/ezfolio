@@ -1,4 +1,4 @@
-import { PageHeader, Form, Spin, Input, Select, Button } from 'antd';
+import { PageHeader, Form, Spin, Input, Select, Button, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import HTTP from '../../../common/helpers/HTTP';
@@ -76,7 +76,14 @@ const Mail = () => {
         <React.Fragment>
             <PageHeader
                 title="Mail Settings"
-                subTitle="Optional and needed for password recovery mail"
+                subTitle={
+                    <Typography.Text
+                        style={{ width: '100%', color: 'grey' }}
+                        ellipsis={{ tooltip: 'Optional and needed for password recovery mail' }}
+                    >
+                        Optional and needed for password recovery mail
+                    </Typography.Text>
+                }
             >
                 <Spin spinning={componentLoading} delay={500} size="large">
                     <Form

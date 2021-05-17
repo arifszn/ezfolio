@@ -1,4 +1,4 @@
-import { Button, Menu, PageHeader, Space, Dropdown, Modal, Progress } from 'antd';
+import { Button, Menu, PageHeader, Space, Dropdown, Modal, Progress, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 import PageWrapper from '../layout/PageWrapper';
 import ProTable from '@ant-design/pro-table';
@@ -120,7 +120,14 @@ const Skills = () => {
                 <PageHeader
                     style={{padding: 0}}
                     title="Skills"
-                    subTitle="Your professional skills"
+                    subTitle={
+                        <Typography.Text
+                            style={{ width: '100%', color: 'grey' }}
+                            ellipsis={{ tooltip: 'Your professional skills' }}
+                        >
+                            Your professional skills
+                        </Typography.Text>
+                    }
                     extra={[
                         <Button key="add" type="primary" onClick={() => setModalVisible(true)}>
                             Add New

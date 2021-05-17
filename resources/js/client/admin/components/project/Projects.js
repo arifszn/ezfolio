@@ -170,7 +170,14 @@ const Projects = () => {
                 <PageHeader
                     style={{padding: 0}}
                     title="Projects"
-                    subTitle="Your projects to showcase"
+                    subTitle={
+                        <Typography.Text
+                            style={{ width: '100%', color: 'grey' }}
+                            ellipsis={{ tooltip: 'Your projects to showcase' }}
+                        >
+                            Your projects to showcase
+                        </Typography.Text>
+                    }
                     extra={[
                         <Button key="add" type="primary" onClick={() => setModalVisible(true)}>
                             Add New
