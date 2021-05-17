@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import ColorPickerPopup from '../ColorPickerPopup';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import SeoPopup from '../SeoPopup';
+import { useSelector } from 'react-redux';
 
 const { Meta } = Card;
 const { Item } = List;
@@ -44,6 +45,7 @@ const Basic = (props) => {
     const [colorPickerVisible, setColorPickerVisible] = useState(false);
     const [seoPopupVisible, setSeoPopupVisible] = useState(false);
     const [seo, setSeo] = useState(null);
+    const { demoMode } = useSelector(state => state.globalState);
 
     useEffect(() => {
         props.mountedCallBack();
@@ -148,12 +150,15 @@ const Basic = (props) => {
     }
 
     const maintenanceModeOnChange = (checked) => {
+        if (demoMode) {
+            Utils.showNotification('This feature is disabled in demo', 'warning');
+        } else {
+            const callback = () => {
+                setMaintenanceMode(checked);
+            }
 
-        const callback = () => {
-            setMaintenanceMode(checked);
+            submitData(CoreConstants.portfolioConfig.MAINTENANCE_MODE, checked, callback);
         }
-
-        submitData(CoreConstants.portfolioConfig.MAINTENANCE_MODE, checked, callback);
     }
 
     const changeTemplate = (

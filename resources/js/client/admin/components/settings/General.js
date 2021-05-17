@@ -134,7 +134,7 @@ const General = (props) => {
                             <a key="login-credentials-change" onClick={(e) => {
                                 e.preventDefault();
                                 if (props.globalState.demoMode) {
-                                    Utils.showNotification('This feature is not available in Demo', 'warning');
+                                    Utils.showNotification('This feature is disabled in demo', 'warning');
                                 } else {
                                     setLoginCredentialVisible(true);
                                 }
