@@ -61,7 +61,7 @@ This project can be used as a guide for learning Laravel with React and making a
 ## Demo
 
 <b>Admin Panel:</b> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
-Be free to change anything in admin panel as it resets every 30 minutes.
+Be free to change anything in admin panel as it gets reset every 30 minutes.
 
 ```
 Email: admin@admin.com
