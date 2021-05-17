@@ -526,7 +526,7 @@ class PortfolioSeeder extends Seeder
             //service table seed
             try {
                 $data = [
-                    'title' => 'Website Developing',
+                    'title' => 'Web Development',
                     'icon' => 'fas fa-code',
                     'details' => $faker->text()
                 ];

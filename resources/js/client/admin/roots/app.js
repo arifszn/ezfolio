@@ -64,6 +64,15 @@ const privateRoutes = () => {
  */
 const App = () => {
     const dispatch = useDispatch();
+
+    /**
+     * Below settings are coming from 
+     * resources/views/admin/app.blade.php
+     * line 17. Ideally to get the settings, a request should be made to api.
+     * 
+     * But to keep it simple, we are passing the values in a constant which is
+     * already declared in that mentioned file.
+     */
     // eslint-disable-next-line no-undef
     let mySettings = settings;
 
