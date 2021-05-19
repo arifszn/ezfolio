@@ -74,32 +74,29 @@ Password: 12345
 
 ## Screenshots
 
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" width="50%" alt="Login"/>
-<br />
+<details>
+    <summary>Admin Panel</summary>
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" alt="Login"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" alt="Dashboard"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" alt="Config"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" alt="Theme"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" alt="Visitors"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" alt="Project"/></kbd>
+</details>
 
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" width="50%" alt="Dashboard"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" width="50%" alt="Config"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" width="50%" alt="Theme"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" width="50%" alt="Visitors"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" width="50%" alt="Project"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" width="50%" alt="Procyon"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" width="50%" alt="Rigel"/>
-<br />
-
-<img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" width="50%" alt="Vega"/>
-<br />
+<details>
+    <summary>Front</summary>
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" alt="Procyon"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" alt="Rigel"/></kbd>
+    <br /><br />
+    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" alt="Vega"/></kbd>
+</details>
 
 
 ## Installation
