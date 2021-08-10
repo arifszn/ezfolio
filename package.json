@@ -44,10 +44,10 @@
         "react-icons": "^4.2.0",
         "react-redux": "^7.2.3",
         "react-router-dom": "^5.2.0",
-        "react-typed": "^1.2.0",
         "reddit-image-fetcher": "^2.0.7",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
-        "styled-components": "^5.2.1"
+        "styled-components": "^5.2.1",
+        "typed.js": "^2.0.12"
     }
 }

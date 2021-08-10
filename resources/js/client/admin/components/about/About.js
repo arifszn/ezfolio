@@ -5,7 +5,7 @@ import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
 import FileUploader from '../uploader/FileUploader';
-import Typed from 'react-typed';
+import Typed from 'typed.js';
 import QueueAnim from 'rc-queue-anim';
 import SocialLinkPopup from './SocialLinkPopup';
 import { DownloadOutlined } from '@ant-design/icons';
@@ -103,9 +103,33 @@ const About = () => {
     const taglinesInput = useRef(null);
     const socialLinksInput = useRef(null);
 
+    const typedElement = useRef(null);
+    const typed = useRef(null);
+
     useEffect(() => {
         loadData();
     }, [])
+
+    useEffect(() => {
+        console.log(typedElement);
+        const options = {
+            strings: taglines && taglines.length ? taglines : [''],
+            typeSpeed: 70,
+            backSpeed: 40,
+            smartBackspace: true,
+            loop: true
+        };
+        
+        if (typedElement.current) {
+            typed.current = new Typed(typedElement.current, options);
+        }
+        
+        return () => {
+            if (typed.current) {
+                typed.current.destroy();
+            }
+        }
+    }, [componentLoading, taglines])
 
     useEffect(() => {
         if (focusTaglines === true) {
@@ -376,13 +400,7 @@ const About = () => {
                                     </React.Fragment>
                                 } description={
                                     <div>
-                                        <Typed
-                                            strings={taglines && taglines.length ? taglines : ['']}
-                                            typeSpeed={40}
-                                            backSpeed={40}
-                                            smartBackspace={true}
-                                            loop={true}
-                                        />
+                                        <span ref={typedElement}></span>
                                     </div>
                                 }/>
                             </Item>

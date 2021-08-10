@@ -25,7 +25,7 @@ class VerifyJwt
         } catch (Exception $th) {
             if ($th instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json([
-                    'message' => 'Token is Invalid',
+                    'message' => 'Please Login to Continue',
                     'payload' => CoreConstants::TOKEN_INVALID,
                     'status' => CoreConstants::STATUS_CODE_ERROR
                 ], CoreConstants::STATUS_CODE_ERROR);
@@ -35,7 +35,7 @@ class VerifyJwt
                 }
 
                 return response()->json([
-                    'message' => 'Token is Expired',
+                    'message' => 'Please Login to Continue',
                     'payload' => CoreConstants::TOKEN_EXPIRED,
                     'status' => CoreConstants::STATUS_CODE_UNAUTHORIZED
                 ], CoreConstants::STATUS_CODE_UNAUTHORIZED);
