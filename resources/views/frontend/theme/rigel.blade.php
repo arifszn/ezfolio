@@ -14,18 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @if (!empty($portfolioConfig['googleAnalyticsId']) && $portfolioConfig['googleAnalyticsId'] != '')
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src={{"https://www.googletagmanager.com/gtag/js?id=".$portfolioConfig['googleAnalyticsId']}}></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', '{{$portfolioConfig["googleAnalyticsId"]}}');
-        </script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-    @endif
+    @include('common.googleAnalytics')
     @if (!empty($portfolioConfig['script']['header']) && $portfolioConfig['script']['header'] != '')
         <script>
             {!!$portfolioConfig['script']['header']!!}

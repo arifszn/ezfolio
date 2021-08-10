@@ -12,6 +12,7 @@ use App\Services\Contracts\ProjectInterface;
 use App\Services\Contracts\ServiceInterface;
 use App\Services\Contracts\SkillInterface;
 use App\Services\Contracts\VisitorInterface;
+use Config;
 use Illuminate\Database\Seeder;
 use Log;
 use Str;
@@ -60,8 +61,8 @@ class PortfolioSeeder extends Seeder
             //google analytics ID
             $data = [
                 'setting_key' => CoreConstants::PORTFOLIO_CONFIG__GOOGLE_ANALYTICS_ID,
-                'setting_value' => '',
-                'default_value' => '',
+                'setting_value' => Config::get('custom.demo_mode') ? 'G-PS8JF33VLD' : '',
+                'default_value' => Config::get('custom.demo_mode') ? 'G-PS8JF33VLD' : '',
             ];
             $portfolioConfig->insertOrUpdate($data);
 
