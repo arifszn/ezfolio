@@ -108,9 +108,9 @@ const Dashboard = () => {
 
         if (demoMode) {
             notification.open({
-                message: "Need Github star",
+                message: <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>,
                 description: <React.Fragment>
-                    We need your support. Please <StarOutlined/> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a> to help us increase. <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>
+                    If you like Ezfolio, Please <StarOutlined/> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
                 </React.Fragment>,
                 placement: 'bottomRight',
                 duration: 0,

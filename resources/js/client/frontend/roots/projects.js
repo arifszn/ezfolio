@@ -36,10 +36,11 @@ function App() {
 
         if (demoMode) {
             notification.open({
+                message: <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>,
                 description: <React.Fragment>
                     <Space direction="vertical" size="middle">
-                        <div style={{paddingTop: 16}}>
-                            We need your support. Please <FaRegStar /> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a> to help us increase. <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>
+                        <div>
+                            If you like Ezfolio, Please <FaRegStar/> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <a href={Routes.web.admin.admin} target="_blank" rel="noreferrer">Visit Admin Panel</a>
