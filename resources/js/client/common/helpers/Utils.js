@@ -30,7 +30,7 @@ const showTinyNotification = (message = 'Something went wrong', type = 'error') 
 };
 
 /**
- * Ellipse long test
+ * Ellipse long text
  * 
  * @param string str 
  * @param number length 

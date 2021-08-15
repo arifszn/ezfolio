@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Card, Image, List, notification, Radio, Space } from 'antd';
+import { Card, Image, Row, Col, notification, Radio, Space } from 'antd';
 import '../../common/assets/css/projects.css';
 import ProjectPopup from '../components/ProjectPopup';
 import Routes from '../../common/helpers/Routes';
@@ -13,6 +13,7 @@ const demoMode = document.querySelector('[data-demomode]') ? document.querySelec
 
 const thumbnailStyle = {
     height: '150px',
+    width: '100%',
     transition: '0.3s ease',
     // filter: 'opacity(0.8)',
     objectFit: 'cover'
@@ -83,10 +84,10 @@ function App() {
 
     return (
         <React.Fragment>
-            <div className="container">
-                <div className="row">
-                    <div className="text-center col-md-12">
-                        <Space direction="vertical" size={'large'}>
+            <Row>
+                <Col span={24}>
+                    <Row>
+                        <Col span={24} className="text-center" style={{marginBottom: '24px'}}>
                             {
                                 (categories.length !== 0) && (
                                     <div data-aos="zoom-in">
@@ -107,54 +108,61 @@ function App() {
                                     </div>
                                 )
                             }
-                            <List
-                                grid={{ gutter: 24, xl:4, lg: 4, md: 2, sm: 1, xs: 1 }}
-                                dataSource={data.filter(project => selectedCategory === null || (selectedCategory !== null && JSON.parse(project.categories).includes(selectedCategory)))}
-                                loading={loading}
-                                renderItem={item => (
-                                    <List.Item 
-                                        style={{marginBottom: '24px'}}
-                                        data-aos="fade-up" 
-                                        data-aos-anchor-placement="top-bottom"
-                                    >
-                                        <Card
-                                            onClick={() => {
-                                                setSelectedProject(item);
-                                                setModalVisible(true);
-                                            }}
-                                            loading={loading}
-                                            style={{width: '100%'}}
-                                            bodyStyle={{padding: '14px'}}
-                                            hoverable
-                                            className={'z-hover z-shadow'}
-                                            bordered={false}
-                                            cover={
-                                                <div style={{opacity: '0.7'}}>
-                                                    <Image
-                                                        src={Utils.backend + '/' + item.thumbnail}
-                                                        style={thumbnailStyle}
-                                                        preview={false}
-                                                        placeholder={true}
-                                                    />
-                                                </div>
-                                            }
-                                            actions={[
-                                                <React.Fragment key="view">
-                                                    See Details
-                                                </React.Fragment>
-                                            ]}
+                        </Col>
+                        <Col span={24} className="text-center">
+                            <Row justify='center' gutter={32}>
+                                {
+                                    data.filter(project => selectedCategory === null || (selectedCategory !== null && JSON.parse(project.categories).includes(selectedCategory))).map((item, index) => (
+                                        <Col
+                                            key={index}
+                                            xl={6}
+                                            lg={6}
+                                            md={12}
+                                            sm={24}
+                                            xs={24}
+                                            data-aos="fade-up" 
+                                            data-aos-anchor-placement="top-bottom"
+                                            style={{marginBottom: '24px'}}
                                         >
-                                            <Card.Meta
-                                                title={item.title}
-                                            />
-                                        </Card>
-                                    </List.Item>
-                                )}
-                            />
-                        </Space>
-                    </div>
-                </div>
-            </div>
+                                            <Card
+                                                onClick={() => {
+                                                    setSelectedProject(item);
+                                                    setModalVisible(true);
+                                                }}
+                                                loading={loading}
+                                                bodyStyle={{padding: '14px'}}
+                                                hoverable
+                                                className={'z-hover z-shadow'}
+                                                bordered={false}
+                                                cover={
+                                                    <div style={{opacity: '0.7'}}>
+                                                        <Image
+                                                            width='100%'
+                                                            src={Utils.backend + '/' + item.thumbnail}
+                                                            style={thumbnailStyle}
+                                                            preview={false}
+                                                            placeholder={true}
+                                                        />
+                                                    </div>
+                                                }
+                                                actions={[
+                                                    <React.Fragment key="view">
+                                                        See Details
+                                                    </React.Fragment>
+                                                ]}
+                                            >
+                                                <Card.Meta
+                                                    title={item.title}
+                                                />
+                                            </Card>
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
             {
                 modalVisible && (
                     <ProjectPopup

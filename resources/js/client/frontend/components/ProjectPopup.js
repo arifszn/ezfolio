@@ -77,6 +77,7 @@ const ProjectPopup = (props) => {
                                         <Image
                                             src={Utils.backend + '/' + image}
                                             preview={false}
+                                            width='100%'
                                             placeholder={true}
                                             style={{
                                                 maxHeight: '230px',
