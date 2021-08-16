@@ -12,7 +12,6 @@
     <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/react-17.0.2-blue" alt="react 17.0.2"></a>
     <a href="https://ant.design/"><img src="https://img.shields.io/badge/antd-4.15.0-blue" alt="antd 4.15.0"></a>
     <a href="https://github.com/arifszn/ezfolio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/arifszn/ezfolio"/></a>
-    <a href="https://arifszn.github.io/"><img src="https://img.shields.io/badge/author-arifszn-blueviolet" alt="Author arifszn"/></a>
 </p>
 
 <br/>
@@ -114,17 +113,16 @@ For more info, visit the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 
 ## Contributing
 
-Our vision is to add templates as many as possible. We are looking for contributors to add more frontend templates and features. You can also contribute by participating through issues, discussion and pull requests. Check out our <a href="https://github.com/arifszn/ezfolio/blob/main/CONTRIBUTING.md">contribution guide</a> for more info.
+We are looking for contributors to add more frontend templates and features. You can also contribute by participating through issues, discussion and pull requests. Check out our <a href="https://github.com/arifszn/ezfolio/blob/main/CONTRIBUTING.md">contribution guide</a> for more info.
 
 
 ## Thank You
 
 [![Stargazers repo roster for @arifszn/ezfolio](https://reporoster.com/stars/arifszn/ezfolio)](https://github.com/arifszn/ezfolio/stargazers)
-[![Forkers repo roster for @arifszn/ezfolio](https://reporoster.com/forks/arifszn/ezfolio)](https://github.com/arifszn/ezfolio/network/members)
 
 ## Support
 
-Show your ❤️ and support by giving a <a href="https://github.com/arifszn/ezfolio">star</a>.
+Show your ❤️ and support by giving a star.
 
 
 ## License
