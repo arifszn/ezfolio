@@ -126,7 +126,7 @@ We are looking for contributors to add more frontend templates and features. You
 
 ## Support
 
-Show your ❤️ and support by giving a star.
+Show your ❤️ and support by giving a ⭐.
 
 
 ## License
