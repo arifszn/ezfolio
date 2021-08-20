@@ -3,8 +3,8 @@ import moment from 'moment';
 import HTTP from '../../../common/helpers/HTTP';
 import Routes from '../../../common/helpers/Routes';
 import Utils from '../../../common/helpers/Utils';
-import { Card, Col, Image, notification, Row, Spin, Typography } from 'antd';
-import Icon, { InfoCircleOutlined, StarOutlined } from '@ant-design/icons';
+import { Card, Col, Image, notification, Row, Spin, Typography, Space } from 'antd';
+import Icon, { InfoCircleOutlined } from '@ant-design/icons';
 import { BiArchive } from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import StatCard from './StatCard';
@@ -108,9 +108,22 @@ const Dashboard = () => {
 
         if (demoMode) {
             notification.open({
-                message: <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>,
+                message: (
+                    <div className="text-center">
+                        <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">
+                            <img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/>
+                        </a>
+                    </div>
+                ),
                 description: <React.Fragment>
-                    If you like Ezfolio, Please <StarOutlined/> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
+                    <Space direction="vertical" size="middle">
+                        <div className="text-center">
+                            Show your ❤️ and support by giving a ⭐️ on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
+                        </div>
+                        <div className="text-center">
+                            <a href={Routes.web.frontend.home} target="_blank" rel="noreferrer">Visit Front Panel</a>
+                        </div>
+                    </Space>
                 </React.Fragment>,
                 placement: 'bottomRight',
                 duration: 0,

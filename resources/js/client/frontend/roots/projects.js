@@ -6,7 +6,6 @@ import ProjectPopup from '../components/ProjectPopup';
 import Routes from '../../common/helpers/Routes';
 import HTTP from '../../common/helpers/HTTP';
 import Utils from '../../common/helpers/Utils';
-import { FaRegStar } from 'react-icons/fa';
 
 const accentColor = document.querySelector('[data-accentcolor]') ? document.querySelector('[data-accentcolor]').dataset.accentcolor : null;
 const demoMode = document.querySelector('[data-demomode]') ? document.querySelector('[data-demomode]').dataset.demomode : false;
@@ -36,14 +35,20 @@ function App() {
 
         if (demoMode) {
             notification.open({
-                message: <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio"><img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/></a>,
+                message: (
+                    <div className="text-center">
+                        <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">
+                            <img src="https://img.shields.io/github/stars/arifszn/ezfolio?style=social" alt="Github Star"/>
+                        </a>
+                    </div>
+                ),
                 description: <React.Fragment>
                     <Space direction="vertical" size="middle">
-                        <div>
-                            If you like Ezfolio, Please <FaRegStar/> on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
+                        <div className="text-center">
+                            Show your ❤️ and support by giving a ⭐️ on <a target="_blank" rel="noreferrer" href="https://github.com/arifszn/ezfolio">GitHub</a>.
                         </div>
-                        <div style={{textAlign: 'center'}}>
-                            <a href={Routes.web.admin.admin} target="_blank" rel="noreferrer">Visit Admin Panel</a>
+                        <div className="text-center">
+                            <a href={Routes.web.admin.dashboard} target="_blank" rel="noreferrer">Visit Admin Panel</a>
                         </div>
                     </Space>
                 </React.Fragment>,
