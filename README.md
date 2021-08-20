@@ -50,6 +50,7 @@ This project can be used as a guide for learning Laravel with React and making a
 ## Table of Contents
 
 * [Demo](#demo)
+* [Docs](#docs)
 * [Screenshots](#screenshots)
 * [Installation](#installation)
 * [Contributing](#contributing)
@@ -70,6 +71,9 @@ Password: 12345
 <br/>
 <b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
 
+## Docs
+
+Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>. 
 
 ## Screenshots
 
