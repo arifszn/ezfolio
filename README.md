@@ -47,17 +47,6 @@ This project can be used as a guide for learning Laravel with React and making a
 > Client: https://github.com/arifszn/ezfolio/tree/main/resources/js/client
 
 
-## Table of Contents
-
-* [Demo](#demo)
-* [Docs](#docs)
-* [Screenshots](#screenshots)
-* [Installation](#installation)
-* [Contributing](#contributing)
-* [Thank You](#thank-you)
-* [Support](#support)
-* [License](#license)
-
 ## Demo
 
 <b>Admin Panel:</b> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
