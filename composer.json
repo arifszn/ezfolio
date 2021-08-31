@@ -16,7 +16,6 @@
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "rachidlaasri/laravel-installer": "^4.1",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "stevebauman/location": "^6.1",
         "tymon/jwt-auth": "^1.0"
