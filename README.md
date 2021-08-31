@@ -47,16 +47,6 @@ This project can be used as a guide for learning Laravel with React and making a
 > Client: https://github.com/arifszn/ezfolio/tree/main/resources/js/client
 
 
-## Table of Contents
-
-* [Demo](#demo)
-* [Screenshots](#screenshots)
-* [Installation](#installation)
-* [Contributing](#contributing)
-* [Thank You](#thank-you)
-* [Support](#support)
-* [License](#license)
-
 ## Demo
 
 <b>Admin Panel:</b> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
@@ -70,6 +60,9 @@ Password: 12345
 <br/>
 <b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
 
+## Docs
+
+Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>. 
 
 ## Screenshots
 
@@ -122,7 +115,7 @@ We are looking for contributors to add more frontend templates and features. You
 
 ## Support
 
-Show your ❤️ and support by giving a star.
+Show your ❤️ and support by giving a ⭐.
 
 
 ## License
