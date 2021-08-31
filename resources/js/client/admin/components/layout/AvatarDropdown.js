@@ -22,15 +22,15 @@ const AvatarDropdown = () => {
     const menuHeaderDropdown = (
         <Menu selectedKeys={[]} onClick={onMenuClick}>
             <Menu.Item key="profile">
-                <ProfileOutlined />
+                <ProfileOutlined style={{marginRight: 10}}/>
                 Profile
             </Menu.Item>
             <Menu.Item key="password">
-                <UnlockOutlined />
+                <UnlockOutlined style={{marginRight: 10}}/>
                 Password
             </Menu.Item>
             <Menu.Item key="logout">
-                <LogoutOutlined />
+                <LogoutOutlined style={{marginRight: 10}}/>
                 Log out
             </Menu.Item>
         </Menu>
