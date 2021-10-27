@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "jackiedo/dotenv-editor": "^1.2",
         "jenssegers/agent": "^2.6",
-        "laravel/framework": "^8.12",
+        "laravel/framework": "^8.65",
         "laravel/tinker": "^2.5",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "stevebauman/location": "^6.1",
