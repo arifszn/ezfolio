@@ -14,7 +14,7 @@ import ConfigureStore from '../redux/ConfigureStore';
 import PrivateRoute from '../components/PrivateRoute';
 import loadable from '@loadable/component';
 import ZLayout from '../components/layout/ZLayout';
-import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/lazyLoadingFallbackUi';
+import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/LazyLoadingFallbackUi';
 import { setupInterceptors } from '../../common/helpers/HTTP';
 import Utils from '../../common/helpers/Utils';
 const NotFound = loadable(() => import('../components/Notfound'));
