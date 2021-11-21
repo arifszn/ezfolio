@@ -17,11 +17,11 @@
         "laravel/framework": "^8.65",
         "laravel/tinker": "^2.5",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
+        "barryvdh/laravel-ide-helper": "^2.9",
         "stevebauman/location": "^6.1",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.9",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.12",
