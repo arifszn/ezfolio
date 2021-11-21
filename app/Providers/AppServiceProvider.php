@@ -42,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+
         $this->app->bind(SettingInterface::class, SettingService::class);
         $this->app->bind(AboutInterface::class, AboutService::class);
         $this->app->bind(AdminInterface::class, AdminService::class);

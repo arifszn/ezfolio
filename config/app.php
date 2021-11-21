@@ -166,7 +166,6 @@ return [
          * Package Service Providers...
          */
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
