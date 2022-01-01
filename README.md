@@ -47,19 +47,6 @@ This project can be used as a guide for learning Laravel with React and making a
 > Client: https://github.com/arifszn/ezfolio/tree/main/resources/js/client
 
 
-## Demo
-
-<b>Admin Panel:</b> <a href="https://ezfolio.arifszn.com/admin">https://ezfolio.arifszn.com/admin</a> <br/>
-<sup>Be free to change anything in admin panel as it gets reset every 30 minutes.<sup>
-
-```
-Email: admin@admin.com
-Password: 12345
-```
-
-<br/>
-<b>Frontend:</b> <a href="https://ezfolio.arifszn.com">https://ezfolio.arifszn.com</a>
-
 ## Docs
 
 Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>. 
@@ -101,6 +88,13 @@ Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 - Run ```npm install```
 - Run ```npm run prod``` or ```npm run watch```
 
+Admin credentials:
+
+```
+Email: admin@admin.com
+Password: 12345
+```
+
 For more info, visit the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 
 
@@ -121,4 +115,4 @@ Show your ❤️ and support by giving a ⭐.
 ## License
 
 <p>MIT Licensed.</p>
-<p>Copyright © <a href="https://arifszn.github.io">MD. Ariful Alam</a> 2021.</p>
+<p>Copyright © <a href="https://arifszn.github.io">MD. Ariful Alam</a> 2022.</p>
