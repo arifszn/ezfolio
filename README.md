@@ -114,5 +114,4 @@ Show your ❤️ and support by giving a ⭐.
 
 ## License
 
-<p>MIT Licensed.</p>
-<p>Copyright © <a href="https://arifszn.github.io">MD. Ariful Alam</a> 2022.</p>
+**Ezfolio** is open source software licensed under the [MIT](https://github.com/arifszn/ezfolio/blob/main/LICENSE).
