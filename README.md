@@ -53,36 +53,51 @@ Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 
 ## Screenshots
 
-<details>
-    <summary>Admin Panel</summary>
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" alt="Login"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" alt="Dashboard"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" alt="Config"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" alt="Theme"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" alt="Visitors"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" alt="Project"/></kbd>
-</details>
+### Admin Panel
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/login.png" alt="Login"/></kbd>
 
-<details>
-    <summary>Front</summary>
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" alt="Procyon"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" alt="Rigel"/></kbd>
-    <br /><br />
-    <kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" alt="Vega"/></kbd>
-</details>
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/dashboard.png" alt="Dashboard"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/basic-config.png" alt="Config"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/theme.png" alt="Theme"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/visitors.png" alt="Visitors"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/project.png" alt="Project"/></kbd>
+
+### Front
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/procyon.png" alt="Procyon"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/rigel.png" alt="Rigel"/></kbd>
+
+<kbd><img src="https://arifszn.github.io/ezfolio/img/assets/screenshots/vega.png" alt="Vega"/></kbd>
 
 
 ## Installation
 
-- Clone the repo
-- Run ```composer install```
+### With Docker
 - Run ```cp .env.example .env```
+- Run the below command to install Composer dependencies
+    ```sh
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v $(pwd):/var/www/html \
+        -w /var/www/html \
+        laravelsail/php81-composer:latest \
+        composer install --ignore-platform-reqs
+    ```
+- Run ```./vendor/bin/sail up -d```
+- Run ```./vendor/bin/sail artisan migrate --seed```
+- Run ```./vendor/bin/sail npm install```
+- Run ```./vendor/bin/sail npm run prod``` or ```./vendor/bin/sail npm run watch```
+
+`sail` is equivalent of `docker-compose`, read [`laravel/sail`](https://laravel.com/docs/8.x/sail) doc.
+
+### Without Docker
+
+- Run ```cp .env.example .env```
+- Run ```composer install```
 - Provide db name, username and password in .env
 - Run ```php artisan migrate --seed```
 - Run ```npm install```
@@ -100,7 +115,7 @@ For more info, visit the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 
 ## Contributing
 
-We are looking for contributors to add more frontend templates and features. You can also contribute by participating through issues, discussion and pull requests. Check out our <a href="https://github.com/arifszn/ezfolio/blob/main/CONTRIBUTING.md">contribution guide</a> for more info.
+Any contributors who want to make this project better can make contributions, which will be greatly appreciated. Check out our <a href="https://github.com/arifszn/ezfolio/blob/main/CONTRIBUTING.md">contribution guide</a> for more info.
 
 
 ## Thank You
@@ -114,4 +129,4 @@ Show your ❤️ and support by giving a ⭐.
 
 ## License
 
-**Ezfolio** is open source software licensed under the [MIT](https://github.com/arifszn/ezfolio/blob/main/LICENSE).
+**Ezfolio** is licensed under the [MIT License](https://github.com/arifszn/ezfolio/blob/main/LICENSE).
