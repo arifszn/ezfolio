@@ -81,6 +81,7 @@ Checkout the <a href="http://arifszn.github.io/ezfolio">docs</a>.
 - Run ```php artisan migrate --seed```
 - Run ```npm install```
 - Run ```npm run prod``` or ```npm run watch```
+- Run ```php aritsan serve```
 
 Admin credentials:
 
